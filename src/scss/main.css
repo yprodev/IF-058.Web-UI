@@ -34,17 +34,23 @@ body, html, .container-fluid, .nav-row {
 	padding-left: 0;
 }
 .left-panel ul li a span, .top-nav  ul li a span{
-	color: #FBB023;
+	color: #e8fb77;
     text-shadow: 0 0 8px #C4D2D5;
     font-size:20px;
 }
 .left-panel ul li a:hover, .top-nav  ul li a:hover{
-	color: yellow;
 	text-decoration: none;
 	font-weight: bold;
+	background-color: #057933;
 }
 .left-panel ul li, .top-nav  ul li{
     list-style-type: none;
+}
+.usCenter {
+    text-align: center;
+}
+.badge{
+    background-color: #3c763d;
 }
 @media (min-width: 600px) {
 	.top-nav ul {
@@ -62,3 +68,6 @@ body, html, .container-fluid, .nav-row {
 .left-panel ul, .top-nav ul{
 	padding-left: 0;
 }
+
+
+
