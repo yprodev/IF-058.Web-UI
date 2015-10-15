@@ -3,20 +3,23 @@
  */
 
 var gulp = require('gulp'),
-    uglify = require('gulp-uglify'),
-    concat = require('gulp-concat'),
-    csscomb = require('gulp-csscomb'),
-    cssmin = require('gulp-cssmin'),
-    less = require('gulp-less'),
-    sass = require('gulp-sass'),
-    imagemin = require('gulp-imagemin'),
-    pngquant = require('imagemin-pngquant')
+		uglify = require('gulp-uglify'),
+		concat = require('gulp-concat'),
+		csscomb = require('gulp-csscomb'),
+		cssmin = require('gulp-cssmin'),
+		less = require('gulp-less'),
+		sass = require('gulp-sass'),
+		imagemin = require('gulp-imagemin'),
+		pngquant = require('imagemin-pngquant'),
+
+		//Added for moving files to virtual machine through GULP PLUGIN
+		GulpSSH = require('gulp-ssh');
 
 var path = {
 	build:{
 		css:'build/css/',
 		js:'build/js',
-		html:'build',
+		html:'build/', // Tell your group that this file doesn't build in build folder because of no slash
 		img:'build/img'
 	},
 	src:{
@@ -30,36 +33,36 @@ var path = {
 		js:'src/js/**/*.js',
 		html:'src/**/*.html'
 	}
-}
+};
 
 gulp.task('less',  function () {
-    gulp.src('bower_components/bootstrap/less/bootstrap.less')
-        .pipe(less())
-        .pipe(concat('bootstrap.css'))
-        .pipe(gulp.dest('css'))
+		gulp.src('bower_components/bootstrap/less/bootstrap.less')
+				.pipe(less())
+				.pipe(concat('bootstrap.css'))
+				.pipe(gulp.dest('build/css')); //Added build/ folder to create css file in right directory
 });
 
 gulp.task('js', function() {
 	gulp.src(path.src.js)
 		.pipe(concat('script_min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest(path.build.js))
-})
+		.pipe(gulp.dest(path.build.js));
+});
 
 gulp.task('html', function() {
 	gulp.src(path.src.html)
-		.pipe(gulp.dest(path.build.html))
-})
+		.pipe(gulp.dest(path.build.html));
+});
 
 gulp.task('img', function() {
 	gulp.src(path.src.img)
 		.pipe(imagemin({
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngquant()]
-        }))
-		.pipe(gulp.dest(path.build.img))
-})
+						progressive: true,
+						svgoPlugins: [{removeViewBox: false}],
+						use: [pngquant()]
+				}))
+		.pipe(gulp.dest(path.build.img));
+});
 
 gulp.task('sass', function() {
 	gulp.src(path.src.css)
@@ -68,11 +71,11 @@ gulp.task('sass', function() {
 		.pipe(cssmin())
 		.pipe(concat('main.css'))
 		.pipe(gulp.dest(path.build.css))
-})
+});
 
 gulp.task('libs', function() {
-    gulp.src('./bower.json')
-        .pipe(gulp.dest('libs'))
+		gulp.src('./bower.json')
+				.pipe(gulp.dest('libs'))
 });
 
 gulp.task('default', function() {
@@ -87,3 +90,34 @@ gulp.task('default', function() {
 	});
 });
 
+
+//MOVE TASK - Please, don't remove this code
+//It has been used by Yaroslav ))
+
+var config = {
+	host: '192.168.56.101',
+	port: 22,
+	username: 'uran',
+	password: '1qaz2wsx',
+};
+
+var gulpSSH = new GulpSSH({
+	ignoreErrors: false,
+	sshConfig: config //Here is our configs
+});
+
+gulp.task('dest', function () {
+	return gulp
+		.src([
+			'./*',
+			'!./src/**',
+			'!./*.json',
+			'!./*.md',
+			'!./gulpfile.js',
+			'!**/node_modules/**',
+			'!**/bower_components/**',
+			'**/build/**',
+			'**/libs/**',
+			])
+		.pipe(gulpSSH.dest('/home/uran/public_html/'));
+});
