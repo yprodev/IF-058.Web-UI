@@ -64,10 +64,10 @@ body, html, .container-fluid, .nav-row {
 @media (max-width: 601px) {
 	.top-nav ul li a{
 	    display: inline-block;
+    }
 }
 .left-panel ul, .top-nav ul{
 	padding-left: 0;
-}
 }
 
 

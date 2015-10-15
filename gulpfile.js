@@ -8,20 +8,22 @@ var gulp = require('gulp'),
     csscomb = require('gulp-csscomb'),
     cssmin = require('gulp-cssmin'),
     less = require('gulp-less'),
-    sass = require('gulp-sass')
+    sass = require('gulp-sass'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant')
 
 var path = {
 	build:{
 		css:'build/css/',
 		js:'build/js',
-		html:'build/',
+		html:'build',
 		img:'build/img'
 	},
 	src:{
 		css:'src/scss/**/*.scss',
-		js:'src/js',
-		html:'src/',
-		img:'src/img'
+		js:'src/js/**/*.js',
+		html:'src/**/*.html',
+		img:'src/img/*'
 	},
 	watch:{
 		css:'src/scss/**/*.scss',
@@ -30,21 +32,34 @@ var path = {
 	}
 }
 
-gulp.task('1', function () {
-		console.log('1 task');
-});
-gulp.task('2', function () {
-		console.log('1 task');
-});
-gulp.task('3', function () {
-		console.log('1 task');
-});
 gulp.task('less',  function () {
     gulp.src('bower_components/bootstrap/less/bootstrap.less')
         .pipe(less())
         .pipe(concat('bootstrap.css'))
         .pipe(gulp.dest('css'))
 });
+
+gulp.task('js', function() {
+	gulp.src(path.src.js)
+		.pipe(concat('script_min.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest(path.build.js))
+})
+
+gulp.task('html', function() {
+	gulp.src(path.src.html)
+		.pipe(gulp.dest(path.build.html))
+})
+
+gulp.task('img', function() {
+	gulp.src(path.src.img)
+		.pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()]
+        }))
+		.pipe(gulp.dest(path.build.img))
+})
 
 gulp.task('sass', function() {
 	gulp.src(path.src.css)
@@ -65,10 +80,10 @@ gulp.task('default', function() {
 		gulp.run('sass');
 	});
 	gulp.watch(path.watch.js, function(event) {  
-		gulp.run('2');
+		gulp.run('js');
 	});
 	gulp.watch(path.watch.html, function(event) {  
-		gulp.run('3');
+		gulp.run('html');
 	});
 });
 
