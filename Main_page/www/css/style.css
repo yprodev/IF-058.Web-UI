@@ -1,0 +1,43 @@
+.usCenter {
+    text-align: center;
+}
+.panel-primary .panel-heading {
+    color: #ffffff;
+    background-color: #383e41;
+    border-color: #383e41;
+}
+/*from another site*/
+.responsive-navigation { position: relative; width: 100%; display: block; z-index: 9999; }
+a.menu-toggle-btn { width: 100%; height: 60px; background-color: #38a9e3; text-align: center; line-height: 60px; display: block; color: white; }
+a.menu-toggle-btn i { line-height: 60px; }
+.responsive-menu { display: none; background-color: #495054; }
+.responsive-menu ul li a { color: white; text-transform: uppercase; display: block; padding: 20px; border-bottom: 1px solid #5a6267; }
+.main-menu, .responsive-menu ul, .social-member, .progess-bars, .first-footer .social-footer ul { padding: 0; margin: 0; list-style: none; }
+#main-sidebar { float: left; width: 17%; height: 100%; position: fixed; background-color: #18BC9C; color: white; }
+.logo { margin: 30px 0; background-color: #495054; padding: 25px 40px; }
+.logo>a { color: white; margin: 0 auto; text-align: center}
+.logo a h1 { font-size: 30px; margin: 0; font-weight: 800; }
+.logo span { color: #bee3f6; font-size: 13px; }
+.nav-logo>a { margin: auto;}
+.logo a>img { width: 70px}
+.img-logo {text-align:center}
+.main-menu { text-align: center; }
+.main-menu li { margin-bottom: 1px; }
+.main-menu li a { color: white; text-transform: uppercase; display: block; padding: 15px 30px; background-color: #383e41; -webkit-transition: all 150ms ease-in; -moz-transition: all 150ms ease-in; -o-transition: all 150ms ease-in; transition: all 150ms ease-in; }
+.main-menu li a:hover { background-color: #34393b; }
+.main-menu li a:active { background-color: #18BC9C;}
+.main-menu li a:focus { background-color: #949da2;}
+a.menu-toggle-btn { width: 100%; height: 60px; background-color: #38a9e3; text-align: center; line-height: 60px; display: block; color: white; }
+a.menu-toggle-btn i { line-height: 60px; }
+.table .badge { background-color: #18BC9C;}
+.bottom-footer { background-color: #383e41; color: #949da2; padding: 25px 7% 16px 7%; position: fixed;  bottom: 0px; border:0px;}
+.bottom-footer a { color: white; }
+.bottom-footer .credits { text-align: right; }
+#main-content, .full-width-slider { float: right; width: 84.1%; }
+@media (max-width: 991px) { #main-content { width: 100%; }
+    #main-sidebar {width: 100%; position: static}
+    .bottom-footer { border-left: 0; width: 100%; position: static }
+    .flexslider .slides, .flexslider, .main-slider { height: auto; }
+    .service-item { margin-bottom: 30px; }
+    .progess-bars { margin-top: 40px; }}
+
