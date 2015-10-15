@@ -10,8 +10,10 @@
 
 	<link rel="stylesheet" type="text/css" href="scss/main.css">
 	<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js" type="text/javascript"></script> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-	<script src="js/main.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js" type="text/javascript"></script>
+	<script src="app/app.js" type="text/javascript"></script>
+	<script src="app/conrollers/groupsCtrl.js" type="text/javascript"></script>
+	<script src="app/services/groupsSrvc.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -23,16 +25,16 @@
 				<!-- Клік по лого - головна сторінка -->
 				<center><a href=""><img class="logo hidden-sm hidden-xs" src="img/Logo.png" height="150" alt="Logo"></a></center>
 				<hr>
-    </div>
+    		</div>
 		</div>
 		<div class="row">
 			<nav class="col-md-12 hidden-sm hidden-xs">
 				<ul class="">
-					<li><a href="#"><span class="glyphicon glyphicon-tasks" style="display:block; padding-bottom:5px;"></span>Результати</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-user" style="display:block; padding-bottom:5px;"></span>Студенти</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-th-list" style="display:block; padding-bottom:5px;"></span>Тести</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-tag" style="display:block; padding-bottom:5px;"></span>Групи</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-education" style="display:block; padding-bottom:5px;"></span>Предмети</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-tasks"></span>Результати</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-user"></span>Студенти</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-th-list"></span>Тести</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-tag"></span>Групи</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-education"></span>Предмети</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -46,11 +48,11 @@
 
 			<nav class="col-sm-12 hidden-md hidden-lg">
 				<ul class="">
-					<li><a href="#"><span class="glyphicon glyphicon-tasks" style="padding:5px;"> </span> Результати</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-user" style="padding:5px;"> </span> Студенти</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-th-list" style="padding:5px;"> </span> Тести</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-tag" style="padding:5px;"> </span> Групи</a></li>
-					<li><a href="#"><span class="glyphicon glyphicon-education" style="padding:5px;"> </span> Предмети</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-tasks"> </span> Результати</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-user"> </span> Студенти</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-th-list"> </span> Тести</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-tag"> </span> Групи</a></li>
+					<li><a href="#"><span class="glyphicon glyphicon-education"> </span> Предмети</a></li>
 				</ul>
 			</nav>
 
@@ -89,49 +91,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<div class="wrapper panel panel-success no-border" ng-controller="mainCtrl">
-
-
-
-
-
-
-
-
-{{test}}
-
-					<table class="table">
-						<tr ng-repeat="row in test">
-								<td>{{$index + 1}}</td>
-								<td>{{row.group_name}}</td>
-								<td>{{row.faculty_name}}</td>
-<!-- 							<td ng-repeat="cell in row">
-								{{cell}}
-							</td> -->
-						</tr>
-					</table>
-
-
-					<table class="table">
-						<tr ng-repeat="row in test2">
-								<td>{{$index + 1}}</td>
-								<td>{{row.group_name}}</td>
-								<td>{{row.faculty_name}}</td>
-<!-- 							<td ng-repeat="cell in row">
-								{{cell}}
-							</td> -->
-						</tr>
-					</table>
-
-
-
-
-
-
-
-
-
-
+				<div class="wrapper panel panel-success no-border" ng-controller="groupsCtrl">
 					<div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Головна</div>
 					<div class="col-md-5">
 					    <br/>
