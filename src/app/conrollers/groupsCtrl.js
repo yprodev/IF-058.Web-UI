@@ -14,7 +14,6 @@ app.controller('groupsCtrl', ['$scope', 'groupsSrvc', function($scope, groupsSrv
 			faculty_id:1
 		}
 
-
         // groupsSrvc.setGroup(new_group).then(function(httpData) {
         //   	$scope.change = httpData;
         // });
