@@ -3,9 +3,15 @@ var app = angular.module('app', ['ngRoute']);
 app.config(function($routeProvider) {
 	$routeProvider.
 	when('/', {
-		templateUrl: 'app/views/main.html',
-		controller: ''
-	}).
+			templateUrl: 'app/views/login.html',
+			controller: 'loginCtrl'
+		}).
+	when('/admin', {
+			templateUrl: 'app/views/main.html'
+		}).
+	when('/user', {
+			templateUrl: 'app/views/main.html'
+		}).
 	when('/groups', {
 		templateUrl: 'app/views/listGroups.html',
 		controller: 'groupsCtrl'
