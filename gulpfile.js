@@ -121,3 +121,25 @@ gulp.task('dest', function () {
 			])
 		.pipe(gulpSSH.dest('/home/uran/public_html/'));
 });
+
+// GULP task for creating min version of Bootstrap jQuery Files
+gulp.task('boot-js', function() {
+	gulp.src([
+			'bower_components/jquery/dist/jquery.js',
+			'bower_components/bootstrap/js/affix.js',
+			'bower_components/bootstrap/js/transition.js',
+			'bower_components/bootstrap/js/tooltip.js',
+			'bower_components/bootstrap/js/alert.js',
+			'bower_components/bootstrap/js/button.js',
+			'bower_components/bootstrap/js/carousel.js',
+			'bower_components/bootstrap/js/collapse.js',
+			'bower_components/bootstrap/js/dropdown.js',
+			'bower_components/bootstrap/js/modal.js',
+			'bower_components/bootstrap/js/popover.js',
+			'bower_components/bootstrap/js/scrollspy.js',
+			'bower_components/bootstrap/js/tab.js'
+		])
+		.pipe(concat('bootstrap.js'))
+		.pipe(uglify())
+		.pipe(gulp.dest('build/js/bootstrap-jquery/'));
+});
