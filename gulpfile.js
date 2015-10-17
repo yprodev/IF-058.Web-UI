@@ -18,9 +18,9 @@ var gulp = require('gulp'),
 var path = {
 	build:{
 		css:'build/css/',
-		js:'build/js',
+		js:'build/js/',
 		html:'build/', // Tell your group that this file doesn't build in build folder because of no slash
-		img:'build/img'
+		img:'build/img/'
 	},
 	src:{
 		css:'src/scss/**/*.scss',
@@ -39,7 +39,7 @@ gulp.task('less',  function () {
 		gulp.src('bower_components/bootstrap/less/bootstrap.less')
 				.pipe(less())
 				.pipe(concat('bootstrap.css'))
-				.pipe(gulp.dest('build/css')); //Added build/ folder to create css file in right directory
+				.pipe(gulp.dest('build/css/')); //Added build/ folder to create css file in right directory
 });
 
 gulp.task('js', function() {
@@ -66,7 +66,7 @@ gulp.task('img', function() {
 
 gulp.task('sass', function() {
 	gulp.src(path.src.css)
-		.pipe(sass())
+		.pipe(sass().on('error', sass.logError))// Gives opportunity to see all errors
 		.pipe(csscomb())
 		.pipe(cssmin())
 		.pipe(concat('main.css'))

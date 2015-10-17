@@ -1,0 +1,30 @@
+/* ___________________________________________________________________________
+**
+** Project Buttons
+** ___________________________________________________________________________
+*/
+
+.btn {
+	border: 1px solid $clr-border;
+	display: inline-block;
+	height: ($baseline * 2.3);
+	line-height: ($baseline * 2.3);
+	min-width: 10em;
+	text-align: center;
+	background-color: $clr-primary-color;
+	color: #fff;
+	font-size: $baseline;
+	font-weight: bold;
+	font-style: normal;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+
+	@include round(3px);
+	&:hover,
+	&:active {
+		border-color: $clr-primary-color;
+		background-color: $clr-light-white;
+		text-decoration: none;
+		color: $clr-primary-color;
+	}
+}
