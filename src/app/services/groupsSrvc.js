@@ -10,6 +10,15 @@ app.factory('groupsSrvc', ['$http',  function($http){
 					return result;
 				}, function() {console.error('Error')});
 	},
+// факультети (тимчасово тут)
+	group.getFacultys = function() {
+		return $http.get('http://dtapi.local/faculty/getRecords')
+			.then(function(response) {
+					result = response.data;
+					return result;
+				}, function() {console.error('Error')});
+	},
+
 
 // список груп
  	group.getGroups = function() {
@@ -40,8 +49,8 @@ app.factory('groupsSrvc', ['$http',  function($http){
 		});
 	},
 // запис
-	group.setGroup = function(data) {
-		return $http.post(URL + 'update/2', data)
+	group.setGroup = function(id, data) {
+		return $http.post(URL + 'update/'+id, data)
 		.then(function(response) {
 			return response.data.response;
 		});
