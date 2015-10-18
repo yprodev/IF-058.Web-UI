@@ -8,12 +8,13 @@
 	</a>
 	<span class="glyphicon glyphicon-tags"></span> 
 	<span>Групи</span></div>
+	<div class="table-responsive">
 	<table class="table table-striped table-hover">
 		<tr>
 			<th class="usCenter">№</th>
 			<th class="usCenter">Назва групи</th>
 			<th class="usCenter">Факультет</th>
-			<th class="usCenter">Редагувати/Видалити</th>
+			<th class="usCenter">Редагувати / Видалити</th>
 		</tr>
 		<tr ng-repeat="row in groups">
 			<td class="usCenter">{{$index + 1}}</td>
@@ -25,5 +26,6 @@
 			</td>
 		</tr>
 	</table>
+	</div>
 </div>
 </div>
