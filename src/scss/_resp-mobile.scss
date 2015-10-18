@@ -4,7 +4,7 @@
 ** ___________________________________________________________________________
 */
 
-@media #{$content-sm} {
+@media #{$content-xs} {
 
 	/* _________________________________________
 	**
@@ -58,7 +58,6 @@
 
 	.side-nav {
 		height: 100%;
-		border-bottom: 1px solid $clr-light-bg;
 	}
 
 	.side-nav .navbar .navbar-collapse {
@@ -67,7 +66,30 @@
 	}
 
 	.navbar {
-		margin-bottom: 0;
+		margin: 0;
+
+		button {
+			background-color: $clr-light-bg;
+			&:hover,
+			&:active {
+				background-color: $clr-hover-lblue;
+			}
+		}
+	}
+
+	// Disable margin left and right -15px on mobile
+	// Was creating horizontal scroll bar
+	.container-fluid>.navbar-collapse,
+	.container-fluid>.navbar-header,
+	.container>.navbar-collapse, 
+	.container>.navbar-header {
+		margin: 0;
+		border: none;
+	}
+
+	// Was creating horizontal scroll bar
+	.navbar-nav {
+		margin: 0;
 	}
 
 	.navbar-default {
@@ -106,7 +128,7 @@
 	}
 
 	.navbar-default .navbar-brand {
-		padding-left: 30px;
+		padding-left: 15px;
 		text-align: right;
 		display: block;
 		color: $clr-text-yellow;
