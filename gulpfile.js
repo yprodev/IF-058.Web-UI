@@ -18,7 +18,7 @@ var gulp = require('gulp'),
 var path = {
 	build:{
 		css:'build/css/',
-		js:'build/js/',
+		js:'build/app/**/*.js', // Tell your group to fix this for creating min js file for project
 		html:'build/', // Tell your group that this file doesn't build in build folder because of no slash
 		img:'build/img/'
 	},
@@ -35,7 +35,7 @@ var path = {
 	}
 };
 
-gulp.task('less',  function () {
+gulp.task('less', function () {
 		gulp.src('bower_components/bootstrap/less/bootstrap.less')
 				.pipe(less())
 				.pipe(concat('bootstrap.css'))
@@ -79,17 +79,16 @@ gulp.task('libs', function() {
 });
 
 gulp.task('default', function() {
-	gulp.watch(path.watch.css, function(event) {  
+	gulp.watch(path.watch.css, function(event) {
 		gulp.run('sass');
 	});
-	gulp.watch(path.watch.js, function(event) {  
+	gulp.watch(path.watch.js, function(event) {
 		gulp.run('js');
 	});
-	gulp.watch(path.watch.html, function(event) {  
+	gulp.watch(path.watch.html, function(event) {
 		gulp.run('html');
 	});
 });
-
 
 //MOVE TASK - Please, don't remove this code
 //It has been used by Yaroslav ))
