@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html  ng-app="app">
 <head lang="en-ru">
-    <meta http-equiv="Content-Type" charset="UTF-8">
-    <title></title>
+    <meta http-equiv="Content-Type" charset="UTF-8" >
+    <title>Спеціальності</title>
     <script src="js/angular.min.js"></script>
     <script src="js/controllers/mainCtrl.js"></script>
-    <script src="js/factories/reqFactory.js"></script>
+    <script src="js/services/reqFactory.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-route.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -15,14 +15,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body ng-controller="mainCtrl">
-<div class="container col-md-10 col-md-offset-1">
-    <h1>Спеціальності</h1>
+<div class="panel panel-defaul col-md-10 col-md-offset-1">
+    <div class="panel-heading">
+        <h1>Спеціальності</h1>
+    </div>
+<div class="panel-body">
     <form class="form-horizontal">
         <button class="btn btn-primary" ng-click="showAdd()">Додати спеціальність</button>
-        <div ng-show="addSpec">
-            <p><input  type="text" ng-model="name" placeholder="Введіть назву"/>Назва спеціальності </p>
-            <p><input type="text" ng-model="code" placeholder="Введіть код"/>Код спеціальності </p>
-            <button class="btn" ng-click="add()">Додати</button>
+        <div ng-show="addSpec" style="padding-top:1em">
+            <p><label for="name"><input id="name" type="text" ng-model="name" placeholder="Введіть назву"/> Назва спеціальності</label></p>
+            <p><label><input type="text" ng-model="code" placeholder="Введіть код"/> Код спеціальності </label></p>
+            <button class="btn btn-success" ng-click="add()">Додати</button>
         </div>
         <div ng-show="editSpec">
             <p><input type="text" ng-model="editedName" value="1"/>Назва</p>
@@ -44,13 +47,14 @@
                 <td>{{$index+1}}</td>
                 <td>{{speciality.speciality_name}}</td>
                 <td>{{speciality.speciality_code}}</td>
-                <td><a class="glyphicon glyphicon-pencil" ng-click="edit(speciality)"></a><a class="glyphicon glyphicon-trash col-md-offset-1" ng-click="delete(speciality)"></a></td>
+                <td><button class="glyphicon glyphicon-pencil btn btn-primary" ng-click="edit(speciality)"></button><button class="glyphicon glyphicon-trash btn-danger col-md-offset-1" ng-click="delete(speciality)"></button></td>
             </tr>
             </tbody>
         </table>
 
     </div>
 
+</div>
 </div>
 
 </body>

@@ -14,30 +14,45 @@ app.controller('mainCtrl', function ($scope, specialitySrvc, $http) {
   specialitySrvc.getSpecialities().then(function (response) {
     $scope.specialities = response.data;
   });
+  //функц≥€ оновленн€ списку спец≥альностей
+  function update () {
+    specialitySrvc.getSpecialities().then(function (response) {
+      $scope.specialities = response.data;
+    })
+  }
 
   //додати спец≥альн≥сть
   $scope.add = function () {
     var data = {
       speciality_name: $scope.name,
       speciality_code: $scope.code
-    }
-    specialitySrvc.createGroup(data);
+    };
+    specialitySrvc.createSpeciality(data)
+    update()
+    $scope.name = '';
+    $scope.code = '';
+    console.log('add made')
+    console.log($scope)
   }
+
   //видалити спец≥альн≥сть
   $scope.delete = function (speciality) {
     console.log(speciality.speciality_id)
-    specialitySrvc.delGroup(speciality.speciality_id)
+    specialitySrvc.delSpeciality(speciality.speciality_id)
+    console.log(specialitySrvc.delSpeciality(speciality.speciality_id))
+    update()
   }
-  //редагуванн€
+
+  //редагувати спец≥альн≥сть
   $scope.edit = function (speciality) {
-    var name = prompt('¬каж≥ть назву', speciality.speciality_name);
-    var code = prompt('¬каж≥ть код', speciality.speciality_code)
+    var name = prompt('¬каж≥ть назву (Write speciality name)', speciality.speciality_name);
+    var code = prompt('¬каж≥ть код (Write speciality code)', speciality.speciality_code)
     var newData = {
       speciality_name: name,
       speciality_code: code
     }
     var id = speciality.speciality_id
-    specialitySrvc.editGroup(id, newData)
+    update(specialitySrvc.editSpeciality(id, newData))
   }
 
 });
