@@ -24,7 +24,7 @@ var path = {
 	},
 	src:{
 		css:'src/scss/**/*.scss',
-		js:'src/app/**/*.js', // Tell your group to change this path according to a new file structure
+		js: 'src/app/**/*.js', // Tell your group to change this path according to a new file structure and to be consistent
 		html:'src/**/*.html',
 		img:'src/img/*'
 	},
