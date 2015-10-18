@@ -6,7 +6,12 @@
 
 @media #{$content-md} {
 
-	// Start .fullscreen styling.container-fluid {
+	/* ____________________________________
+	**
+	** Start .fullscreen styling.container-fluid
+	** ____________________________________
+	*/
+
 	.container-fluid {
 		padding: 0;
 		height: 100%;
@@ -17,8 +22,14 @@
 	}
 
 	.row.sides {
-		margin-left: 15px;
-		margin-right: 15px;
+		margin: 0 15px 0 15px;
+	}
+
+	.row.sides.line {
+		margin: 0;
+		padding: 25px 15px 25px 15px;
+		background-color: $clr-light-bg;
+		@include round(0px);
 	}
 
 	.col {
@@ -30,10 +41,17 @@
 		height: 100%;
 	}
 
-	// Start vertical navbar styles
+	/* ____________________________________
+	**
+	** Start vertical navbar styles
+	** ____________________________________
+	*/
+
 	.side-nav {
 		height: 100%;
+		border-right: 1px solid $clr-light-bg;
 	}
+
 	.side-nav .navbar .navbar-collapse {
 		padding: 0;
 		max-height: none;
@@ -88,32 +106,69 @@
 	.navbar-default .navbar-nav > .active > a,
 	.navbar-default .navbar-nav > .open > a {
 		background-image: none;
-		background-color: $clr-hover-lblue;
-		color: $clr-text-yellow;
+		background-color: $WHITE;
+		color: $clr-hover-lblue;
 		&:hover,
 		&:active {
-			background-color: $clr-hover-lblue;
+			background-color: $WHITE;
 		}
+	}
+
+	.navbar-default .navbar-nav > li:hover {
+		background-color: $clr-hover-lblue;
 	}
 
 	.collapse .navbar-collapse {
 		height: 100%;
 	}
 
-	// Content solumn in our desktop template
+	/* ________________________________________
+	**
+	** Styling brand-container in vertical menu
+	** ________________________________________
+	*/
+	.navbar>.container .navbar-brand,
+	.navbar>.container-fluid .navbar-brand {
+		margin-left: 0;
+	}
+
+	.brand-container {
+		padding: 15px;
+		border-bottom: 1px solid $WHITE;
+		text-align: right;
+
+		a.navbar-brand {
+			padding: 0;
+			width: 100%;
+			height: $baseline * 3.5;
+			display: block;
+			font-size: $baseline * 2.5;
+			line-height: $baseline * 2.5;
+			color: $clr-text-yellow;
+		}
+
+		h4 {
+			color: $WHITE;
+		}
+	}
+
+	/* ____________________________________
+	**
+	** Column with main content on the page
+	** ____________________________________
+	*/
+
 	.content {
 		overflow-y: scroll;
 	}
 
-	.row-height {
-		display: table;
-		table-layout: fixed;
-		height: 100%;
-		width: 100%;
-	}
-	.col-height {
-		display: table-cell;
-		float: none;
-		height: 100%;
-	}
+
+
+	/* __________________
+	**
+	** Working with search form
+	** __________________
+	*/
+
+
 }// END @media content-md
