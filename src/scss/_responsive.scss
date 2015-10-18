@@ -1,0 +1,104 @@
+/* ___________________________________________________________________________
+**
+** Responsive views
+** ___________________________________________________________________________
+*/
+
+@media #{$content-md} {
+
+	// Start .fullscreen styling.container-fluid {
+	.container-fluid {
+		padding: 0;
+		height: 100%;
+	}
+
+	.row {
+		margin: 0;
+	}
+
+	.col {
+		outline: 1px solid red;
+		height: 100%;
+		padding: 0;
+	}
+
+	.fullscreen {
+		height: 100%;
+	}
+
+	// Start vertical navbar styles
+	.side-nav {
+		height: 100%;
+	}
+	.side-nav .navbar .navbar-collapse {
+		padding: 0;
+		max-height: none;
+	}
+
+	.side-nav .navbar {
+
+		ul {
+			float: none;
+			&:not {
+				display: block;
+			}
+		}
+
+		li {
+			float: none;
+			display: block;
+
+			a {
+				padding-top: 12px;
+				padding-bottom: 12px;
+				text-align: right;
+				color: $WHITE;
+
+				&:hover {
+					color: $clr-text-yellow;
+				}
+			}
+		}
+	}
+
+	.navbar {
+		margin-bottom: 0;
+	}
+
+	.navbar-default {
+		border: none;
+		background-image: none;
+		background-color: $clr-bg-dblue;
+
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+
+		height: 100%;
+	}
+
+	.navbar-default .navbar-nav > .active > a,
+	.navbar-default .navbar-nav > .open > a {
+		background-image: none;
+		background-color: $clr-hover-lblue;
+		color: $clr-text-yellow;
+		&:hover,
+		&:active {
+			background-color: $clr-hover-lblue;
+		}
+	}
+
+	.collapse .navbar-collapse {
+		height: 100%;
+	}
+
+	// Content solumn in our desktop template
+	.content {
+		overflow-y: scroll;
+	}
+
+}// END @media content-md

@@ -26,3 +26,16 @@ $clr-regular-text: #575757;
 $clr-light-text: #d2d2d2;
 $clr-headings: #323232;
 $clr-light-white: rgba(255,255,255,.45);
+
+$clr-bg-dblue: rgba(0,149,178,1);
+$clr-hover-lblue: rgba(42,220,255,1);
+
+$clr-text-yellow: rgba(255,217,14,1);
+
+$WHITE: rgba(255,255,255,1);
+$BLACK: rgba(0,0,0,1);
+
+//Responsive Content Variables
+$content-xs: 'only screen and (max-width : 767px)';// for mobiles
+$content-sm: 'only screen and (min-width : 768px)';// for pads
+$content-md: 'only screen and (min-width : 992px)';// for desktops and >1200px
