@@ -1,6 +1,6 @@
 ;
 var app = angular.module('app', [])
-.controller('mainCtrl', function($scope, reqFactory, $document){
+.controller('mainCtrl', function($scope, reqFactory){
 
   $scope.showingAddBtn = "Додавання факультетів";
 //функція, яка викликає сервіс для отримання списку факультетів із сервера
