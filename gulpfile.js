@@ -24,13 +24,19 @@ var path = {
 	},
 	src:{
 		css:'src/scss/**/*.scss',
-		js: 'src/app/**/*.js', // Tell your group to change this path according to a new file structure and to be consistent
+		js: [
+			'src/app/app.js',
+			'src/app/services/groupSrvc.js',
+			'src/app/services/studentsSrvc.js',
+			'src/app/controllers/groupsCtrl.js',
+			'src/app/controllers/studentsCtrl.js'
+			], // Tell your group to change this path according to a new file structure and to be consistent
 		html:'src/**/*.html',
 		img:'src/img/*'
 	},
 	watch:{
 		css:'src/scss/**/*.scss',
-		js:'src/js/**/*.js',
+		js:'src/app/**/*.js',
 		html:'src/**/*.html'
 	}
 };
