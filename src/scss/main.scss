@@ -1,15 +1,22 @@
+// Core variables and mixins
 @import '_variables.scss';
 @import '_mixins.scss';
+
+// Typography Styles
 @import '_typography.scss';
+
+// UI Elements Styles
 @import '_forms.scss';
 @import '_buttons.scss';
-@import '_template.scss';
-@import '_responsive.scss';
 
-.center-block {
-	width: 100%;
-	margin: 0 auto;
-}
+// Layout styles
+@import '_template.scss';
+
+// Responsive styles for mobile first structure
+@import '_resp-pads.scss';
+@import '_resp-desktop.scss';
+
+
 
 @media screen and (min-width: 992px) {
 	.center-block {
