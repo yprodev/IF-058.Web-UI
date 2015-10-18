@@ -18,13 +18,13 @@ var gulp = require('gulp'),
 var path = {
 	build:{
 		css:'build/css/',
-		js:'build/app/**/*.js', // Tell your group to fix this for creating min js file for project
+		js:'build/js/', // Tell your group to fix this for creating min js file for project
 		html:'build/', // Tell your group that this file doesn't build in build folder because of no slash
 		img:'build/img/'
 	},
 	src:{
 		css:'src/scss/**/*.scss',
-		js:'src/js/**/*.js',
+		js:'src/app/**/*.js', // Tell your group to change this path according to a new file structure
 		html:'src/**/*.html',
 		img:'src/img/*'
 	},
