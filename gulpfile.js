@@ -26,10 +26,10 @@ var path = {
 		css:'src/scss/**/*.scss',
 		js: [
 			'src/app/app.js',
-			'src/app/services/groupSrvc.js',
-			'src/app/services/studentsSrvc.js',
+			'src/app/services/groupsSrvc.js',
+			'src/app/services/facultySrvc.js',
 			'src/app/controllers/groupsCtrl.js',
-			'src/app/controllers/studentsCtrl.js'
+			'src/app/controllers/facultiesCtrl.js'
 			], // Tell your group to change this path according to a new file structure and to be consistent
 		html:'src/**/*.html',
 		img:'src/img/*'
@@ -51,7 +51,7 @@ gulp.task('less', function () {
 gulp.task('js', function() {
 	gulp.src(path.src.js)
 		.pipe(concat('script_min.js'))
-		// .pipe(uglify()) We can't run our app using uglify
+		.pipe(uglify())
 		.pipe(gulp.dest(path.build.js));
 });
 
