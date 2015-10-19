@@ -11,12 +11,12 @@ form {
 	input[type="email"],
 	input[type="password"] {
 		border: 1px solid $clr-border;
-		width: 60%;
+		width: 80%;
 		display: inline-block;
 		height: ($baseline * 1.5);
 		line-height: ($baseline * 1.5);
 		min-width: 10em;
-		color: $clr-regular-text;
+		color: $clr-bg-dblue;
 		font-family: $txt-headline;
 		font-size: $body-font-size;
 		font-weight: normal;
@@ -24,22 +24,21 @@ form {
 		padding-left: 10px;
 
 		&::-webkit-input-placeholder {color:$clr-light-text;}
-		&::-moz-placeholder          {color:$clr-light-text;}
-		&:-moz-placeholder           {color:$clr-light-text;}
-		&:-ms-input-placeholder      {color:$clr-light-text;}
+		&::-moz-placeholder {color:$clr-light-text;}
+		&:-moz-placeholder {color:$clr-light-text;}
+		&:-ms-input-placeholder {color:$clr-light-text;}
 
 		@include round(3px);
 
 		&:focus {
-			color: $clr-secondary-color;
+			color: $clr-bg-dblue;
 			outline: none;
-			border-color: $clr-secondary-color;
+			border-color: $clr-hover-lblue;
 			@include drop-shadow-input-focus(1px, 1px, 3px, 0, .5);
 		}
 	} // END Inputs
 
 	input[type="submit"] {
-		// position: absolute;
 		margin: 0 auto;
 	}
 } //END Form
@@ -50,4 +49,8 @@ ul.form-input-list {
 	& li {
 		margin-bottom: $baseline;
 	}
+}
+
+.help-block {
+	font-family: $txt-headline;
 }

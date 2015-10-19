@@ -1,15 +1,15 @@
 /* ___________________________________________________________________________
 **
-** Responsive views
+** Responsive views for desktop
 ** ___________________________________________________________________________
 */
 
 @media #{$content-md} {
 
-	/* ____________________________________
+	/* _________________________________________
 	**
 	** Start .fullscreen styling.container-fluid
-	** ____________________________________
+	** _________________________________________
 	*/
 
 	.container-fluid {
@@ -22,12 +22,13 @@
 	}
 
 	.row.sides {
-		margin: 20px 15px 0 15px;
+		margin: 20px 15px 30px 15px;
 	}
 
 	.row.sides.line {
 		margin: 0;
 		padding: 25px 15px 25px 15px;
+		border-bottom: 1px solid $clr-light-border;
 		background-color: $clr-light-bg;
 		@include round(0px);
 	}
@@ -50,6 +51,7 @@
 	.side-nav {
 		height: 100%;
 		border-right: 1px solid $clr-light-bg;
+		@include drop-shadow(1px, 0px, 1px, 0px, .10);
 	}
 
 	.side-nav .navbar .navbar-collapse {
@@ -161,14 +163,6 @@
 	.content {
 		overflow-y: scroll;
 	}
-
-
-
-	/* __________________
-	**
-	** Working with search form
-	** __________________
-	*/
 
 
 }// END @media content-md

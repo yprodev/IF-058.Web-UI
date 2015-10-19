@@ -51,7 +51,7 @@ gulp.task('less', function () {
 gulp.task('js', function() {
 	gulp.src(path.src.js)
 		.pipe(concat('script_min.js'))
-		.pipe(uglify())
+		// .pipe(uglify()) We can't run our app using uglify
 		.pipe(gulp.dest(path.build.js));
 });
 
@@ -148,3 +148,5 @@ gulp.task('boot-js', function() {
 		.pipe(uglify())
 		.pipe(gulp.dest('build/js/bootstrap-jquery/'));
 });
+
+

@@ -6,8 +6,8 @@
 @import '_typography.scss';
 
 // UI Elements Styles
+@import '_ui-elements.scss';
 @import '_forms.scss';
-@import '_buttons.scss';
 
 // Layout styles
 @import '_template.scss';
@@ -17,24 +17,3 @@
 @import '_resp-pads.scss';
 @import '_resp-desktop.scss';
 
-
-
-@media screen and (min-width: 992px) {
-	.center-block {
-		margin-top: $baseline * 5;
-	}
-}
-
-span.clr-primary {
-	color: $clr-primary-color;
-}
-
-span.clr-secondary {
-	color: $clr-secondary-color;
-}
-
-
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
