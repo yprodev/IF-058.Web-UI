@@ -47,9 +47,9 @@ var app = angular.module('app', [])
       $scope.currentIndex = index;
     } else if (index == $scope.currentIndex) {
       $scope.showingEdit = false;
+      $scope.currentId = "";
       $scope.editingDescription = "";
       $scope.editingName = "";
-      $scope.currentId = "";
       $scope.currentIndex = 0;
     } else {
       alert("Закрийте попередню форму редагування!");
@@ -66,6 +66,11 @@ var app = angular.module('app', [])
     reqFactory.updateFaculty(function () {
       getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
     }, $scope.currentId, editedData);
+    $scope.showingEdit = false;
+    $scope.currentId = "";
+    $scope.editingDescription = "";
+    $scope.editingName = "";
+    $scope.currentIndex = 0;
   };
 
 
