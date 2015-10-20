@@ -1,5 +1,5 @@
 ;
-app.controller('mainCtrl', function($scope, reqFactory){
+app.controller('facultiesCtrl', function($scope, reqFactory){
 
   $scope.showingAddBtn = "Додавання факультетів";
 //функція, яка викликає сервіс для отримання списку факультетів із сервера
