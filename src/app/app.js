@@ -18,6 +18,10 @@ app.config(function($routeProvider) {
 		templateUrl: 'app/views/editGroup.html',
 		controller: 'editGroupsCtrl'
 	}).
+	when('/faculties', {
+		templateUrl: 'app/views/facultiesList.html',
+		controller: 'facultyCtrl'
+	}).
 	otherwise({
 		redirectTo: '/'
 	});
