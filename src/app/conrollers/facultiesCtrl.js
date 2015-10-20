@@ -1,5 +1,5 @@
 ;
-app.controller('facultiesCtrl', function($scope, reqFactory){
+app.controller('facultiesCtrl', function($scope, facultiesSrvc){
 
   $scope.showingAddBtn = "Додавання факультетів";
 //функція, яка викликає сервіс для отримання списку факультетів із сервера
@@ -26,7 +26,7 @@ app.controller('facultiesCtrl', function($scope, reqFactory){
       faculty_description: $scope.newDescription,
       faculty_name: $scope.newName
     };
-    reqFactory.createFaculty(function (resp) {
+    facultiesSrvc.createFaculty(function (resp) {
       getFacultyList();
     }, newData);
 
@@ -62,7 +62,7 @@ app.controller('facultiesCtrl', function($scope, reqFactory){
       faculty_description: $scope.editingDescription,
       faculty_name: $scope.editingName
     };
-    reqFactory.updateFaculty(function () {
+    facultiesSrvc.updateFaculty(function () {
       getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
     }, $scope.currentId, editedData);
     $scope.showingEdit = false;
@@ -76,14 +76,14 @@ app.controller('facultiesCtrl', function($scope, reqFactory){
 // функція на клік викликає сервіс для видалення обєкту масиву faculties за відповідним faculty_id
   $scope.removeFaculty = function (faculty) {
     var currentId = faculty.faculty_id;
-    reqFactory.deleteFaculty(function () {
+    facultiesSrvc.deleteFaculty(function () {
       getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
     }, currentId);
   };
 
 //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
   function getFacultyList () {
-    reqFactory.getFaculties(function (resp) {
+    facultiesSrvc.getFaculties(function (resp) {
       $scope.faculties = resp.data; // faculties використовується у view для перебору обєктів (факультетів)
     });
   };

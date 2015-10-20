@@ -1,5 +1,5 @@
 ;
-app.factory('reqFactory', function ($http) {
+app.factory('facultiesSrvc', function ($http) {
 
 //отримання обєктів (факультетів) із сервера
   var service = {};
