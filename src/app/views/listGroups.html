@@ -1,0 +1,31 @@
+<div>
+
+<div class="panel panel-success">
+							<!-- Default panel contents -->
+<div class="panel-heading">
+	<a class="pull-right" href="#/addGroup">
+		<button type="button" class="btn btn-sm btn-success">Додати групу</button>
+	</a>
+	<span class="glyphicon glyphicon-tags"></span> 
+	<span>Групи</span></div>
+	<div class="table-responsive">
+	<table class="table table-striped table-hover">
+		<tr>
+			<th class="usCenter">№</th>
+			<th class="usCenter">Назва групи</th>
+			<th class="usCenter">Факультет</th>
+			<th class="usCenter">Редагувати / Видалити</th>
+		</tr>
+		<tr ng-repeat="row in groups">
+			<td class="usCenter">{{$index + 1}}</td>
+			<td class="usCenter">{{row.group_name}}</td>
+			<td class="usCenter">{{row.faculty_name}}</td>
+			<td  class="usCenter">
+				<a href="{{'#/editGroup/' + row.group_id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+				<a href="{{'#/groups'}}" ng-click="delGroupAction(row.group_id)"><span class="glyphicon glyphicon-remove"></span></a>
+			</td>
+		</tr>
+	</table>
+	</div>
+</div>
+</div>
