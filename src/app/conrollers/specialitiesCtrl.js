@@ -34,7 +34,7 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
     console.log('add made')
     console.log($scope)
   }
-
+//видалити спец≥альн≥сть
   $scope.delete = function (speciality) {
     console.log(speciality.speciality_id)
     specialitiesSrvc.delSpeciality(speciality.speciality_id)
@@ -42,20 +42,11 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
     update()
   }
 
-});
-
-
-
-/*
-
-
-  //видалити спец≥альн≥сть
-
-
   //редагувати спец≥альн≥сть
   $scope.edit = function (speciality) {
     var name = prompt('¬каж≥ть назву (Write speciality name)', speciality.speciality_name);
     var code = prompt('¬каж≥ть код (Write speciality code)', speciality.speciality_code)
+
     var newData = {
       speciality_name: name,
       speciality_code: code
@@ -63,6 +54,17 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
     var id = speciality.speciality_id
     update(specialitiesSrvc.editSpeciality(id, newData))
   }
+});
+
+
+
+/*
+
+
+
+
+
+
 
 */
 
