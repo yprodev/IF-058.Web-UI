@@ -1,8 +1,7 @@
 /**
  * Created by Серёга on 09.10.2015.
  */
-var app = angular.module('app', []);
-app.controller('specialitiesCtrl', ['$scope', 'specialitiesSrvc', '$location', function($scope, specialitiesSrvc, $location) {
+app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location) {
 
 //показати поля редагування файлу
   $scope.showAdd = function () {
@@ -31,17 +30,27 @@ app.controller('specialitiesCtrl', ['$scope', 'specialitiesSrvc', '$location', f
     update()
     $scope.name = '';
     $scope.code = '';
+    console.log($location)
     console.log('add made')
     console.log($scope)
   }
 
-  //видалити спеціальність
   $scope.delete = function (speciality) {
     console.log(speciality.speciality_id)
     specialitiesSrvc.delSpeciality(speciality.speciality_id)
     console.log(specialitiesSrvc.delSpeciality(speciality.speciality_id))
     update()
   }
+
+});
+
+
+
+/*
+
+
+  //видалити спеціальність
+
 
   //редагувати спеціальність
   $scope.edit = function (speciality) {
@@ -55,6 +64,6 @@ app.controller('specialitiesCtrl', ['$scope', 'specialitiesSrvc', '$location', f
     update(specialitiesSrvc.editSpeciality(id, newData))
   }
 
-}]);
+*/
 
 
