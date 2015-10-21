@@ -55,6 +55,8 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
     update(specialitiesSrvc.editSpeciality(id, newData))
   }
 });
+//פûףאפûאפûא
+ûפגפûג
 
 
 
