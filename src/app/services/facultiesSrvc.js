@@ -21,7 +21,7 @@ app.factory('facultiesSrvc', function ($http) {
     $http({
       method: 'POST',
       url: baseURL + 'faculty/insertData',
-      data
+      data: data
     }).then(
     function successCallback (response) {
       callback(response);
