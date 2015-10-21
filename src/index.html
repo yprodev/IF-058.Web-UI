@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="ru" ng-app="app">
 <head>
 	<meta charset="UTF-8">
 	<title>template</title>
@@ -11,7 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="scss/main.css">
 	<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js" type="text/javascript"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js" type="text/javascript"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>
+	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular-route.min.js"></script>-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 	<script src="app/app.js" type="text/javascript"></script>
 	<script src="app/conrollers/groupsCtrl.js" type="text/javascript"></script>
 	<script src="app/services/groupsSrvc.js" type="text/javascript"></script>
@@ -23,7 +24,8 @@
 	<script src="app/services/authSrvc.js"></script>
 </head>
 <body>
-<div class="commonWrapper" ng-view></div>
+<ui-view> </ui-view>
+<!--<div class="commonWrapper" ui-view></div>-->
 
 </body>
 </html>

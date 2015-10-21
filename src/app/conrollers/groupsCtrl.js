@@ -34,7 +34,7 @@ app.controller('groupsCtrl', ['$scope', 'groupsSrvc', function($scope, groupsSrv
         }
 }]);
 
-app.controller('addGroupsCtrl', ['$scope', 'groupsSrvc', '$location', function($scope, groupsSrvc, $location) {
+app.controller('addGroupsCtrl', ['$scope', 'groupsSrvc', '$state', function($scope, groupsSrvc, $state) {
 	
 	groupsSrvc.getFacultys().then(function(httpData) {
        	$scope.facultys = httpData;
@@ -48,7 +48,7 @@ app.controller('addGroupsCtrl', ['$scope', 'groupsSrvc', '$location', function($
 		console.log(new_group);
 		groupsSrvc.createGroup(new_group).then(function(httpData) {
           	$scope.add = httpData;
-          	$location.path("/groups");
+          	$state.go("groups");
         });
 	}
 }]);
@@ -74,7 +74,7 @@ app.controller('editGroupsCtrl', ['$scope', 'groupsSrvc', '$routeParams', '$loca
 			console.log(new_group);
 			groupsSrvc.setGroup(id, new_group).then(function(httpData) {
 	          	$scope.add = httpData;
-	          	$location.path("/groups");
+							$state.go("groups");
 	        });
 		}
 }]);
