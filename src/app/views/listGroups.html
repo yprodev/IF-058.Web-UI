@@ -3,7 +3,7 @@
 <div class="panel panel-success">
 							<!-- Default panel contents -->
 <div class="panel-heading">
-	<a class="pull-right" href="#/addGroup">
+	<a class="pull-right" ui-sref=".addGroup">
 		<button type="button" class="btn btn-sm btn-success">Додати групу</button>
 	</a>
 	<span class="glyphicon glyphicon-tags"></span> 
@@ -21,8 +21,8 @@
 			<td class="usCenter">{{row.group_name}}</td>
 			<td class="usCenter">{{row.faculty_name}}</td>
 			<td  class="usCenter">
-				<a href="{{'#/editGroup/' + row.group_id}}"><span class="glyphicon glyphicon-pencil"></span></a>
-				<a href="{{'#/groups'}}" ng-click="delGroupAction(row.group_id)"><span class="glyphicon glyphicon-remove"></span></a>
+				<a ui-sref="{{'.editGroup/' + row.group_id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+				<a ui-sref="{{'.groups'}}" ng-click="delGroupAction(row.group_id)"><span class="glyphicon glyphicon-remove"></span></a>
 			</td>
 		</tr>
 	</table>
