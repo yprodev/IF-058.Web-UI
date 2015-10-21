@@ -1,5 +1,9 @@
 ;
+<<<<<<< HEAD
 app.factory('reqFactory', function ($http) {
+=======
+app.factory('facultiesSrvc', function ($http) {
+>>>>>>> 9f1bef06dbe016c9691cf6f50d5f4db90042b5f3
 
 //отримання обєктів (факультетів) із сервера
   var service = {};
