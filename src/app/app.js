@@ -26,6 +26,10 @@ app.config(function($routeProvider) {
 			templateUrl: 'app/views/specialitiesList.html',
 			controller: 'specialitiesCtrl'
 		}).
+	when('/subjects', {
+			templateUrl: 'app/views/subjectsList.html',
+			controller: 'subjectsCtrl'
+		}).
 	otherwise({
 		redirectTo: '/'
 	});
