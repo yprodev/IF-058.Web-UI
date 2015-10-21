@@ -22,6 +22,10 @@ app.config(function($routeProvider) {
 		templateUrl: 'app/views/facultyList.html',
 		controller: 'facultiesCtrl'
 	}).
+	when('/specialities', {
+			templateUrl: 'app/views/specialitiesList.html',
+			controller: 'specialitiesCtrl'
+		}).
 	otherwise({
 		redirectTo: '/'
 	});
