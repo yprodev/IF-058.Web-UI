@@ -56,7 +56,7 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
   }
 });
 //פûףאפûאפûא
-ûפגפûג
+
 
 
 
