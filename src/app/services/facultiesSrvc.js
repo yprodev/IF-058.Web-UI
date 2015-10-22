@@ -48,6 +48,7 @@ app.factory('facultiesSrvc', function ($http) {
 
 //створення нового обєкта (факультету) на сервері
   service.updateFaculty = function (callback, id, data) {
+    console.log(data, id);
     var baseURL = 'http://dtapi.local/';
     $http({
       method: 'POST',
