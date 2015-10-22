@@ -34,42 +34,35 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
     $scope.newName = "";
   };
 
-
-
+    $scope.editingData = {};
 //функція відкриття форми редагування запису (факультету)
-  $scope.showEditForm = function (event, faculty, index) {
-    if (!$scope.showingEdit) {
-      $scope.showingEdit = true;
-      $scope.editingDescription = faculty.faculty_description;
-      $scope.editingName = faculty.faculty_name;
+  $scope.showEditForm = function (faculty) {
+    if ($scope.editingFaculty != faculty) {
+      $scope.editingFaculty = faculty;
+      $scope.editingData.editingDescription = faculty.faculty_description;
+      $scope.editingData.editingName = faculty.faculty_name;
       $scope.currentId = faculty.faculty_id;
-      $scope.currentIndex = index;
-    } else if (index == $scope.currentIndex) {
-      $scope.showingEdit = false;
-      $scope.currentId = "";
-      $scope.editingDescription = "";
-      $scope.editingName = "";
-      $scope.currentIndex = 0;
     } else {
-      alert("Закрийте попередню форму редагування!");
+      $scope.editingFaculty = null;
     };
   };
 
 
 
   $scope.editFaculty = function () {
-    var editedData = {
-      faculty_description: $scope.editingDescription,
-      faculty_name: $scope.editingName
+
+    var editingData = {
+      faculty_description: $scope.editingData.editingDescription,
+      faculty_name: $scope.editingData.editingName
     };
+    console.log($scope.editingData, $scope.currentId);
     facultiesSrvc.updateFaculty(function () {
       getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
-    }, $scope.currentId, editedData);
-    $scope.showingEdit = false;
-    $scope.currentId = "";
-    $scope.editingDescription = "";
-    $scope.editingName = "";
-    $scope.currentIndex = 0;
+    }, $scope.currentId, editingData);
+    $scope.editingFaculty = null;
+    // $scope.currentId = "";
+    // $scope.editingDescription = "";
+    // $scope.editingName = "";
   };
 
 

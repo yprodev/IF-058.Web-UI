@@ -10,10 +10,10 @@
                 <div class=" row">
                   <form class="form-inline">
                     <div class="col-md-4">
-                      <input class="form-control width-max" placeholder="Введіть назву факультету" ng-model="newName" required>
+                      <input class="form-control width-max" placeholder="Введіть назву факультету" ng-model="newName">
                     </div>
                     <div class="col-md-6">
-                      <input class="form-control width-max" placeholder="Вкажіть деталі" ng-model="newDescription" required>
+                      <input class="form-control width-max" placeholder="Вкажіть деталі" ng-model="newDescription">
                     </div>
                     <div class="col-md-2">
                       <button type="submit" class="btn btn-success pull-right width-max" ng-click="addFaculty()">
@@ -32,22 +32,33 @@
                     <th>Дії</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr ng-repeat="faculty in faculties">
+                <tbody ng-repeat="faculty in faculties">
+                  <tr ng-if="faculty != editingFaculty"> <!-- read-only cells -->
                     <td>{{$index + 1}}</td>
                     <td>{{faculty.faculty_name}}</td>
                     <td>{{faculty.faculty_description}}</td>
                     <td>
-                      <button class="btn btn-info col-md-offset-2" ng-click="showEditForm($event, faculty, $index+1)">
+                      <button class="btn btn-info col-md-offset-2" ng-click="showEditForm(faculty)">
                         <span class="glyphicon glyphicon-pencil"></span></button>
                       <button class="btn btn-danger col-md-offset-1" ng-click="removeFaculty(faculty)">
+                        <span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+                  </tr>
+                  <tr ng-if="faculty == editingFaculty"> <!-- editable cells -->
+                    <td>{{$index + 1}}</td>
+                    <td><input class="form-control width-max" ng-model="editingData.editingName"></td>
+                    <td><input class="form-control width-max" ng-model="editingData.editingDescription"></td>
+                    <td>
+                      <button class="btn btn-success col-md-offset-2" ng-click="editFaculty()">
+                        <span class="glyphicon glyphicon-save"></span></button>
+                      <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(faculty)">
                         <span class="glyphicon glyphicon-remove"></span></button>
                     </td>
                   </tr>
                 </tbody>
             </table>
 
-            <div class="well" ng-show="showingEdit">
+           <!--  <div class="well" ng-show="showingEdit">
               <div class=" row">
                 <form class="form-inline">
                   <div class="col-md-4">
@@ -63,7 +74,7 @@
                   </div>
                 </form>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
