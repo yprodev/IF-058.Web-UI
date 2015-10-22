@@ -1,7 +1,7 @@
 <div>
   <div class="wrapper panel panel-success no-border">
         <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Факультети </div>
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-12">
           <div>
             <br/>
             <button class="btn btn-primary pull-right" ng-click="showAddForm()">{{showingAddBtn}}</button>
@@ -57,6 +57,40 @@
                   </tr>
                 </tbody>
             </table>
+
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                  <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 id="mySmallModalLabel" class="modal-title">Small modal</h4>
+                  </div>
+                  <div class="modal-body"> ... </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Small modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                  <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 id="mySmallModalLabel" class="modal-title">Small modal</h4>
+                  </div>
+                  <div class="modal-body"> ... </div>
+                </div>
+              </div>
+            </div>
 
            <!--  <div class="well" ng-show="showingEdit">
               <div class=" row">
