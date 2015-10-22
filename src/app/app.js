@@ -1,38 +1,52 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('app', ['ui.router']);
 
-app.config(function($routeProvider) {
-	$routeProvider.
-	when('/', {
-		templateUrl: 'app/views/main.html',
-		controller: ''
-	}).
-	when('/groups', {
-		templateUrl: 'app/views/listGroups.html',
-		controller: 'groupsCtrl'
-	}).
-	when('/addGroup', {
-		templateUrl: 'app/views/addGroup.html',
-		controller: 'addGroupsCtrl'
-	}).
-	when('/editGroup/:group_id', {
-		templateUrl: 'app/views/editGroup.html',
-		controller: 'editGroupsCtrl'
-	}).
-	when('/faculties', {
-		templateUrl: 'app/views/facultyList.html',
-		controller: 'facultiesCtrl'
-	}).
-	when('/specialities', {
-			templateUrl: 'app/views/specialitiesList.html',
-			controller: 'specialitiesCtrl'
-		}).
-	when('/subjects', {
-			templateUrl: 'app/views/subjectsList.html',
-			controller: 'subjectsCtrl'
-		}).
-	otherwise({
-		redirectTo: '/'
-	});
+app.config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider.
+    state('login', {
+      url: '/',
+      templateUrl: 'app/views/login.html',
+      controller: 'loginCtrl'
+    }).
+    state('admin', {
+      url: '/admin',
+      templateUrl: 'app/views/admin.html'
+    }).
+    state('user', {
+      url: '/user',
+      templateUrl: 'app/views/user.html'
+    }).
+    state('admin.groups', {
+      url: '/groups',
+      templateUrl: 'app/views/listGroups.html',
+      controller: 'groupsCtrl'
+    }).
+    state('admin.addGroup', {//not work
+      url:'/addGroup',
+      templateUrl: 'app/views/addGroup.html',
+      controller: 'addGroupsCtrl'
+    }).
+    state('admin.editGroup/:group_id', {//not work
+    url:'/editGroup',
+      templateUrl: 'app/views/editGroup.html',
+      controller: 'editGroupsCtrl'
+    }).
+    state('admin.faculties', {
+      url:'/faculties',
+      templateUrl: 'app/views/facultyList.html',
+      controller: 'facultiesCtrl'
+    }).
+    state('admin.specialities', {
+      url:'/specialities',
+      templateUrl: 'app/views/specialitiesList.html',
+      controller: 'specialitiesCtrl'
+    }).
+    state('admin.subjects', {
+    url:'/subjects',
+      templateUrl: 'app/views/subjectsList.html',
+      controller: 'subjectsCtrl'
+  })
+
+    $urlRouterProvider.otherwise('/');
 });
 
 

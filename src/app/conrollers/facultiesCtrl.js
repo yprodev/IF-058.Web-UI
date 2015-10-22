@@ -34,6 +34,8 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
     $scope.newName = "";
   };
 
+
+
     $scope.editingData = {};
 //функція відкриття форми редагування запису (факультету)
   $scope.showEditForm = function (faculty) {
