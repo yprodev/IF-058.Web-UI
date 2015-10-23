@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $location, $rootScope, auth){
+app.controller('loginCtrl', function($scope, $state, $rootScope, auth){
     $scope.getError = function (error) {
         if (angular.isDefined(error)) {
             if (error.required) {
@@ -20,11 +20,17 @@ app.controller('loginCtrl', function($scope, $location, $rootScope, auth){
         auth.enterLogin(function(response){
             console.log(response);
             if (response.data.response === "ok" && response.data.roles[1] === 'admin') {
-                console.log("hello admin");
-                $location.path('/admin');
+                localStorage.adminName = response.data.username;
+                localStorage.adminId = response.data.id;
+                console.log(response.data.username);
+                console.log(response.data.id);
+                $state.go('admin.groups');
             } else if (response.data.response === "ok" && response.data.roles[1] === 'student') {
-                console.log("hello student");
-                $location.path('/user');
+                localStorage.userName = response.data.username;
+                localStorage.userId = response.data.id;
+                console.log(response.data.username);
+                console.log(response.data.id);
+                $state.go('user');
             } else {
                 console.log("wrong credentials");
                 $scope.wrongCredentials = true;
