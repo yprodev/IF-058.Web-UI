@@ -20,9 +20,9 @@ body {
 .loginPage {
   background: url("../img/texture.png"); }
 
-.logo {
+.loginLogo {
   margin-top: 30px; }
-  .logo img {
+  .loginLogo img {
     width: 175px;
     margin: 0 auto; }
 
