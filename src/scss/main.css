@@ -20,17 +20,6 @@ body {
 .loginPage {
   background: url("../img/texture.png"); }
 
-/*.logo {
-  h1 {
-    text-align: center;
-    letter-spacing: 2px;
-    font-size: 3.5em;
-    color: $myBlue;
-  }
-  span {
-    color: $myGreen;
-  }
-}*/
 .logo {
   margin-top: 30px; }
   .logo img {
@@ -88,21 +77,11 @@ span.summary.ng-valid {
   padding: 10px 12px;
   pointer-events: none; }
 
-.well {
+.fieldsBg {
   background-image: none;
   background-color: #EBFDD4;
   border-color: #3AB54A; }
 
-/*.copyright {
-  position : absolute;
-  bottom : 15px;
-  margin-top : 40px;
-  text-align: center;
-  left: 0;
-  right: 0;
-  font-size: 1.5em;
-  color: #014783;
-}*/
 .padding {
   padding-bottom: 60px; }
 
@@ -194,6 +173,9 @@ body, html, .container-fluid, .nav-row {
 .badge {
   background-color: #3c763d; }
 
+.width-max{
+  width:100% !important;
+}
 @media (min-width: 600px) {
   .top-nav ul {
     margin: 10px auto; }
