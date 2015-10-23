@@ -12,7 +12,7 @@
 
 body {
   font-family: Calibri, Verdana, Arial;
-  font-size: 10px; }
+}
 
 .commonWrapper {
   height: 100%; }
@@ -42,7 +42,7 @@ body {
   margin-bottom: 40px; }
   .system h3 {
     color: #014783;
-    font-size: 4em;
+    font-size: 40px;
     font-family: Arial;
     font-weight: bold;
     line-height: 120%;
@@ -73,7 +73,7 @@ span.summary.ng-valid {
 .error {
   color: #ff465e;
   font-weight: bold;
-  font-size: 1.2em;
+  font-size: 12px;
   text-align: center;
   padding-top: 5px; }
 
@@ -114,13 +114,13 @@ span.summary.ng-valid {
 
 .copyright {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 15px;
   color: #014783; }
 
 .wrongCredentials {
   text-align: center;
   color: #f00;
-  font-size: 1.5em; }
+  font-size: 15px; }
 
 .btn-success:focus {
   outline: none; }
