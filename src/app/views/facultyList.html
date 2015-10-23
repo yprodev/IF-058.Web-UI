@@ -1,0 +1,115 @@
+<div>
+  <div class="wrapper panel panel-success no-border">
+        <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Факультети </div>
+        <div class="col-md-12">
+          <div>
+            <br/>
+            <button class="btn btn-primary pull-right" ng-click="showAddForm()">{{showingAddBtn}}</button>
+            <br/><br/><br/>
+            <div class="well" ng-show="showingAdd">
+                <div class=" row">
+                  <form class="form-inline">
+                    <div class="col-md-4">
+                      <input class="form-control width-max" placeholder="Введіть назву факультету" ng-model="newName">
+                    </div>
+                    <div class="col-md-6">
+                      <input class="form-control width-max" placeholder="Вкажіть деталі" ng-model="newDescription">
+                    </div>
+                    <div class="col-md-2">
+                      <button type="submit" class="btn btn-success pull-right width-max" ng-click="addFaculty()">
+                        <span class="glyphicon glyphicon-plus"></span> Додати
+                      </button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>№</th>
+                    <th>Факультет</th>
+                    <th>Деталі</th>
+                    <th>Дії</th>
+                  </tr>
+                </thead>
+                <tbody ng-repeat="faculty in faculties">
+                  <tr ng-if="faculty != editingFaculty"> <!-- read-only cells -->
+                    <td>{{$index + 1}}</td>
+                    <td>{{faculty.faculty_name}}</td>
+                    <td>{{faculty.faculty_description}}</td>
+                    <td>
+                      <button class="btn btn-info col-md-offset-2" ng-click="showEditForm(faculty)">
+                        <span class="glyphicon glyphicon-pencil"></span></button>
+                      <button class="btn btn-danger col-md-offset-1" ng-click="removeFaculty(faculty)">
+                        <span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
+                  </tr>
+                  <tr ng-if="faculty == editingFaculty"> <!-- editable cells -->
+                    <td>{{$index + 1}}</td>
+                    <td><input class="form-control width-max" ng-model="editingData.editingName"></td>
+                    <td><input class="form-control width-max" ng-model="editingData.editingDescription"></td>
+                    <td>
+                      <button class="btn btn-success col-md-offset-2" ng-click="editFaculty()">
+                        <span class="glyphicon glyphicon-save"></span></button>
+                      <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(faculty)">
+                        <span class="glyphicon glyphicon-remove"></span></button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                  <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 id="mySmallModalLabel" class="modal-title">Small modal</h4>
+                  </div>
+                  <div class="modal-body"> ... </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Small modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+                  <span aria-hidden="true">×</span>
+                  </button>
+                  <h4 id="mySmallModalLabel" class="modal-title">Small modal</h4>
+                  </div>
+                  <div class="modal-body"> ... </div>
+                </div>
+              </div>
+            </div>
+
+           <!--  <div class="well" ng-show="showingEdit">
+              <div class=" row">
+                <form class="form-inline">
+                  <div class="col-md-4">
+                    <input class="form-control width-max" ng-model="editingName">
+                  </div>
+                  <div class="col-md-6">
+                    <input class="form-control width-max" ng-model="editingDescription">
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-success pull-right width-max" ng-click="editFaculty()">
+                      <span class="glyphicon glyphicon-save"></span> Зберегти
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+</div>
