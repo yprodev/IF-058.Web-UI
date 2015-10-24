@@ -10,10 +10,12 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
   $scope.showAddForm = function () {
     if (!$scope.showingAdd) {
       $scope.showingAdd = true;
-      $scope.showingAddBtn = "Приховати форму";
+      $scope.showingAddBtn = "Скасувати додавання";
     } else {
       $scope.showingAdd = false;
       $scope.showingAddBtn = "Додавання факультетів";
+      $scope.newDescription = "";
+      $scope.newName = "";
     };
   };
 
@@ -29,9 +31,7 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
     facultiesSrvc.createFaculty(function (resp) {
       getFacultyList();
     }, newData);
-
-    $scope.newDescription = "";
-    $scope.newName = "";
+    $scope.showAddForm();
   };
 
 
@@ -52,7 +52,6 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
 
 
   $scope.editFaculty = function () {
-
     var editingData = {
       faculty_description: $scope.editingData.editingDescription,
       faculty_name: $scope.editingData.editingName
@@ -61,20 +60,30 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
     facultiesSrvc.updateFaculty(function () {
       getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
     }, $scope.currentId, editingData);
-    $scope.editingFaculty = null;
-    // $scope.currentId = "";
-    // $scope.editingDescription = "";
-    // $scope.editingName = "";
+    $scope.showEditForm();
+    $scope.activateFaculty();
+  };
+
+
+  $scope.activateFaculty = function (faculty) {
+    if ($scope.activeFaculty != faculty) {
+      $scope.activeFaculty = faculty;
+    } else {
+      $scope.activeFaculty = null;
+    };
+    console.log($scope.activeFaculty);
   };
 
 
 // функція на клік викликає сервіс для видалення обєкту масиву faculties за відповідним faculty_id
-  $scope.removeFaculty = function (faculty) {
-    var currentId = faculty.faculty_id;
+  $scope.removeFaculty = function () {
+    var currentId = $scope.activeFaculty.faculty_id;
     facultiesSrvc.deleteFaculty(function () {
       getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
     }, currentId);
+    $scope.activateFaculty();
   };
+
 
 //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
   function getFacultyList () {
