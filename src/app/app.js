@@ -15,7 +15,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: '/user',
       templateUrl: 'app/views/user.html'
     }).
-    state('admin.groups', {
+
+    state('admin.educationInfo', {
+      url: '/educationInfo',
+      templateUrl: 'app/views/educationInfo.html'
+    }).
+    state('admin.educationInfo.groups', {
       url: '/groups',
       templateUrl: 'app/views/listGroups.html',
       controller: 'groupsCtrl'
@@ -30,12 +35,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/views/editGroup.html',
       controller: 'editGroupsCtrl'
     }).
-    state('admin.faculties', {
+    state('admin.educationInfo.faculties', {
       url:'/faculties',
       templateUrl: 'app/views/facultyList.html',
       controller: 'facultiesCtrl'
     }).
-    state('admin.specialities', {
+    state('admin.educationInfo.specialities', {
       url:'/specialities',
       templateUrl: 'app/views/specialitiesList.html',
       controller: 'specialitiesCtrl'
