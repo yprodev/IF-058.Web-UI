@@ -1,31 +1,26 @@
 ;
-app.factory('facultiesSrvc', function ($http, baseUrl) {
+app.factory('entitiesSrvc', function ($http, baseUrl) {
 
-  var service = {};
-  // var baseUrl = 'http://dtapi.local/';
+  return {
+    getEntities: function (entity) {
+      return $http.get(baseUrl + entity + '/getRecords')
+        .then(fulfilled, rejected);
+    },
 
-//отримання обєктів (факультетів) із сервера
-  service.getFaculties = function () {
-    return $http.get(baseUrl + 'faculty/getRecords')
+    createEntity: function (entity, data) {
+      return $http.post(baseUrl + entity + '/insertData', data)
+        .then(fulfilled, rejected);
+    },
+
+    deleteEntity: function (entity, id) {
+      return $http.delete(baseUrl + entity + '/del/' + id)
+        .then(fulfilled, rejected);
+    },
+
+    updateEntity: function (entity, id, data) {
+      return $http.post(baseUrl + entity + '/update/' + id, data)
       .then(fulfilled, rejected);
-    };
-
-    //створення нового обєкта (факультету) на сервері
-  service.createFaculty = function (data) {
-    return $http.post(baseUrl + 'faculty/insertData', data)
-      .then(fulfilled, rejected);
-  };
-
-  //видалення обєкта на сервері за переданим id
-  service.deleteFaculty = function (id) {
-    return $http.delete(baseUrl + 'faculty/del/' + id)
-      .then(fulfilled, rejected);
-  };
-
-//створення нового обєкта (факультету) на сервері
-  service.updateFaculty = function (id, data) {
-    return $http.post(baseUrl + 'faculty/update/' + id, data)
-    .then(fulfilled, rejected);
+    }
   };
 
   function fulfilled(response) {
@@ -35,6 +30,4 @@ app.factory('facultiesSrvc', function ($http, baseUrl) {
   function rejected(error) {
     alert("Помилка " + error.status + " " + error.statusText);
   };
-
-  return service;
 });

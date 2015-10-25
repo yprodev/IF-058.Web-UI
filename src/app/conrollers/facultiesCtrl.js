@@ -1,11 +1,11 @@
 ;
-app.controller('facultiesCtrl', function($scope, facultiesSrvc){
+app.controller('facultiesCtrl', function($scope, entitiesSrvc){
 
 
-
+  $scope.thisEntity = "faculty";
 //function gets a list of entities
   function getFacultyList () {
-    facultiesSrvc.getFaculties().then(function (resp) {
+    entitiesSrvc.getEntities($scope.thisEntity).then(function (resp) {
       $scope.faculties = resp.data;
       $scope.noData = "Немає записів";
     });
@@ -34,7 +34,7 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
       faculty_name: $scope.newName
     };
     // console.log(newData);
-    facultiesSrvc.createFaculty(newData).then(function (resp) {
+    entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
       if (resp.data.response == "ok") {
         newData.faculty_id = resp.data.id;
         // console.log(resp);
@@ -61,47 +61,44 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
         $scope.editingFaculty = null;
       };
     };
-  //function for initiate of entity for using in modals
-    $scope.activateFaculty = function (faculty) {
-      if ($scope.activeFaculty != faculty) {
-        $scope.activeFaculty = faculty;
-
-      } else {
-        $scope.activeFaculty = null;
-      };
-      console.log($scope.activeFaculty + "fin");
-    };
   //function updates an element of array and send updating of entity to server
     $scope.editFaculty = function () {
-      var editingData = {
+      var editedData = {
         faculty_description: $scope.editingData.editingDescription,
         faculty_name: $scope.editingData.editingName
       };
       // console.log($scope.editingData, $scope.currentId);
-      facultiesSrvc.updateFaculty($scope.currentId, editingData).then(function (resp) {
+      entitiesSrvc.updateEntity($scope.thisEntity, $scope.currentId, editedData).then(function (resp) {
       if (resp.data.response == "ok") {
         for (var i = 1; i < $scope.faculties.length; i++) {
           if ($scope.faculties[i].faculty_id == $scope.currentId) {
-            $scope.faculties[i].faculty_description = editingData.faculty_description;
-            $scope.faculties[i].faculty_name = editingData.faculty_name;
+            $scope.faculties[i].faculty_description = editedData.faculty_description;
+            $scope.faculties[i].faculty_name = editedData.faculty_name;
           } ;
         };
       } else {
         alert ("Помилка " + resp.data.response);
       };
     });;
-      $scope.showEditForm();
-      $scope.activateFaculty();
+    $scope.editingFaculty = null;
     };
 
 
 
 
+//function for initiate of entity for delete in modal
+    $scope.activateFaculty = function (faculty) {
+      if ($scope.activeFaculty != faculty) {
+        $scope.activeFaculty = faculty;
+      } else {
+        $scope.activeFaculty = null;
+      };
+    };
 //function removes an entity from array and from server
   $scope.removeFaculty = function () {
     var currentFaculty = $scope.activeFaculty;
     var currentId = $scope.activeFaculty.faculty_id;
-    facultiesSrvc.deleteFaculty(currentId).then(function (resp) {
+    entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
       if (resp.data.response == "ok") {
             var index = $scope.faculties.indexOf(currentFaculty);
             $scope.faculties.splice(index, 1);
