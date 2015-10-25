@@ -1,18 +1,21 @@
-app.factory('logSrvc', ['auth', '$state', function(auth, $state) {
-    var logged = false;
+app.factory('logSrvc', ['authSrvc', '$state', function(authSrvc, $state) {
+    //var logged = false;
     var toAuth = function() {
-        logged = false;
+        console.log('toAuth!!!!!!!!!!!!!!');
+        //logged = false;
         $state.go('login');
     };
     return {
         logOut: function(){
-            auth.logOut().then(
+            authSrvc.logOut().then(
                 function() {
-                    logged = false;
+                    console.log('logout1!!!!!!!!!!!!');
+                    //logged = false;
                     toAuth();
                 },
                 function() {
-                    logged = false;
+                    console.log('logout2!!!!!!!!!!!!!!!!');
+                    //logged = false;
                     toAuth();
                 }
             );
