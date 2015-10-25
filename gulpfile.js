@@ -28,8 +28,10 @@ var path = {
 			'src/app/app.js',
 			'src/app/services/groupsSrvc.js',
 			'src/app/services/facultySrvc.js',
+			'src/app/services/addStudentSrvc.js',
 			'src/app/controllers/groupsCtrl.js',
-			'src/app/controllers/facultiesCtrl.js'
+			'src/app/controllers/facultiesCtrl.js',
+			'src/app/controllers/addStudentCtrl.js'
 			], // Tell your group to change this path according to a new file structure and to be consistent
 		html:'src/**/*.html',
 		img:'src/img/*'
