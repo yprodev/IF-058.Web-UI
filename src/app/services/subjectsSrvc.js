@@ -1,39 +1,33 @@
 ;
-app.factory('subjectsSrvc', ['$http', function ($http) {
-  var service = {};
-  var URL = 'http://dtapi.local/subject/';
-// список предметів
-  service.getSubjects = function () {
-    return $http.get(URL + 'getRecords')
-      .success(function (result) {
-        return result
-      })
-      .error(function (result) {
-        console.log('error')
-      });
-  }
-  // створення нового предмету
-  service.createSubject = function(data) {
-    return $http.post(URL + 'insertData', data)
-      .then(function(response) {
-        return response.data.response;
-      });
-  }
+app.factory('entitiesSrvc', function ($http, baseUrl) {
 
- // видалення предмету
- service.delSubject = function(data) {
-  return $http.get(URL +'del/' + data)
-    .then(function(response) {
-     return response.data.response;
-    });
- }
-//редагування предметів
-  service.editSubject = function(id, newData) {
-    console.log(id, newData)
-    return $http.post(URL +'update/'+ id, newData)
-      .then(function(response) {
-        return response.data.response;
-      });
-  }
- return service
-}]);
+  return {
+    getEntities: function (entity) {
+      return $http.get(baseUrl + entity + '/getRecords')
+        .then(fulfilled, rejected);
+    },
+
+    createEntity: function (entity, data) {
+      return $http.post(baseUrl + entity + '/insertData', data)
+        .then(fulfilled, rejected);
+    },
+
+    deleteEntity: function (entity, id) {
+      return $http.delete(baseUrl + entity + '/del/' + id)
+        .then(fulfilled, rejected);
+    },
+
+    updateEntity: function (entity, id, data) {
+      return $http.post(baseUrl + entity + '/update/' + id, data)
+      .then(fulfilled, rejected);
+    }
+  };
+
+  function fulfilled(response) {
+    return response;
+  };
+
+  function rejected(error) {
+    alert("Помилка " + error.status + " " + error.statusText);
+  };
+});
