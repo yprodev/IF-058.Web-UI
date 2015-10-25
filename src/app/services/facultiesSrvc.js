@@ -1,66 +1,39 @@
 ;
-app.factory('facultiesSrvc', function ($http) {
+app.factory('facultiesSrvc', function ($http, baseUrl) {
+
+  var service = {};
+  // var baseUrl = 'http://dtapi.local/';
 
 //отримання обєктів (факультетів) із сервера
-  var service = {};
-  service.getFaculties = function (callback) {
-    var baseURL = 'http://dtapi.local/';
-    $http({
-      method: 'GET',
-      url: baseURL + 'faculty/getRecords'
-    }).then(function successCallback (response) {
-        callback (response);
-      }, function errorCallback (response) {
-        callback (response);
-      });
+  service.getFaculties = function () {
+    return $http.get(baseUrl + 'faculty/getRecords')
+      .then(fulfilled, rejected);
+    };
+
+    //створення нового обєкта (факультету) на сервері
+  service.createFaculty = function (data) {
+    return $http.post(baseUrl + 'faculty/insertData', data)
+      .then(fulfilled, rejected);
+  };
+
+  //видалення обєкта на сервері за переданим id
+  service.deleteFaculty = function (id) {
+    return $http.delete(baseUrl + 'faculty/del/' + id)
+      .then(fulfilled, rejected);
   };
 
 //створення нового обєкта (факультету) на сервері
-  service.createFaculty = function (callback, data) {
-    var baseURL = 'http://dtapi.local/';
-    $http({
-      method: 'POST',
-      url: baseURL + 'faculty/insertData',
-      data: data
-    }).then(
-    function successCallback (response) {
-      callback(response);
-      }, function errorCallback (response) {
-        callback(response);
-      }
-      );
+  service.updateFaculty = function (id, data) {
+    return $http.post(baseUrl + 'faculty/update/' + id, data)
+    .then(fulfilled, rejected);
   };
 
-//видалення обєкта на сервері за переданим id
-  service.deleteFaculty = function (callback,id) {
-    var baseURL = 'http://dtapi.local/';
-    $http({
-      method: 'DELETE',
-      url: baseURL + 'faculty/del/' + id,
-    }).then(
-    function successCallback (response) {
-      callback(response);
-      }, function errorCallback (response) {
-        callback(response);
-      }
-      );
+  function fulfilled(response) {
+    return response;
   };
 
-//створення нового обєкта (факультету) на сервері
-  service.updateFaculty = function (callback, id, data) {
-    console.log(data, id);
-    var baseURL = 'http://dtapi.local/';
-    $http({
-      method: 'POST',
-      url: baseURL + 'faculty/update/' + id,
-      data: data
-    }).then(
-    function successCallback (response) {
-      callback(response);
-      }, function errorCallback (response) {
-        callback(response);
-      }
-      );
+  function rejected(error) {
+    alert("Помилка " + error.status + " " + error.statusText);
   };
 
   return service;
