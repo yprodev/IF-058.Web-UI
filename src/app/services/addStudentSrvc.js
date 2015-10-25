@@ -1,7 +1,7 @@
 angular.module('app')
-	.constant('URL_BASE', 'http://dtapi.local/')
 	.factory('addStudentSrvc', ['$http', function ($http) {
-		var service = {};
+		var URL_BASE = 'http://dtapi.local/'
+			, service = {};
 
 		service.addStudent = function (studentRecordData) {
 
@@ -15,7 +15,7 @@ angular.module('app')
 				// Success Function for Promise
 				function addSuccess (response) {
 					condole.log('Everything is OK. Student record is added.');
-				},
+				}
 
 				//Error Function for Promise
 				function addError (response) {
