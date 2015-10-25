@@ -1,33 +1,36 @@
-app.factory('authSrvc', function($http){
-    var service = {};
+app.factory('authSrvc', function($http, $state){
     var baseURL = 'http://dtapi.local/';
+    var toAuth = function() {
+        console.log('toAuth!!!!!!!!!!!!!!');
+        $state.go('login');
+    };
+    return {
+        enterLogin : function (data) {
+        return $http.post(baseURL + 'login/index', data)
+            .then(fulfilled, rejected);
+        },
 
-    service.enterLogin = function (callback, data) {
-        $http({
-            method: 'POST',
-            url: baseURL + 'login/index',
-            data: data
-        }).then(function successCallback (response) {
-            callback(response);
-        }, function errorCallback (response) {
-            callback(response);
-        });
+        logOut: function(){
+            return $http.get(baseURL + 'login/logout')
+                .then(
+                function() {
+                    console.log('logout1!!!!!!!!!!!!');
+                    return toAuth();
+                },
+                function() {
+                    console.log('logout2!!!!!!!!!!!!!!!!');
+                    return toAuth();
+                }
+            );
+        }
+    };
+    function fulfilled(response) {
+        return response;
+        console.log(response);
     };
 
-    service.logOut = function(){
-        console.log('logout srvc!!!!!!!!!!!!!!');
-        return $http.get(baseURL + 'login/logout')
-            .then(
-            function(response) {
-                return response.data;
-                console.log(response);
-            },
-            function(error) {
-                return error.data;
-                console.log(error);
-            }
-        );
+    function rejected(error) {
+        return error;
+        console.log(error);
     };
-
-    return service;
 });
