@@ -93,7 +93,8 @@
 
 				</div><!-- END row sides -->
 
-				<div class="row sides">
+				<div class="row sides"
+						 ng-controller="addStudentCtrl"><!-- Adding Controller to the view -->
 					<div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div class="row">
 							<div class="col col-sx-12 col-sm-12 col-md-7 col-lg-7">
@@ -102,14 +103,18 @@
 							<div class="col col-sx-12 col-sm-12 col-md-5 col-lg-5"></div>
 						</div>
 
-						<form>
+						<form name="formAddStudentRecord"
+									novalidate
+									ng-submit="addNewStudent(newStudent)">
 							<div class="form-group">
 								<label class="sr-only" for="name">First Name</label>
 								<input type="text"
 											 id="name"
 											 class="form-control"
 											 aria-describedby="helpName"
-											 placeholder="John">
+											 placeholder="John"
+											 ng-model="newStudent.student_fname"
+											 required>
 								<span id="helpName" class="help-block">Please, enter your fisrt name. It should contain minimum 2 letters without special symbols in latin or cyrillic.</span>
 							</div>
 							<div class="form-group">
@@ -118,7 +123,9 @@
 											 id="secname"
 											 class="form-control"
 											 aria-describedby="helpSecName"
-											 placeholder="Drake">
+											 placeholder="Drake"
+											 ng-model="newStudent.student_name"
+											 required>
 								<span id="helpSecName" class="help-block">Please, enter your second name. It should contain minimum 2 letters without special symbols in latin or cyrillic.</span>
 							</div>
 							<div class="form-group">
@@ -127,7 +134,9 @@
 											 id="surname"
 											 class="form-control"
 											 aria-describedby="helpSurname"
-											 placeholder="Smith">
+											 placeholder="Smith"
+											 ng-model="newStudent.student_surname"
+											 required>
 								<span id="helpSurname" class="help-block">Please, enter your last name. It should contain minimum 2 letters without special symbols in latin or cyrillic.</span>
 							</div>
 							<div class="form-group">
@@ -136,7 +145,9 @@
 											 id="username"
 											 class="form-control"
 											 aria-describedby="helpUsername"
-											 placeholder="e.g. test-user">
+											 placeholder="e.g. test-user"
+											 ng-model="newStudent.username"
+											 required>
 								<span id="helpUsername" class="help-block">Please, choose your username. It should contain minimum 5 latin letters without special symbols.</span>
 							</div>
 							<div class="form-group">
@@ -144,7 +155,9 @@
 								<input type="password"
 											 id="password"
 											 class="form-control"
-											 aria-describedby="helpPassword">
+											 aria-describedby="helpPassword"
+											 ng-model="newStudent.password"
+											 required>
 								<span id="helpPassword" class="help-block">Please, choose your password. It should contain minimum 8 characters with special symbols.</span>
 							</div>
 							<div class="form-group">
@@ -152,7 +165,9 @@
 								<input type="password"
 											 id="confpassword"
 											 class="form-control"
-											 aria-describedby="helpConfPassword">
+											 aria-describedby="helpConfPassword"
+											 ng-model="newStudent.password_confirm"
+											 required>
 								<span id="helpConfPassword" class="help-block">Please, confirm the password you have chosen earlier.</span>
 							</div>
 							<div class="form-group">
@@ -161,7 +176,9 @@
 											 id="email"
 											 class="form-control"
 											 aria-describedby="helpEmail"
-											 placeholder="myemail@site.com">
+											 placeholder="myemail@site.com"
+											 ng-model="newStudent.email"
+											 required>
 								<span id="helpEmail" class="help-block">Please, enter your email.</span>
 							</div>
 							<div class="form-group">
@@ -169,7 +186,9 @@
 								<input type="text"
 											 id="gradebook"
 											 class="form-control"
-											 aria-describedby="helpGradebook">
+											 aria-describedby="helpGradebook"
+											 ng-model="newStudent.gradebook_id"
+											 required>
 								<span id="helpGradebook" class="help-block">Please, enter your gradebook code here. You may use latin and cyrillic characters, numbers and special symbols.</span>
 							</div>
 							<button type="submit" class="btn btn-default">Submit</button>
