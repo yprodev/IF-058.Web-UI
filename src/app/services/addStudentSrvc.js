@@ -20,6 +20,7 @@ angular.module('app')
 				//Error Function for Promise
 				function addError (response) {
 					console.log('Something goes wrong. Student record was not added.');
+					console.log(response);
 				}
 		};
 
