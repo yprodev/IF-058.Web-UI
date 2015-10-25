@@ -1,8 +1,7 @@
 app.factory('facultySrvc', ['$http', function ($http) {
 	//Creating an object for adding methods to it and more efficient work
-	var service = {};
-
-	var URL = 'http://dtapi.local/faculty/';
+	var service = {}
+		, URL = 'http://dtapi.local/faculty/';
 
 	// This method returns students
 	service.getFaculties = function () {
