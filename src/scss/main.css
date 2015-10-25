@@ -178,3 +178,9 @@ body, html, .container-fluid, .nav-row {
 @media (max-width: 601px) {
   .top-nav ul li a {
     display: inline-block; } }
+@media screen and (max-height: 642px) {
+  .footer {
+    position: static;
+    margin-top: 30px;  }
+  .container-fluid {
+    height: auto;  } }

@@ -1,26 +1,26 @@
 /**
- * Created by Серёга on 09.10.2015.
+ * Created by Г‘ГҐГ°ВёГЈГ  on 09.10.2015.
  */
 app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location) {
 
-//показати поля редагування файлу
+//ГЇГ®ГЄГ Г§Г ГІГЁ ГЇГ®Г«Гї Г°ГҐГ¤Г ГЈГіГўГ Г­Г­Гї ГґГ Г©Г«Гі
   $scope.showAdd = function () {
     $scope.addSpec = !$scope.addSpec
     console.log($scope.addSpec)
   }
 
-  //показати всі спеціаьності
+  //ГЇГ®ГЄГ Г§Г ГІГЁ ГўГ±Ві Г±ГЇГҐГ¶ВіГ ГјГ­Г®Г±ГІВі
   specialitiesSrvc.getSpecialities().then(function (response) {
     $scope.specialities = response.data;
   });
-  //функція оновлення списку спеціальностей
+  //ГґГіГ­ГЄГ¶ВіГї Г®Г­Г®ГўГ«ГҐГ­Г­Гї Г±ГЇГЁГ±ГЄГі Г±ГЇГҐГ¶ВіГ Г«ГјГ­Г®Г±ГІГҐГ©
   function update () {
     specialitiesSrvc.getSpecialities().then(function (response) {
       $scope.specialities = response.data;
     })
   }
 
-  //додати спеціальність
+  //Г¤Г®Г¤Г ГІГЁ Г±ГЇГҐГ¶ВіГ Г«ГјГ­ВіГ±ГІГј
   $scope.add = function () {
     var data = {
       speciality_name: $scope.name,
@@ -34,7 +34,7 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
     console.log('add made')
     console.log($scope)
   }
-//видалити спеціальність
+//ГўГЁГ¤Г Г«ГЁГІГЁ Г±ГЇГҐГ¶ВіГ Г«ГјГ­ВіГ±ГІГј
   $scope.delete = function (speciality) {
     console.log(speciality.speciality_id)
     specialitiesSrvc.delSpeciality(speciality.speciality_id)
@@ -42,10 +42,10 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
     update()
   }
 
-  //редагувати спеціальність
+  //Г°ГҐГ¤Г ГЈГіГўГ ГІГЁ Г±ГЇГҐГ¶ВіГ Г«ГјГ­ВіГ±ГІГј
   $scope.edit = function (speciality) {
-    var name = prompt('Вкажіть назву (Write speciality name)', speciality.speciality_name);
-    var code = prompt('Вкажіть код (Write speciality code)', speciality.speciality_code)
+    var name = prompt('Г‚ГЄГ Г¦ВіГІГј Г­Г Г§ГўГі (Write speciality name)', speciality.speciality_name);
+    var code = prompt('Г‚ГЄГ Г¦ВіГІГј ГЄГ®Г¤ (Write speciality code)', speciality.speciality_code)
 
     var newData = {
       speciality_name: name,
@@ -55,7 +55,7 @@ app.controller('specialitiesCtrl', function($scope, specialitiesSrvc, $location)
     update(specialitiesSrvc.editSpeciality(id, newData))
   }
 });
-//фыуафыафыа
+//ГґГ»ГіГ ГґГ»Г ГґГ»Г 
 
 
 

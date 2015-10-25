@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $location, $rootScope, auth){
+app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
     $scope.getError = function (error) {
         if (angular.isDefined(error)) {
             if (error.required) {
@@ -11,26 +11,31 @@ app.controller('loginCtrl', function($scope, $location, $rootScope, auth){
     };
 
     $scope.enter = function(){
-        console.log('enter works');
         $scope.wrongCredentials = false;
         var user = {
             username: $scope.username,
             password: $scope.password
         };
-        auth.enterLogin(function(response){
-            console.log(response);
+        authSrvc.enterLogin(user).then(function(response){
             if (response.data.response === "ok" && response.data.roles[1] === 'admin') {
-                console.log("hello admin");
-                $location.path('/admin');
+                localStorage.adminName = response.data.username;
+                localStorage.adminId = response.data.id;
+                $state.go('admin.groups');
             } else if (response.data.response === "ok" && response.data.roles[1] === 'student') {
-                console.log("hello student");
-                $location.path('/user');
+                localStorage.userName = response.data.username;
+                localStorage.userId = response.data.id;
+                $state.go('user');
             } else {
                 console.log("wrong credentials");
                 $scope.wrongCredentials = true;
             };
 
-        }, user);
+        });
+    };
+
+    $scope.exit = function() {
+        authSrvc.logOut().then();
+        console.log('exit!!!!!!!!');
     };
 
 });

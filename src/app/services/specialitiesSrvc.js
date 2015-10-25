@@ -44,4 +44,3 @@ app.factory('specialitiesSrvc', ['$http', function ($http) {
   }
  return service
 }]);
-

@@ -48,5 +48,3 @@ app.controller('subjectsCtrl', function ($scope, subjectsSrvc) {
   }
 
 });
-
-

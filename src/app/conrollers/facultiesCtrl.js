@@ -1,12 +1,21 @@
 ;
-app.controller('facultiesCtrl', function($scope, facultiesSrvc){
+app.controller('facultiesCtrl', function($scope, entitiesSrvc){
+
+
+  $scope.thisEntity = "faculty";
+//function gets a list of entities
+  function getFacultyList () {
+    entitiesSrvc.getEntities($scope.thisEntity).then(function (resp) {
+      $scope.faculties = resp.data;
+      $scope.noData = "Немає записів";
+    });
+  };
+
+
+
 
   $scope.showingAddBtn = "Додавання факультетів";
-//функція, яка викликає сервіс для отримання списку факультетів із сервера
-  getFacultyList();
-
-
-//функція відкриття форми створення нового запису (факультету)
+//function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
     if (!$scope.showingAdd) {
       $scope.showingAdd = true;
@@ -18,78 +27,90 @@ app.controller('facultiesCtrl', function($scope, facultiesSrvc){
       $scope.newName = "";
     };
   };
-
-
-
-// функція на клік, викликає сервіс, який присвоює в обєкт newFaculty дані з
-// інпутів, відпраляється а сервер.
+//function creates new element of array and sends new entity on server
   $scope.addFaculty = function () {
     var newData = {
       faculty_description: $scope.newDescription,
       faculty_name: $scope.newName
     };
-    facultiesSrvc.createFaculty(function (resp) {
-      getFacultyList();
-    }, newData);
+    // console.log(newData);
+    entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
+      if (resp.data.response == "ok") {
+        newData.faculty_id = resp.data.id;
+        // console.log(resp);
+        $scope.faculties.push(newData);
+      } else {
+        alert ("Помилка " + resp.data.response);
+      };
+    });
     $scope.showAddForm();
   };
 
 
 
-    $scope.editingData = {};
-//функція відкриття форми редагування запису (факультету)
-  $scope.showEditForm = function (faculty) {
-    if ($scope.editingFaculty != faculty) {
-      $scope.editingFaculty = faculty;
-      $scope.editingData.editingDescription = faculty.faculty_description;
-      $scope.editingData.editingName = faculty.faculty_name;
-      $scope.currentId = faculty.faculty_id;
-    } else {
-      $scope.editingFaculty = null;
+
+  //function opens a form for editing
+    $scope.showEditForm = function (faculty) {
+      if ($scope.editingFaculty != faculty) {
+        $scope.editingFaculty = faculty;
+        $scope.editingData = {};
+        $scope.editingData.editingDescription = faculty.faculty_description;
+        $scope.editingData.editingName = faculty.faculty_name;
+        $scope.currentId = faculty.faculty_id;
+      } else {
+        $scope.editingFaculty = null;
+      };
     };
-  };
-
-
-
-  $scope.editFaculty = function () {
-    var editingData = {
-      faculty_description: $scope.editingData.editingDescription,
-      faculty_name: $scope.editingData.editingName
+  //function updates an element of array and send updating of entity to server
+    $scope.editFaculty = function () {
+      var editedData = {
+        faculty_description: $scope.editingData.editingDescription,
+        faculty_name: $scope.editingData.editingName
+      };
+      // console.log($scope.editingData, $scope.currentId);
+      entitiesSrvc.updateEntity($scope.thisEntity, $scope.currentId, editedData).then(function (resp) {
+      if (resp.data.response == "ok") {
+        for (var i = 1; i < $scope.faculties.length; i++) {
+          if ($scope.faculties[i].faculty_id == $scope.currentId) {
+            $scope.faculties[i].faculty_description = editedData.faculty_description;
+            $scope.faculties[i].faculty_name = editedData.faculty_name;
+          } ;
+        };
+      } else {
+        alert ("Помилка " + resp.data.response);
+      };
+    });;
+    $scope.editingFaculty = null;
     };
-    console.log($scope.editingData, $scope.currentId);
-    facultiesSrvc.updateFaculty(function () {
-      getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
-    }, $scope.currentId, editingData);
-    $scope.showEditForm();
-    $scope.activateFaculty();
-  };
 
 
-  $scope.activateFaculty = function (faculty) {
-    if ($scope.activeFaculty != faculty) {
-      $scope.activeFaculty = faculty;
-    } else {
-      $scope.activeFaculty = null;
+
+
+//function for initiate of entity for delete in modal
+    $scope.activateFaculty = function (faculty) {
+      if ($scope.activeFaculty != faculty) {
+        $scope.activeFaculty = faculty;
+      } else {
+        $scope.activeFaculty = null;
+      };
     };
-    console.log($scope.activeFaculty);
-  };
-
-
-// функція на клік викликає сервіс для видалення обєкту масиву faculties за відповідним faculty_id
+//function removes an entity from array and from server
   $scope.removeFaculty = function () {
+    var currentFaculty = $scope.activeFaculty;
     var currentId = $scope.activeFaculty.faculty_id;
-    facultiesSrvc.deleteFaculty(function () {
-      getFacultyList(); //функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
-    }, currentId);
+    entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
+      if (resp.data.response == "ok") {
+            var index = $scope.faculties.indexOf(currentFaculty);
+            $scope.faculties.splice(index, 1);
+      } else {
+        alert ("Помилка " + resp.data.response);
+      };
+    });
     $scope.activateFaculty();
   };
 
 
-//функція, яка викликає сервіс для отримання ОНОВЛЕННЯ списку факультетів із сервера
-  function getFacultyList () {
-    facultiesSrvc.getFaculties(function (resp) {
-      $scope.faculties = resp.data; // faculties використовується у view для перебору обєктів (факультетів)
-    });
-  };
 
+
+  getFacultyList();
 });

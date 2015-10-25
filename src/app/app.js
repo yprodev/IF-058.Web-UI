@@ -1,5 +1,7 @@
 var app = angular.module('app', ['ui.router']);
 
+app.constant("baseUrl", "http://dtapi.local/");
+
 app.config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider.
 		state('login', {
