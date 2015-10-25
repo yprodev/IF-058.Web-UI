@@ -13,5 +13,20 @@ app.factory('auth', function($http){
                 callback(response);
             });
         };
+
+
+
+    service.logOut = function(){
+        return $http.get(baseURL + 'login/logout')
+            .then(
+            function(response) {
+                return response.data;
+            },
+            function(error) {
+                return error.data;
+            }
+        );
+    };
+
     return service;
 });
