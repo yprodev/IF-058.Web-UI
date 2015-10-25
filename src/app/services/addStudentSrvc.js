@@ -12,16 +12,15 @@ angular.module('app')
 			}, studentRecordData)
 				.then(addSuccess, addError);
 
-				// Success Function for Promise
-				function addSuccess (response) {
-					condole.log('Everything is OK. Student record is added.');
-				}
+			// Success Function for Promise
+			function addSuccess (response) {
+				condole.log('Everything is OK. Student record is added.');
+			}
 
-				//Error Function for Promise
-				function addError (response) {
-					console.log('Something goes wrong. Student record was not added.');
-					console.log(response);
-				}
+			//Error Function for Promise
+			function addError (response) {
+				console.log('Something goes wrong. Student record was not added.');
+			}
 		};
 
 		return service;
