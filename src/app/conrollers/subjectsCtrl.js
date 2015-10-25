@@ -114,5 +114,3 @@ app.controller('subjectsCtrl', function($scope, entitiesSrvc){
 
   getSubjectList();
 });
-
-

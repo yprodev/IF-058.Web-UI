@@ -10,6 +10,8 @@
     "gulp-jshint": "~1.5.1",
     "gulp-less": "*",
     "gulp-sass": "*",
+    "gulp-sass-bulk-import": "^0.3.2",
+    "gulp-ssh": "^0.5.3",
     "gulp-uglify": "~0.2.1",
     "imagemin-pngquant": "^4.2.0"
   }
