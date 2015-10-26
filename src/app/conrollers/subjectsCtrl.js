@@ -14,15 +14,12 @@ app.controller('subjectsCtrl', function($scope, entitiesSrvc){
 
 
 
-  $scope.showingAddBtn = "Додавання предметів";
 //function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
     if (!$scope.showingAdd) {
       $scope.showingAdd = true;
-      $scope.showingAddBtn = "Скасувати додавання";
     } else {
       $scope.showingAdd = false;
-      $scope.showingAddBtn = "Додавання предметів";
       $scope.newDescription = "";
       $scope.newName = "";
     };

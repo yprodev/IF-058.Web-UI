@@ -14,15 +14,12 @@ app.controller('specialitiesCtrl', function($scope, entitiesSrvc){
 
 
 
-  $scope.showingAddBtn = "Додавання спеціальностей";
 //function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
     if (!$scope.showingAdd) {
       $scope.showingAdd = true;
-      $scope.showingAddBtn = "Скасувати додавання";
     } else {
       $scope.showingAdd = false;
-      $scope.showingAddBtn = "Додавання спеціальностей";
       $scope.newCode = "";
       $scope.newName = "";
     };
