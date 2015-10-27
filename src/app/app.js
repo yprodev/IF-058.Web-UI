@@ -48,6 +48,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'subjectsCtrl'
 		}).
 		state('admin.students', {
+		url:'/students',
+			templateUrl: 'app/views/getStudents.html',
+			controller: 'getStudentsCtrl'
+		}).
+		state('admin.addStudent', {
 		url:'/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',
 			controller: 'addStudentCtrl'
