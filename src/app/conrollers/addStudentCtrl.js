@@ -2,6 +2,11 @@ angular.module('app')
 	.controller('addStudentCtrl', ['$scope', 'addStudentSrvc', function ($scope, addStudentSrvc) {
 
 		$scope.getError = function(error) {
+			//
+			// 
+			// We need to add here true validation
+			// 
+			//
 			if(angular.isDefined(error)) {
 				if(error.required) {
 					return 'Please, fill in this field';
