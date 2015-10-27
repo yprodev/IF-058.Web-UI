@@ -54,25 +54,4 @@ angular.module('app')
 			addStudentSrvc.addStudent(studentRecordData);
 		}; // End $scope.addStudent
 
-		$scope.testStud = function () {
-			var studentRecordData = {
-				// User Values
-				username: 'addmisuser',
-				password: '1q2w3e4r5t6y',
-				password_confirm: '1q2w3e4r5t6y',
-				email: 'somewhere@nowhere.com',
-				// Students Values
-				gradebook_id: 'JI-835674',
-				student_surname: 'Mutak',
-				student_name: 'Anatoliyovich',
-				student_fname: 'Misko',
-				group_id: '1',// something we need to invent
-				plain_password: '1q2w3e4r5t6y',
-				photo: '' //need to invent
-			};
-
-			// Gives data to a service file
-			addStudentSrvc.addStudent(studentRecordData);
-		};
-
 	}]);
