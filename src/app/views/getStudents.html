@@ -1,0 +1,27 @@
+<div class="container-fluid">
+	<div class="row"
+			 ng-controller="getStudentsCtrl">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table>
+				<thead>
+					<th>
+						<td>#</td>
+						<td>Name</td>
+						<td>Surname</td>
+						<td>S Name</td>
+						<td>Group</td>
+					</th>
+				</thead>
+				<tbody>
+					<tr ng-repeat="student in students">
+						<td>{{ index + 1 }}</td>
+						<td>{{ student.student_fname }}</td>
+						<td>{{ student.student_surname }}</td>
+						<td>{{ student.student_name }}</td>
+						<td>{{ student.group_id }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div><!-- END col -->
+	</div><!-- END row -->
+</div>
