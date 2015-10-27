@@ -5,7 +5,6 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
                 return "Field can't be empty!";
             } else if (error.minlength) {
                 return "No less than 4 characters!";
-
             }
         }
     };
@@ -20,7 +19,7 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
             if (response.data.response === "ok" && response.data.roles[1] === 'admin') {
                 localStorage.adminName = response.data.username;
                 localStorage.adminId = response.data.id;
-                $state.go('admin');
+                $state.go('admin.main');
             } else if (response.data.response === "ok" && response.data.roles[1] === 'student') {
                 localStorage.userName = response.data.username;
                 localStorage.userId = response.data.id;
