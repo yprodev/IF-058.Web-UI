@@ -23,7 +23,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		}).
 		state('admin.educationInfo.groups', {
 			url: '/groups',
-			templateUrl: 'app/views/listGroups.html',
+			templateUrl: 'app/views/groupList.html',
 			controller: 'groupsCtrl'
 		}).
 		state('admin.educationInfo.faculties', {
