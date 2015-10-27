@@ -5,6 +5,8 @@ angular.module('app')
 
 		service.addStudent = function (studentRecordData) {
 
+			console.log(studentRecordData);
+
 			var studData = angular.toJson(studentRecordData);
 
 			return $http({
