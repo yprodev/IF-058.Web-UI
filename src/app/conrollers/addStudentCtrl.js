@@ -22,10 +22,10 @@ angular.module('app')
 
 			// Some tricks with fields we don't know how to work with
 			if(!recordData.group_id) {
-				recordData.group_id = '1';
+				recordData.group_id = '3';
 			}
 			if(!recordData.photo) {
-				recordData.photo = '';
+				recordData.photo = ' ';
 			}
 
 			// Put recordData Object into a variable
@@ -41,12 +41,33 @@ angular.module('app')
 				student_name: recordData.student_name,
 				student_fname: recordData.student_fname,
 				group_id: recordData.group_id,// something we need to invent
-				plain_password: recordData.password,
+				plain_password: recordData.password_confirm,
 				photo: recordData.photo //need to invent
 			};
 
 			// Gives data to a service file
 			addStudentSrvc.addStudent(studentRecordData);
-	}; // End $scope.addStudent
+		}; // End $scope.addStudent
+
+		$scope.testStud = function () {
+			var studentRecordData = {
+				// User Values
+				username: 'addmisuser',
+				password: '1q2w3e4r5t6y',
+				password_confirm: '1q2w3e4r5t6y',
+				email: 'somewhere@nowhere.com',
+				// Students Values
+				gradebook_id: 'JI-835674',
+				student_surname: 'Mutak',
+				student_name: 'Anatoliyovich',
+				student_fname: 'Misko',
+				group_id: '1',// something we need to invent
+				plain_password: '1q2w3e4r5t6y',
+				photo: '' //need to invent
+			};
+
+			// Gives data to a service file
+			addStudentSrvc.addStudent(studentRecordData);
+		};
 
 	}]);

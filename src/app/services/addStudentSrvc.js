@@ -7,25 +7,23 @@ angular.module('app')
 
 			console.log(studentRecordData);
 
-			var studData = angular.toJson(studentRecordData);
+			var jsonData = JSON.stringify(studentRecordData);
 
-			return $http({
-				//Creating object with parameters
-				method: 'POST',
-				url: URL_BASE + 'student/insertData'
-			}, studData)
+			return $http.post(URL_BASE + 'student/insertData', jsonData)
 				.then(addSuccess, addError);
 
 			// Success Function for Promise
 			function addSuccess (response) {
-				condole.log('Everything is OK. Student record is added.');
-				return response.data.response;
+				var result = response.data.response;
+				console.log('Everything is OK. Student record is added.');
+				return result;
 			}
 
 			//Error Function for Promise
 			function addError (response) {
+				var result = response.data.response;
 				console.log('Something goes wrong. Student record was not added.');
-				return response.data.response;
+				return result;
 			}
 		};
 
