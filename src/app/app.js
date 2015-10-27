@@ -42,9 +42,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'subjectsCtrl'
 		}).
 		state('admin.students', {
-		url:'/students/addStudent',
+			url: '/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',
 			controller: 'addStudentCtrl'
+		}).
+		state('admin.addAdmin', {
+			url: '/addAdmin',
+			templateUrl: 'app/views/addAdmin.html',
+			controller: 'addAdminCtrl'
 	});
 
 		$urlRouterProvider.otherwise('/');
