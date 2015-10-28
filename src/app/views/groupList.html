@@ -11,14 +11,25 @@
                 <div class=" row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-4">
-                      <input class="form-control width-max" placeholder="Введіть назву факультету" type='text' ng-model="newName" required
-                      >
+                      <input class="form-control width-max" placeholder="Введіть назву групи" type='text' ng-model="newName" required>
                     </div>
-                    <div class="col-md-6">
-                      <input class="form-control width-max" placeholder="Вкажіть деталі" type='text' ng-model="newDescription" required>
+                    <div class="col-md-3">
+                    <select class="form-control width-max" 
+                      ng-options="key as value for (key, value) in groups.faculty" name="faculty"
+                       ng-model="newFaculty_id" required>
+                       <option value="">Виберіть факультет</option>
+                    </select></td>
+                    </div>
+
+                  <div class="col-md-3">
+                  <select class="form-control width-max"  
+                  ng-options="key as value for (key, value) in groups.speciality" name="faculty"
+                   ng-model="newSpeciality_id" required>
+                   <option value="">Виберіть спеціальність</option>
+                  </select>
                     </div>
                     <div class="col-md-2">
-                      <button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addFaculty()">Додати</button>
+                      <button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addGroup()">Додати</button>
                     </div>
                   </form>
                 </div>
@@ -39,23 +50,23 @@
                   </tr>
                 </thead>
 
-                <tr ng-repeat-start="row in groups.list" ng-if='editingGroup == row.group_id'>
+                <tr ng-repeat-start="row in groups.list" ng-if='editingData.group_id === row.group_id'>
                   <td class="usCenter">{{$index + 1}}</td>
-                  <td class="usCenter"><input class="form-control width-max"  value= '{{row.group_name}}'</></td>
+                  <td class="usCenter"><input class="form-control width-max" ng-model="editingData.group_name" value= '{{row.group_name}}'</></td>
                   <td class="usCenter">
                   <select class="form-control width-max" 
                   ng-options="key as value for (key, value) in groups.faculty" name="faculty"
-                   ng-model="row.faculty_id">
+                   ng-model="editingData.faculty_id">
                 </select></td>
 
                   <td class="usCenter">
                   <select class="form-control width-max"  
                   ng-options="key as value for (key, value) in groups.speciality" name="faculty"
-                   ng-model="row.speciality_id">
+                   ng-model="editingData.speciality_id">
                   </select>
                   </td>
                   <td  class="usCenter">
-                      <button class="btn btn-success" ng-click='showEditForm(null)'>
+                      <button class="btn btn-success" ng-click='editGroup()'>
                         <span class="glyphicon glyphicon-ok"></span></button>
                       <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(null)">
                         <span class="glyphicon glyphicon-remove"></span></button>
@@ -63,15 +74,15 @@
                     <a href="{{'#/groups'}}" ng-click="delGroupAction(row.group_id)"><span class="glyphicon glyphicon-remove"></span></a> -->
                   </td>
                 </tr>
-                <tr ng-repeat-end ng-if='editingGroup != row.group_id'> 
+                <tr ng-repeat-end ng-if='editingData.group_id !== row.group_id'> 
                   <td class="usCenter">{{$index + 1}}</td>
-                  <td class="usCenter">{{::row.group_name}}</td>
-                  <td class="usCenter">{{::row.faculty_name}}</td>
-                  <td class="usCenter">{{::row.speciality_name}}</td>
+                  <td class="usCenter">{{row.group_name}}</td>
+                  <td class="usCenter">{{row.faculty_name}}</td>
+                  <td class="usCenter">{{row.speciality_name}}</td>
                     <td  class="usCenter">
-                      <button class="btn btn-info" ng-click='showEditForm(row.group_id)'>
+                      <button class="btn btn-info" ng-click='showEditForm(row)'>
                         <span class="glyphicon glyphicon-pencil"></span></button>
-                      <button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateFaculty(faculty)">
+                      <button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click='activateGroup(row.group_id)'>
                         <span class="glyphicon glyphicon-trash"></span></button>
 <!--                     <a ng-click='showEditForm(row.group_id)'><span class="glyphicon glyphicon-pencil"></span></a>
                     <a href="{{'#/groups'}}" ng-click="delGroupAction(row.group_id)"><span class="glyphicon glyphicon-remove"></span></a> -->
@@ -88,8 +99,8 @@
                     <h4 class="modal-title">Видалити запис?</h4>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="activateFaculty()">Скасувати</button>
-                    <button type="button" class="btn btn-danger" ng-click="removeFaculty()" data-dismiss="modal">Видалити</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="activateGroup()">Скасувати</button>
+                    <button type="button" class="btn btn-danger" ng-click="removeGroup()" data-dismiss="modal">Видалити</button>
                   </div>
                 </div>
               </div>
