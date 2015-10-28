@@ -12,7 +12,7 @@ var dependencies = {
     var entityId = dep+'_id';
     var entityName = dep+'_name';
 
-    return $http.get('http://dtapi.local/'+dep+'/getRecords')
+    return $http.get(baseUrl + dep + '/getRecords')
       .then(function(response) {
         var entityForInject = response.data;
         
