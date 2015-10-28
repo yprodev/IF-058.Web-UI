@@ -1,5 +1,4 @@
 app.factory('authSrvc', function($http, $state, baseUrl){
-    //var baseURL = 'http://dtapi.local/';
     var toAuth = function() {
         console.log('toAuth!!!!!!!!!!!!!!');
         $state.go('login');

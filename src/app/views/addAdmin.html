@@ -10,12 +10,18 @@
 				<div class="well" ng-show="showingAdd">
 					<div class=" row">
 						<form name="addForm" class="form-inline" role='form' novalidate>
-							<div class="col-md-4">
-								<input class="form-control width-max" placeholder="Введіть назву факультету" type='text' ng-model="newName" required
+							<div class="col-md-3">
+								<input class="form-control width-max" placeholder="Введіть логін" type='text' ng-model="newUsername" required
 										>
 							</div>
-							<div class="col-md-6">
-								<input class="form-control width-max" placeholder="Вкажіть деталі" type='text' ng-model="newDescription" required>
+							<div class="col-md-3">
+								<input class="form-control width-max" placeholder="Введіть елетронну пошту" type='text' ng-model="newEmail" required>
+							</div>
+							<div class="col-md-2">
+								<input class="form-control width-max" placeholder="Введіть пароль" type='text' ng-model="newPassword" required>
+							</div>
+							<div class="col-md-2">
+								<input class="form-control width-max" placeholder="Повторіть пароль" type='text' ng-model="newPasswordConfirm" required>
 							</div>
 							<div class="col-md-2">
 								<button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addAdmin()">Додати</button>
@@ -37,8 +43,8 @@
 						<th class="usCenter">Дії</th>
 					</tr>
 					</thead>
-					<tbody ng-repeat="admin in admins">
-					<tr ng-if="admin != editingAdmin">
+					<tbody>
+					<tr ng-if="admin != editingAdmin" ng-repeat-start="admin in admins">
 						<!-- read-only cells -->
 						<td>{{$index + 1}}</td>
 						<td>{{admin.username}}</td>
@@ -50,10 +56,12 @@
 								<span class="glyphicon glyphicon-trash"></span></button>
 						</td>
 					</tr>
-					<tr ng-if="admin == editingAdmin">
+					<tr ng-if="admin == editingAdmin" ng-repeat-end="">
 						<td>{{$index + 1}}</td>
-						<td><input class="form-control width-max" ng-model="editingData.editingName"></td>
-						<td><input class="form-control width-max" ng-model="editingData.editingDescription"></td>
+						<td><input class="form-control width-max" ng-model="editingData.editingUsername"></td>
+						<td><input class="form-control width-max" ng-model="editingData.editingEmail"></td>
+						<td><input class="form-control width-max" ng-model="editingData.editingPassword"></td>
+						<td><input class="form-control width-max" ng-model="editingData.editingPasswordConfirm"></td>
 						<td class="usCenter">
 							<button class="btn btn-success" ng-click="editAdmin()">
 								<span class="glyphicon glyphicon-ok"></span></button>
