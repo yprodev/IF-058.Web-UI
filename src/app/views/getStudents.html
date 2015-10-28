@@ -18,8 +18,10 @@
 					</tr>
 				</thead>
 				<tbody>
+
+					<!-- Block shows we edit entity -->
 					<tr ng-repeat-start="student in students.list"
-							ng-if="editingStudent == student.user_id">
+							ng-if="editingStudent === student.user_id">
 						<td>{{ student.student_fname }}</td>
 						<td>{{ student.student_surname }}</td>
 						<td>{{ student.student_name }}</td>
@@ -31,35 +33,79 @@
 							</select>
 						</td>
 						<td>
-							<button class="btn btn-info"
-												ng-click="showEditingForm(null)">
+							<button class="btn btn-success"
+												ng-click="editStudent()">
 								<span class="glyphicon glyphicon-ok"></span>
 							</button>
 							<button class="btn btn-danger"
-												ng-click="showEditingForm(student.user_id)">
-								<span class="glyphicon glyphicon-pencil"></span>
+												ng-click="showEditingForm(null)">
+								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					</td>
 					</tr>
+
+					<!-- Block shows static students' records -->
 					<tr ng-repeat-end
-							ng-if="editingStudent != student.user_id">
+							ng-if="editingStudent !== student.user_id">
 						<td>{{ student.student_fname }}</td>
 						<td>{{ student.student_surname }}</td>
 						<td>{{ student.student_name }}</td>
 						<td>{{ student.group_name }}</td>
 						<td>
 							<button class="btn btn-info"
-												ng-click="showEditingForm(student.user_id)">
+											ng-click="showEditingForm(student.user_id)">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</button>
 							<button class="btn btn-danger"
-												ng-click="showEditingForm(student.user_id)">
-								<span class="glyphicon glyphicon-pencil"></span>
+											ng-click="confirmDelete(student.user_id)"
+											data-toggle="modal"
+											data-target="#deleteModal">
+								<span class="glyphicon glyphicon-trash"></span>
 							</button>
 					</td>
 					</tr>
+
 				</tbody>
 			</table>
+
+			<!-- Modal confirmation window before deleting -->
+			<div class="modal fade"
+					 role="dialog"
+					 id="deleteModal"
+					 aria-labelledby="gridSystemModalLabel">
+				<div class="modal-dialog"
+						 role="document">
+					<div class="modal-content">
+
+						<div class="modal-header">
+							<button type="button"
+											class="close"
+											data-dismiss="modal"
+											ng-click="confirmDelete()"
+											aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+
+							<h4 class="modal-title" id="gridSystemModalLabel">Do you really want to delete student?</h4>
+						</div><!-- END modal-header -->
+
+						<div class="modal-footer">
+							<button type="button"
+											class="btn btn-default btn-lg"
+											data-dismiss="modal"
+											ng-click="confirmDelete()">Undo
+							</button>
+							<button type="button"
+											class="btn btn-danger btn-sm"
+											ng-click="deleteStudent()"
+											data-dismiss="modal">Delete
+							</button>
+						</div><!-- END modal-footer -->
+
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
 		</div><!-- END col -->
 	</div><!-- END row -->
 </div>

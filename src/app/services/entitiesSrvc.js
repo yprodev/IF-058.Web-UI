@@ -12,11 +12,7 @@ var dependencies = {
     var entityId = dep+'_id';
     var entityName = dep+'_name';
 
-<<<<<<< HEAD
     return $http.get(baseUrl + dep + '/getRecords')
-=======
-    return $http.get(baseUrl+dep+'/getRecords')
->>>>>>> eb09a159b55769f756d3ccc762a1a58621adb78d
       .then(function(response) {
         var entityForInject = response.data;
         
