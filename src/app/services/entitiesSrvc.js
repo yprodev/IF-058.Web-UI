@@ -40,7 +40,6 @@ var dependencies = {
     getEntities: function (entity) {
       return $http.get(baseUrl + entity + '/getRecords')
       .then(  function (response) {
-        console.log(entity);
         if (dependencies[entity] != undefined) {
             var depArr = dependencies[entity].split(',');
             data = {};
