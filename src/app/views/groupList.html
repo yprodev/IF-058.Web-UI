@@ -28,40 +28,56 @@
             <div ng-show="!faculties">{{noData}}</div>
 
 <!-- The table for list of Entities -->
-            <table ng-show="faculties" class="table table-hover .table-condensed">
+            <table class="table table-hover .table-condensed">
                 <thead>
                   <tr>
-                    <th>№</th>
-                    <th>Факультет</th>
-                    <th>Деталі</th>
+                    <th class="usCenter">№</th>
+                    <th class="usCenter">Назва групи</th>
+                    <th class="usCenter">Факультет</th>
+                    <th class="usCenter">Спеціальність</th>
                     <th class="usCenter">Дії</th>
                   </tr>
                 </thead>
-                <tbody ng-repeat="faculty in faculties">
-                  <tr ng-if="faculty != editingFaculty">
-                    <!-- read-only cells -->
-                    <td>{{$index + 1}}</td>
-                    <td>{{faculty.faculty_name}}</td>
-                    <td>{{faculty.faculty_description}}</td>
-                    <td class="usCenter">
-                      <button class="btn btn-info" ng-click="showEditForm(faculty)">
+
+                <tr ng-repeat-start="row in groups.list" ng-if='editingGroup == row.group_id'>
+                  <td class="usCenter">{{$index + 1}}</td>
+                  <td class="usCenter"><input class="form-control width-max"  value= '{{row.group_name}}'</></td>
+                  <td class="usCenter">
+                  <select class="form-control width-max" 
+                  ng-options="key as value for (key, value) in groups.faculty" name="faculty"
+                   ng-model="row.faculty_id">
+                </select></td>
+
+                  <td class="usCenter">
+                  <select class="form-control width-max"  
+                  ng-options="key as value for (key, value) in groups.speciality" name="faculty"
+                   ng-model="row.speciality_id">
+                  </select>
+                  </td>
+                  <td  class="usCenter">
+                      <button class="btn btn-success" ng-click='showEditForm(null)'>
+                        <span class="glyphicon glyphicon-ok"></span></button>
+                      <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(null)">
+                        <span class="glyphicon glyphicon-remove"></span></button>
+<!--                     <a ng-click='showEditForm(null)'><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="{{'#/groups'}}" ng-click="delGroupAction(row.group_id)"><span class="glyphicon glyphicon-remove"></span></a> -->
+                  </td>
+                </tr>
+                <tr ng-repeat-end ng-if='editingGroup != row.group_id'> 
+                  <td class="usCenter">{{$index + 1}}</td>
+                  <td class="usCenter">{{::row.group_name}}</td>
+                  <td class="usCenter">{{::row.faculty_name}}</td>
+                  <td class="usCenter">{{::row.speciality_name}}</td>
+                    <td  class="usCenter">
+                      <button class="btn btn-info" ng-click='showEditForm(row.group_id)'>
                         <span class="glyphicon glyphicon-pencil"></span></button>
                       <button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateFaculty(faculty)">
                         <span class="glyphicon glyphicon-trash"></span></button>
-                    </td>
-                  </tr>
-                  <tr ng-if="faculty == editingFaculty">
-                    <td>{{$index + 1}}</td>
-                    <td><input class="form-control width-max" ng-model="editingData.editingName"></td>
-                    <td><input class="form-control width-max" ng-model="editingData.editingDescription"></td>
-                    <td class="usCenter">
-                      <button class="btn btn-success" ng-click="editFaculty()">
-                        <span class="glyphicon glyphicon-ok"></span></button>
-                      <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(faculty)">
-                        <span class="glyphicon glyphicon-remove"></span></button>
-                    </td>
-                  </tr>
-                </tbody>
+<!--                     <a ng-click='showEditForm(row.group_id)'><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href="{{'#/groups'}}" ng-click="delGroupAction(row.group_id)"><span class="glyphicon glyphicon-remove"></span></a> -->
+                  </td>
+                </tr>
+
             </table>
 
             <!-- The modal to confirm removing of Entity -->

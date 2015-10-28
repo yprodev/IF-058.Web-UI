@@ -14,15 +14,12 @@ app.controller('facultiesCtrl', function($scope, entitiesSrvc){
 
 
 
-  $scope.showingAddBtn = "Додавання факультетів";
 //function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
     if (!$scope.showingAdd) {
       $scope.showingAdd = true;
-      $scope.showingAddBtn = "Скасувати додавання";
     } else {
       $scope.showingAdd = false;
-      $scope.showingAddBtn = "Додавання факультетів";
       $scope.newDescription = "";
       $scope.newName = "";
     };

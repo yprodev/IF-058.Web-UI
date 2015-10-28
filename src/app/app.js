@@ -17,27 +17,21 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/user',
 			templateUrl: 'app/views/user.html'
 		}).
-		state('admin.groups', {
+		state('admin.educationInfo', {
+			url: '/educationInfo',
+			templateUrl: 'app/views/educationInfo.html'
+		}).
+		state('admin.educationInfo.groups', {
 			url: '/groups',
-			templateUrl: 'app/views/listGroups.html',
+			templateUrl: 'app/views/groupList.html',
 			controller: 'groupsCtrl'
 		}).
-		state('admin.addGroup', {//not work
-			url:'/addGroup',
-			templateUrl: 'app/views/addGroup.html',
-			controller: 'addGroupsCtrl'
-		}).
-		state('admin.editGroup/:group_id', {//not work
-		url:'/editGroup',
-			templateUrl: 'app/views/editGroup.html',
-			controller: 'editGroupsCtrl'
-		}).
-		state('admin.faculties', {
+		state('admin.educationInfo.faculties', {
 			url:'/faculties',
 			templateUrl: 'app/views/facultyList.html',
 			controller: 'facultiesCtrl'
 		}).
-		state('admin.specialities', {
+		state('admin.educationInfo.specialities', {
 			url:'/specialities',
 			templateUrl: 'app/views/specialitiesList.html',
 			controller: 'specialitiesCtrl'
