@@ -1,10 +1,15 @@
 ;
-app.controller('facultiesCtrl', function($scope, entitiesSrvc){
+app.controller('facultiesCtrl', function($scope, entitiesSrvc, $timeout){
 
+  function showInformModal (infMsg) {
+    $scope.infMsg = infMsg;
+    console.log(angular.element(document.querySelector('#informModal')));
+    angular.element(document.querySelector('#informModal')).modal();
+  };
 
   $scope.thisEntity = "faculty";
 //function gets a list of entities
-  function getFacultyList () {
+  $scope.getFacultyList = function () {
     entitiesSrvc.getEntities($scope.thisEntity).then(function (resp) {
       $scope.faculties = resp.data;
       $scope.noData = "Немає записів";
@@ -32,12 +37,23 @@ app.controller('facultiesCtrl', function($scope, entitiesSrvc){
     };
     // console.log(newData);
     entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
-      if (resp.data.response == "ok") {
-        newData.faculty_id = resp.data.id;
-        // console.log(resp);
-        $scope.faculties.push(newData);
-      } else {
-        alert ("Помилка " + resp.data.response);
+      switch (resp.data.response) {
+          case "ok":
+            newData.faculty_id = resp.data.id;
+            $scope.faculties.push(newData);
+            // //lightins of addedRow for ... seconds
+            // var succeedRow = angular.element(document.querySelector('#row'+($scope.faculties.length)))[0];
+            // var standartClass = succeedRow.className;
+            // succeedRow.className = succeedRow.className + " success";
+            // $timeout(function () {
+            //   succeedRow.className = standartClass;
+            // }, 3000);
+            break;
+          case "error 23000":
+            showInformModal("Зазначене ім'я вже існує");
+            break;
+          default:
+            showInformModal("Помилка редагування запису:" + resp.data.response);
       };
     });
     $scope.showAddForm();
@@ -47,67 +63,80 @@ app.controller('facultiesCtrl', function($scope, entitiesSrvc){
 
 
   //function opens a form for editing
-    $scope.showEditForm = function (faculty) {
-      if ($scope.editingFaculty != faculty) {
-        $scope.editingFaculty = faculty;
-        $scope.editingData = {};
-        $scope.editingData.editingDescription = faculty.faculty_description;
-        $scope.editingData.editingName = faculty.faculty_name;
-        $scope.currentId = faculty.faculty_id;
-      } else {
-        $scope.editingFaculty = null;
-      };
+  $scope.showEditForm = function (faculty) {
+    if ($scope.editingFaculty != faculty) {
+      $scope.editingFaculty = faculty;
+      $scope.editingData = {};
+      $scope.editingData.editingName = faculty.faculty_name;
+      $scope.editingData.editingDescription = faculty.faculty_description;
+    } else {
+      $scope.editingFaculty = null;
     };
-  //function updates an element of array and send updating of entity to server
-    $scope.editFaculty = function () {
+  };
+//function updates an element of array and send updating of entity to server
+  $scope.editFaculty = function (faculty) {
+    if ($scope.editingData.editingName != "" && $scope.editingData.editingDescription != "") {
       var editedData = {
-        faculty_description: $scope.editingData.editingDescription,
-        faculty_name: $scope.editingData.editingName
+      faculty_name: $scope.editingData.editingName,
+      faculty_description: $scope.editingData.editingDescription
       };
-      // console.log($scope.editingData, $scope.currentId);
-      entitiesSrvc.updateEntity($scope.thisEntity, $scope.currentId, editedData).then(function (resp) {
-      if (resp.data.response == "ok") {
-        for (var i = 1; i < $scope.faculties.length; i++) {
-          if ($scope.faculties[i].faculty_id == $scope.currentId) {
-            $scope.faculties[i].faculty_description = editedData.faculty_description;
-            $scope.faculties[i].faculty_name = editedData.faculty_name;
-          } ;
+      entitiesSrvc.updateEntity($scope.thisEntity, faculty.faculty_id, editedData).then(function (resp) {
+        switch (resp.data.response) {
+          case "ok":
+            for (var i = 1; i < $scope.faculties.length; i++) {
+              if ($scope.faculties[i].faculty_id == faculty.faculty_id) {
+                $scope.faculties[i].faculty_name = editedData.faculty_name;
+                $scope.faculties[i].faculty_description = editedData.faculty_description;
+
+                //lightins of editedRow for ... seconds
+                var succeedRow = angular.element(document.querySelector('#row'+(i+1)))[0];
+                var standartClass = succeedRow.className;
+                succeedRow.className = succeedRow.className + " success";
+                $timeout(function () {
+                  succeedRow.className = standartClass;
+                }, 2000);
+              };
+            };
+            break;
+          case "error 23000":
+            showInformModal("Зазначене ім'я вже існує");
+            break;
+          default:
+            showInformModal("Помилка редагування запису:" + resp.data.response);
         };
-      } else {
-        alert ("Помилка " + resp.data.response);
-      };
-    });;
-    $scope.editingFaculty = null;
+      });
+      $scope.editingFaculty = null;
+    } else {
+      showInformModal("Будь ласка, заповніть всі поля");
     };
+  };
 
 
 
 
 //function for initiate of entity for delete in modal
-    $scope.activateFaculty = function (faculty) {
-      if ($scope.activeFaculty != faculty) {
-        $scope.activeFaculty = faculty;
+  $scope.activateFaculty = function (faculty) {
+      if ($scope.deletingFaculty != faculty) {
+        $scope.deletingFaculty = faculty;
       } else {
-        $scope.activeFaculty = null;
+        $scope.deletingFaculty = null;
       };
     };
 //function removes an entity from array and from server
   $scope.removeFaculty = function () {
-    var currentFaculty = $scope.activeFaculty;
-    var currentId = $scope.activeFaculty.faculty_id;
+    var currentFaculty = $scope.deletingFaculty;
+    var currentId = $scope.deletingFaculty.faculty_id;
     entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
       if (resp.data.response == "ok") {
             var index = $scope.faculties.indexOf(currentFaculty);
             $scope.faculties.splice(index, 1);
       } else {
-        alert ("Помилка " + resp.data.response);
+        showInformModal("Помилка видалення запису" + resp.data.response);
       };
     });
     $scope.activateFaculty();
   };
 
 
-
-
-  getFacultyList();
+  $scope.getFacultyList();
 });
