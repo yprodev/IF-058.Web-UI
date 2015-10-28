@@ -2,23 +2,61 @@
 	<div class="row"
 			 ng-controller="getStudentsCtrl">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<table>
+
+			<!-- If have no data -->
+			<div ng-show="!students">{{noData}}</div>
+
+			<!-- Here table with students -->
+			<table ng-show="students" class="table table-hover">
 				<thead>
-					<th>
-						<td>#</td>
-						<td>Name</td>
-						<td>Surname</td>
-						<td>S Name</td>
-						<td>Group</td>
-					</th>
+					<tr>
+						<th>Name</th>
+						<th>Surname</th>
+						<th>S Name</th>
+						<th>Group</th>
+						<th>Options</th>
+					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="student in students">
-						<td>{{ index + 1 }}</td>
+					<tr ng-repeat-start="student in students.list"
+							ng-if="editingStudent == student.user_id">
 						<td>{{ student.student_fname }}</td>
 						<td>{{ student.student_surname }}</td>
 						<td>{{ student.student_name }}</td>
-						<td>{{ student.group_id }}</td>
+						<td>
+							<select class="form-control width-max"
+											ng-options="key as value for (key, value) in students.group"
+											ng-model="student.group_id"
+											name="group">
+							</select>
+						</td>
+						<td>
+							<button class="btn btn-info"
+												ng-click="showEditingForm(null)">
+								<span class="glyphicon glyphicon-ok"></span>
+							</button>
+							<button class="btn btn-danger"
+												ng-click="showEditingForm(student.user_id)">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+					</td>
+					</tr>
+					<tr ng-repeat-end
+							ng-if="editingStudent != student.user_id">
+						<td>{{ student.student_fname }}</td>
+						<td>{{ student.student_surname }}</td>
+						<td>{{ student.student_name }}</td>
+						<td>{{ student.group_name }}</td>
+						<td>
+							<button class="btn btn-info"
+												ng-click="showEditingForm(student.user_id)">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+							<button class="btn btn-danger"
+												ng-click="showEditingForm(student.user_id)">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+					</td>
 					</tr>
 				</tbody>
 			</table>

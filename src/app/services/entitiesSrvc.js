@@ -4,7 +4,7 @@ app.factory('entitiesSrvc', function ($http, baseUrl) {
 
 var dependencies = {
     group : 'speciality,faculty',
-    specialities : 'faculties'
+    student : 'group'
 };
 
 
