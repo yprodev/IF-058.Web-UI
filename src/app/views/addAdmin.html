@@ -15,13 +15,13 @@
 										>
 							</div>
 							<div class="col-md-3">
-								<input class="form-control width-max" placeholder="Введіть елетронну пошту" type='text' ng-model="newEmail" required>
+								<input class="form-control width-max" placeholder="Введіть елетронну пошту" type='email' ng-model="newEmail" required>
 							</div>
 							<div class="col-md-2">
-								<input class="form-control width-max" placeholder="Введіть пароль" type='text' ng-model="newPassword" required>
+								<input class="form-control width-max" placeholder="Введіть пароль" type='password' ng-model="newPassword" required>
 							</div>
 							<div class="col-md-2">
-								<input class="form-control width-max" placeholder="Повторіть пароль" type='text' ng-model="newPasswordConfirm" required>
+								<input class="form-control width-max" placeholder="Повторіть пароль" type='password' ng-model="newPasswordConfirm" required>
 							</div>
 							<div class="col-md-2">
 								<button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addAdmin()">Додати</button>
@@ -58,10 +58,10 @@
 					</tr>
 					<tr ng-if="admin == editingAdmin" ng-repeat-end="">
 						<td>{{$index + 1}}</td>
-						<td><input class="form-control width-max" ng-model="editingData.editingUsername"></td>
-						<td><input class="form-control width-max" ng-model="editingData.editingEmail"></td>
-						<td><input class="form-control width-max" ng-model="editingData.editingPassword"></td>
-						<td><input class="form-control width-max" ng-model="editingData.editingPasswordConfirm"></td>
+						<td><input class="form-control width-max" type='text' ng-model="editingData.editingUsername"></td>
+						<td><input class="form-control width-max" type='email' ng-model="editingData.editingEmail"></td>
+						<td><input class="form-control width-max" placeholder="Введіть пароль" type='password' ng-model="editingData.editingPassword"></td>
+						<td><input class="form-control width-max" placeholder="Повторіть пароль" type='password' ng-model="editingData.editingPasswordConfirm"></td>
 						<td class="usCenter">
 							<button class="btn btn-success" ng-click="editAdmin()">
 								<span class="glyphicon glyphicon-ok"></span></button>
