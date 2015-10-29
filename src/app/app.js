@@ -29,12 +29,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		state('admin.educationInfo.faculties', {
 			url:'/faculties',
 			templateUrl: 'app/views/facultyList.html',
-			controller: 'facultiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.educationInfo.specialities', {
 			url:'/specialities',
 			templateUrl: 'app/views/specialitiesList.html',
-			controller: 'specialitiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.subjects', {
 		url:'/subjects',
