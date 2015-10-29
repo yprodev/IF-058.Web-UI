@@ -26,7 +26,6 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
                 localStorage.userId = response.data.id;
                 $state.go('user');
             } else {
-                console.log("wrong credentials");
                 $scope.wrongCredentials = true;
             };
 
@@ -35,7 +34,6 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
 
     $scope.exit = function() {
         authSrvc.logOut().then();
-        console.log('exit!!!!!!!!');
     };
 
 });
