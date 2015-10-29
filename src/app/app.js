@@ -27,18 +27,18 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		}).
 		state('admin.educationInfo.groups', {
 			url: '/groups',
-			templateUrl: 'app/views/listGroups.html',
+			templateUrl: 'app/views/groupList.html',
 			controller: 'groupsCtrl'
 		}).
 		state('admin.educationInfo.faculties', {
 			url:'/faculties',
 			templateUrl: 'app/views/facultyList.html',
-			controller: 'facultiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.educationInfo.specialities', {
 			url:'/specialities',
 			templateUrl: 'app/views/specialitiesList.html',
-			controller: 'specialitiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.subjects', {
 		url:'/subjects',
@@ -51,9 +51,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'testsCtrl'
 		}).
 		state('admin.students', {
-		url:'/students/addStudent',
+			url: '/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',
 			controller: 'addStudentCtrl'
+		}).
+		state('admin.addAdmin', {
+			url: '/addAdmin',
+			templateUrl: 'app/views/addAdmin.html',
+			controller: 'addAdminCtrl'
 	});
 
 		$urlRouterProvider.otherwise('/');
