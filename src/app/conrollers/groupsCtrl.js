@@ -1,80 +1,117 @@
-app.controller('groupsCtrl', ['$scope', 'groupsSrvc', function($scope, groupsSrvc) {
+;
+app.controller('groupsCtrl', function($scope, entitiesSrvc){
 
-		groupsSrvc.getGroups().then(function(httpData) {
+
+  $scope.thisEntity = "group";
+//function gets a list of entities
+
+		entitiesSrvc.getEntities($scope.thisEntity).then(function(httpData) {
           	$scope.groups = httpData;
         });
 
-		// groupsSrvc.getGroup(5).then(function(httpData) {
-  //         	$scope.group = httpData;
-  //       });
-
-		// var new_group = {
-		// 	group_name:"ІВТ-97",
-		// 	speciality_id:1,
-		// 	faculty_id:1
-		// }
 
 
-        // groupsSrvc.setGroup(new_group).then(function(httpData) {
-        //   	$scope.change = httpData;
-        // });
-        //groupsSrvc.createGroup(new_group).then(function(httpData) {
-        //   	$scope.add = httpData;
-        // });
-        $scope.delGroupAction = function(id) {
-        	groupsSrvc.delGroup(id).then(function(httpData) {
-          		$scope.del = httpData;
-        	});
-        	for (row in $scope.groups) {
-        		if ($scope.groups[row].group_id == id) {
-        			$scope.groups.splice(row,1);
-        		};
-        	}
-        	
-        }
-}]);
 
-app.controller('addGroupsCtrl', ['$scope', 'groupsSrvc', '$state', function($scope, groupsSrvc, $state) {
-	
-	groupsSrvc.getFacultys().then(function(httpData) {
-       	$scope.facultys = httpData;
-    });	
+//function shows and hides the form for creating new entity
+  $scope.showAddForm = function () {
+    if (!$scope.showingAdd) {
+      $scope.showingAdd = true;
+    } else {
+      $scope.showingAdd = false;
+      $scope.newDescription = "";
+      $scope.newName = "";
+    };
+  };
+//function creates new element of array and sends new entity on server
+  $scope.addGroup = function () {
+    var newDataServer = {
+      speciality_id: $scope.newSpeciality_id,
+      faculty_id: $scope.newFaculty_id,
+      group_name: $scope.newName
+    };
+    var newData = {
+      speciality_id: $scope.newSpeciality_id,
+      faculty_id: $scope.newFaculty_id,
+      group_name: $scope.newName,
+      speciality_name: $scope.groups.speciality[$scope.newSpeciality_id],
+      faculty_name: $scope.groups.faculty[$scope.newFaculty_id]
+    };
+    // console.log(newData);
+    entitiesSrvc.createEntity($scope.thisEntity, newDataServer).then(function (resp) {
+      if (resp.data.response == "ok") {
+        newData.group_id = resp.data.id;
+        // console.log(resp);
+        $scope.groups.list.push(newData);
+      } else {
+        alert ("Помилка " + resp.data.response);
+      };
+    });
+    $scope.showAddForm();
+  };
 
-	$scope.addGroupAction = function() {
-		var new_group = {};
-		new_group.group_name = $scope.groupName;
-		new_group.speciality_id = 1;
-		new_group.faculty_id = +$scope.facultyId;
-		console.log(new_group);
-		groupsSrvc.createGroup(new_group).then(function(httpData) {
-          	$scope.add = httpData;
-          	$state.go("groups");
-        });
-	}
-}]);
 
-app.controller('editGroupsCtrl', ['$scope', 'groupsSrvc', '$routeParams', '$location',
-	function($scope, groupsSrvc, $routeParams, $location) {
-		var id = $routeParams.group_id;
 
-		groupsSrvc.getGroup(id).then(function(httpData) {
-	        $scope.groupName = httpData[0].group_name;
-	    	$scope.facultyId = httpData[0].faculty_id;
-	    });
 
-		groupsSrvc.getFacultys().then(function(httpData) {
-	       	$scope.facultys = httpData;
-	    });
+  //function opens a form for editing
+    $scope.showEditForm = function (group) {
+      if (group !== null) {
+        $scope.currentId = group.group_id;
+      }
+        $scope.editingData = group;
+      };
+  //function updates an element of array and send updating of entity to server
+    $scope.editGroup = function () {
+      var editedDataServer = {
+        speciality_id: $scope.editingData.speciality_id,
+        faculty_id: $scope.editingData.faculty_id,
+        group_name: $scope.editingData.group_name
+      };
+      var editingData = $scope.editingData;
+      editingData.faculty_name = $scope.groups.faculty[editingData.faculty_id];
+      editingData.speciality_name = $scope.groups.speciality[editingData.speciality_id];
+      var currentId = $scope.currentId;
+      entitiesSrvc.updateEntity($scope.thisEntity, currentId, editedDataServer).then(function (resp) {
+      if (resp.data.response == "ok") {
+        for (var i = 1; i < $scope.groups.list.length; i++) {
 
-		$scope.editGroupAction = function() {
-			var new_group = {};
-			new_group.group_name = $scope.groupName;
-			new_group.speciality_id = 1;
-			new_group.faculty_id = +$scope.facultyId;
-			console.log(new_group);
-			groupsSrvc.setGroup(id, new_group).then(function(httpData) {
-	          	$scope.add = httpData;
-							$state.go("groups");
-	        });
-		}
-}]);
+          if ($scope.groups.list[i].group_id == currentId) {
+            $scope.groups.list[i] = editingData;
+          } ; 
+        };
+      } else {
+        alert ("Помилка " + resp.data.response);
+      };
+    });
+    $scope.editingData = null;
+    $scope.currentId = null;
+    };
+
+
+
+
+//function for initiate of entity for delete in modal
+    $scope.activateGroup = function (group) {
+
+      if ($scope.activeGroup != group) {
+        $scope.activeGroup = group;
+      } else {
+        $scope.activeGroup = null;
+      };
+    };
+//function removes an entity from array and from server
+  $scope.removeGroup = function () {
+    var currentGroup = $scope.activeGroup;
+    var currentId = $scope.activeGroup;
+    console.log(currentGroup);
+    entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
+      if (resp.data.response == "ok") {
+            var index = $scope.groups.list.indexOf(currentGroup);
+            $scope.groups.list.splice(index, 1);
+      } else {
+        alert ("Помилка " + resp.data.response);
+      };
+    });
+    $scope.activateGroup();
+  };
+
+});
