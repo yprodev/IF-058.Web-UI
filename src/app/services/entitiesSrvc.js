@@ -2,6 +2,7 @@
 app.factory('entitiesSrvc', function ($http, baseUrl) {
 
   return {
+
     getEntities: function (entity) {
       return $http.get(baseUrl + entity + '/getRecords')
         .then(fulfilled, rejected);

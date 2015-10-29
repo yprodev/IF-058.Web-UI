@@ -11,9 +11,6 @@ app.controller('specialitiesCtrl', function($scope, entitiesSrvc){
     });
   };
 
-
-
-
 //function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
     if (!$scope.showingAdd) {

@@ -1,5 +1,5 @@
 ;
-app.controller('subjectsCtrl', function($scope, entitiesSrvc){
+app.controller('subjectsCtrl', function($scope, entitiesSrvc, $rootScope){
 
 
   $scope.thisEntity = "subject";
@@ -10,9 +10,6 @@ app.controller('subjectsCtrl', function($scope, entitiesSrvc){
       $scope.noData = "Немає записів";
     });
   };
-
-
-
 
 //function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
@@ -30,6 +27,8 @@ app.controller('subjectsCtrl', function($scope, entitiesSrvc){
       subject_description: $scope.newDescription,
       subject_name: $scope.newName
     };
+    /*$scope.newName.$setPristine;
+    $scope.newDescription.$setPristine;*/
     // console.log(newData);
     entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
       if (resp.data.response == "ok") {
@@ -40,6 +39,7 @@ app.controller('subjectsCtrl', function($scope, entitiesSrvc){
         alert ("Помилка " + resp.data.response);
       };
     });
+
     $scope.showAddForm();
   };
 
@@ -105,8 +105,6 @@ app.controller('subjectsCtrl', function($scope, entitiesSrvc){
     });
     $scope.activateSubject();
   };
-
-
 
 
   getSubjectList();

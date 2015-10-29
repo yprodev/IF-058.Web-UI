@@ -46,8 +46,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			controller: 'subjectsCtrl'
 		}).
 		state('admin.tests', {
-			url:'/tests',
-			templateUrl: 'app/views/testsList.html', /*'<div>hi</div>'*/
+			url:'/tests/:id',
+			templateUrl: 'app/views/testsList.html',
 			controller: 'testsCtrl'
 		}).
 		state('admin.students', {
