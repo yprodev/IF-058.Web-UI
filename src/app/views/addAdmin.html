@@ -37,19 +37,23 @@
 				<table ng-show="admins" class="table table-hover .table-condensed">
 					<thead>
 					<tr>
-						<th>№</th>
-						<th>Логін</th>
-						<th>Електронна пошта</th>
-						<th class="usCenter">Дії</th>
+						<th class="col-md-1">№</th>
+						<th class="col-md-2">Логін</th>
+						<th class="col-md-2">Електронна пошта</th>
+						<th class="col-md-2"></th>
+						<th class="col-md-2"></th>
+						<th class="col-md-2 usCenter">Дії</th>
 					</tr>
 					</thead>
 					<tbody>
 					<tr ng-if="admin != editingAdmin" ng-repeat-start="admin in admins">
 						<!-- read-only cells -->
-						<td>{{$index + 1}}</td>
-						<td>{{admin.username}}</td>
-						<td>{{admin.email}}</td>
-						<td class="usCenter">
+						<td class="col-md-1">{{$index + 1}}</td>
+						<td class="col-md-2">{{admin.username}}</td>
+						<td class="col-md-2">{{admin.email}}</td>
+						<td class="col-md-2"></td>
+						<td class="col-md-2"></td>
+						<td class="col-md-2 usCenter">
 							<button class="btn btn-info" ng-click="showEditForm(admin)">
 								<span class="glyphicon glyphicon-pencil"></span></button>
 							<button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateAdmin(admin)">
