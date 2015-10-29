@@ -37,6 +37,7 @@ var dependencies = {
   }
 
   return {
+
     getEntities: function (entity) {
       return $http.get(baseUrl + entity + '/getRecords')
       .then(  function (response) {

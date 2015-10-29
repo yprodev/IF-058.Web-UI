@@ -38,10 +38,11 @@
                     <th class="usCenter">Дії</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
                     <!-- read-only cells -->
-                    <td>{{$index + 1}}</td>
+                    <td><a ui-sref="admin.tests({id:entity.subject_id})">{{$index + 1}}</a></td>
                     <td>{{entity.subject_name}}</td>
                     <td>{{entity.subject_description}}</td>
                     <td class="usCenter">
@@ -50,6 +51,7 @@
                       <button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateEntity(entity)">
                         <span class="glyphicon glyphicon-trash"></span></button>
                     </td>
+
                   </tr>
                   <tr ng-if="entity == editingEntity" ng-repeat-end="">
                     <td>{{$index + 1}}</td>
@@ -62,6 +64,7 @@
                         <span class="glyphicon glyphicon-remove"></span></button>
                     </td>
                   </tr>
+                  <!--</a>-->
                 </tbody>
             </table>
 

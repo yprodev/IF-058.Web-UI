@@ -169,6 +169,9 @@ body, html, .container-fluid, .nav-row {
 .width-max{
   width:100% !important;
 }
+.testList .well .form-inline input, select, button {
+ margin: 5px 0px;
+}
 @media (min-width: 600px) {
   .top-nav ul {
     margin: 10px auto; }
