@@ -13,6 +13,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/admin',
 			templateUrl: 'app/views/admin.html'
 		}).
+		state('admin.main', {
+			url: '/main',
+			templateUrl: 'app/views/main.html'
+		}).
 		state('user', {
 			url: '/user',
 			templateUrl: 'app/views/user.html'
@@ -39,7 +43,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		state('admin.subjects', {
 		url:'/subjects',
 			templateUrl: 'app/views/subjectsList.html',
-			controller: 'subjectsCtrl'
+			controller: 'entitiesCtrl'
+		}).
+		state('admin.tests', {
+			url:'/tests/:id',
+			templateUrl: 'app/views/testsList.html',
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.students', {
 			url: '/students/addStudent',

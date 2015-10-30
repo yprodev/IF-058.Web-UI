@@ -39,8 +39,8 @@
                     <th class="usCenter">Дії</th>
                   </tr>
                 </thead>
-                <tbody ng-repeat="entity in entities">
-                  <tr ng-if="entity != editingEntity">
+                <tbody>
+                  <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
                     <!-- read-only cells -->
                     <td>{{$index + 1}}</td>
                     <td>{{entity.speciality_name}}</td>
@@ -52,7 +52,7 @@
                         <span class="glyphicon glyphicon-trash"></span></button>
                     </td>
                   </tr>
-                  <tr ng-if="entity == editingEntity">
+                  <tr ng-if="entity == editingEntity" ng-repeat-end="">
                     <td>{{$index + 1}}</td>
                     <td><input class="form-control width-max" ng-model="editedEntity.new_speciality_name"></td>
                     <td><input class="form-control width-max" ng-model="editedEntity.new_speciality_code"></td>
