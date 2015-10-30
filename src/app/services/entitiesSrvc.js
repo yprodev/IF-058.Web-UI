@@ -76,6 +76,7 @@ var dependencies = {
     },
 
     updateEntity: function (entity, id, data) {
+      console.log(data, "!!!!!!!!!!!!!!!");
       return $http.post(baseUrl + entity + '/update/' + id, data)
       .then(fulfilled, rejected);
     }

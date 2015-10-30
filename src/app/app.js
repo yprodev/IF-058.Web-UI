@@ -58,7 +58,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		state('admin.addAdmin', {
 			url: '/addAdmin',
 			templateUrl: 'app/views/addAdmin.html',
-			controller: 'addAdminCtrl'
+			controller: 'entitiesCtrl'
 	});
 
 		$urlRouterProvider.otherwise('/');
