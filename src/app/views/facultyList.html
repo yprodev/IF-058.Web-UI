@@ -1,12 +1,11 @@
 <div>
-  <div class="wrapper panel panel-success no-border">
-        <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Факультети </div>
+  <div class="wrapper panel-success no-border">
 
         <!-- The button and form to add Entity -->
         <div class="col-md-12">
           <div>
             <br/>
-            <button class="btn btn-primary pull-right" ng-click="showAddForm()">{{showingAddBtn}}</button>
+            <button class="btn btn-primary pull-right" ng-click="showAddForm()"><span class="glyphicon glyphicon-plus"></span></button>
             <br/><br/><br/>
             <div class="well" ng-show="showingAdd">
                 <div class=" row">
@@ -19,27 +18,10 @@
                       <input class="form-control width-max" placeholder="Вкажіть деталі" type='text' ng-model="newDescription" required>
                     </div>
                     <div class="col-md-2">
-                      <button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" data-toggle="modal" data-target="#addModal">
-                        <span class="glyphicon glyphicon-plus"></span> Додати
-                      </button>
+                      <button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addFaculty()">Додати</button>
                     </div>
                   </form>
                 </div>
-            </div>
-
-            <!-- The modal to confirm adding of Entity -->
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="addModal">
-              <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Додати запис?</h4>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="activateFaculty()">Скасувати</button>
-                    <button type="button" class="btn btn-info" ng-click="addFaculty()" data-dismiss="modal">Додати</button>
-                  </div>
-                </div>
-              </div>
             </div>
 
 
@@ -73,7 +55,7 @@
                     <td><input class="form-control width-max" ng-model="editingData.editingName"></td>
                     <td><input class="form-control width-max" ng-model="editingData.editingDescription"></td>
                     <td class="usCenter">
-                      <button class="btn btn-success" data-toggle="modal" data-target="#editModal">
+                      <button class="btn btn-success" ng-click="editFaculty()">
                         <span class="glyphicon glyphicon-ok"></span></button>
                       <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(faculty)">
                         <span class="glyphicon glyphicon-remove"></span></button>
@@ -97,20 +79,6 @@
               </div>
             </div>
 
-            <!-- The modal to confirm updating of Entity -->
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="editModal">
-              <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Оновити запис?</h4>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="activateFaculty()">Скасувати</button>
-                    <button type="button" class="btn btn-info" ng-click="editFaculty()" data-dismiss="modal">Оновити</button>
-                  </div>
-                </div>
-              </div>
-            </div>
 
           </div>
         </div>

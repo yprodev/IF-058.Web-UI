@@ -2,6 +2,11 @@ angular.module('app')
 	.controller('addStudentCtrl', ['$scope', 'addStudentSrvc', function ($scope, addStudentSrvc) {
 
 		$scope.getError = function(error) {
+			//
+			// 
+			// We need to add here true validation
+			// 
+			//
 			if(angular.isDefined(error)) {
 				if(error.required) {
 					return 'Please, fill in this field';
@@ -22,10 +27,10 @@ angular.module('app')
 
 			// Some tricks with fields we don't know how to work with
 			if(!recordData.group_id) {
-				recordData.group_id = '1';
+				recordData.group_id = '3';
 			}
 			if(!recordData.photo) {
-				recordData.photo = '';
+				recordData.photo = ' ';
 			}
 
 			// Put recordData Object into a variable
@@ -41,12 +46,12 @@ angular.module('app')
 				student_name: recordData.student_name,
 				student_fname: recordData.student_fname,
 				group_id: recordData.group_id,// something we need to invent
-				plain_password: recordData.password,
+				plain_password: recordData.password_confirm,
 				photo: recordData.photo //need to invent
 			};
 
 			// Gives data to a service file
 			addStudentSrvc.addStudent(studentRecordData);
-	}; // End $scope.addStudent
+		}; // End $scope.addStudent
 
 	}]);

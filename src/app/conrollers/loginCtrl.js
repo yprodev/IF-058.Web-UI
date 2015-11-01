@@ -20,7 +20,7 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
             if (response.data.response === "ok" && response.data.roles[1] === 'admin') {
                 localStorage.adminName = response.data.username;
                 localStorage.adminId = response.data.id;
-                $state.go('admin.groups');
+                $state.go('admin');
             } else if (response.data.response === "ok" && response.data.roles[1] === 'student') {
                 localStorage.userName = response.data.username;
                 localStorage.userId = response.data.id;
