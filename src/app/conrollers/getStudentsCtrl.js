@@ -21,41 +21,47 @@ angular.module('app')
 		};
 
 		// Editing and updating student record functionality
-		// $scope.editStud = function () {
+		$scope.editStud = function () {
 
-		// 	// Put student data we need to update
-		// 	var editStudData = {
-		// 		// Students Values
-		// 		gradebook_id: $scope.editingStudent.gradebook_id,
-		// 		student_surname: $scope.editingStudent.student_surname,
-		// 		student_name: $scope.editingStudent.student_name,
-		// 		student_fname: $scope.editingStudent.student_fname,
-		// 		group_id: $scope.editingStudent.group_id,
-		// 		plain_password: $scope.editingStudent.plain_password
-		// 	};
+			// Put student data we need to update
+			var editStudData = {
+				user_id: $scope.editingStudent.user_id,
+				// Students Values
+				gradebook_id: $scope.editingStudent.gradebook_id,
+				student_surname: $scope.editingStudent.student_surname,
+				student_name: $scope.editingStudent.student_name,
+				student_fname: $scope.editingStudent.student_fname,
+				group_id: $scope.editingStudent.group_id,
+				// plain_password: $scope.editingStudent.plain_password
+				photo: ""
+			};
 
-		// 	var editingData = $scope.editingStudent;
+			var eStud = $scope.editingStudent;
 
-		// 	editingData.student_fname = $scope.students.student_fname[editingData.user_id];
-		// 	editingData.student_name = $scope.students.student_name[editingData.user_id];
-		// 	editingData.student_surname = $scope.students.student_surname[editingData.user_id];
-		// 	editingData.gradebook_id = $scope.students.student_gradebook[editingData.user_id];
-		// 	editingData.plain_password = $scope.students.plain_password[editingData.user_id];
-		// 	editingData.group_name = $scope.students.group_name[editingData.group_id];
+			console.log(eStud);
 
-		// 	var currId = $scope.currId;
+			// Need local variable for using in service
+			// Then we will need to null the scope's same variable
+			var currId = $scope.currId;
 
-		// 	entitiesSrvc.updateEntity($scope.thisEntity, currId, editStudData)
-		// 		.then(function (response) {
-		// 			if(response.data.response == 'ok') {
-		// 				for (var i = 1; i < $scope.students.list.length; i++) {
-		// 					if ($scope.students.list[i].user_id == currId) {
-		// 						$scope.students.list[i] = editingData;
-		// 					}
-		// 				} // END for loop
-		// 			} // END if statement for status 'OK'
-		// 		}); // END .then
-		// };
+			entitiesSrvc.updateEntity($scope.thisEntity, currId, editStudData)
+				.then(function (response) {
+					if(response.data.response == 'ok') {
+						for (var i = 1; i < $scope.students.list.length; i++) {
+							if ($scope.students.list[i].user_id != currId) {
+								// Need to say about error if it needed
+								throw new Error ($scope.students.list[i] + ' is different from ' + currId + ' id.. Try to solve this or, please, contact with your back-end administrator.');
+							}
+						} // END for loop
+					} else {
+						throw new Error ('Server response was not "OK" - ' + response.data.response);
+					}
+				}); // END .then
+
+				// 'Nulls' all scope variables
+				$scope.editingStudent = null;
+				$scope.currId = null;
+		};
 
 
 
