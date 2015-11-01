@@ -12,12 +12,11 @@ angular.module('app')
 		// Show edit panel for a student
 		$scope.showEditingForm = function (stud) {
 			console.log(stud);
+			// if stud Object is not equal to null
 			if (stud !== null) {
 				$scope.currId = stud.user_id;
 			}
 				$scope.editingStudent = stud;
-			// $scope.editingStudent = stud.user_id;
-
 		};
 
 		// Editing and updating student record functionality
