@@ -21,8 +21,20 @@
 
 					<!-- Block shows we edit entity -->
 					<tr ng-repeat-start="student in students.list"
-							ng-if="editingStudent === student.user_id">
-						<td>{{ student.student_fname }}</td>
+							ng-if="editingStudent.user_id === student.user_id">
+						<td>
+							<input type="text"
+										 name="eSFName"
+										 id="sName"
+										 class="form-control"
+										 placeholder="Bob"
+										 tabindex="1"
+										 ng-minlength="2"
+										 ng-maxlength="50"
+										 ng-model="editingStudent.student_name"
+										 value="{{ student.student_fname }}"
+										 required>
+						</td>
 						<td>{{ student.student_surname }}</td>
 						<td>{{ student.student_name }}</td>
 						<td>
@@ -34,11 +46,11 @@
 						</td>
 						<td>
 							<button class="btn btn-success"
-												ng-click="editStudent()">
+											ng-click="editStud()">
 								<span class="glyphicon glyphicon-ok"></span>
 							</button>
 							<button class="btn btn-danger"
-												ng-click="showEditingForm(null)">
+											ng-click="showEditingForm(null)">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 					</td>
@@ -46,14 +58,14 @@
 
 					<!-- Block shows static students' records -->
 					<tr ng-repeat-end
-							ng-if="editingStudent !== student.user_id">
+							ng-if="editingStudent.user_id !== student.user_id">
 						<td>{{ student.student_fname }}</td>
 						<td>{{ student.student_surname }}</td>
 						<td>{{ student.student_name }}</td>
 						<td>{{ student.group_name }}</td>
 						<td>
 							<button class="btn btn-info"
-											ng-click="showEditingForm(student.user_id)">
+											ng-click="showEditingForm(student)">
 								<span class="glyphicon glyphicon-pencil"></span>
 							</button>
 							<button class="btn btn-danger"
@@ -67,6 +79,8 @@
 
 				</tbody>
 			</table>
+
+			
 
 			<!-- Modal confirmation window before deleting -->
 			<div class="modal fade"
