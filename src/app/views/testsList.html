@@ -18,11 +18,11 @@
                                        ng-model="newEntity.test_name" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" class="form-control width-max"
+                                <input type="number" min="1" step="1" max="999" class="form-control width-max"
                                        placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" class="form-control width-max" placeholder="Введіть тривалість(хв)"
+                                <input type="number" min="1" class="form-control width-max" placeholder="Введіть тривалість(хв)"
                                        ng-model="newEntity.time_for_test" required>
                             </div>
                             <div class="col-md-6">
@@ -32,7 +32,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" class="form-control width-max"
+                                <input type="number" min="1" class="form-control width-max"
                                        placeholder="Введіть кількість спроб" ng-model="newEntity.attempts" required>
                             </div>
                             <div class="col-md-2 pull-right">

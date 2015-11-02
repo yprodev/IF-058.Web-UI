@@ -96,9 +96,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
         $scope.noData = "Немає записів";
       });
     }
-
   };
-
 
 //function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
@@ -128,10 +126,8 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
             showInformModal("Помилка редагування запису: " + resp.data.response);
         };
       });
-
     $scope.showAddForm();
   };
-
 
   //function opens a form for editing
   $scope.showEditForm = function (entity) {
@@ -175,8 +171,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
               if ($scope.entities[i][$scope.commonId] == entity[$scope.commonId]) {
                 for (prop in editedData) {
                   $scope.entities[i][prop] = editedData[prop];
-                }
-                ;
+                };
                 //lightins of editedRow for ... seconds
                 // console.log(angular.element(document.querySelector('#row'+(i+1))));
                 // var succeedRow = angular.element(document.querySelector('#row'+(i+1)))[0];
@@ -185,10 +180,8 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
                 // $timeout(function () {
                 //   succeedRow.className = standartClass;
                 // }, 2000);
-              }
-              ;
-            }
-            ;
+              };
+            };
             $scope.editingEntity = null;
             break;
           case "error 23000":
@@ -212,8 +205,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       $scope.deletingEntity = entity;
     } else {
       $scope.deletingEntity = null;
-    }
-    ;
+    };
   };
 //function removes an entity from array and from server
   $scope.removeEntity = function () {
