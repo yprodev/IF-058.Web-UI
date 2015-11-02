@@ -21,7 +21,8 @@ var path = {
 		css:'build/css/',
 		js:'build/js/', // Tell your group to fix this for creating min js file for project
 		html:'build/', // Tell your group that this file doesn't build in build folder because of no slash
-		img:'build/img/'
+		img:'build/img/',
+		fonts: 'build/fonts/'
 	},
 	src:{
 		css:'src/scss/**/*.scss',
@@ -39,7 +40,8 @@ var path = {
 		css:'dist/css/',
 		js:'dist/js/', // Tell your group to fix this for creating min js file for project
 		html:'dist/', // Tell your group that this file doesn't build in build folder because of no slash
-		img:'dist/img/'
+		img:'dist/img/',
+		fonts: 'dist/fonts/'
 	}
 };
 
@@ -53,6 +55,11 @@ var path = {
 
 gulp.task('default', ['build', 'watch']);
 
+gulp.task("vendor-fonts", function() {
+	gulp.src('bower_components/bootstrap/fonts/**.*')
+		.pipe(gulp.dest(path.build.fonts));
+});
+
 // Task for compiling bootstrap LESS files
 gulp.task("vendor-css", function() {
 		// Merging all vendor less files
@@ -65,7 +72,7 @@ gulp.task("vendor-css", function() {
 });
 
 // Task for compiling all bootstrap, angular and angular modules js files
-gulp.task("vendor-js", function() {
+gulp.task("build-all-js", function() {
 		// Merging all vendor js files
 		gulp.src([
 			'bower_components/jquery/dist/jquery.js',
@@ -82,17 +89,11 @@ gulp.task("vendor-js", function() {
 			'bower_components/bootstrap/js/scrollspy.js',
 			'bower_components/bootstrap/js/tab.js',
 			'bower_components/angular/angular.js',
-			'bower_components/angular-ui-router/release/angular-ui-router.js'
+			'bower_components/angular-ui-router/release/angular-ui-router.js',
+			path.src.js // Path for compiling all project js files
 		])
-			.pipe(concat("vendor.js"))
+			.pipe(concat("app.js"))
 			.pipe(gulp.dest(path.build.js));
-});
-
-// Task for compiling all project js files
-gulp.task('build-js', function() {
-	gulp.src(path.src.js)
-		.pipe(concat('app.js'))
-		.pipe(gulp.dest(path.build.js));
 });
 
 // Task for moving all html files into destination folder
@@ -103,11 +104,6 @@ gulp.task('build-html', function() {
 
 gulp.task('build-img', function() {
 	gulp.src(path.src.img)
-		.pipe(imagemin({
-			progressive: true,
-			svgoPlugins: [{removeViewBox: false}],
-			use: [pngquant()]
-		}))
 		.pipe(gulp.dest(path.build.img));
 });
 
@@ -119,7 +115,7 @@ gulp.task('build-sass', function() {
 		.pipe(gulp.dest(path.build.css))
 });
 
-gulp.task('build', ['vendor-css', 'vendor-js', 'build-sass', 'build-js', 'build-html', 'build-img']);
+gulp.task('build', ['vendor-css', 'build-sass', 'build-all-js', 'build-html', 'build-img', 'vendor-fonts']);
 
 gulp.task('watch', function() {
 	gulp.watch(path.watch.html, ['build-html']); // END OF WORK
@@ -136,6 +132,11 @@ gulp.task('watch', function() {
  *
  * _________________________________________________________________________
 */
+
+gulp.task("dist-fonts", function() {
+	gulp.src('bower_components/bootstrap/fonts/**.*')
+		.pipe(gulp.dest(path.dist.fonts));
+});
 
 gulp.task("dist-js", function() {
 		// Merging all vendor js files AND project js files
@@ -200,7 +201,7 @@ gulp.task('dist-sass', function() {
 		.pipe(gulp.dest(path.dist.css))
 });
 
-gulp.task('dist', ['dist-js', 'dist-ven-css', 'dist-sass', 'dist-html', 'dist-img']);
+gulp.task('dist', ['dist-js', 'dist-ven-css', 'dist-sass', 'dist-html', 'dist-img', 'dist-fonts']);
 
 
 
