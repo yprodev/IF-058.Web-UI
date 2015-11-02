@@ -55,6 +55,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/questionsList.html',
 			controller: 'entitiesCtrl'
 		}).
+		state('admin.testDetails', {
+			url:'/testDetails/:id',
+			templateUrl: 'app/views/testDetails.html',
+			controller: 'entitiesCtrl'
+		}).
 		state('admin.students', {
 			url: '/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',

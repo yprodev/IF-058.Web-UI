@@ -8,48 +8,48 @@
                     <br/>
                     <button class="btn btn-primary pull-right" ng-click="showAddForm()"><span
                             class="glyphicon glyphicon-plus"></span></button>
-                    <br/><br/><br/>
+                    <br/><br/>
 
-                    <div class="well" ng-show="showingAdd">
-                        <div class=" row">
-                            <form name="addForm" class="form-inline" role='form' novalidate>
-                                <div class="col-md-6">
-                                    <textarea rows="3" class="form-control width-max" placeholder="Введіть текст завданняіфваіфа"
-                                              type='text'
-                                              ng-model="newEntity.question_text" required>
-                                    </textarea>
-                                </div>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control width-max"
-                                           placeholder="Введіть рівень складності" ng-model="newEntity.level" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-control width-max" ng-model="newEntity.type" required>
-                                        <option value="0" selected="selected">Простий вибір</option>
-                                        <option value="1">Мульти-вибір</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="button" value = 'Оберіть файл' ng-model='attachment' class="btn pull-left width-max">
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <button type="submit" class="btn btn-success pull-right width-max"
-                                            ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
-                                    </button>
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <button type="submit" class="btn btn-warning pull-right width-max"
-                                            ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
-                                    </button>
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <button type="submit" class="btn btn-primary  pull-right width-max"
-                                            ng-disabled="!addForm.$dirty" ng-click=""> Параметри тесту
-                                    </button>
-                                </div>
-                            </form>
+                    <div  ng-show="showingAdd">
+                        <br/>
+                        <div class="well">
+                            <div class=" row">
+                                <form name="addForm" class="form-inline" role='form' novalidate>
+                                    <div class="col-md-6">
+                                        <textarea rows="3" class="form-control width-max" placeholder="Введіть текст завданняіфваіфа"
+                                                  type='text'
+                                                  ng-model="newEntity.question_text" required>
+                                        </textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control width-max"
+                                               placeholder="Введіть рівень складності" ng-model="newEntity.level" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control width-max" ng-model="newEntity.type" required>
+                                            <option value="0" selected="selected">Простий вибір</option>
+                                            <option value="1">Мульти-вибір</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="button" value = 'Оберіть файл' ng-model='attachment' class="btn pull-left width-max">
+                                    </div>
+                                    <div class="col-md-2 pull-right">
+                                        <button type="submit" class="btn btn-success pull-right width-max"
+                                                ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 pull-right">
+                                        <button type="submit" class="btn btn-warning pull-right width-max"
+                                                ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
+
+                    <button class="btn btn-primary pull-right" ui-sref="admin.testDetails" ng-click="">Параметри тесту</button>
 
 
                     <div ng-show="!entities">{{noData}}</div>
