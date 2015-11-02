@@ -1,7 +1,11 @@
-/**
- * Created by Home on 21.09.2015.
- */
-
+/* _________________________________________________________________________
+ *
+ *
+ * Created by Home on 21.09.2015
+ * MegaREFACTORED on 03.11.2015
+ *
+ * _________________________________________________________________________
+*/
 var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	concat = require('gulp-concat'),
