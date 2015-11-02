@@ -40,7 +40,7 @@
                 </thead>
 
                 <tbody>
-                  <tr onclick="" ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
+                  <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}"> <a ui-sref="admin.tests({id:entity.subject_id})">
                     <!-- read-only cells -->
                     <td><a ui-sref="admin.tests({id:entity.subject_id})">{{$index + 1}}</a></td>
                     <td>{{entity.subject_name}}</td>
@@ -51,7 +51,7 @@
                       <button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateEntity(entity)">
                         <span class="glyphicon glyphicon-trash"></span></button>
                     </td>
-
+                  </a>
                   </tr>
                   <tr ng-if="entity == editingEntity" ng-repeat-end="">
                     <td>{{$index + 1}}</td>

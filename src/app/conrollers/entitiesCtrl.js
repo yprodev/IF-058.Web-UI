@@ -44,20 +44,16 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     if (ent == $scope.thisEntity) {
       $scope.currentEntity = entityObj[ent];
       console.log($scope.currentEntity)
-    }
-    ;
-  }
-  ;
+    };
+  };
 
 //function gets a list of entities
   $scope.getEntetyList = function () {
     for (ent in entityObj) {
       if (ent == $scope.thisEntity) {
         $scope.currentEntity = entityObj[ent];
-      }
-      ;
-    }
-    ;
+      };
+    };
     if ($scope.currentEntity.by) {
 
       switch ($scope.thisEntity) {
@@ -83,9 +79,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
         $scope.noData = "Немає записів";
       });
     }
-
   };
-
 
 //function shows and hides the form for creating new entity
   $scope.showAddForm = function () {
@@ -93,17 +87,14 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       $scope.showingAdd = true;
     } else {
       $scope.showingAdd = false;
-      $scope.newEntity = $scope.currentEntity;
-    }
-    ;
+      $scope.newEntity = {};
+    };
   };
 //function creates new element of array and sends new entity on server
   $scope.addEntity = function () {
+    var newData = $scope.newEntity;
     if ($scope.currentEntity.by) {
-      var newData = $scope.newEntity;
       newData[$scope.currentEntity.by.parentEntity + "_id"] = $stateParams.id
-    } else {
-      var newData = $scope.newEntity;
     }
     entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
       switch (resp.data.response) {
@@ -116,14 +107,11 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
           break;
         default:
           showInformModal("Помилка редагування запису: " + resp.data.response);
-      }
-      ;
+      };
     });
-
 
     $scope.showAddForm();
   };
-
 
   //function opens a form for editing
   $scope.showEditForm = function (entity) {
@@ -166,8 +154,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
               if ($scope.entities[i][$scope.thisEntity + "_id"] == entity[$scope.thisEntity + "_id"]) {
                 for (prop in editedData) {
                   $scope.entities[i][prop] = editedData[prop];
-                }
-                ;
+                };
                 //lightins of editedRow for ... seconds
                 // console.log(angular.element(document.querySelector('#row'+(i+1))));
                 // var succeedRow = angular.element(document.querySelector('#row'+(i+1)))[0];
@@ -176,10 +163,8 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
                 // $timeout(function () {
                 //   succeedRow.className = standartClass;
                 // }, 2000);
-              }
-              ;
-            }
-            ;
+              };
+            };
             $scope.editingEntity = null;
             break;
           case "error 23000":
@@ -203,8 +188,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       $scope.deletingEntity = entity;
     } else {
       $scope.deletingEntity = null;
-    }
-    ;
+    };
   };
 //function removes an entity from array and from server
   $scope.removeEntity = function () {

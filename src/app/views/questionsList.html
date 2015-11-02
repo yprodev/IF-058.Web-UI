@@ -14,15 +14,18 @@
                         <div class=" row">
                             <form name="addForm" class="form-inline" role='form' novalidate>
                                 <div class="col-md-6">
-                                    <textarea rows="3" class="form-control width-max" placeholder="Введіть текст завданняіфваіфа"
-                                              type='text'
+                                    <textarea rows="3" class="form-control width-max" placeholder="Введіть текст завдання"
                                               ng-model="newEntity.question_text" required>
                                     </textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control width-max"
+                                    <input type="number" min="1" class="form-control width-max"
                                            placeholder="Введіть рівень складності" ng-model="newEntity.level" required>
                                 </div>
+                               <!-- <div class="col-md-6">
+                                    <input type="number" class="form-control width-max"
+                                           placeholder="Введіть " ng-model="newEntity.attachment">
+                                </div>-->
                                 <div class="col-md-6">
                                     <select class="form-control width-max" ng-model="newEntity.type" required>
                                         <option value="0" selected="selected">Простий вибір</option>
@@ -30,7 +33,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="button" value = 'Оберіть файл' ng-model='attachment' class="btn pull-left width-max">
+                                    <input type="file" data-file="param.file"/>
                                 </div>
                                 <div class="col-md-2 pull-right">
                                     <button type="submit" class="btn btn-success pull-right width-max"
@@ -38,11 +41,11 @@
                                     </button>
                                 </div>
                                 <div class="col-md-2 pull-right">
-                                    <button type="submit" class="btn btn-warning pull-right width-max"
+                                    <button class="btn btn-warning pull-right width-max"
                                             ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
                                     </button>
                                 </div>
-                                <div class="col-md-2 pull-right">
+                                <div class="pull-right">
                                     <button type="submit" class="btn btn-primary  pull-right width-max"
                                             ng-disabled="!addForm.$dirty" ng-click=""> Параметри тесту
                                     </button>
@@ -83,16 +86,15 @@
                         </tr>
                         <tr ng-if="entity == editingEntity" ng-repeat-end="">
                             <td>{{$index + 1}}</td>
-                            <td><input class="form-control width-max" ng-model="editedEntity.new_test_name"></td>
-                            <td><input class="form-control width-max" ng-model="editedEntity.new_tasks"></td>
-                            <td><input class="form-control width-max" ng-model="editedEntity.new_time_for_test"></td>
+                            <td><input class="form-control width-max" ng-model="editedEntity.new_question_text"></td>
+                            <td><input class="form-control width-max" ng-model="editedEntity.new_level"></td>
                             <td>
-                                <select class="form-control width-max" ng-model="editedEntity.new_enabled">
+                                <select class="form-control width-max" ng-model="editedEntity.new_type">
                                     <option value="1">доступно</option>
                                     <option value="0">недоступно</option>
                                 </select>
                             </td>
-                            <td><input class="form-control width-max" ng-model="editedEntity.new_attempts"></td>
+                            <td><input class="form-control width-max" ng-model="editedEntity.new_attachment"/></td>
                             <td class="usCenter col-md-2">
                                 <button class="btn btn-success" ng-click="editEntity(entity)">
                                     <span class="glyphicon glyphicon-ok"></span></button>
