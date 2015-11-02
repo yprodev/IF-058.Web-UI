@@ -44,6 +44,11 @@ var dependencies = {
         .then(fulfilled, rejected);
       console.log("get works")
     },
+    getRecordsRangeByEntity: function (entity, parentEntity, id) {
+      return $http.get(baseUrl + entity + '/getRecordsRangeBy' + parentEntity[0].toUpperCase()+parentEntity.slice(1) +'/'+ id + '/' + '100/' + '0')
+        .then(fulfilled, rejected);
+      console.log("get works")
+    },
 
     getEntities: function (entity) {
       return $http.get(baseUrl + entity + '/getRecords')
@@ -76,6 +81,7 @@ var dependencies = {
     },
 
     updateEntity: function (entity, id, data) {
+      console.log(data, "!!!!!!!!!!!!!!!");
       return $http.post(baseUrl + entity + '/update/' + id, data)
       .then(fulfilled, rejected);
     }

@@ -3,17 +3,17 @@
  */
 
 var gulp = require('gulp'),
-		uglify = require('gulp-uglify'),
-		concat = require('gulp-concat'),
-		csscomb = require('gulp-csscomb'),
-		cssmin = require('gulp-cssmin'),
-		less = require('gulp-less'),
-		sass = require('gulp-sass'),
-		imagemin = require('gulp-imagemin'),
-		pngquant = require('imagemin-pngquant'),
+	uglify = require('gulp-uglify'),
+	concat = require('gulp-concat'),
+	csscomb = require('gulp-csscomb'),
+	cssmin = require('gulp-cssmin'),
+	less = require('gulp-less'),
+	sass = require('gulp-sass'),
+	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant'),
 
-		//Added for moving files to virtual machine through GULP PLUGIN
-		GulpSSH = require('gulp-ssh');
+//Added for moving files to virtual machine through GULP PLUGIN
+	GulpSSH = require('gulp-ssh');
 
 
 var path = {
@@ -42,8 +42,6 @@ var path = {
 		img:'dist/img/'
 	}
 };
-
-
 
 /* _________________________________________________________________________
  *
@@ -106,10 +104,10 @@ gulp.task('build-html', function() {
 gulp.task('build-img', function() {
 	gulp.src(path.src.img)
 		.pipe(imagemin({
-						progressive: true,
-						svgoPlugins: [{removeViewBox: false}],
-						use: [pngquant()]
-				}))
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()]
+		}))
 		.pipe(gulp.dest(path.build.img));
 });
 
