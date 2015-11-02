@@ -90,6 +90,26 @@ gulp.task('default', function() {
 	});
 });
 
+
+// -----------------------------------------------------
+// Task for building develop full project (not minified)
+// -----------------------------------------------------
+
+
+gulp.task('build', function() {
+	gulp.src(path.watch.css, function(event) {
+		gulp.run('sass');
+	});
+	gulp.watch(path.watch.js, function(event) {
+		gulp.run('js');
+	});
+	gulp.watch(path.watch.html, function(event) {
+		gulp.run('html');
+	});
+});
+
+
+
 //MOVE TASK - Please, don't remove this code
 //It has been used by Yaroslav ))
 
