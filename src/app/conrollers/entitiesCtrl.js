@@ -101,7 +101,7 @@ app.controller('entitiesCtrl', function($scope, entitiesSrvc, $timeout){
       entitiesSrvc.updateEntity($scope.thisEntity, entity[$scope.thisEntity+"_id"], editedData).then(function (resp) {
         switch (resp.data.response) {
           case "ok":
-            for (var i = 1; i < $scope.entities.length; i++) {
+            for (var i = 0; i < $scope.entities.length; i++) {
               if ($scope.entities[i][$scope.thisEntity+"_id"] == entity[$scope.thisEntity+"_id"]) {
                 for (prop in editedData) {
                   $scope.entities[i][prop] = editedData[prop];
