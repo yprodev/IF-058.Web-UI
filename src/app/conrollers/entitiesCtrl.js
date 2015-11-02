@@ -17,6 +17,12 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       subject_name: "",
       subject_description: ""
     },
+    "AdminUser": {
+      username: "",
+      password: "",
+      password_confirm: "",
+      email: ""
+    },
     "test": {
       test_name: "",
       tasks: "",
@@ -40,26 +46,31 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     //... and other entities
   };
 
+
   for (ent in entityObj) {
     if (ent == $scope.thisEntity) {
       $scope.currentEntity = entityObj[ent];
-      console.log($scope.currentEntity)
+      console.log($scope.currentEntity);
     }
     ;
   }
   ;
+
+  function changeId (){
+    return $scope.commonId = $scope.thisEntity !== "AdminUser" ? $scope.thisEntity + "_id" : "id";
+  };
 
 //function gets a list of entities
   $scope.getEntetyList = function () {
     for (ent in entityObj) {
       if (ent == $scope.thisEntity) {
         $scope.currentEntity = entityObj[ent];
-      }
-      ;
-    }
-    ;
+      };
+    };
+    changeId();
+/*    console.log($scope.commonId, "----------$scope.commonId");
+    console.log($scope.thisEntity, "-----------$scope.thisEntity");*/
     if ($scope.currentEntity.by) {
-
       switch ($scope.thisEntity) {
         case 'test':
           var id = $stateParams.id//замінити на універсальну змінну
@@ -105,21 +116,19 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     } else {
       var newData = $scope.newEntity;
     }
-    entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
-      switch (resp.data.response) {
-        case "ok":
-          newData[$scope.thisEntity + "_id"] = resp.data.id;
-          $scope.entities.push(newData);
-          break;
-        case "error 23000":
-          showInformModal("Зазначене ім'я вже існує");
-          break;
-        default:
-          showInformModal("Помилка редагування запису: " + resp.data.response);
-      }
-      ;
-    });
-
+      entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
+        switch (resp.data.response) {
+          case "ok":
+            newData[$scope.commonId] = resp.data.id;
+            $scope.entities.push(newData);
+            break;
+          case "error 23000":
+            showInformModal("Зазначене ім'я вже існує");
+            break;
+          default:
+            showInformModal("Помилка редагування запису: " + resp.data.response);
+        };
+      });
 
     $scope.showAddForm();
   };
@@ -132,6 +141,10 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       $scope.editedEntity = {};
       for (prop in entity) {
         $scope.editedEntity["new_" + prop] = entity[prop];
+        if(entityObj["AdminUser"]){
+          $scope.editedEntity.new_password = "";
+          $scope.editedEntity.new_password_confirm = "";
+        };
       }
       ;
     } else {
@@ -145,7 +158,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     var editedData = {};
     //checking on empty fields, appropriationing all properties except ID of property
     for (prop in entity) {
-      if ($scope.editedEntity["new_" + prop] != "" && prop != ($scope.thisEntity + "_id")) {
+      if ($scope.editedEntity["new_" + prop] != "" && prop != ($scope.commonId)) {
         fieldsFulled = true;
         editedData[prop] = $scope.editedEntity["new_" + prop];
       } else if ($scope.editedEntity["new_" + prop] != "") {
@@ -159,11 +172,11 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     ;
 //updates an element of array and send updating of entity to server
     if (fieldsFulled == true) {
-      entitiesSrvc.updateEntity($scope.thisEntity, entity[$scope.thisEntity + "_id"], editedData).then(function (resp) {
+      entitiesSrvc.updateEntity($scope.thisEntity, entity[$scope.commonId], editedData).then(function (resp) {
         switch (resp.data.response) {
           case "ok":
-            for (var i = 1; i < $scope.entities.length; i++) {
-              if ($scope.entities[i][$scope.thisEntity + "_id"] == entity[$scope.thisEntity + "_id"]) {
+            for (var i = 0; i < $scope.entities.length; i++) {
+              if ($scope.entities[i][$scope.commonId] == entity[$scope.commonId]) {
                 for (prop in editedData) {
                   $scope.entities[i][prop] = editedData[prop];
                 }
@@ -209,7 +222,8 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
 //function removes an entity from array and from server
   $scope.removeEntity = function () {
     var currentEntity = $scope.deletingEntity;
-    var currentId = $scope.deletingEntity[$scope.thisEntity + "_id"];
+    var currentId = $scope.deletingEntity[$scope.commonId];
+    console.log($scope.commonId);
     entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
       switch (resp.data.response) {
         case "ok":

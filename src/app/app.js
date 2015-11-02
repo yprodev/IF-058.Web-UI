@@ -60,15 +60,24 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/testDetails.html',
 			controller: 'entitiesCtrl'
 		}).
-		state('admin.students', {
-			url: '/students/addStudent',
+		state('admin.usersTabs', {
+			url: '/usersTabs',
+			templateUrl: 'app/views/usersTabs.html'
+		}).
+		state('admin.usersTabs.students', {
+			url:'/students',
+			templateUrl: 'app/views/getStudents.html',
+			controller: 'getStudentsCtrl'
+		}).
+		state('admin.addStudent', {
+			url:'/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',
 			controller: 'addStudentCtrl'
 		}).
-		state('admin.addAdmin', {
+		state('admin.usersTabs.addAdmin', {
 			url: '/addAdmin',
 			templateUrl: 'app/views/addAdmin.html',
-			controller: 'addAdminCtrl'
+			controller: 'entitiesCtrl'
 	});
 
 		$urlRouterProvider.otherwise('/');

@@ -6,6 +6,9 @@ build/
 dest/
 dist/
 ftpsync.settings
+libs/
+build/
 src/config.rb
 .idea/
+build/
 npm-debug.log

@@ -198,3 +198,20 @@ body, html, .container-fluid, .nav-row {
     height: auto;
   }
 }
+
+
+/* ___________________________________
+ *
+ * Here is styles for student entities
+ * ___________________________________
+*/
+
+.student-photo {
+  width: 100%;
+  height: auto;
+}
+
+.table>tbody>tr>td.td-photo {
+  width: 15%;
+  padding: 0;
+}

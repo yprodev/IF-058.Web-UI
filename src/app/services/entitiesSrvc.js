@@ -4,7 +4,7 @@ app.factory('entitiesSrvc', function ($http, baseUrl) {
 
 var dependencies = {
     group : 'speciality,faculty',
-    specialities : 'faculties'
+    student : 'group'
 };
 
 
@@ -12,7 +12,7 @@ var dependencies = {
     var entityId = dep+'_id';
     var entityName = dep+'_name';
 
-    return $http.get(baseUrl+dep+'/getRecords')
+    return $http.get(baseUrl + dep + '/getRecords')
       .then(function(response) {
         var entityForInject = response.data;
         
@@ -81,6 +81,7 @@ var dependencies = {
     },
 
     updateEntity: function (entity, id, data) {
+      console.log(data, "!!!!!!!!!!!!!!!");
       return $http.post(baseUrl + entity + '/update/' + id, data)
       .then(fulfilled, rejected);
     }

@@ -1,4 +1,4 @@
-<div>
+<div entities-drct="AdminUser">
 	<div class="wrapper panel-success no-border">
 
 		<!-- The button and form to add Entity -->
@@ -11,61 +11,65 @@
 					<div class=" row">
 						<form name="addForm" class="form-inline" role='form' novalidate>
 							<div class="col-md-3">
-								<input class="form-control width-max" placeholder="Введіть логін" type='text' ng-model="newUsername" required
+								<input class="form-control width-max" placeholder="Введіть логін" type='text' ng-model="newEntity.username" required
 										>
 							</div>
 							<div class="col-md-3">
-								<input class="form-control width-max" placeholder="Введіть елетронну пошту" type='email' ng-model="newEmail" required>
+								<input class="form-control width-max" placeholder="Введіть елетронну пошту" type='email' ng-model="newEntity.email" required>
 							</div>
 							<div class="col-md-2">
-								<input class="form-control width-max" placeholder="Введіть пароль" type='password' ng-model="newPassword" required>
+								<input class="form-control width-max" placeholder="Введіть пароль" type='password' ng-model="newEntity.password" required>
 							</div>
 							<div class="col-md-2">
-								<input class="form-control width-max" placeholder="Повторіть пароль" type='password' ng-model="newPasswordConfirm" required>
+								<input class="form-control width-max" placeholder="Повторіть пароль" type='password' ng-model="newEntity.password_confirm" required>
 							</div>
 							<div class="col-md-2">
-								<button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addAdmin()">Додати</button>
+								<button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
 							</div>
 						</form>
 					</div>
 				</div>
 
 
-				<div ng-show="!admins">{{noData}}</div>
+				<div ng-show="!entities">{{noData}}</div>
 
 				<!-- The table for list of Entities -->
-				<table ng-show="admins" class="table table-hover .table-condensed">
+				<table ng-show="entities" class="table table-hover .table-condensed">
 					<thead>
 					<tr>
-						<th>№</th>
-						<th>Логін</th>
-						<th>Електронна пошта</th>
-						<th class="usCenter">Дії</th>
+						<th class="col-md-1">№</th>
+						<th class="col-md-2">Логін</th>
+						<th class="col-md-2">Електронна пошта</th>
+						<th class="col-md-2"></th>
+						<th class="col-md-2"></th>
+						<th class="col-md-2 usCenter">Дії</th>
 					</tr>
 					</thead>
 					<tbody>
-					<tr ng-if="admin != editingAdmin" ng-repeat-start="admin in admins">
+					<tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
 						<!-- read-only cells -->
-						<td>{{$index + 1}}</td>
-						<td>{{admin.username}}</td>
-						<td>{{admin.email}}</td>
-						<td class="usCenter">
-							<button class="btn btn-info" ng-click="showEditForm(admin)">
+						<td class="col-md-1">{{$index + 1}}</td>
+						<td class="col-md-2">{{entity.username}}</td>
+						<td class="col-md-2">{{entity.email}}</td>
+						<td class="col-md-2"></td>
+						<td class="col-md-2"></td>
+						<td class="col-md-2 usCenter">
+							<button class="btn btn-info" ng-click="showEditForm(entity)">
 								<span class="glyphicon glyphicon-pencil"></span></button>
-							<button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateAdmin(admin)">
+							<button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateEntity(entity)">
 								<span class="glyphicon glyphicon-trash"></span></button>
 						</td>
 					</tr>
-					<tr ng-if="admin == editingAdmin" ng-repeat-end="">
+					<tr ng-if="entity == editingEntity" ng-repeat-end="">
 						<td>{{$index + 1}}</td>
-						<td><input class="form-control width-max" type='text' ng-model="editingData.editingUsername"></td>
-						<td><input class="form-control width-max" type='email' ng-model="editingData.editingEmail"></td>
-						<td><input class="form-control width-max" placeholder="Введіть пароль" type='password' ng-model="editingData.editingPassword"></td>
-						<td><input class="form-control width-max" placeholder="Повторіть пароль" type='password' ng-model="editingData.editingPasswordConfirm"></td>
+						<td><input class="form-control width-max" type='text' ng-model="editedEntity.new_username"></td>
+						<td><input class="form-control width-max" type='email' ng-model="editedEntity.new_email"></td>
+						<td><input class="form-control width-max" placeholder="Введіть пароль" type='password' ng-model="editedEntity.new_password"></td>
+						<td><input class="form-control width-max" placeholder="Повторіть пароль" type='password' ng-model="editedEntity.new_password_confirm"></td>
 						<td class="usCenter">
-							<button class="btn btn-success" ng-click="editAdmin()">
+							<button class="btn btn-success" ng-click="editEntity(entity)">
 								<span class="glyphicon glyphicon-ok"></span></button>
-							<button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(admin)">
+							<button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(entity)">
 								<span class="glyphicon glyphicon-remove"></span></button>
 						</td>
 					</tr>
@@ -80,13 +84,25 @@
 								<h4 class="modal-title">Видалити запис?</h4>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="activateAdmin()">Скасувати</button>
-								<button type="button" class="btn btn-danger" ng-click="removeAdmin()" data-dismiss="modal">Видалити</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="activateEntity()">Скасувати</button>
+								<button type="button" class="btn btn-danger" ng-click="removeEntity()" data-dismiss="modal">Видалити</button>
 							</div>
 						</div>
 					</div>
 				</div>
 
+				<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="informModal">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">{{infMsg}}</h4>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">ОК</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			</div>
 		</div>
