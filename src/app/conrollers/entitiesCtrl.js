@@ -1,7 +1,6 @@
 ;
 app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $timeout) {
 
-
   $scope.thisEntity = ""; //можна привязати через привязку з вьюхи, або через директиву (але нашо директива?)
 
   var entityObj = {
@@ -41,23 +40,21 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       by: {
         parentEntity: 'test'
       }
+    },
+    "TestDetail": {
+      level: "",
+      tasks: "",
+      rate: "",
+      by: {
+        parentEntity: 'test'
+      }
     }
 
     //... and other entities
   };
 
-
-  for (ent in entityObj) {
-    if (ent == $scope.thisEntity) {
-      $scope.currentEntity = entityObj[ent];
-      console.log($scope.currentEntity);
-    }
-    ;
-  }
-  ;
-
   function changeId (){
-    return $scope.commonId = $scope.thisEntity !== "AdminUser" ? $scope.thisEntity + "_id" : "id";
+    return $scope.commonId = $scope.thisEntity !== "AdminUser" && $scope.thisEntity !== "TestDetail" ? $scope.thisEntity + "_id" : "id";
   };
 
 //function gets a list of entities
@@ -68,11 +65,16 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       };
     };
     changeId();
-/*    console.log($scope.commonId, "----------$scope.commonId");
-    console.log($scope.thisEntity, "-----------$scope.thisEntity");*/
     if ($scope.currentEntity.by) {
       switch ($scope.thisEntity) {
         case 'test':
+          var id = $stateParams.id//замінити на універсальну змінну
+          entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
+            $scope.entities = resp.data;
+            $scope.noData = "Немає записів";
+          });
+          break
+        case "TestDetail":
           var id = $stateParams.id//замінити на універсальну змінну
           entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
             $scope.entities = resp.data;
@@ -104,18 +106,15 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       $scope.showingAdd = true;
     } else {
       $scope.showingAdd = false;
-      $scope.newEntity = $scope.currentEntity;
-    }
-    ;
+      $scope.newEntity = {};
+    };
   };
 //function creates new element of array and sends new entity on server
   $scope.addEntity = function () {
+    var newData = $scope.newEntity;
     if ($scope.currentEntity.by) {
-      var newData = $scope.newEntity;
-      newData[$scope.currentEntity.by.parentEntity + "_id"] = $stateParams.id
-    } else {
-      var newData = $scope.newEntity;
-    }
+      newData[$scope.currentEntity.by.parentEntity + "_id"] = $stateParams.id;
+    };
       entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
         switch (resp.data.response) {
           case "ok":
@@ -145,8 +144,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
           $scope.editedEntity.new_password = "";
           $scope.editedEntity.new_password_confirm = "";
         };
-      }
-      ;
+      };
     } else {
       $scope.editingEntity = null;
     }
@@ -166,10 +164,8 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       } else {
         fieldsFulled = false;
         break;
-      }
-      ;
-    }
-    ;
+      };
+    };
 //updates an element of array and send updating of entity to server
     if (fieldsFulled == true) {
       entitiesSrvc.updateEntity($scope.thisEntity, entity[$scope.commonId], editedData).then(function (resp) {
@@ -223,7 +219,6 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
   $scope.removeEntity = function () {
     var currentEntity = $scope.deletingEntity;
     var currentId = $scope.deletingEntity[$scope.commonId];
-    console.log($scope.commonId);
     entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
       switch (resp.data.response) {
         case "ok":
