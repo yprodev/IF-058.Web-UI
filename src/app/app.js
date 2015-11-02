@@ -13,44 +13,52 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/admin',
 			templateUrl: 'app/views/admin.html'
 		}).
+		state('admin.main', {
+			url: '/main',
+			templateUrl: 'app/views/main.html'
+		}).
 		state('user', {
 			url: '/user',
 			templateUrl: 'app/views/user.html'
 		}).
-		state('admin.groups', {
+		state('admin.educationInfo', {
+			url: '/educationInfo',
+			templateUrl: 'app/views/educationInfo.html'
+		}).
+		state('admin.educationInfo.groups', {
 			url: '/groups',
-			templateUrl: 'app/views/listGroups.html',
+			templateUrl: 'app/views/groupList.html',
 			controller: 'groupsCtrl'
 		}).
-		state('admin.addGroup', {//not work
-			url:'/addGroup',
-			templateUrl: 'app/views/addGroup.html',
-			controller: 'addGroupsCtrl'
-		}).
-		state('admin.editGroup/:group_id', {//not work
-		url:'/editGroup',
-			templateUrl: 'app/views/editGroup.html',
-			controller: 'editGroupsCtrl'
-		}).
-		state('admin.faculties', {
+		state('admin.educationInfo.faculties', {
 			url:'/faculties',
 			templateUrl: 'app/views/facultyList.html',
-			controller: 'facultiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
-		state('admin.specialities', {
+		state('admin.educationInfo.specialities', {
 			url:'/specialities',
 			templateUrl: 'app/views/specialitiesList.html',
-			controller: 'specialitiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.subjects', {
 		url:'/subjects',
 			templateUrl: 'app/views/subjectsList.html',
-			controller: 'subjectsCtrl'
+			controller: 'entitiesCtrl'
+		}).
+		state('admin.tests', {
+			url:'/tests/:id',
+			templateUrl: 'app/views/testsList.html',
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.students', {
-		url:'/students/addStudent',
+			url: '/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',
 			controller: 'addStudentCtrl'
+		}).
+		state('admin.addAdmin', {
+			url: '/addAdmin',
+			templateUrl: 'app/views/addAdmin.html',
+			controller: 'addAdminCtrl'
 	});
 
 		$urlRouterProvider.otherwise('/');
