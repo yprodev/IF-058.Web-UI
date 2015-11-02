@@ -44,54 +44,11 @@ var path = {
 };
 
 
-gulp.task('js', function() {
-	gulp.src(path.src.js)
-		.pipe(concat('script_min.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest(path.build.js));
-});
-
-gulp.task('html', function() {
-	gulp.src(path.src.html)
-		.pipe(gulp.dest(path.build.html));
-});
-
-gulp.task('img', function() {
-	gulp.src(path.src.img)
-		.pipe(imagemin({
-						progressive: true,
-						svgoPlugins: [{removeViewBox: false}],
-						use: [pngquant()]
-				}))
-		.pipe(gulp.dest(path.build.img));
-});
-
-gulp.task('sass', function() {
-	gulp.src(path.src.css)
-		.pipe(sass().on('error', sass.logError))// Gives opportunity to see all errors
-		.pipe(csscomb())
-		.pipe(cssmin())
-		.pipe(concat('main.css'))
-		.pipe(gulp.dest(path.build.css))
-});
-
-// gulp.task('default', function() {
-// 	gulp.watch(path.watch.css, function(event) {
-// 		gulp.run('sass');
-// 	});
-// 	gulp.watch(path.watch.js, function(event) {
-// 		gulp.run('js');
-// 	});
-// 	gulp.watch(path.watch.html, function(event) {
-// 		gulp.run('html');
-// 	});
-// });
-
 
 /* _________________________________________________________________________
  *
  *
- * START BUILD DEV Task for building developer full project (not minified)
+ * START BUILD DEV Task for building developer full project (NOT minified)
  *
  * _________________________________________________________________________
 */
@@ -249,73 +206,16 @@ gulp.task('dist', ['dist-js', 'dist-ven-css', 'dist-sass', 'dist-html', 'dist-im
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-gulp.task('less', function () {
-		gulp.src('bower_components/bootstrap/less/bootstrap.less')
-				.pipe(less())
-				.pipe(concat('bootstrap.css'))
-				.pipe(gulp.dest('build/css/')); //Added build/ folder to create css file in right directory
-});
-
-gulp.task('libs', function() {
-		gulp.src('./bower.json')
-				.pipe(gulp.dest('libs'))
-});
-
-
-// GULP task for creating min version of Bootstrap jQuery Files
-gulp.task('boot-js', function() {
-	gulp.src([
-			'bower_components/jquery/dist/jquery.js',
-			'bower_components/bootstrap/js/affix.js',
-			'bower_components/bootstrap/js/transition.js',
-			'bower_components/bootstrap/js/tooltip.js',
-			'bower_components/bootstrap/js/alert.js',
-			'bower_components/bootstrap/js/button.js',
-			'bower_components/bootstrap/js/carousel.js',
-			'bower_components/bootstrap/js/collapse.js',
-			'bower_components/bootstrap/js/dropdown.js',
-			'bower_components/bootstrap/js/modal.js',
-			'bower_components/bootstrap/js/popover.js',
-			'bower_components/bootstrap/js/scrollspy.js',
-			'bower_components/bootstrap/js/tab.js',
-			'bower_components/angular/angular.js'
-		])
-		.pipe(concat('vendor.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest('build/js/bootstrap-jquery/'));
-});
-
-
-
-//MOVE TASK - Please, don't remove this code
-//It has been used by Yaroslav ))
+/* _________________________________________________________________________
+ *
+ *
+ * START BUILD PRODUCTION (DIST TASK - minified and uglified)
+ *
+ * Please, don't remove this code.
+ * It's using to move files to virtual machine
+ *
+ * _________________________________________________________________________
+*/
 
 var config = {
 	host: '192.168.56.101',
@@ -329,7 +229,7 @@ var gulpSSH = new GulpSSH({
 	sshConfig: config //Here is our configs
 });
 
-gulp.task('local', function () {
+gulp.task('move', function () {
 	return gulp
 		.src([
 			'./*',
