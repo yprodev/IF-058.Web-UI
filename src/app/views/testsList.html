@@ -1,3 +1,4 @@
+<div entities-drct="test">
 <div class="testList">
     <div class="wrapper panel panel-success no-border">
         <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Тести </div>
@@ -14,35 +15,35 @@
                         <form name="addForm" class="form-inline" role='form' novalidate>
                             <div class="col-md-6">
                                 <input class="form-control width-max" placeholder="Введіть назву тесту" type='text'
-                                       ng-model="newName" required>
+                                       ng-model="newEntity.test_name" required>
                             </div>
                             <div class="col-md-6">
                                 <input type="number" class="form-control width-max"
-                                       placeholder="Введіть кількість завдань" ng-model="newTasks" required>
+                                       placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required>
                             </div>
                             <div class="col-md-6">
                                 <input type="number" class="form-control width-max" placeholder="Введіть тривалість(хв)"
-                                       ng-model="newTime_for_test" required>
+                                       ng-model="newEntity.time_for_test" required>
                             </div>
                             <div class="col-md-6">
-                                <select class="form-control width-max" ng-model="newEnabled" required>
+                                <select class="form-control width-max" ng-model="newEntity.enabled" required>
                                     <option value="1" selected="selected">Доступно</option>
                                     <option value="0">Недоступно</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
                                 <input type="number" class="form-control width-max"
-                                       placeholder="Введіть кількість спроб" ng-model="newAttempts" required>
+                                       placeholder="Введіть кількість спроб" ng-model="newEntity.attempts" required>
                             </div>
 
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-success pull-right width-max"
-                                        ng-disabled="addForm.$invalid" ng-click="addTest()">Додати
+                                        ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
                                 </button>
                             </div>
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-warning pull-right width-max"
-                                        ng-disabled="!addForm.$dirty" ng-click="resetTest()">Скинути
+                                        ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Скинути
                                 </button>
                             </div>
                         </form>
@@ -50,10 +51,10 @@
                 </div>
 
 
-                <div ng-show="!tests">{{noData}}</div>
+                <div ng-show="!entities">{{noData}}</div>
 
                 <!-- The table for list of Entities -->
-                <table ng-show="tests" class="table table-hover .table-condensed">
+                <table ng-show="entities" class="table table-hover .table-condensed">
                     <thead>
                     <tr>
                         <th>№</th>
@@ -66,41 +67,41 @@
                         <th class="usCenter">Дії</th>
                     </tr>
                     </thead>
-                    <tbody ng-repeat="test in tests">
-                    <tr ng-if="test != editingTest">
+                    <tbody >
+                    <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
                         <!-- read-only cells -->
                         <td>{{$index + 1}}</td>
-                        <td>{{test.test_name}}</td>
+                        <td>{{entity.test_name}}</td>
                         <!-- <td>{{test.subject_id}}</td>-->
-                        <td>{{test.tasks}}</td>
-                        <td>{{test.time_for_test}}</td>
-                        <td>{{test.enabled}}</td>
-                        <td>{{test.attempts}}</td>
+                        <td>{{entity.tasks}}</td>
+                        <td>{{entity.time_for_test}}</td>
+                        <td>{{entity.enabled}}</td>
+                        <td>{{entity.attempts}}</td>
                         <td class="usCenter">
-                            <button class="btn btn-info" ng-click="showEditForm(test)">
+                            <button class="btn btn-info" ng-click="showEditForm(entity)">
                                 <span class="glyphicon glyphicon-pencil"></span></button>
                             <button class="btn btn-danger col-md-offset-1" data-toggle="modal"
-                                    data-target="#deleteModal" ng-click="activateTest(test)">
+                                    data-target="#deleteModal" ng-click="activateEntity(entity)">
                                 <span class="glyphicon glyphicon-trash"></span></button>
                         </td>
                     </tr>
-                    <tr ng-if="test == editingTest">
+                    <tr ng-if="entity == editingEntity" ng-repeat-end="">
                         <td>{{$index + 1}}</td>
                         <!--написати перевірку на ввід чисел при редагуванні-->
-                        <td><input class="form-control width-max" ng-model="editingData.editingName"></td>
-                        <td><input class="form-control width-max" ng-model="editingData.editingTasks"></td>
-                        <td><input class="form-control width-max" ng-model="editingData.editingTime_for_test"></td>
+                        <td><input class="form-control width-max" ng-model="editedEntity.new_test_name"></td>
+                        <td><input class="form-control width-max" ng-model="editedEntity.new_tasks"></td>
+                        <td><input class="form-control width-max" ng-model="editedEntity.new_time_for_test"></td>
                         <td>
-                            <select class="form-control width-max" ng-model="editingData.editingEnabled">
+                            <select class="form-control width-max" ng-model="editedEntity.new_enabled">
                                 <option value="1">Доступно</option>
                                 <option value="0">Недоступно</option>
                             </select>
                         </td>
-                        <td><input class="form-control width-max" ng-model="editingData.editingAttempts"></td>
-                        <td class="usCenter">
-                            <button class="btn btn-success" ng-click="editTest()">
+                        <td><input class="form-control width-max" ng-model="editedEntity.new_attempts"></td>
+                        <td class="usCenter col-md-2">
+                            <button class="btn btn-success" ng-click="editEntity(entity)">
                                 <span class="glyphicon glyphicon-ok"></span></button>
-                            <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(test)">
+                            <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(entity)">
                                 <span class="glyphicon glyphicon-remove"></span></button>
                         </td>
                     </tr>
@@ -118,9 +119,9 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal"
-                                        ng-click="activateTest()">Скасувати
+                                        ng-click="activateEntity()">Скасувати
                                 </button>
-                                <button type="button" class="btn btn-danger" ng-click="removeTest()"
+                                <button type="button" class="btn btn-danger" ng-click="removeEntity()"
                                         data-dismiss="modal">Видалити
                                 </button>
                             </div>
@@ -131,4 +132,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
