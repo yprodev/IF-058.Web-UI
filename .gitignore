@@ -5,7 +5,7 @@ bower_components/
 ftpsync.settings
 libs/
 build/
+dist/
 src/config.rb
 .idea/
-build/
 npm-debug.log
