@@ -37,6 +37,14 @@ var dependencies = {
   }
 
   return {
+
+    getEntitiesByEntity: function (entity, parentEntity, id) {
+      //console.log("get works")
+      return $http.get(baseUrl + entity + '/get'+entity[0].toUpperCase()+entity.slice(1) + 's' + 'By' + parentEntity[0].toUpperCase()+parentEntity.slice(1) +'/' + id)
+        .then(fulfilled, rejected);
+      console.log("get works")
+    },
+
     getEntities: function (entity) {
       return $http.get(baseUrl + entity + '/getRecords')
       .then(  function (response) {

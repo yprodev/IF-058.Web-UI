@@ -7,4 +7,5 @@ libs/
 build/
 src/config.rb
 .idea/
+build/
 npm-debug.log
