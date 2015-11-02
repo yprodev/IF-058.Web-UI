@@ -47,6 +47,10 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
   }
   ;
 
+  function changeId (){
+    return $scope.commonId = $scope.thisEntity !== "AdminUser" ? $scope.thisEntity + "_id" : "id";
+  };
+
 //function gets a list of entities
   $scope.getEntetyList = function () {
     for (ent in entityObj) {
@@ -55,12 +59,9 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
         //console.log($scope.currentEntity)
       };
     };
-    $scope.commonId = $scope.thisEntity + "_id";
-    if($scope.thisEntity === "AdminUser"){
-      $scope.commonId = "id";
-      console.log($scope.commonId, "----------$scope.commonId");
-    };
-    console.log($scope.thisEntity, "-----------$scope.thisEntity");
+    changeId();
+/*    console.log($scope.commonId, "----------$scope.commonId");
+    console.log($scope.thisEntity, "-----------$scope.thisEntity");*/
     if ($scope.currentEntity.by){
       //console.log('has by')
         var id = $stateParams.id//замінити на універсальну змінну
