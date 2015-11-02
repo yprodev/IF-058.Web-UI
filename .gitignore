@@ -2,6 +2,9 @@ logs/*
 !.gitkeep
 node_modules/
 bower_components/
+build/
+dest/
+dist/
 ftpsync.settings
 src/config.rb
 .idea/

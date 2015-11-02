@@ -3,17 +3,17 @@
  */
 
 var gulp = require('gulp'),
-		uglify = require('gulp-uglify'),
-		concat = require('gulp-concat'),
-		csscomb = require('gulp-csscomb'),
-		cssmin = require('gulp-cssmin'),
-		less = require('gulp-less'),
-		sass = require('gulp-sass'),
-		imagemin = require('gulp-imagemin'),
-		pngquant = require('imagemin-pngquant'),
+	uglify = require('gulp-uglify'),
+	concat = require('gulp-concat'),
+	csscomb = require('gulp-csscomb'),
+	cssmin = require('gulp-cssmin'),
+	less = require('gulp-less'),
+	sass = require('gulp-sass'),
+	imagemin = require('gulp-imagemin'),
+	pngquant = require('imagemin-pngquant'),
 
-		//Added for moving files to virtual machine through GULP PLUGIN
-		GulpSSH = require('gulp-ssh');
+//Added for moving files to virtual machine through GULP PLUGIN
+	GulpSSH = require('gulp-ssh');
 
 var path = {
 	build:{
@@ -36,10 +36,10 @@ var path = {
 };
 
 gulp.task('less', function () {
-		gulp.src('bower_components/bootstrap/less/bootstrap.less')
-				.pipe(less())
-				.pipe(concat('bootstrap.css'))
-				.pipe(gulp.dest('build/css/')); //Added build/ folder to create css file in right directory
+	gulp.src('bower_components/bootstrap/less/bootstrap.less')
+		.pipe(less())
+		.pipe(concat('bootstrap.css'))
+		.pipe(gulp.dest('build/css/')); //Added build/ folder to create css file in right directory
 });
 
 gulp.task('js', function() {
@@ -57,10 +57,10 @@ gulp.task('html', function() {
 gulp.task('img', function() {
 	gulp.src(path.src.img)
 		.pipe(imagemin({
-						progressive: true,
-						svgoPlugins: [{removeViewBox: false}],
-						use: [pngquant()]
-				}))
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()]
+		}))
 		.pipe(gulp.dest(path.build.img));
 });
 
@@ -74,8 +74,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('libs', function() {
-		gulp.src('./bower.json')
-				.pipe(gulp.dest('libs'))
+	gulp.src('./bower.json')
+		.pipe(gulp.dest('libs'))
 });
 
 gulp.task('default', function() {
@@ -117,30 +117,28 @@ gulp.task('dest', function () {
 			'!**/bower_components/**',
 			'**/build/**',
 			'**/libs/**',
-			])
+		])
 		.pipe(gulpSSH.dest('/home/uran/public_html/'));
 });
 
 // GULP task for creating min version of Bootstrap jQuery Files
 gulp.task('boot-js', function() {
 	gulp.src([
-			'bower_components/jquery/dist/jquery.js',
-			'bower_components/bootstrap/js/affix.js',
-			'bower_components/bootstrap/js/transition.js',
-			'bower_components/bootstrap/js/tooltip.js',
-			'bower_components/bootstrap/js/alert.js',
-			'bower_components/bootstrap/js/button.js',
-			'bower_components/bootstrap/js/carousel.js',
-			'bower_components/bootstrap/js/collapse.js',
-			'bower_components/bootstrap/js/dropdown.js',
-			'bower_components/bootstrap/js/modal.js',
-			'bower_components/bootstrap/js/popover.js',
-			'bower_components/bootstrap/js/scrollspy.js',
-			'bower_components/bootstrap/js/tab.js'
-		])
+		'bower_components/jquery/dist/jquery.js',
+		'bower_components/bootstrap/js/affix.js',
+		'bower_components/bootstrap/js/transition.js',
+		'bower_components/bootstrap/js/tooltip.js',
+		'bower_components/bootstrap/js/alert.js',
+		'bower_components/bootstrap/js/button.js',
+		'bower_components/bootstrap/js/carousel.js',
+		'bower_components/bootstrap/js/collapse.js',
+		'bower_components/bootstrap/js/dropdown.js',
+		'bower_components/bootstrap/js/modal.js',
+		'bower_components/bootstrap/js/popover.js',
+		'bower_components/bootstrap/js/scrollspy.js',
+		'bower_components/bootstrap/js/tab.js'
+	])
 		.pipe(concat('bootstrap.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('build/js/bootstrap-jquery/'));
 });
-
-

@@ -40,7 +40,7 @@
                 </thead>
 
                 <tbody>
-                  <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
+                  <tr onclick="" ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
                     <!-- read-only cells -->
                     <td><a ui-sref="admin.tests({id:entity.subject_id})">{{$index + 1}}</a></td>
                     <td>{{entity.subject_name}}</td>

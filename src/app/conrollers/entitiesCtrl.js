@@ -26,9 +26,18 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       by: {
         parentEntity: 'subject'
       }
+    },
+    question: {
+      question_text: '',
+      level: '',
+      type: '',
+      attachment: '',
+      by: {
+        parentEntity: 'test'
+      }
     }
 
-    //... and othe entities
+    //... and other entities
   };
 
   for (ent in entityObj) {
@@ -45,18 +54,30 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     for (ent in entityObj) {
       if (ent == $scope.thisEntity) {
         $scope.currentEntity = entityObj[ent];
-        //console.log($scope.currentEntity)
-      };
-    };
-    if ($scope.currentEntity.by){
-      //console.log('has by')
-        var id = $stateParams.id//замінити на універсальну змінну
-        entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
-          $scope.entities = resp.data;
-          $scope.noData = "Немає записів";
-        });
-    } else {
-      //console.log('dont have by')
+      }
+      ;
+    }
+    ;
+    if ($scope.currentEntity.by) {
+
+      switch ($scope.thisEntity) {
+        case 'test':
+          var id = $stateParams.id//замінити на універсальну змінну
+          entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
+            $scope.entities = resp.data;
+            $scope.noData = "Немає записів";
+          });
+          break
+        case 'question':
+          var id = $stateParams.id
+          entitiesSrvc.getRecordsRangeByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
+            $scope.entities = resp.data;
+            $scope.noData = "Немає записів";
+          });
+          break
+      }
+    }
+    else {
       entitiesSrvc.getEntities($scope.thisEntity).then(function (resp) {
         $scope.entities = resp.data;
         $scope.noData = "Немає записів";
@@ -64,7 +85,6 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     }
 
   };
-
 
 
 //function shows and hides the form for creating new entity
@@ -79,25 +99,26 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
   };
 //function creates new element of array and sends new entity on server
   $scope.addEntity = function () {
-    if ($scope.currentEntity.by){
+    if ($scope.currentEntity.by) {
       var newData = $scope.newEntity;
       newData[$scope.currentEntity.by.parentEntity + "_id"] = $stateParams.id
     } else {
       var newData = $scope.newEntity;
     }
-      entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
-        switch (resp.data.response) {
-          case "ok":
-            newData[$scope.thisEntity + "_id"] = resp.data.id;
-            $scope.entities.push(newData);
-            break;
-          case "error 23000":
-            showInformModal("Зазначене ім'я вже існує");
-            break;
-          default:
-            showInformModal("Помилка редагування запису: " + resp.data.response);
-        };
-      });
+    entitiesSrvc.createEntity($scope.thisEntity, newData).then(function (resp) {
+      switch (resp.data.response) {
+        case "ok":
+          newData[$scope.thisEntity + "_id"] = resp.data.id;
+          $scope.entities.push(newData);
+          break;
+        case "error 23000":
+          showInformModal("Зазначене ім'я вже існує");
+          break;
+        default:
+          showInformModal("Помилка редагування запису: " + resp.data.response);
+      }
+      ;
+    });
 
 
     $scope.showAddForm();
@@ -115,7 +136,8 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       ;
     } else {
       $scope.editingEntity = null;
-    };
+    }
+    ;
   };
 //function updates an element of array and send updating of entity to server
   $scope.editEntity = function (entity) {
