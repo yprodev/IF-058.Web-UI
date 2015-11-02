@@ -13,6 +13,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			url: '/admin',
 			templateUrl: 'app/views/admin.html'
 		}).
+		state('admin.main', {
+			url: '/main',
+			templateUrl: 'app/views/main.html'
+		}).
 		state('user', {
 			url: '/user',
 			templateUrl: 'app/views/user.html'
@@ -29,27 +33,51 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 		state('admin.educationInfo.faculties', {
 			url:'/faculties',
 			templateUrl: 'app/views/facultyList.html',
-			controller: 'facultiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.educationInfo.specialities', {
 			url:'/specialities',
 			templateUrl: 'app/views/specialitiesList.html',
-			controller: 'specialitiesCtrl'
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.subjects', {
 		url:'/subjects',
 			templateUrl: 'app/views/subjectsList.html',
-			controller: 'subjectsCtrl'
+			controller: 'entitiesCtrl'
 		}).
-		state('admin.students', {
-		url:'/students',
+		state('admin.tests', {
+			url:'/tests/:id',
+			templateUrl: 'app/views/testsList.html',
+			controller: 'entitiesCtrl'
+		}).
+		state('admin.questions', {
+			url:'/questions/:id',
+			templateUrl: 'app/views/questionsList.html',
+			controller: 'entitiesCtrl'
+		}).
+		state('admin.testDetails', {
+			url:'/TestDetail/:id',
+			templateUrl: 'app/views/testDetails.html',
+			controller: 'entitiesCtrl'
+		}).
+		state('admin.usersTabs', {
+			url: '/usersTabs',
+			templateUrl: 'app/views/usersTabs.html'
+		}).
+		state('admin.usersTabs.students', {
+			url:'/students',
 			templateUrl: 'app/views/getStudents.html',
 			controller: 'getStudentsCtrl'
 		}).
 		state('admin.addStudent', {
-		url:'/students/addStudent',
+			url:'/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',
 			controller: 'addStudentCtrl'
+		}).
+		state('admin.usersTabs.addAdmin', {
+			url: '/addAdmin',
+			templateUrl: 'app/views/addAdmin.html',
+			controller: 'entitiesCtrl'
 	});
 
 		$urlRouterProvider.otherwise('/');

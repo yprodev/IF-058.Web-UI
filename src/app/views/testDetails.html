@@ -1,5 +1,6 @@
-<div entities-drct="speciality">
+<div entities-drct="TestDetail">
   <div class="wrapper panel-success no-border">
+        <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Параметри тесту </div>
 
         <!-- The button and form to add Entity -->
         <div class="col-md-12">
@@ -10,21 +11,22 @@
             <div class="well" ng-show="showingAdd">
                 <div class=" row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
-                    <div class="col-md-4">
-                      <input class="form-control width-max" placeholder="Введіть назву спеціальності" type='text' ng-model="newEntity.speciality_name" required
+                    <div class="col-md-3">
+                      <input type='number' class="form-control width-max" min="1" step="1" max="9999" placeholder="Рівень завдань" ng-model="newEntity.level" required
                       >
                     </div>
-                    <div class="col-md-6">
-                      <input class="form-control width-max" placeholder="Вкажіть код спеціальності" type='text' ng-model="newEntity.speciality_code" required>
+                    <div class="col-md-3">
+                      <input type='number' class="form-control width-max" min="1" step="1" max="9999" placeholder="Кількість завдань" ng-model="newEntity.tasks" required>
                     </div>
-                    <div class="col-md-2">
-                      <button type="submit" class="btn btn-success pull-right width-max" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
+                    <div class="col-md-3">
+                      <input type='number' class="form-control width-max" min="1" step="1" max="9999" placeholder="Кількість балів" ng-model="newEntity.rate" required>
+                    </div>
+                    <div class="col-md-2 pull-right ">
+                      <button type="submit" class="btn btn-success width-max" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
                     </div>
                   </form>
                 </div>
             </div>
-
-
 
 
             <div ng-show="!entities">{{noData}}</div>
@@ -34,18 +36,20 @@
                 <thead>
                   <tr>
                     <th>№</th>
-                    <th>Спеціальність</th>
-                    <th>Код спеціальності</th>
+                    <th>Рівень завдань</th>
+                    <th>Кількість завдань</th>
+                    <th>Кількість балів</th>
                     <th class="usCenter">Дії</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
                     <!-- read-only cells -->
-                    <td>{{$index + 1}}</td>
-                    <td>{{entity.speciality_name}}</td>
-                    <td>{{entity.speciality_code}}</td>
-                    <td class="usCenter">
+                    <td class="col-md-1">{{$index + 1}}</td>
+                    <td>{{entity.level}}</td>
+                    <td>{{entity.tasks}}</td>
+                    <td>{{entity.rate}}</td>
+                    <td class="usCenter col-md-2">
                       <button class="btn btn-info" ng-click="showEditForm(entity)">
                         <span class="glyphicon glyphicon-pencil"></span></button>
                       <button class="btn btn-danger col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click="activateEntity(entity)">
@@ -54,8 +58,9 @@
                   </tr>
                   <tr ng-if="entity == editingEntity" ng-repeat-end="">
                     <td>{{$index + 1}}</td>
-                    <td><input class="form-control width-max" ng-model="editedEntity.new_speciality_name"></td>
-                    <td><input class="form-control width-max" ng-model="editedEntity.new_speciality_code"></td>
+                    <td><input class="form-control width-max" ng-model="editedEntity.new_level"></td>
+                    <td><input class="form-control width-max" ng-model="editedEntity.new_tasks"></td>
+                    <td><input class="form-control width-max" ng-model="editedEntity.new_rate"></td>
                     <td class="usCenter">
                       <button class="btn btn-success" ng-click="editEntity(entity)">
                         <span class="glyphicon glyphicon-ok"></span></button>
