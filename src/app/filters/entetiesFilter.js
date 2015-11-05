@@ -24,3 +24,14 @@ app.filter('avialibility', function() {
     }
   }
 });
+app.filter('correctAnswer', function() {
+  return function(value){
+    if (value == '1') {
+      return 'так';
+    } else if (value == '0'){
+      return 'ні'
+    } else {
+      'вибір не виконано'
+    }
+  }
+});

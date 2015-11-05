@@ -109,23 +109,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       $scope.showingAdd = false;
       $scope.newEntity = {};
     };
-    $scope.loadFile = function (files) {
-      $scope.files = files;
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        //$scope.newEntity = {};
-        $scope.imagecontent = e.target.result;
-        $scope.newEntity = {
-          attachment: e.target.result
-        }
-        /* $scope.newEntity.attachment = e.target.result*/
-        //console.log($scope.newEntity)
-        if (!$scope.$$phase) {
-          $scope.$apply();
-        }
-      };
-      reader.readAsDataURL(files[0]);
-    };
+
   };
 //function creates new element of array and sends new entity on server
   $scope.addEntity = function () {
@@ -150,7 +134,19 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     $scope.showAddForm();
   };
 
-
+  $scope.loadFile = function (files) {
+    $scope.files = files;
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $scope.imagecontent = e.target.result;
+      $scope.newEntity.attachment = e.target.result
+      //console.log($scope.newEntity)
+      if (!$scope.$$phase) {
+        $scope.$apply();
+      }
+    };
+    reader.readAsDataURL(files[0]);
+  };
   //console.log($scope.newEntity.attachment)
 
   //function opens a form for editing

@@ -6,45 +6,42 @@
             <div class="col-md-12">
                 <div>
                     <br/>
-                    <!--<button class="btn btn-primary pull-right" ng-click="showAddForm()"><span
+                    <button class="btn btn-primary pull-right" ng-click="showAddForm()"><span
                             class="glyphicon glyphicon-plus"></span></button>
                     <br/><br/>
                     <div class="well" ng-show="showingAdd">
                         <div class=" row">
                             <form name="addForm" class="form-inline" role='form' novalidate>
                                 <div class="col-md-6">
-                                    <textarea rows="3" class="form-control width-max" placeholder="Введіть текст завдання"
-                                              ng-model="newEntity.question_text" required>
+                                    <textarea rows="3" class="form-control width-max" placeholder="Введіть нову відповідь"
+                                              ng-model="newEntity.answer_text" required>
                                     </textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" min="1" class="form-control width-max"
-                                           placeholder="Введіть рівень складності" ng-model="newEntity.level" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <select class="form-control width-max" ng-model="newEntity.type" required>
-                                        <option value="1" selected="selected">Простий вибір</option>
-                                        <option value="2">Мульти-вибір</option>
+                                    <select class="form-control width-max" ng-model="newEntity.true_answer" required>
+                                        <option value="1" selected="selected">Правильна відповідь</option>
+                                        <option value="0">Неправильна відповідь</option>
                                     </select>
                                 </div>
-                                <div class="col-md-2">
-                                    <input type="file" name="file" accept="image/*" onchange="angular.element(this).scope().loadFile(this.files)"/>
-                                    <img ng-src="{{imagecontent}}" height="200px">
+                                <div class="pull-right col-md-12">
+                                <div class="col-md-4 pull-left">
+                                    <loadfile-Drct></loadfile-Drct>
                                 </div>
-                                <div class="col-md-2 pull-right">
+
+                                <div class="col-md-3 pull-right">
                                     <button type="submit" class="btn btn-success pull-right width-max"
                                             ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
                                     </button>
                                 </div>
-                                <div class="col-md-2 pull-right">
+                                <div class="col-md-3 pull-right">
                                     <button class="btn btn-warning pull-right width-max"
                                             ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
                                     </button>
                                 </div>
+                                </div>
                             </form>
                         </div>
                     </div>
--->
 
                     <div ng-show="!entities">{{noData}}</div>
 
@@ -52,18 +49,18 @@
                     <table ng-show="entities" class="table table-hover .table-condensed">
                         <thead>
                         <tr>
-                            <th>№</th>
-                            <th>Відповіді</th>
-                            <th>Правильна відповідь</th>
+                            <th class="usCenter">№</th>
+                            <th class="usCenter">Відповіді</th>
+                            <th class="usCenter">Правильна відповідь</th>
                             <th class="usCenter">Дії</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
                             <!-- read-only cells -->
-                            <td class="col-md-1" >{{$index + 1}}</td>
-                            <td class="col-md-2">{{entity.answer_text}}</td>
-                            <td class="col-md-2">{{entity.true_answer}}</td>
+                            <td class="col-md-1 usCenter " >{{$index + 1}}</td>
+                            <td  class = "usCenter" ng-bind-html="entity.answer_text | unsafe"></td>
+                            <td class=" usCenter">{{entity.true_answer | correctAnswer}}</td>
                             <td class="col-md-2" class="usCenter col-md-2">
                                 <button class="btn btn-info" ng-click="showEditForm(entity)">
                                     <span class="glyphicon glyphicon-pencil"></span></button>
@@ -74,12 +71,10 @@
                         </tr>
                         <tr ng-if="entity == editingEntity" ng-repeat-end="">
                             <td class="col-md-1">{{$index + 1}}</td>
-                            <td class="col-md-5"><input class="form-control width-max" ng-model="editedEntity.new_question_text"></td>
-                            <td class="col-md-2"><input class="form-control width-max" ng-model="editedEntity.new_level"></td>
+                            <td class="col-md-5"><input class="form-control width-max" ng-model="entity.answer_text | unsafe"></td>
                             <td class="col-md-2">
-                                <select class="form-control width-max" ng-model="editedEntity.new_type">
-                                    <option value="1">доступно</option>
-                                    <option value="0">недоступно</option>
+                                <select class="form-control width-max"
+                                        ng-options="entity.true_answer | correctAnswer for entity in entities" ng-model="editedEntity.true_answer">
                                 </select>
                             </td>
                             <!--<td><input class="form-control width-max" ng-model="editedEntity.new_attachment"/></td>-->
