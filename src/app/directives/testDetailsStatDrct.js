@@ -1,5 +1,5 @@
 ;
-app.directive('testDetailsStatDrct', function(){
+app.directive('testDetailsStatDrct', [function(){
   return {
     link: function (scope, element, attrs) {
       scope.editingEntity = "";
@@ -21,4 +21,4 @@ app.directive('testDetailsStatDrct', function(){
     },
     restrict: "A"
   };
-});
+}]);

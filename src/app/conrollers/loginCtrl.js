@@ -1,4 +1,4 @@
-app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
+app.controller('loginCtrl', ['$scope', '$state', '$rootScope', 'authSrvc', function($scope, $state, $rootScope, authSrvc){
     $scope.getError = function (error) {
         if (angular.isDefined(error)) {
             if (error.required) {
@@ -35,4 +35,4 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
         authSrvc.logOut().then();
     };
 
-});
+}]);

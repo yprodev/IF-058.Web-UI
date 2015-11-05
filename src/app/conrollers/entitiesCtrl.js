@@ -1,5 +1,5 @@
 ;
-app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $timeout) {
+app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$timeout', function ($scope, entitiesSrvc, $stateParams, $timeout) {
 
   $scope.thisEntity = ""; //можна привязати через привязку з вьюхи, або через директиву (але нашо директива?)
 
@@ -234,4 +234,4 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     angular.element(document.querySelector('#informModal')).modal();
   };
 
-});
+}]);

@@ -1,6 +1,6 @@
 ;
 
-app.factory('entitiesSrvc', function ($http, baseUrl) {
+app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
 
 var dependencies = {
     group : 'speciality,faculty',
@@ -94,4 +94,4 @@ var dependencies = {
     alert("Помилка " + error.status + " " + error.statusText);
   };
 
-});
+}]);
