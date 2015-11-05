@@ -36,9 +36,9 @@
                 <thead>
                   <tr>
                     <th>№</th>
-                    <th>Рівень завдань</th>
-                    <th>Кількість завдань</th>
-                    <th>Кількість балів</th>
+                    <th class="usCenter">Рівень завдань</th>
+                    <th class="usCenter">Кількість завдань</th>
+                    <th class="usCenter">Кількість балів</th>
                     <th class="usCenter">Дії</th>
                   </tr>
                 </thead>
@@ -46,9 +46,9 @@
                   <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
                     <!-- read-only cells -->
                     <td class="col-md-1">{{$index + 1}}</td>
-                    <td>{{entity.level}}</td>
-                    <td>{{entity.tasks}}</td>
-                    <td>{{entity.rate}}</td>
+                    <td class="usCenter">{{entity.level}}</td>
+                    <td class="usCenter">{{entity.tasks}}</td>
+                    <td class="usCenter">{{entity.rate}}</td>
                     <td class="usCenter col-md-2">
                       <button class="btn btn-info" ng-click="showEditForm(entity)">
                         <span class="glyphicon glyphicon-pencil"></span></button>
@@ -67,6 +67,13 @@
                       <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(entity)">
                         <span class="glyphicon glyphicon-remove"></span></button>
                     </td>
+                  </tr>
+                  <tr test-details-stat-drct>
+                    <td class="col-md-1"><strong>Всього:</strong></td>
+                    <td class="usCenter"><strong>{{entities.length}}</strong></td>
+                    <td class="usCenter"><strong>{{totalCountTasks}}</strong></td>
+                    <td class="usCenter"><strong>{{totalCountRate}}</strong></td>
+                    <td></td>
                   </tr>
                 </tbody>
             </table>
