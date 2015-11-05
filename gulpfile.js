@@ -124,7 +124,7 @@ gulp.task('build', ['vendor-css', 'build-sass', 'build-all-js', 'build-html', 'b
 gulp.task('watch', function() {
 	gulp.watch(path.watch.html, ['build-html']); // END OF WORK
 	gulp.watch(path.watch.css, ["build-sass"]);
-	gulp.watch(path.watch.js, ["build-js"]);
+	gulp.watch(path.watch.js, ["build-all-js"]);
 	gulp.watch(path.watch.img, ["build-img"]);
 });
 
