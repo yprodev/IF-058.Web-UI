@@ -158,13 +158,28 @@ body, html, .container-fluid, .nav-row {
           font-size: 20px; }
 
 .logoWrapper {
-  text-align: center; }
+  text-align: center;
+}
 
 .usCenter {
-  text-align: center;  }
+  text-align: center;
+}
 
 .badge {
-  background-color: #3c763d; }
+  background-color: #3c763d;
+}
+
+.table>tbody>tr>td {
+  vertical-align: middle;
+}
+
+.table>.usCenter>tr>td {
+  text-align: center;
+}
+
+.table>.usCenter>tr>th {
+  text-align: center;
+}
 
 .width-max{
   width:100% !important;
