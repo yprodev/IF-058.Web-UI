@@ -27,12 +27,12 @@ app.controller('loginCtrl', function($scope, $state, $rootScope, authSrvc){
             } else {
                 $scope.wrongCredentials = true;
             };
-
         });
     };
-
+    $scope.detectUser = localStorage.adminName || localStorage.userName;
+    console.log($scope.detectUser, "!!!!!!!!!!!!!!!!!!!!!");
     $scope.exit = function() {
+        localStorage.clear();
         authSrvc.logOut().then();
     };
-
 });
