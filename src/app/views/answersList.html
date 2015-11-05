@@ -71,7 +71,7 @@
                         </tr>
                         <tr ng-if="entity == editingEntity" ng-repeat-end="">
                             <td class="col-md-1">{{$index + 1}}</td>
-                            <td class="col-md-5"><input class="form-control width-max" ng-model="entity.answer_text | unsafe"></td>
+                            <td class="col-md-5"><input class="form-control width-max" ng-model="entity.answer_text"></td>
                             <td class="col-md-2">
                                 <select class="form-control width-max"
                                         ng-options="entity.true_answer | correctAnswer for entity in entities" ng-model="editedEntity.true_answer">

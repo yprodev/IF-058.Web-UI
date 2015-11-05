@@ -7,7 +7,6 @@ app.directive('entitiesDrct', function(entitiesSrvc){
               scope.getEntetyList();
           },
     restrict: "A"
-    // template: ""
   };
 });
 

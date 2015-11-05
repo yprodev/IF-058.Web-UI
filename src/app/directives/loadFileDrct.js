@@ -13,6 +13,7 @@ app.directive('loadfileDrct', function() {
       scope.newEntity = {
         attachment: ''
       }
+/*
 
       el.bind('change', function(event){
         var reader = new FileReader();
@@ -24,45 +25,10 @@ app.directive('loadfileDrct', function() {
         reader.readAsDataURL(el);
         console.log(reader.readAsDataURL(files))
       });
+*/
 
     }
 
   }
   })
-
-
-
-/*
-app.directive('exampleDirective1', function() {
-  return {
-    restrict: 'E',
-    template: '<span>sdgsdgfsdhfedshgdfhsd</span>'
-    //replace: true
-  };
-});*/
-
-
-
-
-
-app.directive('file', function() {
-  return {
-    require:"ngModel",
-    restrict: 'A',
-    link: function($scope, el, attrs, ngModel){
-      scope.newEntity = {
-        attachment: ''
-      }
-      el.bind('change', function(event){
-        var files = event.target.files;
-        var file = files[0];
-        scope.newEntity = {
-          attachment: file
-        }
-        ngModel.$setViewValue(file);
-        $scope.$apply();
-      });
-    }
-  };
-});
 
