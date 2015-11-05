@@ -32,7 +32,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
         parentEntity: 'subject'
       }
     },
-    question: {
+    "question": {
       question_text: '',
       level: '',
       type: '',
@@ -48,6 +48,14 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       by: {
         parentEntity: 'test'
       }
+    },
+    "answer": {
+      by: {
+        parentEntity: 'question'
+      },
+      true_answer: '',
+      answer_text: '',
+      attachment: ''
     }
 
     //... and other entities
@@ -68,14 +76,9 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     if ($scope.currentEntity.by) {
       switch ($scope.thisEntity) {
         case 'test':
-          var id = $stateParams.id//замінити на універсальну змінну
-          entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
-            $scope.entities = resp.data;
-            $scope.noData = "Немає записів";
-          });
-          break
-        case "TestDetail":
-          var id = $stateParams.id//замінити на універсальну змінну
+        case 'TestDetail':
+        case 'answer':
+          var id = $stateParams.id
           entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
             $scope.entities = resp.data;
             $scope.noData = "Немає записів";
@@ -106,9 +109,27 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       $scope.showingAdd = false;
       $scope.newEntity = {};
     };
+    $scope.loadFile = function (files) {
+      $scope.files = files;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        //$scope.newEntity = {};
+        $scope.imagecontent = e.target.result;
+        $scope.newEntity = {
+          attachment: e.target.result
+        }
+        /* $scope.newEntity.attachment = e.target.result*/
+        //console.log($scope.newEntity)
+        if (!$scope.$$phase) {
+          $scope.$apply();
+        }
+      };
+      reader.readAsDataURL(files[0]);
+    };
   };
 //function creates new element of array and sends new entity on server
   $scope.addEntity = function () {
+
     var newData = $scope.newEntity;
     if ($scope.currentEntity.by) {
       newData[$scope.currentEntity.by.parentEntity + "_id"] = $stateParams.id;
@@ -128,6 +149,9 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       });
     $scope.showAddForm();
   };
+
+
+  //console.log($scope.newEntity.attachment)
 
   //function opens a form for editing
   $scope.showEditForm = function (entity) {
@@ -227,6 +251,8 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
     });
     $scope.activateEntity();
   };
+
+
 
 //show inform message about error
   function showInformModal(infMsg) {

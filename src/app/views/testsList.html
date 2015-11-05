@@ -74,7 +74,7 @@
                         <!-- <td>{{test.subject_id}}</td>-->
                         <td>{{entity.tasks}}</td>
                         <td>{{entity.time_for_test}}</td>
-                        <td>{{entity.enabled}}</td>
+                        <td>{{entity.enabled | testStatus}}</td>
                         <td>{{entity.attempts}}</td>
                         <td class="usCenter">
                             <button class="btn btn-info" ng-click="showEditForm(entity)">
