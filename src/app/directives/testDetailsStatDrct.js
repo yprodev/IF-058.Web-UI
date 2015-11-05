@@ -1,5 +1,5 @@
 ;
-app.directive('testDetailsStatDrct', function(){
+app.directive('testDetailsStatDrct', [function(){
   return {
     link: function (scope, element, attrs) {
       scope.$watch("entities.length", function (newValue, oldValue) {
@@ -15,4 +15,4 @@ app.directive('testDetailsStatDrct', function(){
     },
     restrict: "A"
   };
-});
+}]);

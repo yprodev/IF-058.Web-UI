@@ -2,7 +2,7 @@ var app = angular.module('app', ['ui.router']);
 
 app.constant("baseUrl", "http://dtapi.local/");
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 	$stateProvider.
 		state('login', {
 			url: '/',
@@ -81,4 +81,4 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	});
 
 		$urlRouterProvider.otherwise('/');
-});
+}]);
