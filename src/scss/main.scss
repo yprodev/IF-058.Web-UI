@@ -172,7 +172,8 @@ body, html, .container-fluid, .nav-row {
 .usCenter {
   text-align: center;
 }
-.badge{
+
+.badge {
   background-color: #3c763d;
 }
 
@@ -186,6 +187,10 @@ body, html, .container-fluid, .nav-row {
 
 .table>.usCenter>tr>th {
   text-align: center;
+}
+
+.width-max{
+  width:100% !important;
 }
 
 @media (min-width: 600px) {
