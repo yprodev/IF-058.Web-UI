@@ -175,6 +175,11 @@ body, html, .container-fluid, .nav-row {
 .badge{
   background-color: #3c763d;
 }
+
+.width-max{
+  width:100% !important;
+}
+
 @media (min-width: 600px) {
   .top-nav ul {
 	margin:10px auto;
