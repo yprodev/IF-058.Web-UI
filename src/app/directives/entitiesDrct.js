@@ -1,5 +1,5 @@
-;
-app.directive('entitiesDrct', function(entitiesSrvc){
+
+app.directive('entitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
   return {
     link: function (scope, element, attrs) {
               scope.thisEntity = attrs.entitiesDrct;
@@ -8,5 +8,6 @@ app.directive('entitiesDrct', function(entitiesSrvc){
           },
     restrict: "A"
   };
-});
+}])
+
 

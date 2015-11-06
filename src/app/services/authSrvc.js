@@ -1,4 +1,4 @@
-app.factory('authSrvc', function($http, $state, baseUrl){
+app.factory('authSrvc', ['$http', '$state', 'baseUrl', function($http, $state, baseUrl){
     var toAuth = function() {
         $state.go('login');
     };
@@ -27,4 +27,4 @@ app.factory('authSrvc', function($http, $state, baseUrl){
     function rejected(error) {
         return error;
     };
-});
+}]);
