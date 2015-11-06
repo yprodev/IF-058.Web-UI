@@ -175,6 +175,7 @@ app.controller('entitiesCtrl', function ($scope, entitiesSrvc, $stateParams, $ti
       if ($scope.editedEntity["new_" + prop] != "" && prop != ($scope.commonId)) {
         fieldsFulled = true;
         editedData[prop] = $scope.editedEntity["new_" + prop];
+        console.log(editedData[prop])
       } else if ($scope.editedEntity["new_" + prop] != "") {
         fieldsFulled = true;
       } else {
