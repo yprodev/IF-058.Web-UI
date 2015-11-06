@@ -1,4 +1,4 @@
-app.controller('addAdminCtrl', function($scope, entitiesSrvc) {
+app.controller('addAdminCtrl', ['$scope', 'entitiesSrvc', function($scope, entitiesSrvc) {
 
     $scope.thisEntity = "AdminUser";
     //function gets a list of entities
@@ -110,4 +110,4 @@ app.controller('addAdminCtrl', function($scope, entitiesSrvc) {
 
 
     getAdmins();
-});
+}]);

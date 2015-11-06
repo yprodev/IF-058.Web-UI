@@ -38,5 +38,3 @@ app.controller('loginCtrl', ['$scope', '$state', '$rootScope', 'authSrvc', funct
 
 
 }]);
-
-

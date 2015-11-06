@@ -2,7 +2,7 @@ var app = angular.module('app', ['ui.router']);
 
 app.constant("baseUrl", "http://dtapi.local/");
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 	$stateProvider.
 		state('login', {
 			url: '/',
@@ -50,6 +50,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/views/testsList.html',
 			controller: 'entitiesCtrl'
 		}).
+		state('admin.questions', {
+			url:'/questions/:id',
+			templateUrl: 'app/views/questionsList.html',
+			controller: 'entitiesCtrl'
+		}).
+		state('admin.testDetails', {
+			url:'/TestDetail/:id',
+			templateUrl: 'app/views/testDetails.html',
+			controller: 'entitiesCtrl'
+		}).
 		state('admin.usersTabs', {
 			url: '/usersTabs',
 			templateUrl: 'app/views/usersTabs.html'
@@ -71,4 +81,4 @@ app.config(function ($stateProvider, $urlRouterProvider) {
 	});
 
 		$urlRouterProvider.otherwise('/');
-});
+}]);
