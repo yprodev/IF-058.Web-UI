@@ -187,7 +187,9 @@ body, html, .container-fluid, .nav-row {
     margin-top: 30px;  }
   .container-fluid {
     height: auto;  } }
-
+button.marginTop {
+  margin-top: 0;
+}
 /* ___________________________________
  *
  * Here is styles for student entities
