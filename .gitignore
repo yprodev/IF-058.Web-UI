@@ -2,7 +2,13 @@ logs/*
 !.gitkeep
 node_modules/
 bower_components/
+build/
+dest/
+dist/
 ftpsync.settings
+libs/
+build/
+dist/
 src/config.rb
 .idea/
 npm-debug.log

@@ -1,5 +1,5 @@
 ;
-app.controller('groupsCtrl', function($scope, entitiesSrvc){
+app.controller('groupsCtrl', ['$scope', 'entitiesSrvc', function($scope, entitiesSrvc){
 
 
   $scope.thisEntity = "group";
@@ -114,4 +114,4 @@ app.controller('groupsCtrl', function($scope, entitiesSrvc){
     $scope.activateGroup();
   };
 
-});
+}]);

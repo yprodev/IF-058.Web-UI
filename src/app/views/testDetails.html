@@ -1,0 +1,80 @@
+<div entities-drct="TestDetail">
+  <div class="wrapper panel-success no-border">
+        <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Параметри тесту </div>
+        <!-- The button and form to add Entity -->
+        <div class="col-md-12">
+          <div>
+            <br/>
+            <show-add-form-button-drct></show-add-form-button-drct>
+            <br/><br/><br/>
+            <div class="well" ng-show="showingAdd">
+                <div class=" row">
+                  <form name="addForm" class="form-inline" role='form' novalidate>
+                    <div class="col-md-3">
+                      <input type='text' class="form-control width-max navbar-btn" placeholder="Рівень завдань" ng-model="newEntity.level" required
+                      >
+                    </div>
+                    <div class="col-md-3">
+                      <input type='text' class="form-control width-max navbar-btn" placeholder="Кількість завдань" ng-model="newEntity.tasks" required>
+                    </div>
+                    <div class="col-md-3">
+                      <input type='text' class="form-control width-max navbar-btn" placeholder="Кількість балів" ng-model="newEntity.rate" required>
+                    </div>
+                    <div class="col-md-2 pull-right ">
+                      <button type="submit" class="btn btn-success width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+
+
+            <div ng-show="!entities">{{noData}}</div>
+
+<!-- The table for list of Entities -->
+            <table ng-show="entities" class="table table-hover .table-condensed">
+                <thead class="usCenter">
+                  <tr>
+                    <th>№</th>
+                    <th class="col-md-3">Рівень завдань</th>
+                    <th class="col-md-3">Кількість завдань</th>
+                    <th class="col-md-4">Кількість балів</th>
+                    <th class="col-md-2">Дії</th>
+                  </tr>
+                </thead>
+                <tbody class="usCenter">
+                  <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}">
+                    <!-- read-only cells -->
+                    <td>{{$index + 1}}</td>
+                    <td class="col-md-3">{{entity.level}}</td>
+                    <td class="col-md-3">{{entity.tasks}}</td>
+                    <td class="col-md-4">{{entity.rate}}</td>
+                    <td class="col-md-2">
+                      <actions-buttons-drct></actions-buttons-drct>
+                    </td>
+                  </tr>
+                  <tr ng-if="entity == editingEntity" ng-repeat-end="">
+                    <td>{{$index + 1}}</td>
+                    <td class="col-md-3"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_level"></td>
+                    <td class="col-md-3"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_tasks"></td>
+                    <td class="col-md-4"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_rate"></td>
+                    <td class="col-md-2">
+                      <editing-buttons-drct></editing-buttons-drct>
+                    </td>
+                  </tr>
+                  <tr test-details-stat-drct>
+                    <td><strong>Всього:</strong></td>
+                    <td class="col-md-3"><strong>{{entities.length}}</strong></td>
+                    <td class="col-md-3"><strong>{{totalCountTasks}}</strong></td>
+                    <td class="col-md-4"><strong>{{totalCountRate}}</strong></td>
+                    <td class="col-md-2"></td>
+                  </tr>
+                </tbody>
+            </table>
+            <!-- The modal to confirm removing of Entity -->
+            <deleting-modal-drct></deleting-modal-drct>
+            <!-- The modal to inform about error from server -->
+            <inform-modal-drct></inform-modal-drct>
+          </div>
+        </div>
+      </div>
+</div>
