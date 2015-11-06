@@ -1,7 +1,7 @@
 <div entities-drct="answer">
-    <div class="answerList">
+    <div class="">
         <div class="wrapper panel panel-success no-border">
-            <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Відповіді на питання </div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Відповіді на питання</div>
             <!-- The button and form to add Entity -->
             <div class="col-md-12">
                 <div>
@@ -9,35 +9,40 @@
                     <button class="btn btn-primary pull-right" ng-click="showAddForm()"><span
                             class="glyphicon glyphicon-plus"></span></button>
                     <br/><br/>
+
                     <div class="well" ng-show="showingAdd">
                         <div class=" row">
                             <form name="addForm" class="form-inline" role='form' novalidate>
                                 <div class="col-md-6">
-                                    <textarea rows="3" class="form-control width-max" placeholder="Введіть нову відповідь"
+                                    <textarea rows="3" class="navbar-btn form-control width-max"
+                                              placeholder="Введіть нову відповідь"
                                               ng-model="newEntity.answer_text" required>
                                     </textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-control width-max" ng-model="newEntity.true_answer" required>
+                                    <select class="navbar-btn form-control width-max" ng-model="newEntity.true_answer"
+                                            required>
+                                        <option value="" disabled selected hidden> Вкажіть правельність відповіді
+                                        </option>
                                         <option value="1" selected="selected">Правильна відповідь</option>
                                         <option value="0">Неправильна відповідь</option>
                                     </select>
                                 </div>
                                 <div class="pull-right col-md-12">
-                                <div class="col-md-4 pull-left">
-                                    <loadfile-Drct></loadfile-Drct>
-                                </div>
+                                    <div class="navbar-btn col-md-4 pull-left ">
+                                        <loadfile-Drct></loadfile-Drct>
+                                    </div>
 
-                                <div class="col-md-3 pull-right">
-                                    <button type="submit" class="btn btn-success pull-right width-max"
-                                            ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
-                                    </button>
-                                </div>
-                                <div class="col-md-3 pull-right">
-                                    <button class="btn btn-warning pull-right width-max"
-                                            ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
-                                    </button>
-                                </div>
+                                    <div class="navbar-btn col-md-3 pull-right">
+                                        <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
+                                                ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
+                                        </button>
+                                    </div>
+                                    <div class="navbar-btn col-md-3 pull-right">
+                                        <button class="navbar-btn btn btn-warning pull-right width-max"
+                                                ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -52,63 +57,41 @@
                             <th class="usCenter">№</th>
                             <th class="usCenter">Відповіді</th>
                             <th class="usCenter">Правильна відповідь</th>
-                            <th class="usCenter">Дії</th>
+                            <th class="">Дії</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
                             <!-- read-only cells -->
-                            <td class="col-md-1 usCenter " >{{$index + 1}}</td>
-                            <td  class = "usCenter" ng-bind-html="entity.answer_text | unsafe"></td>
-                            <td class=" usCenter">{{entity.true_answer | correctAnswer}}</td>
-                            <td class="col-md-2" class="usCenter col-md-2">
-                                <button class="btn btn-info" ng-click="showEditForm(entity)">
-                                    <span class="glyphicon glyphicon-pencil"></span></button>
-                                <button class="btn btn-danger col-md-offset-1" data-toggle="modal"
-                                        data-target="#deleteModal" ng-click="activateEntity(entity)">
-                                    <span class="glyphicon glyphicon-trash"></span></button>
+                            <td class="col-md-1 usCenter ">{{$index + 1}}</td>
+                            <td class="col-md-3 usCenter" ng-bind-html="entity.answer_text | unsafe"></td>
+                            <td class="col-md-5  usCenter">{{entity.true_answer | correctAnswer}}</td>
+                            <td class="col-md-2" class="col-md-2">
+                                <actions-buttons-drct></actions-buttons-drct>
                             </td>
                         </tr>
                         <tr ng-if="entity == editingEntity" ng-repeat-end="">
                             <td class="col-md-1">{{$index + 1}}</td>
-                            <td class="col-md-5"><input class="form-control width-max" ng-model="entity.answer_text"></td>
-                            <td class="col-md-2">
-                                <select class="form-control width-max"
-                                        ng-options="entity.true_answer | correctAnswer for entity in entities" ng-model="editedEntity.true_answer">
+                            <td class="col-md-3"><input class="navbar-btn form-control width-max" ng-model="entity.answer_text"></td>
+                            <td class="col-md-5">
+                                <select class="navbar-btn form-control width-max" ng-model="editedEntity.true_answer">
+                                    <option value="" disabled selected hidden> Вкажіть доступність тесту</option>
+                                    <option value="1">Так</option>
+                                    <option value="0">Ні</option>
                                 </select>
                             </td>
                             <!--<td><input class="form-control width-max" ng-model="editedEntity.new_attachment"/></td>-->
-                            <td class="usCenter col-md-2">
-                                <button class="btn btn-success" ng-click="editEntity(entity)">
-                                    <span class="glyphicon glyphicon-ok"></span></button>
-                                <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(entity)">
-                                    <span class="glyphicon glyphicon-remove"></span></button>
+                            <td class="col-md-2">
+                                <editing-buttons-drct></editing-buttons-drct>
                             </td>
                         </tr>
 
                         </tbody>
                     </table>
-
                     <!-- The modal to confirm removing of Entity -->
-                    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                         aria-labelledby="mySmallModalLabel" id="deleteModal">
-                        <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Видалити запис?</h4>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal"
-                                            ng-click="activateEntity()"> Скасувати
-                                    </button>
-                                    <button type="button" class="btn btn-danger" ng-click="removeEntity()"
-                                            data-dismiss="modal"> Видалити
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <deleting-modal-drct></deleting-modal-drct>
+                    <!-- The modal to inform about error from server -->
+                    <inform-modal-drct></inform-modal-drct>
                 </div>
             </div>
         </div>

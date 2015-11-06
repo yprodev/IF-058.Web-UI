@@ -68,9 +68,9 @@ gulp.task("vendor-fonts", function() {
 gulp.task("vendor-css", function() {
 		// Merging all vendor less files
 		gulp.src([
-			'bower_components/bootstrap/less/bootstrap.less'
+			'bower_components/bootstrap/dist/css/bootstrap.css',
+			'bower_components/bootstrap/dist/css/bootstrap-theme.css'
 		])
-		.pipe(less())
 		.pipe(concat('vendor.css'))
 		.pipe(gulp.dest(path.build.css));
 });
@@ -172,9 +172,9 @@ gulp.task("dist-js", function() {
 gulp.task("dist-ven-css", function() {
 		// First of all we need to compile LESS vendor files
 		gulp.src([
-			'bower_components/bootstrap/less/bootstrap.less'
+			'bower_components/bootstrap/dist/css/bootstrap.css',
+			'bower_components/bootstrap/dist/css/bootstrap-theme.css'
 		])
-			.pipe(less())
 			.pipe(concat('vendor.css'))
 			.pipe(cssmin())
 			.pipe(gulp.dest(path.dist.css));

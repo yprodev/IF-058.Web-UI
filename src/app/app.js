@@ -1,3 +1,4 @@
+;
 var app = angular.module('app', ['ui.router']);
 
 app.constant("baseUrl", "http://dtapi.local/");

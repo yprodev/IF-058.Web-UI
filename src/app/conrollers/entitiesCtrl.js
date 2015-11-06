@@ -145,9 +145,13 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
         $scope.$apply();
       }
     };
+    //console.log(files[0])
     reader.readAsDataURL(files[0]);
   };
   //console.log($scope.newEntity.attachment)
+  $scope.resetEntity = function(){
+    $scope.newEntity = {};
+  }
 
   //function opens a form for editing
   $scope.showEditForm = function (entity) {

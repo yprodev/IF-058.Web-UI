@@ -172,9 +172,27 @@ body, html, .container-fluid, .nav-row {
 .usCenter {
   text-align: center;
 }
-.badge{
+
+.badge {
   background-color: #3c763d;
 }
+
+.table>tbody>tr>td {
+  vertical-align: middle;
+}
+
+.table>.usCenter>tr>td {
+  text-align: center;
+}
+
+.table>.usCenter>tr>th {
+  text-align: center;
+}
+
+.width-max{
+  width:100% !important;
+}
+
 @media (min-width: 600px) {
   .top-nav ul {
 	margin:10px auto;
@@ -199,6 +217,9 @@ body, html, .container-fluid, .nav-row {
   }
 }
 
+button.marginTop {
+  margin-top: 0;
+}
 
 /* ___________________________________
  *
