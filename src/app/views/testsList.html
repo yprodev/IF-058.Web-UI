@@ -50,7 +50,7 @@
                 <div ng-show="!entities">{{noData}}</div>
                 <!-- The table for list of Entities -->
                 <table ng-show="entities" class="table table-hover .table-condensed">
-                    <thead>
+                    <thead class="usCenter">
                     <tr>
                         <th>№</th>
                         <th>Тест</th>
@@ -61,7 +61,7 @@
                         <th>Дії</th>
                     </tr>
                     </thead>
-                    <tbody >
+                    <tbody class="usCenter">
                     <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
                         <td><a ui-sref="admin.questions({id:entity.test_id})">{{$index + 1}}</a></td>
                         <td class="col-md-5">{{entity.test_name}}</td>
