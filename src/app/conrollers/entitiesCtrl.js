@@ -134,20 +134,6 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
     $scope.showAddForm();
   };
 
-  $scope.loadFile = function (files) {
-    $scope.files = files;
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      $scope.imagecontent = e.target.result;
-      $scope.newEntity.attachment = e.target.result
-      //console.log($scope.newEntity)
-      if (!$scope.$$phase) {
-        $scope.$apply();
-      }
-    };
-    //console.log(files[0])
-    reader.readAsDataURL(files[0]);
-  };
   //console.log($scope.newEntity.attachment)
   $scope.resetEntity = function(){
     $scope.newEntity = {};

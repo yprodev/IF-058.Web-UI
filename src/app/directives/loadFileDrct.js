@@ -1,18 +1,17 @@
-
-
+/*
 app.directive('loadfileDrct', function() {
   return {
-    template: '<input id="upload"  class="navbar-btn" type="file" name="file" accept="image/*" onchange="angular.element(this).scope().loadFile(this.files)"/> ' +
+    template: '<input id="upload"  class="button" type="file" name="file" accept="image/!*" onchange="angular.element(this).scope().loadFile(this.files)"/> ' +
     '<img id="imageAttachment" ng-src="{{imagecontent}}" height="200px">',
 
     link: function(scope, el, attrs) {
       scope.newEntity = {
-        attachment: ''
+        attachment:''
       }
       scope.$watch('showingAdd', function (newValue, oldValue) {
         if (newValue == false) {
-          console.log(angular.element(document.querySelector('#imageAttachment'))[0].attributes);
-          angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";
+          console.log(scope.newEntity.attachment)
+          angular.element(document.querySelector('#imagecontent'))[0].attributes["src"].value = "";
         }
       })
       scope.$watch(scope.resetEntity(), function (newValue, oldValue) {
@@ -23,11 +22,47 @@ app.directive('loadfileDrct', function() {
         }
       })
     }}
+})*/
+
+app.directive('loadfileDrct', function() {
+  return {
+    restrict: 'E',
+    template: '<input type="file" class="button" loadfile-drct="customer.file" onchange="angular.element(this).scope().loadFile(this.files)"/>' +
+    '<img id="imageAttachment" ng-src="{{newEntity.attachment}}" alt="" height="100px"/>',
+    link:function(scope, element, attrs, ctrl){
+      scope.newEntity = {
+        attachment: ''
+      }
+      scope.loadFile = function(files){
+        scope.files = files;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          scope.$watch('showingAdd', function (newValue, oldValue) {
+            if (newValue == true) {
+              scope.newEntity.attachment = e.target.result
+            }
+          })
+          scope.$watch('showingAdd', function (newValue, oldValue) {
+            if (newValue == false) {
+              scope.newEntity = {
+                attachment: ''
+              }
+              console.log(scope.newEntity.attachment)
+              angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";
+            }
+          })
+        };
+        reader.readAsDataURL(files[0]);
+      }
+    }}
 })
 
-app.directive('fileModel',['$parse', function($parse) {
+
+
+app.directive('fileModel', function() {
   return {
-    restrict: 'A',
+    restrict: 'E',
+    template: '<input type="file" class="button change navbar-btn" onchange="angular.element(this).scope().loadEditedFile(this.files)"/>',
     link:function(scope, element, attrs){
       scope.loadEditedFile = function(files){
         scope.files = files;
@@ -40,5 +75,5 @@ app.directive('fileModel',['$parse', function($parse) {
         reader.readAsDataURL(files[0]);
       }
     }}
-}])
+})
 

@@ -72,16 +72,22 @@
                         </tr>
                         <tr ng-if="entity == editingEntity" ng-repeat-end="">
                             <td class="col-md-1">{{$index + 1}}</td>
-                            <td class="col-md-3"><input class="navbar-btn form-control width-max" ng-model="entity.answer_text"></td>
-                            <td class="col-md-5">
+                            <td class="col-md-2"><input class="navbar-btn form-control width-max" ng-model="entity.answer_text"></td>
+                            <td class="col-md-3">
                                 <select class="navbar-btn form-control width-max" ng-model="editedEntity.true_answer">
                                     <option value="" disabled selected hidden> Вкажіть доступність тесту</option>
                                     <option value="1">Так</option>
                                     <option value="0">Ні</option>
                                 </select>
                             </td>
+                            <td ng-if="!(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1"> <file-model></file-model>
+                                <img ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
+                            </td>
+                            <td ng-if="(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1">
+                                <file-model></file-model>
+                            </td>
                             <!--<td><input class="form-control width-max" ng-model="editedEntity.new_attachment"/></td>-->
-                            <td class="col-md-2">
+                            <td class="col-md-1">
                                 <editing-buttons-drct></editing-buttons-drct>
                             </td>
                         </tr>

@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col-md-11">
                                 <div class="col-md-2">
-                                    <loadfile-Drct></loadfile-Drct>
+                                    <loadfile-drct></loadfile-drct>
                                 </div>
                                 <div class="col-md-2 pull-right">
                                     <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
@@ -82,10 +82,13 @@
                                     <option value="2">Мульти-вибір</option>
                                 </select>
                             </td>
-                            <td ng-if="!(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1"> <img ng-src="{{editedEntity.new_attachment}}" alt="" height="100px"/> </td>
+                            <td ng-if="!(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1"> <file-model></file-model>
+                                <img ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
+                            </td>
                             <td ng-if="(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1">
-                                <input type="file" file-model="customer.file" onchange="angular.element(this).scope().loadEditedFile(this.files)"/> </td>
-                            <td class="usCenter col-md-2">
+                                <file-model></file-model>
+                            </td>
+                            <td class="col-md-1">
                                 <editing-buttons-drct></editing-buttons-drct>
                             </td>
                         </tr>
