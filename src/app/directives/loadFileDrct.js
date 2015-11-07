@@ -2,7 +2,7 @@
 
 app.directive('loadfileDrct', function() {
   return {
-    template: '<input id="fileInput" class="btn btn-default navbar-btn" type="file" name="file" accept="image/*" onchange="angular.element(this).scope().loadFile(this.files)"/>' +
+    template: '<input id="upload"  class="navbar-btn" type="file" name="file" accept="image/*" onchange="angular.element(this).scope().loadFile(this.files)"/> ' +
     '<img id="imageAttachment" ng-src="{{imagecontent}}" height="200px">',
 
     link: function(scope, el, attrs) {
