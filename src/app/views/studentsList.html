@@ -1,35 +1,42 @@
 <div class="container-fluid">
 
-	<button class="btn btn-sm btn-primary pull-right" ng-click="showAddForm()">
-		<span class="glyphicon glyphicon-plus"></span>
-	</button>
-
 <!-- Faculties add form here -->
-  <div class="well" ng-show="showingAdd">
-      <div class=" row">
-        <form name="addForm" class="form-inline" role='form' novalidate>
-          <div class="col-md-4">
-            <input class="form-control width-max navbar-btn" placeholder="Введіть назву факультету" type='text' ng-model="newEntity.faculty_name" required
-            >
-          </div>
-          <div class="col-md-6">
-            <input class="form-control width-max navbar-btn" placeholder="Вкажіть деталі" type='text' ng-model="newEntity.faculty_description" required>
-          </div>
-          <div class="col-md-2">
-            <button type="submit" class="btn btn-success pull-right width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
-          </div>
-        </form>
-      </div>
-  </div>
+<!--   <div class="well" ng-show="showingAdd">
+    <div class=" row">
+      <form name="addForm" class="form-inline" role='form' novalidate>
+        <div class="col-md-4">
+          <input class="form-control width-max navbar-btn" placeholder="Введіть назву факультету" type='text' ng-model="newEntity.faculty_name" required
+          >
+        </div>
+        <div class="col-md-6">
+          <input class="form-control width-max navbar-btn" placeholder="Вкажіть деталі" type='text' ng-model="newEntity.faculty_description" required>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-success pull-right width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
+        </div>
+      </form>
+    </div>
+</div>
+ -->
+
+
 
 <!-- Student Add form HERE -->
 	<div class="row"
-			 ng-show="showingAdd">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			 ng-controller="addStudentCtrl"
+			 ng-show="false">
+
+		<button class="btn btn-sm btn-primary pull-right" ng-click="showAddForm()">
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
+
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+				 ng-show="showingAdd">
+
 			<h1>Adding a new student</h1>
 			<form name="addRecord"
-									novalidate
-									ng-submit="addNewStudent(newStudent)">
+						novalidate
+						ng-submit="addNewStudent(newStudent)">
 
 				<div class="form-group">
 					<label class="sr-only" for="name">First Name</label>
@@ -247,12 +254,11 @@
 
 
 
-	<div class="row"
-			 ng-controller="getStudentsCtrl">
+	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 			<!-- If have no data -->
-			<div ng-show="!students">{{noData}}</div>
+			<!-- <div ng-show="!students">{{noData}}</div> -->
 
 			<!-- Tablist area -->
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
