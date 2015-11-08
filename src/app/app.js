@@ -67,7 +67,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('admin.usersTabs.students', {
 			url:'/students',
-			templateUrl: 'app/views/getStudents.html',
+			templateUrl: 'app/views/studentsList.html',
 			controller: 'getStudentsCtrl'
 		}).
 		state('admin.addStudent', {
