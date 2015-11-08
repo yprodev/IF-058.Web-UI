@@ -28,8 +28,9 @@
                                        placeholder="Введіть кількість спроб" ng-model="newEntity.attempts" required>
                             </div>
                             <div class="col-md-6">
-                                <select class="form-control width-max navbar-btn" ng-model="newEntity.enabled" required>
-                                    <option value="1" selected="selected">Доступно</option>
+                                <select id="avaible" class="form-control width-max navbar-btn" ng-model="newEntity.enabled" required>
+                                    <option value="" disabled selected hidden> Вкажіть доступність тесту </option>
+                                    <option value="1" >Доступно</option>
                                     <option value="0">Недоступно</option>
                                 </select>
                             </div>
@@ -64,24 +65,26 @@
                     <tbody class="usCenter">
                     <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
                         <td><a ui-sref="admin.questions({id:entity.test_id})">{{$index + 1}}</a></td>
-                        <td class="col-md-5">{{entity.test_name}}</td>
+                        <td class="col-md-4">{{entity.test_name}}</td>
+                        <!-- <td>{{test.subject_id}}</td>-->
                         <td class="col-md-1">{{entity.tasks}}</td>
                         <td class="col-md-1">{{entity.time_for_test}}</td>
-                        <td class="col-md-1">{{entity.attempts}}</td>
-                        <td class="col-md-2">{{entity.enabled}}</td>
-                        <td class="col-md-2">
+                        <td class="col-md-2">{{entity.attempts}}</td>
+                        <td class="col-md-1">{{entity.enabled | testStatus}}</td>
+                        <td class="col-md-2" class="usCenter">
                             <actions-buttons-drct></actions-buttons-drct>
                         </td>
                     </tr>
                     <tr ng-if="entity == editingEntity" ng-repeat-end="">
                         <td>{{$index + 1}}</td>
                         <!--написати перевірку на ввід чисел при редагуванні-->
-                        <td class="col-md-5"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_test_name"></td>
+                        <td class="col-md-4"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_test_name"></td>
                         <td class="col-md-1"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_tasks"></td>
                         <td class="col-md-1"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_time_for_test"></td>
                         <td class="col-md-1"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_attempts"></td>
                         <td class="col-md-2">
                             <select class="form-control width-max navbar-btn" ng-model="editedEntity.new_enabled">
+                                <option value="" disabled selected hidden> Вкажіть доступність тесту </option>
                                 <option value="1">Доступно</option>
                                 <option value="0">Недоступно</option>
                             </select>

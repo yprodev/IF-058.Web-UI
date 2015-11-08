@@ -30,11 +30,8 @@ app.controller('loginCtrl', ['$scope', '$state', '$rootScope', 'authSrvc', funct
         });
     };
     $scope.detectUser = localStorage.adminName || localStorage.userName;
-    console.log($scope.detectUser, "!!!!!!!!!!!!!!!!!!!!!");
     $scope.exit = function() {
         localStorage.clear();
         authSrvc.logOut().then();
     };
-
-
 }]);
