@@ -37,9 +37,8 @@ app.directive('loadfileDrct', function() {
         scope.files = files;
         var reader = new FileReader();
         reader.onload = function(e) {
-          scope.$watch('e.target.result', function (newValue, oldValue) {
-            if (newValue != null) {
-              console.log('asdfasdfasdf')
+          scope.$watch('showingAdd', function (newValue, oldValue) {
+            if (newValue == true) {
               scope.newEntity.attachment = e.target.result
             }
           })
