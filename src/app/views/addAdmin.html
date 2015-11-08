@@ -34,15 +34,21 @@
           <thead>
           <tr>
             <th class="col-md-1">№</th>
-            <th class="col-md-2">Логін</th>
-            <th class="col-md-2">Електронна пошта</th>
+            <th class="col-md-2 clickable" ng-click="sortType = 'name'; sortReverse = !sortReverse">Логін
+              <i ng-show="sortType == 'name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+              <i ng-show="sortType == 'name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+            </th>
+            <th class="col-md-2 clickable" ng-click="sortType = 'email'; sortReverse = !sortReverse">Електронна пошта
+              <i ng-show="sortType == 'email' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+              <i ng-show="sortType == 'email' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+            </th>
             <th class="col-md-2"></th>
             <th class="col-md-2"></th>
             <th class="col-md-2 usCenter">Дії</th>
           </tr>
           </thead>
           <tbody name="fuck">
-          <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem">
+          <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse">
             <!-- read-only cells -->
             <td class="col-md-1">{{$index + 1}}</td>
             <td class="col-md-2">{{entity.username}}</td>
