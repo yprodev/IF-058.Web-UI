@@ -247,12 +247,15 @@ button.marginTop {
 .button:active:before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
+.button:after {
+  display: none;
+}
 
-/* ___________________________________
- *
- * Here is styles for student entities
- * ___________________________________
-*/
+  /* ___________________________________
+   *
+   * Here is styles for student entities
+   * ___________________________________
+  */
 
 .student-photo {
   width: 100%;
