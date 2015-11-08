@@ -62,7 +62,7 @@
                     </tr>
                     </thead>
                     <tbody class="usCenter">
-                    <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
+                    <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem">
                         <td><a ui-sref="admin.questions({id:entity.test_id})">{{$index + 1}}</a></td>
                         <td class="col-md-5">{{entity.test_name}}</td>
                         <td class="col-md-1">{{entity.tasks}}</td>

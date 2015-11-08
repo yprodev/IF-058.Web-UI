@@ -58,7 +58,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
+            <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem">
               <!-- read-only cells -->
               <td class="usCenter">{{$index + 1}}</td>
               <td class="col-md-7">{{entity.question_text}}</td>

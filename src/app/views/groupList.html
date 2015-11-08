@@ -49,7 +49,7 @@
                   </tr>
                 </thead>
                   <tbody class="usCenter">
-                    <tr ng-repeat-start="row in groups.list" ng-if='editingData.group_id !== row.group_id'>
+                    <tr ng-repeat-start="row in groups.list | filter:searchItem" ng-if='editingData.group_id !== row.group_id'>
                       <td class="usCenter">{{$index + 1}}</td>
                       <td class="usCenter">{{row.group_name}}</td>
                       <td class="usCenter">{{row.faculty_name}}</td>

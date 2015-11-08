@@ -42,7 +42,7 @@
           </tr>
           </thead>
           <tbody name="fuck">
-          <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
+          <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem">
             <!-- read-only cells -->
             <td class="col-md-1">{{$index + 1}}</td>
             <td class="col-md-2">{{entity.username}}</td>
