@@ -32,7 +32,7 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
         parentEntity: 'subject'
       }
     },
-    question: {
+    "question": {
       question_text: '',
       level: '',
       type: '',
@@ -48,6 +48,14 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
       by: {
         parentEntity: 'test'
       }
+    },
+    "answer": {
+      by: {
+        parentEntity: 'question'
+      },
+      true_answer: '',
+      answer_text: '',
+      attachment: ''
     }
 
     //... and other entities
@@ -68,14 +76,9 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
     if ($scope.currentEntity.by) {
       switch ($scope.thisEntity) {
         case 'test':
-          var id = $stateParams.id//замінити на універсальну змінну
-          entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
-            $scope.entities = resp.data;
-            $scope.noData = "Немає записів";
-          });
-          break
-        case "TestDetail":
-          var id = $stateParams.id//замінити на універсальну змінну
+        case 'TestDetail':
+        case 'answer':
+          var id = $stateParams.id
           entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.currentEntity.by.parentEntity, id).then(function (resp) {
             $scope.entities = resp.data;
             $scope.noData = "Немає записів";
@@ -106,9 +109,11 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
       $scope.showingAdd = false;
       $scope.newEntity = {};
     };
+
   };
 //function creates new element of array and sends new entity on server
   $scope.addEntity = function () {
+
     var newData = $scope.newEntity;
     if ($scope.currentEntity.by) {
       newData[$scope.currentEntity.by.parentEntity + "_id"] = $stateParams.id;
@@ -128,6 +133,11 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
       });
     $scope.showAddForm();
   };
+
+  //console.log($scope.newEntity.attachment)
+  $scope.resetEntity = function(){
+    $scope.newEntity = {};
+  }
 
   //function opens a form for editing
   $scope.showEditForm = function (entity) {
@@ -155,6 +165,7 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
       if ($scope.editedEntity["new_" + prop] != "" && prop != ($scope.commonId)) {
         fieldsFulled = true;
         editedData[prop] = $scope.editedEntity["new_" + prop];
+        console.log(editedData[prop])
       } else if ($scope.editedEntity["new_" + prop] != "") {
         fieldsFulled = true;
       } else {
@@ -227,6 +238,8 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
     });
     $scope.activateEntity();
   };
+
+
 
 //show inform message about error
   function showInformModal(infMsg) {
