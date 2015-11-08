@@ -71,7 +71,7 @@
             <tr ng-if="entity == editingEntity" ng-repeat-end="">
               <td class="usCenter">{{$index + 1}}</td>
               <td class="col-md-7"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_question_text"></td>
-              <td class="col-md-1 usCenter"><input class="form-control width-max" ng-model="editedEntity.new_level"></td>
+              <td class="col-md-1 usCenter"><input type="number" min="1" class="form-control width-max" ng-model="editedEntity.new_level"></td>
               <td class="col-md-2 usCenter">
                 <select class="form-control width-max navbar-btn" ng-model="editedEntity.new_type">
                   <option value="1">доступно</option>

@@ -11,14 +11,14 @@
                 <div class=" row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-3">
-                      <input type='text' class="form-control width-max navbar-btn" placeholder="Рівень завдань" ng-model="newEntity.level" required
+                      <input type='number' min="1" class="form-control width-max navbar-btn" placeholder="Рівень завдань" ng-model="newEntity.level" required
                       >
                     </div>
                     <div class="col-md-3">
-                      <input type='text' class="form-control width-max navbar-btn" placeholder="Кількість завдань" ng-model="newEntity.tasks" required>
+                      <input type='number' min="1" class="form-control width-max navbar-btn" placeholder="Кількість завдань" ng-model="newEntity.tasks" required>
                     </div>
                     <div class="col-md-3">
-                      <input type='text' class="form-control width-max navbar-btn" placeholder="Кількість балів" ng-model="newEntity.rate" required>
+                      <input type='number' min="1" class="form-control width-max navbar-btn" placeholder="Кількість балів" ng-model="newEntity.rate" required>
                     </div>
                     <div class="col-md-2 pull-right ">
                       <button type="submit" class="btn btn-success width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
@@ -54,9 +54,9 @@
                   </tr>
                   <tr ng-if="entity == editingEntity" ng-repeat-end="">
                     <td>{{$index + 1}}</td>
-                    <td class="col-md-3"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_level"></td>
-                    <td class="col-md-3"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_tasks"></td>
-                    <td class="col-md-4"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_rate"></td>
+                    <td class="col-md-3"><input type='number' min="1" class="form-control width-max navbar-btn" ng-model="editedEntity.new_level"></td>
+                    <td class="col-md-3"><input type='number' min="1" class="form-control width-max navbar-btn" ng-model="editedEntity.new_tasks"></td>
+                    <td class="col-md-4"><input type='number' min="1" class="form-control width-max navbar-btn" ng-model="editedEntity.new_rate"></td>
                     <td class="col-md-2">
                       <editing-buttons-drct></editing-buttons-drct>
                     </td>
