@@ -163,7 +163,7 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
     addParentEntityId(newData);
     entitiesSrvc.createEntity($scope.thisEntity, newData)
     .then(function (resp) {
-      addingAndEditingResponseHandler (resp, successfulAddingResponseHandler, newData);
+      addAndEditRespHandler (resp, successAddRespHandler, newData);
     });
     $scope.showAddForm();
   };
@@ -203,10 +203,11 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
   $scope.editEntity = function (entity) {
     var fieldsFulled;
     var editedData = {};
-    fieldsFulled = checkEmptyNewEditedProps (entity, editedData);
+    fieldsFulled = checkEmptyFields (entity, editedData);
     if (fieldsFulled == true) {
-      entitiesSrvc.updateEntity($scope.thisEntity, entity[$scope.commonId], editedData).then(function (resp) {
-        addingAndEditingResponseHandler (resp, successfulEditingResponseHandler, editedData, entity);
+      entitiesSrvc.updateEntity($scope.thisEntity, entity[$scope.commonId], editedData)
+      .then(function (resp) {
+        addAndEditRespHandler (resp, successEditRespHandler, editedData, entity);
       });
     } else {
       showInformModal("Будь ласка, заповніть всі поля");
@@ -214,15 +215,12 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
   };
 
   //checks on empty fields, appropriationing all properties except ID of property
-  function checkEmptyNewEditedProps (entity, editedData) {
+  function checkEmptyFields (entity, editedData) {
     for (prop in entity) {
       //new_prop is not empty and is not ID
-      if ($scope.editedEntity["new_" + prop] != "" && prop != ($scope.commonId)) {
+      if ($scope.editedEntity["new_" + prop] != "") {
         fieldsFulled = true;
-        editedData[prop] = $scope.editedEntity["new_" + prop];
-      //prop = $scope.commonId ("id" or "entity_id")
-      } else if ($scope.editedEntity["new_" + prop] != "") {
-        fieldsFulled = true;
+        createPropForSendingObj (editedData);
       } else {
         fieldsFulled = false;
         break;
@@ -231,12 +229,19 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
     return fieldsFulled;
   };
 
+  //prop = $scope.commonId ("id" or "entity_id")
+  function createPropForSendingObj (editedData) {
+    if (prop != ($scope.commonId)) {
+      editedData[prop] = $scope.editedEntity["new_" + prop];
+    }
+  }
+
   //FOR ADD and EDIT
-  //sends object and handing response
-  function addingAndEditingResponseHandler (resp, successfulResponseHandler, newOrEditedData, entity) {
+  //handing success and error response
+  function addAndEditRespHandler (resp, successRespHandler, newOrEditedData, entity) {
     switch (resp.data.response) {
       case "ok":
-        successfulResponseHandler (resp, newOrEditedData, entity);
+        successRespHandler (resp, newOrEditedData, entity);
         break;
       case "error 23000":
         showInformModal("Зазначене ім'я вже існує");
@@ -249,12 +254,12 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
     };
   };
   //pushes to array $scope.entities a new added object
-  function successfulAddingResponseHandler (resp, newData) {
+  function successAddRespHandler (resp, newData) {
     newData[$scope.commonId] = resp.data.id;
     $scope.entities.push(newData);
   };
   //changes in array $scope.entities an edited object
-  function successfulEditingResponseHandler (resp, editedData, entity) {
+  function successEditRespHandler (resp, editedData, entity) {
     for (var i = 0; i < $scope.entities.length; i++) {
       if ($scope.entities[i][$scope.commonId] == entity[$scope.commonId]) {
         for (prop in editedData) {
