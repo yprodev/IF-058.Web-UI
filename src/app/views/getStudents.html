@@ -11,7 +11,7 @@
 
 				<!-- Block with only data from server -->
 				<div class="panel panel-default"
-						 ng-repeat-start="student in students.list"
+						 ng-repeat-start="student in students.list | filter:searchItem"
 						 ng-if="editingStudent.user_id !== student.user_id">
 					<div class="panel-heading" role="tab" id="headingOne">
 						<h4 class="panel-title">
