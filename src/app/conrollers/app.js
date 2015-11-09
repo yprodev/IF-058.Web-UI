@@ -51,6 +51,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 			templateUrl: 'app/views/testsList.html',
 			controller: 'entitiesCtrl'
 		}).
+		state('admin.tests', {
+			url:'/timeTable/:id',
+			templateUrl: 'app/views/timeTableList.html',
+			controller: 'entitiesCtrl'
+		}).
 		state('admin.questions', {
 			url:'/questions/:id',
 			templateUrl: 'app/views/questionsList.html',
