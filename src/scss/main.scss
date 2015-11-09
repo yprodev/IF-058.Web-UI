@@ -250,6 +250,26 @@ button.marginTop {
 .button:after {
   display: none;
 }
+.edited-picture {
+  z-index: 1;
+}
+.close-button-questions{
+  position: relative;
+  z-index: 2;
+  margin-right: -20px;
+  top: -35px;
+  right: 30px;
+  }
+.close-button-answers{
+  position: relative;
+  z-index: 2;
+  margin-right: -20px;
+  top: -100px;
+  right: -103px;
+}
+
+
+
 
   /* ___________________________________
    *

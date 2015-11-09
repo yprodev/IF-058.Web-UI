@@ -146,15 +146,18 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
       $scope.editedEntity = {};
       for (prop in entity) {
         $scope.editedEntity["new_" + prop] = entity[prop];
+        console.log($scope.editedEntity["new_" + prop])
         if(entityObj["AdminUser"]){
           $scope.editedEntity.new_password = "";
           $scope.editedEntity.new_password_confirm = "";
         };
       };
     } else {
+     /* if ($scope.pictureStorage != null) {
+        entity.attachment = $scope.pictureStorage;
+      }*/
       $scope.editingEntity = null;
-    }
-    ;
+    };
   };
 //function updates an element of array and send updating of entity to server
   $scope.editEntity = function (entity) {
@@ -165,7 +168,6 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
       if ($scope.editedEntity["new_" + prop] != "" && prop != ($scope.commonId)) {
         fieldsFulled = true;
         editedData[prop] = $scope.editedEntity["new_" + prop];
-        console.log(editedData[prop])
       } else if ($scope.editedEntity["new_" + prop] != "") {
         fieldsFulled = true;
       } else {
@@ -238,8 +240,15 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
     });
     $scope.activateEntity();
   };
-
-
+  //function for closing picture
+$scope.closePicture = function(ent){
+  console.log(ent);
+  //$scope.pictureStorage = ent.attachment;
+  ent.attachment = '';
+  //ent.new_attachment = '';
+ // $scope.editedEntity.new_attachment = '';
+}
+  //$scope.trustAsHtml = $sce.trustAsHtml;
 
 //show inform message about error
   function showInformModal(infMsg) {

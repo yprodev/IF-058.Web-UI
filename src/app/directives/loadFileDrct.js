@@ -28,7 +28,7 @@ app.directive('loadfileDrct', function() {
   return {
     restrict: 'E',
     template: '<input type="file" class="button" loadfile-drct="customer.file" onchange="angular.element(this).scope().loadFile(this.files)"/>' +
-    '<img id="imageAttachment" ng-src="{{newEntity.attachment}}" alt="" height="100px"/>',
+    '<img id="imageAttachment" ng-src="{{newEntity.attachment}}" alt="" height="100px"/><p>asdsadasdassdfdsfdas</p>',
     link:function(scope, element, attrs, ctrl){
       scope.newEntity = {
         attachment: ''
@@ -75,5 +75,23 @@ app.directive('fileModel', function() {
         reader.readAsDataURL(files[0]);
       }
     }}
+})
+app.directive('quesText', function($sce) {
+  /*return function(scope, el, attrs) {
+    console.log('element:' + el[0])
+    console.log('attrs:' + attrs)
+    console.log('scope:' + scope)
+    console.log('compile:' + $compile(scope.editedEntity.new_question_text))
+    var a = el[0].replaceWith($compile(scope.editedEntity.new_question_text)(scope));
+    console.log(a)
+  }
+*/
+  return {
+    link: function(scope, element, attrs){
+      //console.log($sce.trustAsHtml(scope.editedEntity.new_question_text))
+      //ng-bind-html="entity.question_text | unsafe"
+
+    }
+  }
 })
 

@@ -76,11 +76,13 @@
                             <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-7">
                                 <div class="col-md-7">
-                                    <textarea class="form-control width-max navbar-btn" ng-model="editedEntity.new_question_text"></textarea>
+                                    <textarea class="form-control width-max navbar-btn"  ng-model="editedEntity.new_question_text"></textarea>
                                 </div>
                                 <div class="col-md-5 ">
                                     <div ng-if="!(entity.attachment == 'added' || entity.attachment == '')" > <file-model></file-model>
-                                        <img ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
+                                        <img class="edited-picture" ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
+                                        <img class="close-button-questions" src="img/close_button.png" height="30px" ng-click="closePicture(entity)">
+
                                     </div>
                                     <div ng-if="(entity.attachment == 'added' || entity.attachment == '')">
                                         <file-model></file-model>
