@@ -30,9 +30,7 @@ app.directive('loadfileDrct', function() {
     template: '<input type="file" class="button" loadfile-drct="customer.file" onchange="angular.element(this).scope().loadFile(this.files)"/>' +
     '<img id="imageAttachment" ng-src="{{newEntity.attachment}}" alt="" height="100px"/><p>asdsadasdassdfdsfdas</p>',
     link:function(scope, element, attrs, ctrl){
-      scope.newEntity = {
-        attachment: ''
-      }
+      scope.newEntity.attachment = '';
       scope.loadFile = function(files){
         scope.files = files;
         var reader = new FileReader();
@@ -66,16 +64,21 @@ app.directive('fileModel', function() {
     link:function(scope, element, attrs){
       scope.loadEditedFile = function(files){
         scope.files = files;
-        console.log(files)
         var reader = new FileReader();
         reader.onload = function(e) {
           scope.editedEntity.new_attachment = e.target.result
-          console.log(e.target)
         };
         reader.readAsDataURL(files[0]);
       }
+      scope.closePicture = function () {
+        console.log('asdasd')
+        scope.editedEntity.new_attachment = ''
+        scope.entity.attachment = ''
+      }
     }}
 })
+
+
 app.directive('quesText', function($sce) {
   /*return function(scope, el, attrs) {
     console.log('element:' + el[0])

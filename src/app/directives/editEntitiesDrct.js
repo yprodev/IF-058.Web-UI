@@ -43,9 +43,9 @@ app.directive('editEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
           function checkEmptyFields (entity, editedData) {
             for (prop in entity) {
               //new_prop is not empty and is not ID
-              if (scope.editedEntity["new_" + prop] != "") {
+              if (scope.editedEntity["new_" + prop] != "" || prop == "attachment") {
                 fieldsFulled = true;
-                createPropForSendingObj (editedData);
+                createPropForSendingObj (prop, editedData);
               } else {
                 fieldsFulled = false;
                 break;
@@ -55,11 +55,11 @@ app.directive('editEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
           };
 
           //prop = scope.commonId ("id" or "entity_id")
-          function createPropForSendingObj (editedData) {
-            if (prop != (scope.commonId)) {
+          function createPropForSendingObj (prop, editedData) {
+            if(prop != scope.commonId) {
               editedData[prop] = scope.editedEntity["new_" + prop];
-            }
-          }
+            };
+          };
 
           //handing success and error response
           function editRespHandler (resp, editedData, entity) {

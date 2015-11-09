@@ -6,7 +6,8 @@ app.controller('entitiesCtrl', ['$scope', 'entitiesSrvc', '$stateParams', '$time
   //$scope.entityObj contains entities of application
   $scope.entityObj = entityObj;
 
-
+  //create empty object for adding of entity
+  $scope.newEntity = {};
 
   //show inform message about error
   $scope.showInformModal = function(infMsg) {

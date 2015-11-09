@@ -89,7 +89,7 @@
                                 <div class="col-md-5 ">
                                     <div ng-if="!(entity.attachment == 'added' || entity.attachment == '')" > <file-model></file-model>
                                         <img class="edited-picture" ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
-                                        <img class="close-button-questions" src="img/close_button.png" height="30px" ng-click="closePicture(entity)">
+                                        <img class="close-button-questions" src="img/close_button.png" height="30px" delete-picture ng-click="closePicture(entity)">
 
                                     </div>
                                     <div ng-if="(entity.attachment == 'added' || entity.attachment == '')">
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="col-md-1 usCenter"><input type="number" min="1" class="form-control width-max" ng-model="editedEntity.new_level"></td>
+                            <td class="col-md-1 usCenter"><input  class="form-control width-max" ng-model="editedEntity.new_level"></td>
                             <td class="col-md-2 usCenter">
                                 <select class="form-control width-max navbar-btn" ng-model="editedEntity.new_type">
                                     <option value="1">простий вибір</option>
