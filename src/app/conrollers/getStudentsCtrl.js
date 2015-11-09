@@ -11,7 +11,6 @@ app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', function ($scope, e
 
 	// Show edit panel for a student
 	$scope.showEditingForm = function (stud) {
-		console.log(stud);
 		// if stud Object is not equal to null
 		if (stud !== null) {
 			$scope.currId = stud.user_id;
@@ -36,8 +35,6 @@ app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', function ($scope, e
 		};
 
 		var eStud = $scope.editingStudent;
-
-		console.log(eStud);
 
 		// Need local variable for using in service
 		// Then we will need to null the scope's same variable
