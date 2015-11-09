@@ -48,21 +48,29 @@
                     </div>
 
                     <button class="btn btn-primary pull-right" ui-sref="admin.testDetails({id:entities[0].test_id})" ng-click="">Параметри тесту</button>
-
                     <div ng-show="!entities">{{noData}}</div>
                     <!-- The table for list of Entities -->
                     <table ng-show="entities" class="table table-hover .table-condensed">
                         <thead>
                         <tr>
                             <th class=" usCenter">№</th>
-                            <th class="col-md-7">Завдання</th>
-                            <th class="col-md-1 usCenter">Рівень</th>
-                            <th class="col-md-2 usCenter">Тип</th>
+                            <th class="col-md-7 clickable" ng-click="sortType = 'question_text'; sortReverse = !sortReverse">Завдання
+                                <i ng-show="sortType == 'question_text' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                <i ng-show="sortType == 'question_text' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                            </th>
+                            <th class="col-md-1 usCenter clickable" ng-click="sortType = 'level'; sortReverse = !sortReverse">Рівень
+                                <i ng-show="sortType == 'level' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                <i ng-show="sortType == 'level' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                            </th>
+                            <th class="col-md-2 usCenter clickable" ng-click="sortType = 'type'; sortReverse = !sortReverse">Тип
+                                <i ng-show="sortType == 'type' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                <i ng-show="sortType == 'type' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                            </th>
                             <th class="col-md-2 usCenter">Дії</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
+                        <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse">
                             <!-- read-only cells -->
                             <td class="usCenter"><a ui-sref="admin.answers({id:entity.question_id})">{{$index + 1}}</a></td>
                             <td class="col-md-7" ng-bind-html="entity.question_text | unsafe"></td>
@@ -87,7 +95,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="col-md-1 usCenter"><input class="form-control width-max" ng-model="editedEntity.new_level"></td>
+                            <td class="col-md-1 usCenter"><input type="number" min="1" class="form-control width-max" ng-model="editedEntity.new_level"></td>
                             <td class="col-md-2 usCenter">
                                 <select class="form-control width-max navbar-btn" ng-model="editedEntity.new_type">
                                     <option value="1">простий вибір</option>

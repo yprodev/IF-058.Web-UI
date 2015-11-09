@@ -2,6 +2,63 @@
 var app = angular.module('app', ['ui.router']);
 
 app.constant("baseUrl", "http://dtapi.local/");
+app.value("entityObj", {
+    "faculty": {
+      faculty_name: "",
+      faculty_description: ""
+    },
+    "speciality": {
+      speciality_name: "",
+      speciality_code: ""
+    },
+    "subject": {
+      subject_name: "",
+      subject_description: ""
+    },
+    "AdminUser": {
+      username: "",
+      password: "",
+      password_confirm: "",
+      email: ""
+    },
+    "test": {
+      test_name: "",
+      tasks: "",
+      time_for_test: "",
+      enabled: "",
+      attempts: "",
+      by: {
+        parentEntity: "subject"
+      }
+    },
+    "question": {
+      question_text: '',
+      level: '',
+      type: '',
+      attachment: '',
+      by: {
+        parentEntity: "test"
+      }
+    },
+    "TestDetail": {
+      level: "",
+      tasks: "",
+      rate: "",
+      by: {
+        parentEntity: "test"
+      }
+    },
+    "answer": {
+      by: {
+        parentEntity: "question"
+      },
+      true_answer: '',
+      answer_text: '',
+      attachment: ''
+    }
+
+    //... and other entities
+  });
 
 app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 	$stateProvider.

@@ -1,4 +1,5 @@
 <div entities-drct="subject">
+
   <div class="wrapper panel panel-success no-border">
         <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Предмети </div>
         <!-- The button and form to add Entity -->
@@ -30,13 +31,19 @@
                 <thead class="usCenter">
                   <tr>
                     <th>№</th>
-                    <th class="col-md-4">Предмет</th>
-                    <th class="col-md-6">Деталі</th>
+                    <th class="col-md-4 clickable" ng-click="sortType = 'subject_name'; sortReverse = !sortReverse">Предмет
+                        <i ng-show="sortType == 'subject_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                        <i ng-show="sortType == 'subject_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                    </th>
+                    <th class="col-md-6 clickable" ng-click="sortType = 'subject_description'; sortReverse = !sortReverse">Деталі
+                        <i ng-show="sortType == 'subject_description' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                        <i ng-show="sortType == 'subject_description' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                    </th>
                     <th class="col-md-2">Дії</th>
                   </tr>
                 </thead>
                 <tbody class="usCenter">
-                  <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities" id="row{{$index + 1}}"> <a ui-sref="admin.tests({id:entity.subject_id})">
+                  <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse" id="row{{$index + 1}}"> <a ui-sref="admin.tests({id:entity.subject_id})">
                     <!-- read-only cells -->
                     <td><a ui-sref="admin.tests({id:entity.subject_id})">{{$index + 1}}</a></td>
                     <td class="col-md-4">{{entity.subject_name}}</td>
