@@ -1,5 +1,5 @@
 ;
-app.directive('addEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
+app.directive('addEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entitiesSrvc, $stateParams){
   return {
     link: function (scope, element, attrs) {
           //shows and hides the form for creating new entity
