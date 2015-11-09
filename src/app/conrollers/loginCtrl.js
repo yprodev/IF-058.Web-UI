@@ -1,4 +1,4 @@
-app.controller('loginCtrl', ['$scope', '$state', '$rootScope', 'authSrvc', function($scope, $state, $rootScope, authSrvc){
+app.controller('loginCtrl', ['$scope', '$state', 'authSrvc', function($scope, $state, authSrvc){
     $scope.getError = function (error) {
         if (angular.isDefined(error)) {
             if (error.required) {
@@ -35,7 +35,7 @@ app.controller('loginCtrl', ['$scope', '$state', '$rootScope', 'authSrvc', funct
         authSrvc.logOut().then();
     };
 
-    $scope.sortType = ''; // set the default sort type
-    $scope.sortReverse = false;  // set the default sort order
+/*    $scope.sortType = ''; // set the default sort type
+    $scope.sortReverse = false;  // set the default sort order*/
 
 }]);
