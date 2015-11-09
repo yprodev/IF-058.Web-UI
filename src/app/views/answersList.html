@@ -74,11 +74,12 @@
                             <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-8">
                                 <div class="col-md-7">
-                                    <input class="navbar-btn form-control width-max" ng-model="entity.answer_text">
+                                    <input class="navbar-btn form-control width-max" ng-model="editedEntity.new_answer_text">
                                 </div>
                             <div class="col-md-5">
                                 <div ng-if="!(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1"> <file-model></file-model>
-                                    <img ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
+                                    <img class="edited-picture" ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
+                                    <img class="close-button-answers" src="img/close_button.png" height="30px" ng-click="closePicture(editedEntity)">
                                 </div>
                                 <div ng-if="(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1">
                                     <file-model></file-model>
@@ -86,7 +87,7 @@
                             </div>
                             </td>
                             <td class="col-md-2">
-                                <select class="navbar-btn form-control width-max" ng-model="editedEntity.true_answer">
+                                <select class="navbar-btn form-control width-max" ng-model="editedEntity.new_true_answer">
                                     <option value="" disabled selected hidden> Вкажіть правельність</option>
                                     <option value="1">Так</option>
                                     <option value="0">Ні</option>

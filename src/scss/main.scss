@@ -158,7 +158,8 @@ body, html, .container-fluid, .nav-row {
 
 .top-nav {
   background-color: $nav_color;
-  //box-shadow: 0 3px 3px $nav_color;
+  border-radius: 0px;
+  // box-shadow: 0 3px 3px $nav_color;
   margin-bottom: 20px;
   ul li a {
     color: #fff;
@@ -175,6 +176,20 @@ body, html, .container-fluid, .nav-row {
     }
   }
 }
+
+.left-panel{
+  box-shadow: 0px 0 0px;
+}
+.top-nav>.container{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.navbar-header>.navbar-toggle{
+  float:left;
+  margin-left: 15px;
+}
+
 .logoWrapper {
   text-align: center;
 }
@@ -245,6 +260,30 @@ button.marginTop {
 .button:after {
   display: none;
 }
+.edited-picture {
+  z-index: 1;
+}
+.close-button-questions{
+  position: relative;
+  z-index: 2;
+  margin-right: -20px;
+  top: -35px;
+  right: 34px;
+  }
+.close-button-answers{
+  position: relative;
+  z-index: 2;
+  margin-right: -20px;
+  top: -100px;
+  right: -103px;
+}
+#imageAttachment{
+  margin: 5px;
+  border-radius: 5px;
+}
+
+
+
 
   /* ___________________________________
    *
