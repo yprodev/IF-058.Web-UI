@@ -1,5 +1,5 @@
 ;
-app.directive('removeEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entitiesSrvc, $stateParams){
+app.directive('removeEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
   return {
     link: function (scope, element, attrs) {
           //function for initiate of entity for delete in modal

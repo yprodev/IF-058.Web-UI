@@ -2,6 +2,7 @@
 app.directive('editEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
   return {
     link: function (scope, element, attrs) {
+          scope.editingEntity = null;
           //function opens a form for editing
           scope.showEditForm = function (entity) {
             if (scope.editingEntity != entity) {
@@ -17,7 +18,7 @@ app.directive('editEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
             scope.editedEntity = {};
             for (prop in entity) {
               scope.editedEntity["new_" + prop] = entity[prop];
-              if(scope.entityObj["AdminUser"]){
+              if(scope.thisEntity == "AdminUser"){
                 scope.editedEntity.new_password = "";
                 scope.editedEntity.new_password_confirm = "";
               };
