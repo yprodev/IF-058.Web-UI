@@ -1,5 +1,6 @@
 app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', function ($scope, entitiesSrvc) {
 
+	// Declares Entity of the controller
 	$scope.thisEntity = 'student';
 	$scope.photo = '';
 

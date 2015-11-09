@@ -26,6 +26,7 @@
 									 ng-minlength="2"
 									 ng-maxlength="50"
 									 ng-model="newStudent.student_fname"
+									 ng-model-option="{ updateOn: 'default', debounce: { default: 500} }"
 									 required>
 
 						<!-- Error message for Student's First Name -->
@@ -191,6 +192,11 @@
 									 onchange="angular.element(this).scope().addImageFile(this)"
 									 ng-model="newStudent.photo"
 									 accept="image/*">
+							<a href="" 
+								 data-toggle="popover" 
+								 ng-mouseover="showPopover()"
+								 title="Popover title"
+								 data-content="And here's some amazing content. It's very engaging. Right?">something to tooltip</a>
 
 						<span id="helpPhoto"
 									ng-show="addRecord.studPhoto.$invalid && addRecord.studPhoto.$dirty"

@@ -43,8 +43,15 @@ angular.module('app')
 			};
 		};
 
+		$scope.showPopover = function () {
+			$scope.lemenent = angular.element.find('[data-toggle="popover"]');
+			$scope.lemenent.popover('toggle');
+			console.log($scope.lemenent);
+		};
+
 		// Create variable of a string for student photo string
 		$scope.studPhoto;
+
 
 		$scope.addImageFile = function (element) {
 
@@ -66,9 +73,10 @@ angular.module('app')
 				// Getting cutted uploading file name into a variable
 				fileName = fileCutName(studImage.name, -11);
 				// Find text of our button for uploading image
-				var el = angular.element(document.querySelector('.file-name'));
+				var el = angular.element.querySelector('.file-name');
 				// Add cutted text of an image to the button
 				el.text(fileName);
+
 
 				//Create event handler
 				reader.onload = function (e) {
