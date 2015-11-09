@@ -1,5 +1,5 @@
 ;
-app.directive('getEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
+app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entitiesSrvc, $stateParams){
   return {
     link: function (scope, element, attrs) {
           //gets a list of entities
