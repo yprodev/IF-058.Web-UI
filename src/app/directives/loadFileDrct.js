@@ -28,29 +28,30 @@ app.directive('loadfileDrct', function() {
   return {
     restrict: 'E',
     template: '<input type="file" class="button" loadfile-drct="customer.file" onchange="angular.element(this).scope().loadFile(this.files)"/>' +
-    '<img id="imageAttachment" ng-src="{{newEntity.attachment}}" alt="" height="100px"/><p>asdsadasdassdfdsfdas</p>',
+    '<img id="imageAttachment" ng-src="{{newEntity.attachment}}" ng-show="newEntity.attachment"  alt="" height="200px"/>',
     link:function(scope, element, attrs, ctrl){
+
       scope.newEntity.attachment = '';
       scope.loadFile = function(files){
         scope.files = files;
         var reader = new FileReader();
         reader.onload = function(e) {
-          scope.$watch('showingAdd', function (newValue, oldValue) {
-            if (newValue == true) {
-              scope.newEntity.attachment = e.target.result
-            }
-          })
+          scope.$apply(function () {
+            scope.newEntity.attachment = e.target.result;
+          });
           scope.$watch('showingAdd', function (newValue, oldValue) {
             if (newValue == false) {
-              scope.newEntity = {
-                attachment: ''
-              }
-              console.log(scope.newEntity.attachment)
+              console.log(scope.newEntity)
               angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";
             }
           })
         };
         reader.readAsDataURL(files[0]);
+        scope.$apply(function () {
+          scope.newEntity.attachment =''
+          console.log(scope.newEntity.attachment)
+        });
+
       }
     }}
 })
@@ -73,24 +74,19 @@ app.directive('fileModel', function() {
       scope.closePicture = function () {
         console.log('asdasd')
         scope.editedEntity.new_attachment = ''
-        scope.entity.attachment = ''
+        scope.entity.attachment=''
       }
     }}
 })
+/*
 
 
-app.directive('quesText', function($sce) {
-  /*return function(scope, el, attrs) {
-    console.log('element:' + el[0])
-    console.log('attrs:' + attrs)
-    console.log('scope:' + scope)
-    console.log('compile:' + $compile(scope.editedEntity.new_question_text))
-    var a = el[0].replaceWith($compile(scope.editedEntity.new_question_text)(scope));
-    console.log(a)
-  }
-*/
+app.directive('quesText', function($compile) {
   return {
     link: function(scope, element, attrs){
+      var a = '<p>asdsad</p>'
+      scope.compiledData = $compile(scope.editedEntity.new_question_text)(scope);
+      console.log(scope.compiledData[0].innerText)
       //console.log($sce.trustAsHtml(scope.editedEntity.new_question_text))
       //ng-bind-html="entity.question_text | unsafe"
 
@@ -98,3 +94,4 @@ app.directive('quesText', function($sce) {
   }
 })
 
+*/

@@ -6,9 +6,11 @@ app.directive('addEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
           scope.showAddForm = function () {
             if (!scope.showingAdd) {
               scope.showingAdd = true;
+
             } else {
               scope.showingAdd = false;
               scope.resetEntity();
+              console.log(scope.newEntity)
             };
           };
 
@@ -21,15 +23,12 @@ app.directive('addEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
           //creates new element of array and sends new entity on server
           scope.addEntity = function () {
             var newData = scope.newEntity;
-            console.log(newData)
             addParentEntityId(newData);
-            console.log(newData)
             entitiesSrvc.createEntity(scope.thisEntity, newData)
             .then(function (resp) {
               addRespHandler (resp, newData);
             });
           };
-
           //if entity depends of some entity function adds parentEntity_id property
           function addParentEntityId (newData) {
             if (scope.currentEntity.by) {
