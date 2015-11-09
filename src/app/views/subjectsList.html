@@ -11,11 +11,11 @@
                 <div class=" row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-4">
-                      <input class="form-control width-max navbar-btn" placeholder="Введіть назву предмету" type='text' ng-model="newSubject.faculty_name" required
+                      <input class="form-control width-max navbar-btn" placeholder="Введіть назву предмету" type='text' ng-model="newEntity.subject_name" required
                       >
                     </div>
                     <div class="col-md-6">
-                      <input class="form-control width-max navbar-btn" placeholder="Вкажіть деталі" type='text' ng-model="newEntity.faculty_description" required>
+                      <input class="form-control width-max navbar-btn" placeholder="Вкажіть деталі" type='text' ng-model="newEntity.subject_description" required>
                     </div>
                     <div class="col-md-2">
                       <button type="submit" class="btn btn-success pull-right width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
