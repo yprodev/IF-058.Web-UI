@@ -48,7 +48,9 @@
                     </div>
                 </div>
 
-                <div ng-show="!entities">{{noData}}</div>
+                <button class="btn btn-primary pull-right" ui-sref="admin.timeTable({id:entities[0].test_id})" ng-click="">Розклад</button>
+                
+                 <div ng-show="!entities">{{noData}}</div>
                 <!-- The table for list of Entities -->
                 <table ng-show="entities" class="table table-hover .table-condensed">
                     <thead class="usCenter">

@@ -18,7 +18,7 @@
                                        ng-model="newEntity.group_name" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="number" class="form-control width-max"
+                                <input type="date" class="form-control width-max"
                                        placeholder="Введіть дату тестування" ng-model="newEntity.date" required>
                             </div>
 
@@ -55,8 +55,7 @@
                         <!-- read-only cells -->
                         <td>{{$index + 1}}</td>
                         <td>{{entity.group_name}}</td>
-                        <!-- <td>{{test.subject_id}}</td>-->
-                        <td>{{entity.date}}</td>
+                        <td>{{entity.event_date}}</td>
                         <td class="usCenter">
                             <button class="btn btn-info" ng-click="showEditForm(entity)">
                                 <span class="glyphicon glyphicon-pencil"></span></button>
@@ -67,9 +66,8 @@
                     </tr>
                     <tr ng-if="entity == editingEntity" ng-repeat-end="">
                         <td>{{$index + 1}}</td>
-                        <!--написати перевірку на ввід чисел при редагуванні-->
                         <td><input class="form-control width-max" ng-model="editedEntity.new_group_name"></td>
-                        <td><input class="form-control width-max" ng-model="editedEntity.new_date"></td>
+                        <td><input type="date" class="form-control width-max" ng-model="editedEntity.new_date"></td>
                         <td class="usCenter col-md-2">
                             <button class="btn btn-success" ng-click="editEntity(entity)">
                                 <span class="glyphicon glyphicon-ok"></span></button>
