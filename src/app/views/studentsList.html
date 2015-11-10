@@ -189,17 +189,13 @@
 									 class="form-control inputfile"
 									 aria-describedby="helpPhoto"
 									 tabindex="9"
-									 onchange="angular.element(this).scope().addImageFile(this)"
-									 ng-model="newStudent.photo"
+									 fileread="newStudent.photo"
 									 accept="image/*">
-							<a href="" 
-								 title="Tech Hours Progress" data-toggle="popover" data-placement="bottom" data-content="More stuff here.." data-trigger="hover">something to tooltip</a>
-
-						<span id="helpPhoto"
-									ng-show="addRecord.studPhoto.$invalid && addRecord.studPhoto.$dirty"
-									class="help-block error">{{ getError(addRecord.studPhoto.$error) }}
-						</span>
-
+<!-- 						<span id="helpPhoto"
+			ng-show="addRecord.studPhoto.$invalid && addRecord.studPhoto.$dirty"
+			class="help-block error">{{ getError(addRecord.studPhoto.$error) }}
+</span>
+ -->
 					</div>
 					<button type="submit"
 									class="btn btn-primary"
