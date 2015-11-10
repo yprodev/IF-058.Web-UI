@@ -348,3 +348,10 @@ label.ilabel {
 .clickable {
   cursor: pointer;
 }
+
+.glyphicon-color {
+  color: #E2FF8D;
+  &:hover {
+    color: #fff;
+  }
+}
