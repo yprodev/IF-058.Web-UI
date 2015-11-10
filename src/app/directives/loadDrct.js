@@ -10,7 +10,8 @@ app.directive('fileread', [function () {
 
 	return {
 		scope: {
-			fileread: '='
+			fileread: '=',
+			getstr: '&'
 		},
 		link: function (scope, element, attributes) {
 			element.bind("change", function (changeEvent) {
