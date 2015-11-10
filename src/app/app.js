@@ -137,13 +137,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('admin.usersTabs.students', {
 			url:'/students',
-			templateUrl: 'app/views/getStudents.html',
-			controller: 'getStudentsCtrl'
+			templateUrl: 'app/views/studentsList.html'
 		}).
 		state('admin.addStudent', {
 			url:'/students/addStudent',
-			templateUrl: 'app/views/addStudentRecord.html',
-			controller: 'addStudentCtrl'
+			templateUrl: 'app/views/addStudentRecord.html'
 		}).
 		state('admin.timeTable', {
 			url:'/timeTable/:id',
