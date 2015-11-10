@@ -55,7 +55,15 @@ app.value("entityObj", {
       true_answer: '',
       answer_text: '',
       attachment: ''
-    }
+    },
+    "timeTable": {
+      by: {
+        parentEntity: "subject"
+      },
+      group_name: '',
+      event_date: ''
+      }
+
 
     //... and other entities
   });
@@ -129,13 +137,18 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('admin.usersTabs.students', {
 			url:'/students',
-			templateUrl: 'app/views/studentsList.html',
+			templateUrl: 'app/views/getStudents.html',
 			controller: 'getStudentsCtrl'
 		}).
 		state('admin.addStudent', {
 			url:'/students/addStudent',
 			templateUrl: 'app/views/addStudentRecord.html',
 			controller: 'addStudentCtrl'
+		}).
+		state('admin.timeTable', {
+			url:'/timeTable/:id',
+			templateUrl: 'app/views/timeTableList.html',
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.usersTabs.addAdmin', {
 			url: '/addAdmin',
