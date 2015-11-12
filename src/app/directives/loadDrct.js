@@ -14,7 +14,9 @@ app.directive('fileread', [function () {
 			getstr: '&'
 		},
 		link: function (scope, element, attributes) {
+			console.log(element)
 			element.bind("change", function (changeEvent) {
+				console.log(changeEvent)
 
 				// Gets file name and cut it
 				var fileName = changeEvent.target.files[0].name;
@@ -26,7 +28,7 @@ app.directive('fileread', [function () {
 
 				var reader = new FileReader();
 				reader.onload = function (loadEvent) {
-
+					console.log(loadEvent)
 					scope.$apply(function () {
 						//string base64 encoded
 						scope.fileread = loadEvent.target.result;

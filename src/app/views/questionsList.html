@@ -28,10 +28,10 @@
                                         <option value="2">мульти-вибір</option>
                                     </select>
                                 </div>
-                                <div class="col-md-11">
-                                <div class="col-md-2">
+                                <div class="row col-md-11">
+                                <div class="col-md-4">
                                     <loadfile-drct></loadfile-drct>
-                                    <div ng-if entity.attachment="" >sDadsafasfF</div>
+                                    <img class="picture new-picture" ng-src="{{newEntity.attachment}}" ng-show="newEntity.attachment"  alt=""/>
                                 </div>
                                 <div class="col-md-2 pull-right">
                                     <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
@@ -88,13 +88,10 @@
                                     <textarea class="form-control width-max navbar-btn" ques-text  ng-model="editedEntity.new_question_text"></textarea>
                                 </div>
                                 <div class="col-md-5 ">
-                                    <div ng-if="!(entity.attachment == 'added' || entity.attachment == '')" > <file-model></file-model>
-                                        <img class="edited-picture" ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
-                                        <img class="close-button-questions" src="img/close_button.png" height="30px" delete-picture ng-click="closePicture(entity)">
-
-                                    </div>
-                                    <div ng-if="(entity.attachment == 'added' || entity.attachment == '')">
+                                    <div>
                                         <file-model></file-model>
+                                        <img class="picture edited-picture" ng-src="{{editedEntity.new_attachment}}" ng-show="editedEntity.new_attachment"  alt=""/>
+                                        <img class="close-button-questions" src="img/close_button.png" height="30px" ng-show="editedEntity.new_attachment" ng-click="closePicture(entity)">
                                     </div>
                                 </div>
                             </td>
