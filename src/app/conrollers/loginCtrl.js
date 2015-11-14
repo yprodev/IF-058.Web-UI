@@ -2,9 +2,9 @@ app.controller('loginCtrl', ['$scope', '$state', 'authSrvc', function($scope, $s
     $scope.getError = function (error) {
         if (angular.isDefined(error)) {
             if (error.required) {
-                return "Field can't be empty!";
+                return "Поле не може бути пустим!";
             } else if (error.minlength) {
-                return "No less than 4 characters!";
+                return "Поле не може містити менше 4-х символів!";
             }
         }
     };
