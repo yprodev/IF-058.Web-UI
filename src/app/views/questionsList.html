@@ -71,9 +71,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse">
+                        <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse" ng-click="enterToEntity('admin.answers', entity.question_id)">
                             <!-- read-only cells -->
-                            <td class="usCenter"><a ui-sref="admin.answers({id:entity.question_id})">{{$index + 1}}</a></td>
+                            <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-7" ng-bind-html="entity.question_text | unsafe"></td>
                             <td class="col-md-1 usCenter">{{entity.level}}</td>
                             <td class="col-md-2 usCenter">{{entity.type | avialibility}}</td>
