@@ -220,6 +220,15 @@ gulp.task('dist', ['dist-js', 'dist-ven-css', 'dist-sass', 'dist-html', 'dist-im
  * _________________________________________________________________________
 */
 
+gulp.task('ext-move', ['build', 'move', 'ext-watch']);
+
+gulp.task('ext-watch', function() {
+	gulp.watch(path.watch.html, ['build-html', 'ext-move']); // END OF WORK
+	gulp.watch(path.watch.css, ['build-sass', 'ext-move']);
+	gulp.watch(path.watch.js, ['build-all-js', 'ext-move']);
+	gulp.watch(path.watch.img, ['build-img', 'ext-move']);
+});
+
 var config = {
 	host: '192.168.56.101',
 	port: 22,

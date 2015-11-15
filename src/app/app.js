@@ -55,7 +55,15 @@ app.value("entityObj", {
       true_answer: '',
       answer_text: '',
       attachment: ''
-    }
+    },
+    "timeTable": {
+      by: {
+        parentEntity: "subject"
+      },
+      group_name: '',
+      event_date: ''
+      }
+
 
     //... and other entities
   });
@@ -69,7 +77,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('admin', {
 			url: '/admin',
-			templateUrl: 'app/views/admin.html'
+			templateUrl: 'app/views/admin.html',
+			controller: 'loginCtrl'
 		}).
 		state('admin.main', {
 			url: '/main',
@@ -77,7 +86,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('user', {
 			url: '/user',
-			templateUrl: 'app/views/user.html'
+			templateUrl: 'app/views/user.html',
+			controller: 'loginCtrl'
 		}).
 		state('admin.educationInfo', {
 			url: '/educationInfo',
@@ -129,13 +139,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('admin.usersTabs.students', {
 			url:'/students',
-			templateUrl: 'app/views/getStudents.html',
-			controller: 'getStudentsCtrl'
+			templateUrl: 'app/views/studentsList.html'
 		}).
 		state('admin.addStudent', {
 			url:'/students/addStudent',
-			templateUrl: 'app/views/addStudentRecord.html',
-			controller: 'addStudentCtrl'
+			templateUrl: 'app/views/addStudentRecord.html'
+		}).
+		state('admin.timeTable', {
+			url:'/timeTable/:id',
+			templateUrl: 'app/views/timeTableList.html',
+			controller: 'entitiesCtrl'
 		}).
 		state('admin.usersTabs.addAdmin', {
 			url: '/addAdmin',

@@ -28,9 +28,10 @@
                                         <option value="2">мульти-вибір</option>
                                     </select>
                                 </div>
-                                <div class="col-md-11">
-                                <div class="col-md-2">
+                                <div class="row col-md-11">
+                                <div class="col-md-4">
                                     <loadfile-drct></loadfile-drct>
+                                    <img class="picture new-picture" ng-src="{{newEntity.attachment}}" ng-show="newEntity.attachment"  alt=""/>
                                 </div>
                                 <div class="col-md-2 pull-right">
                                     <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
@@ -84,18 +85,17 @@
                             <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-7">
                                 <div class="col-md-7">
-                                    <textarea class="form-control width-max navbar-btn" ng-model="editedEntity.new_question_text"></textarea>
+                                    <textarea class="form-control width-max navbar-btn" ques-text  ng-model="editedEntity.new_question_text"></textarea>
                                 </div>
                                 <div class="col-md-5 ">
-                                    <div ng-if="!(entity.attachment == 'added' || entity.attachment == '')" > <file-model></file-model>
-                                        <img ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
-                                    </div>
-                                    <div ng-if="(entity.attachment == 'added' || entity.attachment == '')">
+                                    <div>
                                         <file-model></file-model>
+                                        <img class="picture edited-picture" ng-src="{{editedEntity.new_attachment}}" ng-show="editedEntity.new_attachment"  alt=""/>
+                                        <img class="close-button-questions" src="img/close_button.png" height="30px" ng-show="editedEntity.new_attachment" ng-click="closePicture(entity)">
                                     </div>
                                 </div>
                             </td>
-                            <td class="col-md-1 usCenter"><input type="number" min="1" class="form-control width-max" ng-model="editedEntity.new_level"></td>
+                            <td class="col-md-1 usCenter"><input  class="form-control width-max" ng-model="editedEntity.new_level"></td>
                             <td class="col-md-2 usCenter">
                                 <select class="form-control width-max navbar-btn" ng-model="editedEntity.new_type">
                                     <option value="1">простий вибір</option>

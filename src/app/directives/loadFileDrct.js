@@ -1,79 +1,104 @@
-/*
-app.directive('loadfileDrct', function() {
-  return {
-    template: '<input id="upload"  class="button" type="file" name="file" accept="image/!*" onchange="angular.element(this).scope().loadFile(this.files)"/> ' +
-    '<img id="imageAttachment" ng-src="{{imagecontent}}" height="200px">',
+app.directive('loadfiledesignDrct', function () {
+  function fileCutName(str, slength) {
+    if (str.length >= 15) {
+      return '... ' + str.slice(slength);
+    }
+    return str;
+  }
 
-    link: function(scope, el, attrs) {
-      scope.newEntity = {
-        attachment:''
-      }
-      scope.$watch('showingAdd', function (newValue, oldValue) {
-        if (newValue == false) {
-          console.log(scope.newEntity.attachment)
-          angular.element(document.querySelector('#imagecontent'))[0].attributes["src"].value = "";
-        }
-      })
-      scope.$watch(scope.resetEntity(), function (newValue, oldValue) {
-        console.log('asdasdas')
-        if (newValue == false) {
-          console.log(angular.element(document.querySelector('#imageAttachment'))[0].attributes);
-          angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";
-        }
-      })
-    }}
-})*/
+})
 
-app.directive('loadfileDrct', function() {
+app.directive('loadfileDrct', function () {
+  function fileCutName(str, slength) {
+    if (str.length >= 15) {
+      return '... ' + str.slice(slength);
+    }
+    return str;
+  }
   return {
     restrict: 'E',
-    template: '<input type="file" class="button" loadfile-drct="customer.file" onchange="angular.element(this).scope().loadFile(this.files)"/>' +
-    '<img id="imageAttachment" ng-src="{{newEntity.attachment}}" alt="" height="100px"/>',
-    link:function(scope, element, attrs, ctrl){
-      scope.newEntity = {
-        attachment: ''
-      }
-      scope.loadFile = function(files){
-        scope.files = files;
+    template: '<label class="btn btn-default btn-sm" for="photo">' +
+    '<span class="glyphicon glyphicon-cloud-upload"></span> <span class="file-name">Оберіть картинку</span></label>' +
+    '<input type="file" id="photo" class="form-control inputfile"/>',
+    link: function (scope, element, attrs) {
+        element.bind('change', function (changeEvent) {
+        var fileName = changeEvent.target.files[0].name;
+        scope.cutName = fileCutName(fileName, -15);
+        var el = element.parent().find('.file-name')
+        el.text(scope.cutName);
         var reader = new FileReader();
-        reader.onload = function(e) {
-          scope.$watch('showingAdd', function (newValue, oldValue) {
-            if (newValue == true) {
-              scope.newEntity.attachment = e.target.result
-            }
-          })
+        reader.onload = function (e) {
+          scope.$apply(function () {
+            scope.newEntity.attachment = e.target.result;
+          });
           scope.$watch('showingAdd', function (newValue, oldValue) {
             if (newValue == false) {
-              scope.newEntity = {
-                attachment: ''
-              }
-              console.log(scope.newEntity.attachment)
+              //console.log(scope.newEntity)
               angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";
             }
           })
+
         };
-        reader.readAsDataURL(files[0]);
-      }
-    }}
+        reader.readAsDataURL(changeEvent.target.files[0]);
+      })
+    }
+  }
 })
 
 
-
-app.directive('fileModel', function() {
+app.directive('fileModel', function () {
+  function fileCutName(str, slength) {
+    if (str.length >= 15) {
+      return '... ' + str.slice(slength);
+    }
+    return str;
+  }
   return {
     restrict: 'E',
-    template: '<input type="file" class="button change navbar-btn" onchange="angular.element(this).scope().loadEditedFile(this.files)"/>',
-    link:function(scope, element, attrs){
-      scope.loadEditedFile = function(files){
-        scope.files = files;
-        console.log(files)
+    template: '<label class="btn btn-default btn-sm" for="photo">' +
+    '<span class="glyphicon glyphicon-cloud-upload"></span> <span class="file-name">Оберіть картинку</span></label>' +
+    '<input type="file" id="photo" class="form-control inputfile"/>',
+    link: function (scope, element, attrs) {
+      element.bind('change', function (changeEvent) {
+        var fileName = changeEvent.target.files[0].name;
+        scope.cutName = fileCutName(fileName, -15);
+        var el = element.parent().find('.file-name')
+        el.text(scope.cutName);
         var reader = new FileReader();
-        reader.onload = function(e) {
-          scope.editedEntity.new_attachment = e.target.result
-          console.log(e.target)
+        reader.onload = function (e) {
+          scope.$apply(function () {
+            scope.editedEntity.new_attachment = e.target.result
+          });
+        };
+        reader.readAsDataURL(changeEvent.target.files[0]);
+      })
+      scope.closePicture = function () {
+        console.log('asdasd')
+        scope.editedEntity.new_attachment = ''
+        scope.entity.attachment = ''
+      }
+    }
+  }
+  /*return {
+    restrict: 'E',
+    template: '<input type="file" class="button change navbar-btn" onchange="angular.element(this).scope().loadEditedFile(this.files)"/>',
+    link: function (scope, element, attrs) {
+      scope.loadEditedFile = function (files) {
+        scope.files = files;
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          scope.$apply(function () {
+            scope.editedEntity.new_attachment = e.target.result
+          });
         };
         reader.readAsDataURL(files[0]);
       }
-    }}
+      scope.closePicture = function () {
+        console.log('asdasd')
+        scope.editedEntity.new_attachment = ''
+        scope.entity.attachment = ''
+      }
+    }
+  }*/
 })
 

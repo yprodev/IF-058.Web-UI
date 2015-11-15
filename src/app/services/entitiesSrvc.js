@@ -4,7 +4,8 @@ app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
 
 var dependencies = {
     group : 'speciality,faculty',
-    student : 'group'
+    student : 'group',
+    test: 'subject'
 };
 
 
@@ -45,6 +46,11 @@ var dependencies = {
 
     getRecordsRangeByEntity: function (entity, parentEntity, id) {
       return $http.get(baseUrl + entity + '/getRecordsRangeBy' + parentEntity[0].toUpperCase()+parentEntity.slice(1) +'/'+ id + '/' + '100/' + '0')
+        .then(fulfilled, rejected);
+    },
+
+    getEntitiesForEntity: function (entity, parentEntity, id) {
+      return $http.get(baseUrl + entity + '/getTimeTablesForSubject' + '/' + id)
         .then(fulfilled, rejected);
     },
 
