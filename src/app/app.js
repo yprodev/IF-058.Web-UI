@@ -77,7 +77,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('admin', {
 			url: '/admin',
-			templateUrl: 'app/views/admin.html'
+			templateUrl: 'app/views/admin.html',
+			controller: 'loginCtrl'
 		}).
 		state('admin.main', {
 			url: '/main',
@@ -85,7 +86,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 		}).
 		state('user', {
 			url: '/user',
-			templateUrl: 'app/views/user.html'
+			templateUrl: 'app/views/user.html',
+			controller: 'loginCtrl'
 		}).
 		state('admin.educationInfo', {
 			url: '/educationInfo',
