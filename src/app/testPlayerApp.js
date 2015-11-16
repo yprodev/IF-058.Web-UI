@@ -18,7 +18,6 @@ testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc','$statePar
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
       url = 'timeTable/getTimeTablesForGroup/'
       data = resp.data[0].group_id;
-      //console.log('группа: ' + data)
       return userSrvc.getInfoForStudent(url, data)
     }).then(function (groupInfo) {
       url = 'subject/getRecords/'
