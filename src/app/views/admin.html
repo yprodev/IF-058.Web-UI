@@ -50,29 +50,28 @@
                 <li><a ui-sref=".educationInfo.faculties"><span class="glyphicon glyphicon-tag"> </span>Довідники</a>
                 </li>
               </ul>
-
-                  <div class="input-group margin navbar-right">
-                    <span id="basic-addon1" class="input-group-addon">
-                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                      {{detectUser}}
-                    </span>
-                    <span class="input-group-btn">
-                      <button type="button" class="btn btn-danger marginTop" title="Вихід" ng-click="exit()">
-                        <span class="glyphicon glyphicon-off"></span> Вихід</button>
-                    </span>
-                  </div>
-                  <hr class="hidden-sm hidden-md hidden-lg">
-                  <div class="input-group margin navbar-right" style="width:60%;">
-                    <input type="text" ng-model="searchItem" class="form-control " placeholder="Пошук" aria-describedby="search-icon">
-                    <div class="input-group-addon" id="search-icon">
-                      <span class="glyphicon glyphicon-search"></span>
-                    </div>
-                  </div>
+              <div class="input-group margin navbar-right">
+                <span id="basic-addon1" class="input-group-addon">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  {{detectUser}}
+                </span>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-danger marginTop" title="Вихід" ng-click="exit()">
+                    <span class="glyphicon glyphicon-off"></span> Вихід</button>
+                </span>
+              </div>
+              <hr class="hidden-sm hidden-md hidden-lg">
+              <div class="input-group margin navbar-right width60prc">
+                <input type="text" ng-model="searchItem" class="form-control " placeholder="Пошук" aria-describedby="search-icon">
+                <div class="input-group-addon" id="search-icon">
+                  <span class="glyphicon glyphicon-search"></span>
+                </div>
+              </div>
             </div>
           </div>
           <div class="hidden-sm hidden-xs">
-            <div class="col-sm-5">
-              <div class="input-group margin">
+            <div class="col-md-4">
+              <div class="input-group margin col-md-12">
                 <input type="text" ng-model="searchItem" class="form-control" placeholder="Пошук" aria-describedby="search-icon">
                 <div class="input-group-addon" id="search-icon">
                   <span class="glyphicon glyphicon-search"></span>
