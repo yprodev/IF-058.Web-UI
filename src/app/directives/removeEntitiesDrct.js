@@ -31,7 +31,7 @@ app.directive('removeEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
                   scope.showInformModal("Неможливо видалити запис. Запис має залежні об'єкти.");
                   break;
                 default:
-                  scope.showInformModal("Помилка редагування запису: " + resp.data.response);
+                  scope.showInformModal("Помилка видалення запису: " + resp.data.response);
               };
             };
       }
