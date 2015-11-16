@@ -1,5 +1,5 @@
 ;
-var app = angular.module('app', ['ui.router']);
+var app = angular.module('app', ['ui.router', 'testPlayerApp']);
 
 app.constant("baseUrl", "http://dtapi.local/");
 app.value("entityObj", {
@@ -154,7 +154,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 			url: '/addAdmin',
 			templateUrl: 'app/views/addAdmin.html',
 			controller: 'entitiesCtrl'
-	});
+	}).
+		state('user.tests', {
+			url: '/tests',
+			templateUrl: 'app/views/userTests.html',
+			controller: 'userTestListCtrl'
+		});
 
 		$urlRouterProvider.otherwise('/');
 }]);

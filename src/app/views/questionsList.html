@@ -49,6 +49,8 @@
                     </div>
 
                     <button class="btn btn-primary pull-right" ui-sref="admin.testDetails({id:entities[0].test_id})" ng-click="">Параметри тесту</button>
+                    <br/>
+                    <br/>
                     <div ng-show="!entities">{{noData}}</div>
                     <!-- The table for list of Entities -->
                     <table ng-show="entities" class="table table-hover .table-condensed">
@@ -71,9 +73,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse">
+                        <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse" ng-click="enterToEntity('admin.answers', entity.question_id)">
                             <!-- read-only cells -->
-                            <td class="usCenter"><a ui-sref="admin.answers({id:entity.question_id})">{{$index + 1}}</a></td>
+                            <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-7" ng-bind-html="entity.question_text | unsafe"></td>
                             <td class="col-md-1 usCenter">{{entity.level}}</td>
                             <td class="col-md-2 usCenter">{{entity.type | avialibility}}</td>
