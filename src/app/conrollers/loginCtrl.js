@@ -23,7 +23,7 @@ app.controller('loginCtrl', ['$scope', '$state', 'authSrvc', function($scope, $s
             } else if (response.data.response === "ok" && response.data.roles[1] === 'student') {
                 localStorage.userName = response.data.username;
                 localStorage.userId = response.data.id;
-                $state.go('user');
+                $state.go('user.subjects');
             } else {
                 $scope.wrongCredentials = true;
             };
