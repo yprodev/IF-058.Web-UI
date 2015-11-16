@@ -159,6 +159,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       templateUrl: 'app/views/userSubjects.html',
       controller: 'userSubjectListCtrl'
     }).
+    state('user.results', {
+      url: '/results',
+      templateUrl: 'app/views/userResults.html',
+      controller: 'userResultListCtrl'
+    }).
     state('user.tests', {
       url: '/tests/:id',
       templateUrl: 'app/views/userTests.html',

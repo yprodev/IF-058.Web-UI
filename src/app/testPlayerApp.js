@@ -35,7 +35,7 @@ testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc','$statePar
       //console.log('предмети опис:', subjectInfo.data[0])
       data = subjectInfo.data
       $scope.entities = data
-      //console.log($scope.enteties)
+      //console.log($scope.entities)
     })
 
     /*.then(function (groupInfo) {
@@ -58,11 +58,56 @@ testPlayerApp.controller('userTestListCtrl', ['$scope', 'userSrvc','$stateParams
     var url = 'test/getTestsBySubject/';
     var data = $stateParams.id
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
-      console.log('response', resp.data)
+      //console.log('response', resp.data)
       $scope.entities = resp.data
     })
   }
   $scope.getStudentTests();
+}]);
+
+testPlayerApp.controller('userResultListCtrl', ['$scope', 'userSrvc','$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
+  $scope.getStudentResults = function () {
+    var url = 'result/getRecordsByStudent/'
+    var data = '4'
+    /*localStorage.userId*/
+    userSrvc.getInfoForStudent(url, data).then(function (resp) {
+      console.log('response', resp.data[0])
+      console.log('resp.data', resp.data)
+      return resp.data
+    }).then(function (resp) {
+      console.log('resp',resp)
+      var entities = []
+      for (var i=0; i<resp.length; i++){
+        entities.push(resp[i].result)//вывести во вью
+        entities.push(resp[i].session_date)
+        idArr = []
+        idArr.push(resp[i].test_id)
+      }
+      url = 'EntityManager/getEntityValues'
+      postData = {entity: "Test", ids: idArr}
+      $scope.entities = entities
+      return userSrvc.postInfoForStudent(url, postData)
+    }).then(function (resp) {
+      for (var i=0; i<resp.length; i++){
+        idArr=[]
+        idArr.push(resp.data[0].subject_id)
+      }
+      console.log('idArr',idArr)
+      postData = {entity: "Subject", ids: idArr}
+      //console.log('postdata', postData)
+      return userSrvc.postInfoForStudent(url, postData)
+    }).then(function (resp) {
+      console.log('resp', resp)
+      for (var i=0; i<resp.data.length; i++) {
+        console.log('resp[i].data.subject_name',resp.data[i].subject_name)
+        $scope.entities.push(resp.data[i].subject_name)
+      }
+      console.log($scope.entities)
+      console.log('lastresp', resp)
+      console.log('$scope.entities[0]')
+    })
+    }
+  $scope.getStudentResults()
 }]);
 
 testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
@@ -70,6 +115,11 @@ testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl)
     getInfoForStudent: function (url, data) {
       return $http.get(baseUrl + url + data)
         .then(fulfilled, rejected);
+    },
+      postInfoForStudent: function(url, postData){
+        return $http.post(baseUrl + url, postData)
+          .then(fulfilled, rejected);
+
     }
   }
   function fulfilled(response) {

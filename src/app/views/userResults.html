@@ -1,0 +1,44 @@
+<div>
+    <div class="wrapper panel panel-success no-border">
+        <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Результати </div>
+        <!-- The button and form to add Entity -->
+        <div class="col-md-12">
+            <div>
+                <div ng-show="!entities">{{noData}}</div>
+                <!-- The table for list of Entities -->
+                <table  class="table table-hover .table-condensed">
+                    <thead class="usCenter">
+                    <tr>
+                        <th>№</th>
+                        <th class="col-md-6 clickable" ng-click="sortType = 'subject_name'; sortReverse = !sortReverse">
+                            Предмет
+                            <i ng-show="sortType == 'subject_name' && !sortReverse"
+                               class="glyphicon glyphicon-chevron-down"></i>
+                            <i ng-show="sortType == 'subject_name' && sortReverse"
+                               class="glyphicon glyphicon-chevron-up"></i>
+                        </th>
+                        <th class="col-md-6 clickable"
+                            ng-click="sortType = 'subject_description'; sortReverse = !sortReverse">Деталі
+                            <i ng-show="sortType == 'subject_description' && !sortReverse"
+                               class="glyphicon glyphicon-chevron-down"></i>
+                            <i ng-show="sortType == 'subject_description' && sortReverse"
+                               class="glyphicon glyphicon-chevron-up"></i>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody class="usCenter">
+                    <tr ng-repeat="entity in entities | filter:searchItem | orderBy:sortType:sortReverse"
+                        id="row{{$index + 1}}" ng-click="enterToEntity('user.tests', entity.subject_id)" ng-click="getStudentTests()">
+                        <!-- read-only cells -->
+                        <td> {{$index + 1}} </td>
+                        <td class="col-md-3">{{entities[0]}}</td>
+                        <td class="col-md-4">{{entities[1]}}</td>
+                        <td class="col-md-4">{{entities[2]}}</td>
+                    </tr >
+                    </tbody>
+                </table>
+                <inform-modal-drct></inform-modal-drct>
+            </div>
+        </div>
+    </div>
+</div>
