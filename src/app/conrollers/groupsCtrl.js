@@ -38,15 +38,19 @@ app.controller('groupsCtrl', ['$scope', 'entitiesSrvc', function($scope, entitie
     };
     // console.log(newData);
     entitiesSrvc.createEntity($scope.thisEntity, newDataServer).then(function (resp) {
-      if (resp.data.response == "ok") {
-        newData.group_id = resp.data.id;
-        // console.log(resp);
-        $scope.groups.list.push(newData);
-      } else {
-        alert ("Помилка " + resp.data.response);
+      switch (resp.data.response) {
+        case "ok":
+          newData.group_id = resp.data.id;
+          $scope.groups.list.push(newData);
+          $scope.showAddForm();
+          break;
+        case "error 23000":
+          $scope.showInformModal("Зазначене ім'я вже існує");
+          break;
+        default:
+          $scope.showInformModal("Помилка запису: " + resp.data.response);
       };
     });
-    $scope.showAddForm();
   };
 
 
@@ -71,18 +75,26 @@ app.controller('groupsCtrl', ['$scope', 'entitiesSrvc', function($scope, entitie
       editingData.speciality_name = $scope.groups.speciality[editingData.speciality_id];
       var currentId = $scope.currentId;
       entitiesSrvc.updateEntity($scope.thisEntity, currentId, editedDataServer).then(function (resp) {
-      if (resp.data.response == "ok") {
-        for (var i = 1; i < $scope.groups.list.length; i++) {
+      switch (resp.data.response) {
+        case "ok":
+          for (var i = 1; i < $scope.groups.list.length; i++) {
 
-          if ($scope.groups.list[i].group_id == currentId) {
-            $scope.groups.list[i] = editingData;
-          } ; 
-        };
-      } else {
-        alert ("Помилка " + resp.data.response);
+            if ($scope.groups.list[i].group_id == currentId) {
+              $scope.groups.list[i] = editingData;
+            };
+          };
+          $scope.editingData = null;
+          break;
+        case "error 23000":
+          $scope.showInformModal("Зазначене ім'я вже існує");
+          break;
+        case "error":
+          $scope.showInformModal("Дані не змінено");
+          break;
+        default:
+          $scope.showInformModal("Помилка запису: " + resp.data.response);
       };
     });
-    $scope.editingData = null;
     $scope.currentId = null;
     };
 
@@ -102,16 +114,25 @@ app.controller('groupsCtrl', ['$scope', 'entitiesSrvc', function($scope, entitie
   $scope.removeGroup = function () {
     var currentGroup = $scope.activeGroup;
     var currentId = $scope.activeGroup;
-    console.log(currentGroup);
     entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
-      if (resp.data.response == "ok") {
+      switch (resp.data.response) {
+        case "ok":
             var index = $scope.groups.list.indexOf(currentGroup);
             $scope.groups.list.splice(index, 1);
-      } else {
-        alert ("Помилка " + resp.data.response);
+        break;
+        case "error 23000":
+          $scope.showInformModal("Неможливо видалити запис. Запис має залежні об'єкти.");
+          break;
+        default:
+          $scope.showInformModal("Помилка видалення запису: " + resp.data.response);
       };
     });
     $scope.activateGroup();
+  };
+
+  $scope.showInformModal = function(infMsg) {
+    $scope.infMsg = infMsg;
+    angular.element(document.querySelector('#informModal')).modal();
   };
 
 }]);
