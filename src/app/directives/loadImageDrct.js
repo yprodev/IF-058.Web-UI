@@ -8,27 +8,14 @@ app.directive('imageLoad', ['$timeout', function ($timeout) {
 	// imageLoad directive controller function
 	function imageLoadCtrl ($scope) {
 
-		$scope.imageString = 'HOp-Hay-lala';
-
-		console.log('this is src', $scope.imageString);
+		$scope.studPhoto = {
+			src: ''
+		};
 
 		var ctrl = this;
 		ctrl.setImgSrc = function (src) {
-			$scope.imageString = src;
+			$scope.studPhoto.src = src; //END observe
 		};
-
-		ctrl.getInfo = function () {
-			return 'lalal';
-		};
-
-
-
-		// -------------------------------------------------
-		$timeout(function () {
-			console.log('this is changed src ', $scope.imageString);
-		}, 11000);
-		// -------------------------------------------------
-
 
 	}
 
@@ -36,7 +23,7 @@ app.directive('imageLoad', ['$timeout', function ($timeout) {
 		restrict: 'E',
 		template: [
 			'<div class="form-group">',
-				'<image-label></image-label>',
+				'<image-label image="{{ studPhoto.src }}"></image-label>',
 				'<image-input></image-input>',
 			'</div>'
 			].join('\n'),
@@ -58,11 +45,12 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 
 	return {
 		restrict: 'E',
-		// scope: {},
-		// require: 'filereadd',
+		scope: {
+			image: '@'
+		},
 		require: ['^imageLoad', 'imageLabel'],
 		template: [
-			'<label class="btn btn-default btn-sm" for="photo" data-toggl="popover">',
+			'<label class="btn btn-default btn-sm" for="photo">',
 				'<span class="glyphicon glyphicon-cloud-upload"></span>',
 				'<span class="file-name">Choose Student\'s Photo</span>',
 			'</label>'
@@ -73,25 +61,35 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 		link: function ($scope, $element, $attrs, ctrls) {
 
 			var parentCtrl = ctrls[0]
-				, ownCtrl = ctrls[1];
+				, ownCtrl = ctrls[1]
+				, img;
 
-			if (!$attrs.toggl == 'popover' && !parentCtrl.src) { return; }
-			$($element).popover({
-				html: true,
-				trigger: 'hover',
-				placement: 'top',
-				title: 'SOME INFO',
-				content: function () {
-					return '<img src="" />';
-				}
-			});
+				console.log('SI before changing ', $scope.image);
 
 				// -------------------------------------------------
 				$timeout(function () {
-					console.log('popover ', parentCtrl.src);
-				}, 9000);
+					console.log('popoover attrs ', $attrs);
+				}, 3000);
 				// -------------------------------------------------
-		}
+
+				console.log('hiibusa');
+
+				$attrs.$observe('image', function () {
+					img = $scope.image;
+
+					$($element).popover({
+						html: true,
+						trigger: 'hover',
+						placement: 'top',
+						title: 'SOME INFO',
+						content: function () {
+							return '<img ng-src="' + img + '" />';
+						}
+					});
+
+				});
+
+		}// END link function
 	};
 }]);
 
@@ -112,15 +110,20 @@ app.directive('imageInput', ['$timeout', function ($timeout) {
 	return {
 
 		template: '<input type="file" name="studPhoto" id="photo" class="form-control inputfile" aria-describedby="helpPhoto" tabindex="9" image="studPhoto" accept="image/*">',
-
-		controller: function ($scope, $element) {
-			var ctrl = this
+		scope: {
+			fileread: '=image',
+		},
+		require: ['^imageLoad'],
+		link: function ($scope, $element, $attrs, ctrls) {
+			var parentCtrl = ctrls[0]
+				, ownCtrl = ctrls[1]
+				, fileTarget
 				, fileName
 				, el = $element.parent().find('.file-name')
-				, fileTarget
-				, reader
-				, resPhoto;
+				, reader;
 
+			// This functionality needs to be here ...
+			// ... because of access to parentCtrl methods after onload event
 			$element.bind('change', function (changeEvent) {
 
 				// Define fileTarget and fileName after change method (jqLite method)
@@ -135,38 +138,14 @@ app.directive('imageInput', ['$timeout', function ($timeout) {
 				reader.onload = function (loadEvent) {
 					$scope.$apply(function () {
 						$scope.fileread = loadEvent.target.result;
+
+						// Transfer data to the parent directive controller
+						parentCtrl.setImgSrc($scope.fileread);
 					});
 				};
 				reader.readAsDataURL(fileTarget);
 
 			}); // END element bind
-
-		},// END controller
-
-		scope: {
-			fileread: '=image',
-		},
-		require: ['^imageLoad', 'imageInput'],
-		link: function ($scope, $element, $attrs, ctrls) {
-			var parentCtrl = ctrls[0]
-				, ownCtrl = ctrls[1];
-
-			// var imgString = (ownCtrl.getFile());
-
-			// -------------------------------------------------
-			$timeout(function () {
-				console.log('link function fileread ', $scope.fileread);
-			}, 9000);
-			// -------------------------------------------------
-			// HERE WE ARE NOW
-			// -------------------------------------------------
-			$timeout(function () {
-				parentCtrl.setImgSrc($scope.fileread);
-			}, 7000);
-			// -------------------------------------------------
-
-
-			console.log('getting from parent', parentCtrl.getInfo());
 
 		} // END LINK FUNCTION
 	};
