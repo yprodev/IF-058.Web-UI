@@ -21,6 +21,7 @@ app.controller('loginCtrl', ['$scope', '$state', 'authSrvc', function($scope, $s
                 localStorage.adminId = response.data.id;
                 $state.go('admin.main');
             } else if (response.data.response === "ok" && response.data.roles[1] === 'student') {
+                console.log(response.data);
                 localStorage.userName = response.data.username;
                 localStorage.userId = response.data.id;
                 $state.go('user');
