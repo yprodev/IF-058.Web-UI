@@ -1,13 +1,36 @@
-app.directive('imageLoad', function () {
+app.directive('imageLoad', ['$timeout', function ($timeout) {
 
 	// imageLoad directive link function
 	function link (scope, element, attrs, ctrls) {
-		var imageLabel = ctrls[0]
-			, imageInput = ctrls[1];
+
 	}
 
 	// imageLoad directive controller function
-	function imageLoadCtrl () {}
+	function imageLoadCtrl ($scope) {
+
+		$scope.imageString = 'HOp-Hay-lala';
+
+		console.log('this is src', $scope.imageString);
+
+		var ctrl = this;
+		ctrl.setImgSrc = function (src) {
+			$scope.imageString = src;
+		};
+
+		ctrl.getInfo = function () {
+			return 'lalal';
+		};
+
+
+
+		// -------------------------------------------------
+		$timeout(function () {
+			console.log('this is changed src ', $scope.imageString);
+		}, 11000);
+		// -------------------------------------------------
+
+
+	}
 
 	return {
 		restrict: 'E',
@@ -23,18 +46,21 @@ app.directive('imageLoad', function () {
 			options: '='
 		}
 	};
-});
+}]);
+
+
+
+
+
+
 
 app.directive('imageLabel', ['$timeout', function ($timeout) {
-
-
-
 
 	return {
 		restrict: 'E',
 		// scope: {},
 		// require: 'filereadd',
-		require: ['imageLabel', '^imageLoad'],
+		require: ['^imageLoad', 'imageLabel'],
 		template: [
 			'<label class="btn btn-default btn-sm" for="photo" data-toggl="popover">',
 				'<span class="glyphicon glyphicon-cloud-upload"></span>',
@@ -44,24 +70,27 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 		controller: function ($scope, $element) {
 
 		},
-		link: function ($scope, $element, $attrs, fileCtrl) {
-			if (!$attrs.toggl == 'popover') { return; }
+		link: function ($scope, $element, $attrs, ctrls) {
+
+			var parentCtrl = ctrls[0]
+				, ownCtrl = ctrls[1];
+
+			if (!$attrs.toggl == 'popover' && !parentCtrl.src) { return; }
 			$($element).popover({
 				html: true,
 				trigger: 'hover',
 				placement: 'top',
 				title: 'SOME INFO',
 				content: function () {
-					return '<img src="' + i +'" />';
+					return '<img src="" />';
+				}
+			});
 
 				// -------------------------------------------------
 				$timeout(function () {
-					console.log('popover ', fileCtrl.filereadd);
-				}, 5000);
+					console.log('popover ', parentCtrl.src);
+				}, 9000);
 				// -------------------------------------------------
-
-				}
-			});
 		}
 	};
 }]);
@@ -81,14 +110,16 @@ app.directive('imageInput', ['$timeout', function ($timeout) {
 	}
 
 	return {
-		require: '^imageLoad',
+
 		template: '<input type="file" name="studPhoto" id="photo" class="form-control inputfile" aria-describedby="helpPhoto" tabindex="9" image="studPhoto" accept="image/*">',
+
 		controller: function ($scope, $element) {
 			var ctrl = this
 				, fileName
-				, el = $element.parent().find('.file-name')// it will be in another directive
+				, el = $element.parent().find('.file-name')
 				, fileTarget
-				, reader;
+				, reader
+				, resPhoto;
 
 			$element.bind('change', function (changeEvent) {
 
@@ -102,38 +133,42 @@ app.directive('imageInput', ['$timeout', function ($timeout) {
 
 				reader = new FileReader();
 				reader.onload = function (loadEvent) {
-
 					$scope.$apply(function () {
-						//string base64 encoded
 						$scope.fileread = loadEvent.target.result;
 					});
-				}; //END reader onload
+				};
 				reader.readAsDataURL(fileTarget);
-
-
-				// -------------------------------------------------
-				$timeout(function () {
-					console.log($scope.fileread, ' fileread xaxa');
-				}, 5000);
-				// -------------------------------------------------
 
 			}); // END element bind
 
-			ctrl.getFileTarget = function () {
-				// -------------------------------------------------
-				$timeout(function () {
-					console.log(fileTarget, ' file Target HERE');
-				}, 5000);
-				// -------------------------------------------------
-			};
-
 		},// END controller
+
 		scope: {
 			fileread: '=image',
 		},
-		// link: function (scope, element, attributes) {
+		require: ['^imageLoad', 'imageInput'],
+		link: function ($scope, $element, $attrs, ctrls) {
+			var parentCtrl = ctrls[0]
+				, ownCtrl = ctrls[1];
 
-		// } // END LINK FUNCTION
+			// var imgString = (ownCtrl.getFile());
+
+			// -------------------------------------------------
+			$timeout(function () {
+				console.log('link function fileread ', $scope.fileread);
+			}, 9000);
+			// -------------------------------------------------
+			// HERE WE ARE NOW
+			// -------------------------------------------------
+			$timeout(function () {
+				parentCtrl.setImgSrc($scope.fileread);
+			}, 7000);
+			// -------------------------------------------------
+
+
+			console.log('getting from parent', parentCtrl.getInfo());
+
+		} // END LINK FUNCTION
 	};
 }]);
 
