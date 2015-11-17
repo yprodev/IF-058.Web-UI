@@ -5,7 +5,8 @@ app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
 var dependencies = {
     group : 'speciality,faculty',
     student : 'group',
-    test: 'subject'
+    test: 'subject',
+    timeTable: 'group'
 };
 
 
