@@ -1,4 +1,4 @@
-app.directive('imageLoad', ['$timeout', function ($timeout) {
+app.directive('imageLoad', ['$timeout', '$interval', function ($timeout, $interval) {
 
 	// imageLoad directive link function
 	function link ($scope, $element, $attrs, $ctrls) {
@@ -13,15 +13,6 @@ app.directive('imageLoad', ['$timeout', function ($timeout) {
 			name: ''
 		};
 
-		var ctrl = this;
-		ctrl.setImgSrc = function (src) {
-			$scope.studPhoto.src = src; //END observe
-		};
-
-		ctrl.setImgName = function (name) {
-			$scope.studPhoto.name = name; //END observe
-		};
-
 	}
 
 	return {
@@ -29,13 +20,13 @@ app.directive('imageLoad', ['$timeout', function ($timeout) {
 		template: [
 			'<div class="form-group">',
 				'<image-label image="{{ studPhoto.src }}" image-name="{{ studPhoto.name }}"></image-label>',
-				'<image-input></image-input>',
+				'<image-input pic-src="studPhoto.src" pic-name="studPhoto.name"></image-input>',
 			'</div>'
 			].join('\n'),
 		controller: ['$scope', imageLoadCtrl],
 		link: link,
 		scope: {
-			options: '='
+			path: '=options'
 		}
 	};
 }]);
@@ -45,12 +36,15 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 
 	function link ($scope, $element, $attrs, ctrls) {
 		var parentCtrl = ctrls[0]
-			, img;
+			, img
+			, picSrc
+			, picName;
 
 			$attrs.$observe('image', function () {
-				// Inner variables
-				var picSrc = $scope.image
-					, picName = $scope.imageName;
+				// inner variables
+				picSrc = $scope.image;
+				picName = $scope.imageName;
+
 
 				if (picSrc) {
 					$($element).popover({
@@ -61,10 +55,11 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 						content: function () {
 							return '<img class="img-popover" src="' + picSrc + '" />';
 						}
-					}); // END jQuery element selecting
-				} // END if statement
+					}); // end jquery element selecting
+				} // end if statement
 
-			});
+			}); // END attrs observe
+
 	}// END link function
 
 
@@ -90,7 +85,7 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 
 
 
-app.directive('imageInput', [function () {
+app.directive('imageInput', ['$timeout', function ($timeout) {
 
 	// Cut file name function
 	function fileCutName (str, slength) {
@@ -122,23 +117,23 @@ app.directive('imageInput', [function () {
 			reader = new FileReader();
 			reader.onload = function (loadEvent) {
 				$scope.$apply(function () {
-					$scope.fileread = loadEvent.target.result;
-
-					// Transfer data to the parent directive controller
-					parentCtrl.setImgSrc(reader.result);
-					parentCtrl.setImgName($scope.cutName);
+					$scope.pictureSrc = loadEvent.target.result;
+					$scope.pictureName = $scope.cutName;
 				});
 			};
 			reader.readAsDataURL(fileTarget);
 		}); // END element bind
+
+
 	} // END LINK FUNCTION
 
 
 
 	return {
-		template: '<input type="file" name="studPhoto" id="photo" class="form-control inputfile" aria-describedby="helpPhoto" tabindex="9" image="studPhoto" accept="image/*">',
+		template: '<input type="file" name="studPhoto" id="photo" class="form-control inputfile" aria-describedby="helpPhoto" tabindex="9" picture-src="newStudent.photo" accept="image/*">',
 		scope: {
-			fileread: '=image',
+			pictureSrc: '=picSrc',
+			pictureName: '=picName',
 		},
 		require: ['^imageLoad'],
 		link: link

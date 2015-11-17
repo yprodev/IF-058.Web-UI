@@ -19,16 +19,16 @@ app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', '$interval', functi
 		};
 	};
 
-	// $interval(function () {
-	// 	console.log($scope.group_id);
-	// }, 1500);
-
 	$scope.addNewStudent = function (recordData) {
 
 		// Some tricks with fields we don't know how to work with
 		if(!recordData.group_id || recordData.group_id == '') {
 			return; 
 		}
+
+		$interval(function () {
+			console.log('studPhoto', $scope.studPhoto);
+		}, 2000);
 
 		if(!$scope.studPhoto || $scope.studPhoto == '') {
 			return;
