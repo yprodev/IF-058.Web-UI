@@ -168,6 +168,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/tests/:id',
       templateUrl: 'app/views/userTests.html',
       controller: 'userTestListCtrl'
+    }).
+    state('user.questions', {
+      url: '/questions/:id',
+      templateUrl: 'app/views/userQuestions.html',
+      controller: 'userQuestionListCtrl'
     });
 
   $urlRouterProvider.otherwise('/');
