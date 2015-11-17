@@ -87,7 +87,6 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
 
           //create array with entities if response has data
           function gettingResponseHandler (resp) {
-            console.log(resp);
             scope.entities = resp.data;
             scope.noData = "Немає записів";
           };

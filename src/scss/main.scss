@@ -159,7 +159,6 @@ body, html, .container-fluid, .nav-row {
 .top-nav {
   background-color: $nav_color;
   border-radius: 0px;
-  // box-shadow: 0 3px 3px $nav_color;
   margin-bottom: 20px;
   ul li a {
     color: #fff;
@@ -183,11 +182,6 @@ body, html, .container-fluid, .nav-row {
 .top-nav>.container{
   padding-left: 5px;
   padding-right: 5px;
-}
-
-.navbar-header>.navbar-toggle{
-  float:left;
-  margin-left: 15px;
 }
 
 .logoWrapper {
@@ -218,6 +212,18 @@ body, html, .container-fluid, .nav-row {
   width:100% !important;
 }
 
+.navbar-brand{
+  padding: 1px 15px;
+}
+
+.input-group-addon, .input-group-btn{
+  width:0;
+}
+
+.width60prc{
+  width: 60%;
+}
+
 @media screen and (max-height: 643px) {
   .footer {
     position: static;
@@ -229,36 +235,6 @@ body, html, .container-fluid, .nav-row {
 }
 button.marginTop {
   margin-top: 0;
-}
-.button::-webkit-file-upload-button {
-  visibility: hidden;
-}
-.button:before {
-  content: 'Оберіть файл';
-  display: inline-block;
-  background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
-  border: 1px solid #999;
-  border-radius: 3px;
-  padding: 5px 8px;
-  outline: none;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  cursor: pointer;
-  text-shadow: 1px 1px #fff;
-  font-weight: 700;
-  font-size: 10pt;
-  .change {
-    content: 'Змінити файл';
-  }
-}
-.button:hover:before {
-  border-color: black;
-}
-.button:active:before {
-  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
-.button:after {
-  display: none;
 }
 .edited-picture {
   z-index: 1;
@@ -277,9 +253,19 @@ button.marginTop {
   top: -100px;
   right: -103px;
 }
-#imageAttachment{
-  margin: 5px;
+.picture{
+  margin: 5px 0px;
   border-radius: 5px;
+  &.new-picture{
+    max-height: 200px;
+    max-width: 266px;
+  }
+  &.edited-picture{
+    max-height: 100px;
+    max-width: 133px;
+  }
+
+
 }
 
 

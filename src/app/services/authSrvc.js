@@ -6,6 +6,7 @@ app.factory('authSrvc', ['$http', '$state', 'baseUrl', function($http, $state, b
         enterLogin : function (data) {
         return $http.post(baseUrl + 'login/index', data)
             .then(fulfilled, rejected);
+            console.log('adfsadsad')
         },
 
         logOut: function(){
