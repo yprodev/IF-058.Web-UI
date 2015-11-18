@@ -8,73 +8,13 @@ app.directive('imageLoad', ['$timeout', '$interval', function ($timeout, $interv
 	// imageLoad directive controller function
 	function imageLoadCtrl ($scope) {
 
-		$scope.studPhoto = {
-			src: function () {
-				return ''+ picSrc + '';
-			},
-			name: ''
-		};
-
-	$scope.path = $scope.studPhoto.src;
-
-	$interval(function () {
-		console.log('inside path', $scope.path);
-	}, 5000);
-
-	$interval(function () {
-		console.log('scope pic Src ', $scope.picSrc);
-	}, 5000);
+		$scope.studPhoto = {};
+		$scope.path = $scope.studPhoto;
 
 
-
-
-
-
-
-
-
-
-
-	$scope.$watch('[imageSrc, imageName]', changePicturePopover, true);
-
-
-	function changePicturePopover (newValue, oldValue, scope) {
-
-		// inner variables
-		picSrc = newValue[0];
-		picName = newValue[1];
-
-		if (picSrc && picName) {
-			$($element).popover({
-				html: true,
-				trigger: 'hover',
-				placement: 'top',
-				title: function () {
-					return '<strong>Фото: </strong>' + picName;
-				},
-				content: function () {
-					return '<img class="img-popover" src="' + picSrc + '" />';
-				}
-			}); // END jquery element selecting
-		} // END if statement
-	} // END changePicturePopover
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		$interval(function () {
+			console.log('path ', $scope.path);
+		}, 3000);
 	}
 
 
@@ -90,7 +30,6 @@ app.directive('imageLoad', ['$timeout', '$interval', function ($timeout, $interv
 		link: link,
 		scope: {
 			path: '=options',
-			picSrc: '='
 		}
 	};
 }]);
@@ -104,10 +43,7 @@ app.directive('imageLabel', ['$timeout', '$interval', function ($timeout, $inter
 			, picSrc
 			, picName;
 
-
-
 		$scope.$watch('[imageSrc, imageName]', changePicturePopover, true);
-
 
 		function changePicturePopover (newValue, oldValue, scope) {
 
@@ -200,7 +136,7 @@ app.directive('imageInput', ['$timeout', function ($timeout) {
 
 
 	return {
-		template: '<input type="file" name="studPhoto" id="photo" class="form-control inputfile" aria-describedby="helpPhoto" tabindex="9" picture-src="newStudent.photo" accept="image/*">',
+		template: '<input type="file" name="studPhoto" id="photo" class="form-control inputfile" aria-describedby="helpPhoto" tabindex="9" accept="image/*">',
 		scope: {
 			pictureSrc: '=picSrc',
 			pictureName: '=picName',
