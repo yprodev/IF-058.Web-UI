@@ -9,30 +9,94 @@ app.directive('imageLoad', ['$timeout', '$interval', function ($timeout, $interv
 	function imageLoadCtrl ($scope) {
 
 		$scope.studPhoto = {
-			src: '',
+			src: function () {
+				return ''+ picSrc + '';
+			},
 			name: ''
 		};
 
+	$scope.path = $scope.studPhoto.src;
+
+	$interval(function () {
+		console.log('inside path', $scope.path);
+	}, 5000);
+
+	$interval(function () {
+		console.log('scope pic Src ', $scope.picSrc);
+	}, 5000);
+
+
+
+
+
+
+
+
+
+
+
+	$scope.$watch('[imageSrc, imageName]', changePicturePopover, true);
+
+
+	function changePicturePopover (newValue, oldValue, scope) {
+
+		// inner variables
+		picSrc = newValue[0];
+		picName = newValue[1];
+
+		if (picSrc && picName) {
+			$($element).popover({
+				html: true,
+				trigger: 'hover',
+				placement: 'top',
+				title: function () {
+					return '<strong>Фото: </strong>' + picName;
+				},
+				content: function () {
+					return '<img class="img-popover" src="' + picSrc + '" />';
+				}
+			}); // END jquery element selecting
+		} // END if statement
+	} // END changePicturePopover
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
+
 
 	return {
 		restrict: 'E',
 		template: [
 			'<div class="form-group">',
-				'<image-label image="{{ studPhoto.src }}" image-name="{{ studPhoto.name }}"></image-label>',
+				'<image-label image-src="{{ studPhoto.src }}" image-name="{{ studPhoto.name }}"></image-label>',
 				'<image-input pic-src="studPhoto.src" pic-name="studPhoto.name"></image-input>',
 			'</div>'
 			].join('\n'),
 		controller: ['$scope', imageLoadCtrl],
 		link: link,
 		scope: {
-			path: '=options'
+			path: '=options',
+			picSrc: '='
 		}
 	};
 }]);
 
 
-app.directive('imageLabel', ['$timeout', function ($timeout) {
+app.directive('imageLabel', ['$timeout', '$interval', function ($timeout, $interval) {
 
 	function link ($scope, $element, $attrs, ctrls) {
 		var parentCtrl = ctrls[0]
@@ -40,25 +104,31 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 			, picSrc
 			, picName;
 
-			$attrs.$observe('image', function () {
-				// inner variables
-				picSrc = $scope.image;
-				picName = $scope.imageName;
 
 
-				if (picSrc) {
-					$($element).popover({
-						html: true,
-						trigger: 'hover',
-						placement: 'top',
-						title: (picName !== '' && picName !== undefined) ? picName : 'there is no name',
-						content: function () {
-							return '<img class="img-popover" src="' + picSrc + '" />';
-						}
-					}); // end jquery element selecting
-				} // end if statement
+		$scope.$watch('[imageSrc, imageName]', changePicturePopover, true);
 
-			}); // END attrs observe
+
+		function changePicturePopover (newValue, oldValue, scope) {
+
+			// inner variables
+			picSrc = newValue[0];
+			picName = newValue[1];
+
+			if (picSrc && picName) {
+				$($element).popover({
+					html: true,
+					trigger: 'hover',
+					placement: 'top',
+					title: function () {
+						return '<strong>Фото: </strong>' + picName;
+					},
+					content: function () {
+						return '<img class="img-popover" src="' + picSrc + '" />';
+					}
+				}); // END jquery element selecting
+			} // END if statement
+		} // END changePicturePopover
 
 	}// END link function
 
@@ -66,7 +136,7 @@ app.directive('imageLabel', ['$timeout', function ($timeout) {
 	return {
 		restrict: 'E',
 		scope: {
-			image: '@',
+			imageSrc: '@',
 			imageName: '@'
 		},
 		require: ['^imageLoad'],
