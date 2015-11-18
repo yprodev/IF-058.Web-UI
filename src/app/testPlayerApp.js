@@ -3,7 +3,7 @@
  */
 var testPlayerApp = angular.module('testPlayerApp', ['ui.router']);
 
-//список предметов
+
 testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
   $scope.enterToEntity = function (to, entityId) {
     $state.go(to, {'id': entityId});
@@ -37,7 +37,6 @@ testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc', '$statePa
   $scope.getStudentSubjects();
 }]);
 
-//список тестов
 testPlayerApp.controller('userTestListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
   $scope.getStudentTests = function () {
     var url = 'test/getTestsBySubject/';
@@ -64,23 +63,46 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
         for (var i = 0; i < resp.data.length; i++) {
           //var result = resp.data[i].test_id
           for (var j = 0; j < resp.data.length; j++) {
-            var repeatedTest_id = {
-              test_id: resp.data[i].test_id,
-              result: ''
-            }
-            if (resp.data[i].test_id === resp.data[j].test_id) {
+              var repeatedTest_id = {
+                test_id: resp.data[i].test_id,
+                result: ''
+              }
+            if (resp.data[i].test_id === resp.data[j].test_id){
               repeatedTest_id.result++;
             }
           }
         }
-        console.log(repeatedTest_id)//відправити запит на отримання кілкості спроб складання тестів
+        
       }
-
       unique(resp)
+
+    }).then(function(resp){
+      var data =  $stateParams.id
+      var url = 'TestDetail/getTestDetailsByTest/'
+      return userSrvc.getInfoForStudent(url, data)
+    }).then(function(resp){
+     /* console.log('tDetails',resp.data[0].id)
+      if (resp.data[0].id){
+        $scope.showInformModal("Немає параметрів тесту з обраного тесту");
+      }*/
+      var id = $stateParams.id
+      var data = [id, resp.data[0].level, resp.data[0].tasks]
+
+      var url = 'question/getQuestionIdsByLevelRand/'
+      return userSrvc.getInfoForStudent(url, data)
+    }).then(function(resp){
+      var questionList = []
+      for (i in resp.data){
+        questionList.push(resp.data[i].question_id)
+      }
+      localStorage.questionList = questionList
+      $scope.questionsQuantity = questionList.length
     })
   }
   $scope.getRecordsByStudent()
+  $scope.beginTest = function(){
 
+  }
 
 }]);
 
@@ -112,23 +134,20 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
 
  */
 
-// список результатов студентов
+
 testPlayerApp.controller('userResultListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
   $scope.getStudentResults = function () {
     var url = 'result/getRecordsByStudent/'
     var data = '4'//захардкоджено, потім внести в базу данних і поміняти
     /*localStorage.userId*/
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
+      console.log('response', resp.data[0])
+      console.log('resp.data', resp.data)
       return resp.data
     }).then(function (resp) {
+      console.log('resp', resp)
       var entities = []
-      var entitiesView = {
-        result: '',
-        session_date: '',
-        subject_name: ''
-      }
       for (var i = 0; i < resp.length; i++) {
-
         entities.push(resp[i].result)//вывести во вью
         entities.push(resp[i].session_date)
         idArr = []
@@ -136,33 +155,44 @@ testPlayerApp.controller('userResultListCtrl', ['$scope', 'userSrvc', '$statePar
       }
       url = 'EntityManager/getEntityValues'
       postData = {entity: "Test", ids: idArr}
-      console.log('entities', entities)
-      $scope.tempEntities = entities
+      $scope.entities = entities
       return userSrvc.postInfoForStudent(url, postData)
     }).then(function (resp) {
       for (var i = 0; i < resp.length; i++) {
         idArr = []
         idArr.push(resp.data[0].subject_id)
       }
+      console.log('idArr', idArr)
       postData = {entity: "Subject", ids: idArr}
       //console.log('postdata', postData)
       return userSrvc.postInfoForStudent(url, postData)
     }).then(function (resp) {
+      console.log('resp', resp)
       for (var i = 0; i < resp.data.length; i++) {
         console.log('resp[i].data.subject_name', resp.data[i].subject_name)
-        $scope.tempEntities.push(resp.data[i].subject_name)
-        console.log($scope.tempEntities)//создать массив объектов и присвоить его $scope enteties  после добавления  в БД нескольких строк
+        $scope.entities.push(resp.data[i].subject_name)
       }
-      console.log('$scope.entities',$scope.entities)
+      console.log($scope.entities)
+      console.log('lastresp', resp)
+      console.log('$scope.entities[0]')
     })
   }
   $scope.getStudentResults()
 }]);
 
-//сервис студентов
+
 testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
   return {
     getInfoForStudent: function (url, data) {
+      console.log('serviceData',data)
+      if (Array.isArray(data)){
+        console.log('is Array')
+        var sum = ''
+        for (i=0; i<data.length; i++){
+          sum = sum + data[i]+'/'
+        }
+        data = sum
+      }
       return $http.get(baseUrl + url + data)
         .then(fulfilled, rejected);
     },
