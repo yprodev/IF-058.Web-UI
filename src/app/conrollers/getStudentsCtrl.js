@@ -26,16 +26,12 @@ app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', '$interval', functi
 			return; 
 		}
 
-		$interval(function () {
-			console.log('studPhoto', $scope.studPhoto);
-		}, 2000);
-
-		if(!$scope.studPhoto || $scope.studPhoto == '') {
+/*		if(!$scope.studPhoto || $scope.studPhoto == '') {
 			return;
 		}
-
+*/
 		//Transfer photo string inside addNew Student method
-		recordData.photo = $scope.studPhoto;
+		recordData.photo = $scope.studPhoto.src || '';
 
 		// Put recordData Object into a variable
 		var studentRecordData = {
@@ -54,10 +50,10 @@ app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', '$interval', functi
 			photo: recordData.photo
 		};
 
-		var jsonData = JSON.stringify(studentRecordData);
+		// var jsonData = JSON.stringify(studentRecordData);
 
 		// Gives data to a service
-		entitiesSrvc.createEntity($scope.thisEntity, jsonData)
+		entitiesSrvc.createEntity($scope.thisEntity, studentRecordData)
 			.then(function (response) {
 				console.log(response);
 				// addRespHandler(resp, newData);
