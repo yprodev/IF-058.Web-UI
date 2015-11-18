@@ -82,7 +82,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     }).
     state('admin.main', {
       url: '/main',
-      templateUrl: 'app/views/main.html'
+      templateUrl: 'app/views/main.html',
+      controller: 'entitiesCtrl'
     }).
     state('user', {
       url: '/user',
