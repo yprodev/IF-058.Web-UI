@@ -1,87 +1,133 @@
-<div class="container-fluid" ng-controller="loginCtrl">
-    <div class="row nav-row">
-        <div class="col-md-2 pad"></div>
-        <div class="col-md-2 left-panel hidden-sm hidden-xs">
-            <div class="row">
-                <div class="col-xs-12">
-                    <!-- Клік по лого - головна сторінка -->
-                    <center><a ui-sref=".main"><img class="logo hidden-sm hidden-xs" src="img/Logo.png" height="150" alt="Logo"></a>
-                    </center>
-                    <hr>
-                </div>
-            </div>
-            <div class="row">
-                <nav class="col-md-12 hidden-sm hidden-xs">
-                    <ul class="">
-                        <li><a ui-sref=".main"><span class="glyphicon glyphicon-home"></span>Головна</a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-tasks"></span>Результати</a></li>
-                        <li><a ui-sref=".usersTabs.students"><span class="glyphicon glyphicon-user"></span>Користувачі</a></li>
-                        <li><a ui-sref=".subjects"><span class="glyphicon glyphicon-education"></span>Предмети</a></li>
-                        <li><a ui-sref=".educationInfo.faculties"><span class="glyphicon glyphicon-tag"> </span>Довідники</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="row">
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-10">
-            <div class="row">
-                <div class="top-nav navbar">
-                    <div class="hidden-lg hidden-md container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#responsive-menu">
-                            <span class="sr-only">Open navig</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="col-sm-12 hidden-md hidden-lg collapse navbar-collapse" id="responsive-menu">
-                        <ul class="nav navbar-nav usCenter">
-                            <li><a ui-sref=".main"><span class="glyphicon glyphicon-home"></span>Головна</a></li>
-                            <li><a href=""><span class="glyphicon glyphicon-tasks"></span>Результати</a></li>
-                            <li><a ui-sref=".usersTabs.students"><span class="glyphicon glyphicon-user"></span>Користувачі</a></li>
-                            <!--<li><a ui-sref=".tests"><span class="glyphicon glyphicon-th-list"></span>Тести</a></li>-->
-                            <li><a ui-sref=".subjects"><span class="glyphicon glyphicon-education"></span>Предмети</a></li>
-                            <li><a ui-sref=".educationInfo.faculties"><span class="glyphicon glyphicon-tag"> </span>Довідники</a>
-                            </li>
-                            <li><a ng-click="exit()"><span class="glyphicon glyphicon-off"></span>Вихід</a></li>
-                        </ul>
-                    </div>
-                    </div>
-                    <div class="hidden-sm hidden-xs">
-                        <div class="col-sm-offset-5 col-sm-4">
-                            <div class="input-group margin">
-                                <input type="text" ng-model="searchItem" class="form-control" placeholder="Пошук" aria-describedby="search-icon">
-                                <div class="input-group-addon" id="search-icon">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="input-group margin">
-                    <span id="basic-addon1" class="input-group-addon">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            {{detectUser}}
-                            </span>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-success marginTop" title="Вихід" ng-click="exit()"><span
-                                        class="glyphicon glyphicon-off"></span></button>
-                            </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-
-                    <div ui-view>
-
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container-fluid">
+  <div class="row nav-row">
+    <div class="col-md-2 pad">
     </div>
+    <div class="col-md-2 left-panel hidden-sm hidden-xs">
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- Клік по лого - головна сторінка -->
+          <center>
+            <a ui-sref=".main"><img class="logo hidden-sm hidden-xs" src="img/Logo.png" height="150" alt="Logo"></a>
+          </center>
+          <hr>
+        </div>
+      </div>
+      <div class="row">
+        <nav class="col-md-12 hidden-sm hidden-xs">
+          <ul class="">
+            <li><a ui-sref=".main"><span class="glyphicon glyphicon-home"></span> Головна</a></li>
+            <hr>
+            <li><a ui-sref=".usersTabs.students"><span class="glyphicon glyphicon-user"></span> Адміністратори</a></li>
+            <hr>
+            <li ui-sref=".groups"><a ui-sref=".groups"><span class="glyphicon glyphicon-education"></span> Групи і студенти</a></li>
+            <hr>
+            <li><a ui-sref=".subjects"><span class="glyphicon glyphicon-book"></span> Предмети i тести</a></li>
+            <hr>
+            <li><a href=""><span class="glyphicon glyphicon-tasks"></span> Результати</a></li>
+            <hr
+            ><li><a ui-sref=".educationInfo.faculties"><span class="glyphicon glyphicon-tags"> </span> Довідники</a></li>
+            <hr>
+          </ul>
+        </nav>
+      </div>
+      <div class="row">
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-10">
+      <div class="row">
+        <div class="top-nav navbar">
+
+          <div class="hidden-lg hidden-md container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#responsive-menu">
+                <span class="sr-only">Open navig</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" ui-sref=".main">
+                <img class="hidden-md hidden-lg" src="img/mini-Logo.png" height="48px" alt="Logo">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse " id="responsive-menu">
+
+              <div class="sm-menu">
+                <ul class="nav navbar-nav">
+                  <li><a ui-sref=".main"><span class="glyphicon glyphicon-home"></span>Головна</a></li>
+                  <li><a ui-sref=".usersTabs.students"><span class="glyphicon glyphicon-user"></span>Адміністратори</a></li>
+                  <li ui-sref=".groups"><a ui-sref=".groups"><span class="glyphicon glyphicon-education"></span>Групи і студенти</a></li>
+                  <li><a ui-sref=".subjects"><span class="glyphicon glyphicon-book"></span>Предмети i тести</a></li>
+                  <li><a href=""><span class="glyphicon glyphicon-tasks"></span>Результати</a></li>
+                  <li><a ui-sref=".educationInfo.faculties"><span class="glyphicon glyphicon-tags"> </span>Довідники</a></li>
+                  <li>
+                    <hr class="hidden-sm">
+                    <div class="input-group margin">
+                      <input type="text" ng-model="searchItem" class="form-control " placeholder="Пошук" aria-describedby="search-icon">
+                      <div class="input-group-addon" id="search-icon">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <hr class="hidden-sm">
+                    <div class="input-group margin navbar-right hidden-sm">
+                      <span id="basic-addon1" class="input-group-addon">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        {{detectUser}}
+                      </span>
+                      <span class="input-group-btn">
+                        <button type="button" class="btn btn-danger marginTop" title="Вихід" ng-click="exit()">
+                          <span class="glyphicon glyphicon-off"></span></button>
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="input-group margin navbar-right hidden-xs">
+                <span id="basic-addon1" class="input-group-addon">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  {{detectUser}}
+                </span>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-danger marginTop" title="Вихід" ng-click="exit()">
+                    <span class="glyphicon glyphicon-off"></span></button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hidden-sm hidden-xs">
+            <div class="col-md-4">
+              <div class="input-group margin col-md-12">
+                <input type="text" ng-model="searchItem" class="form-control" placeholder="Пошук" aria-describedby="search-icon">
+                <div class="input-group-addon" id="search-icon">
+                  <span class="glyphicon glyphicon-search"></span>
+                </div>
+              </div>
+            </div>
+            <div class="pull-right">
+              <div class="input-group margin">
+                <span id="basic-addon1" class="input-group-addon">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  {{detectUser}}
+                </span>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-danger marginTop" title="Вихід" ng-click="exit()"><span
+                      class="glyphicon glyphicon-off"></span></button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div ui-view>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

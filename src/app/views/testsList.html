@@ -7,7 +7,7 @@
             <div>
                 <br/>
                 <show-add-form-button-drct></show-add-form-button-drct>
-                <br/><br/><br/>
+                <br/><br/>
                 <div class="well" ng-show="showingAdd">
                     <div class=" row">
                         <form name="addForm" class="form-inline" role='form' novalidate>
@@ -49,7 +49,7 @@
                 </div>
 
                 <button class="btn btn-primary pull-right" ui-sref="admin.timeTable({id:entities[0].test_id})" ng-click="">Розклад</button>
-                
+
                  <div ng-show="!entities">{{noData}}</div>
                 <!-- The table for list of Entities -->
                 <table ng-show="entities" class="table table-hover .table-condensed">
@@ -80,8 +80,8 @@
                     </tr>
                     </thead>
                     <tbody class="usCenter">
-                    <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse">
-                        <td><a ui-sref="admin.questions({id:entity.test_id})">{{$index + 1}}</a></td>
+                    <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse" ng-click="enterToEntity('admin.questions', entity.test_id)" role="button">
+                        <td>{{$index + 1}}</td>
                         <td class="col-md-4">{{entity.test_name}}</td>
                         <!-- <td>{{test.subject_id}}</td>-->
                         <td class="col-md-1">{{entity.tasks}}</td>
