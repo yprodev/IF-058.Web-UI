@@ -58,7 +58,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
   var url = 'result/getRecordsByStudent/'
   $scope.getRecordsByStudent = function () {
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
-      console.log(resp)
+        console.log(resp)
       function unique(resp) {
         for (var i = 0; i < resp.data.length; i++) {
           //var result = resp.data[i].test_id
@@ -86,6 +86,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
         $scope.showInformModal("Немає параметрів тесту з обраного тесту");
       }*/
       var id = $stateParams.id
+      localStorage.testId = id;
       var data = [id, resp.data[0].level, resp.data[0].tasks]
 
       var url = 'question/getQuestionIdsByLevelRand/'
@@ -100,11 +101,18 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
     })
   }
   $scope.getRecordsByStudent()
-  $scope.beginTest = function(){
 
+  $scope.beginTest = function(){
+    var userId = localStorage.userId;
+    var testId = localStorage.testId;
+    userSrvc.getTestInfo(userId, testId).then(function (resp) {
+      $state.go('user.testPlayer');
+    });
   }
 
 }]);
+
+
 
 
 /*for (var i = 0; i < arr.length; i++) {
@@ -138,7 +146,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
 testPlayerApp.controller('userResultListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
   $scope.getStudentResults = function () {
     var url = 'result/getRecordsByStudent/'
-    var data = '4'//захардкоджено, потім внести в базу данних і поміняти
+    var data = '69'//захардкоджено, потім внести в базу данних і поміняти
     /*localStorage.userId*/
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
       console.log('response', resp.data[0])
@@ -200,10 +208,14 @@ testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl)
       return $http.post(baseUrl + url, postData)
         .then(fulfilled, rejected);
 
+    },
+    getTestInfo: function(userId, testId) {
+      return $http.get(baseUrl + 'Log/startTest' + '/' + userId + '/' + testId)
+        .then(fulfilled, rejected);
     }
   }
   function fulfilled(response) {
-    console.log('hello')
+    console.log('hello', 'testInfo');
     return response;
   };
   function rejected(error) {
