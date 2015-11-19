@@ -2,21 +2,11 @@
 
 app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
 
-<<<<<<< HEAD
-var dependencies = {
-    group : 'speciality,faculty',
-    student : 'group',
-    test: 'subject',
-    timeTable: 'group'
-};
-
-=======
   var dependencies = {
       group : 'speciality,faculty',
       student : 'group',
       test: 'subject'
   };
->>>>>>> develop
 
   var getDependecies = function (data, dep) {
     var entityId = dep+'_id';

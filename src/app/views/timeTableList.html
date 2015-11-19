@@ -14,13 +14,8 @@
                     <div class=" row">
                         <form name="addForm" class="form-inline" role='form' novalidate>
                             <div class="col-md-6">
-                                <select class="form-control width-max navbar-btn"
-                        ng-options="key as value for (key, value) in timeTables.group" name="group" id="group"
-                       ng-model="newtimeTable_id" required>
-                       <option value="">Виберіть групу</option>
-                    </select>
-                                <!-- <input class="form-control width-max" placeholder="Введіть назву групи" type='text' -->
-                                       <!-- ng-model="newEntity.group_name" required> -->
+                                <input class="form-control width-max" placeholder="Введіть назву групи" type='text'
+                                       ng-model="newEntity.group_name" required>
                             </div>
                             <div class="col-md-6">
                                 <input type="date" class="form-control width-max"
