@@ -21,6 +21,8 @@ app.directive('loadfileDrct', function () {
     '<span class="glyphicon glyphicon-cloud-upload"></span> <span class="file-name">Оберіть картинку</span></label>' +
     '<input type="file" id="photo" class="form-control inputfile"/>',
     link: function (scope, element, attrs) {
+      console.log('hello')
+      scope.newEntity.attachment = '';
         element.bind('change', function (changeEvent) {
         var fileName = changeEvent.target.files[0].name;
         scope.cutName = fileCutName(fileName, -15);
@@ -33,9 +35,8 @@ app.directive('loadfileDrct', function () {
           });
           scope.$watch('showingAdd', function (newValue, oldValue) {
             if (newValue == false) {
-              //console.log(scope.newEntity)
               angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";
-            }
+            } 
           })
 
         };
