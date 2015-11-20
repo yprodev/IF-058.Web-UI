@@ -1,6 +1,5 @@
-;
 var app = angular.module('app', ['ui.router', 'testPlayerApp']);
-
+var testPlayerApp = angular.module('testPlayerApp', ['ui.router']);
 app.constant("baseUrl", "http://dtapi.local/");
 app.value("entityObj", {
   "faculty": {
