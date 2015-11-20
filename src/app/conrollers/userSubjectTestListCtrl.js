@@ -17,7 +17,7 @@ testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc', '$statePa
       url = 'subject/getRecords/'
       data = groupInfo.data[0].subject_id
       if (!data) {
-        $scope.showInformModal("Немає предметів з доступними тестами для вашої групи");
+          $scope.showInformModal("Немає предметів з доступними тестами для вашої групи");
       } else {
         for (i in groupInfo.data) {
           return userSrvc.getInfoForStudent(url, data)

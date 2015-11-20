@@ -1,10 +1,7 @@
 testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
   return {
     getInfoForStudent: function (url, data, result) {
-
-      console.log('serviceData',data)
       if (Array.isArray(data)){
-        console.log('is Array')
         var sum = ''
         for (i=0; i<data.length; i++){
           sum = sum + data[i]+'/'

@@ -1,22 +1,24 @@
 testPlayerApp.controller('userResultListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
   $scope.getStudentResults = function () {
     var url = 'result/getRecordsByStudent/'
-    var data = '69'//захардкоджено, потім внести в базу данних і поміняти
+    var data = '4'//захардкоджено, потім внести в базу данних і поміняти
     /*localStorage.userId*/
-    
+    var entities = {
+        result: '',
+        session_date: '',
+        subject_name: ''
+      }
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
       return resp.data
     }).then(function (resp) {
-      var entities = []
       for (var i = 0; i < resp.length; i++) {
-        entities.push(resp[i].result)//вывести во вью
-        entities.push(resp[i].session_date)
+        entities.result = resp[i].result//вывести во вью
+        entities.session_date = resp[i].session_date
         idArr = []
         idArr.push(resp[i].test_id)
       }
       url = 'EntityManager/getEntityValues'
       postData = {entity: "Test", ids: idArr}
-      $scope.entities = entities
       return userSrvc.postInfoForStudent(url, postData)
     }).then(function (resp) {
       for (var i = 0; i < resp.length; i++) {
@@ -26,8 +28,11 @@ testPlayerApp.controller('userResultListCtrl', ['$scope', 'userSrvc', '$statePar
       postData = {entity: "Subject", ids: idArr}
       return userSrvc.postInfoForStudent(url, postData)
     }).then(function (resp) {
+      console.log(resp)
       for (var i = 0; i < resp.data.length; i++) {
-        $scope.entities.push(resp.data[i].subject_name)
+        entities.subject_name = resp.data[i].subject_name
+        console.log(entities)
+        //$scope.entities = entities
       }
     })
   }

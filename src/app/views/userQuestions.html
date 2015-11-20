@@ -1,13 +1,28 @@
 <h1>Тест состоит из {{questionsQuantity}} вопросов </h1>
-<button class="btn btn-primary" ng-click='beginTest()'>Начать тест </button>
-<div class='test', ng-show='showTest()'>
-	<div class="row">
-        <div class="col-sm-4">Час на роздуми: 01:00:00</div>
-        <div class="col-sm-4 col-sm-offset-4">Завдання 9 з 10 [Рівень 1]</div>
-    </div>
-    <div class="row">
-        <button type="button" class="btn btn-primary">Завершити тестування</button>
+<button class="btn btn-primary" id="startBtn" ng-click='beginTest()'>Начать тест </button>
+<div class='test' ng-show='showTest'>
+	<div class="panel panel-primary">
+	  <div class="panel-heading">
+	  	1
+	    <span class="col-md-3 pull-right">Час на роздуми: 01:00:00</span>
+        <div class="col-md-3 pull-right">Завдання 9 з 10 [Рівень 1]</div>
+	  </div>
+	  <div class="panel-body">
+	    <button class="btn btn-primary pull-left">Завершити тестування</button>
+	     <div class="pull-right text-center">1, 2, 3, 4, 5 </div>
+	  </div>
 </div>
+	<div class="questionBar">
+		<div class="question clearfix well">
+		<p>Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила п'ять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною.</p>
+	</div>
+	<div class="answer clearfix well">
+		<div>
+			<p>На відміну від поширеної думки Lorem Ipsum не є випадковим набором літер. Він походить з уривку класичної латинської літератури 45 року до н.е., тобто має більш як 2000-річну історію. Річард Макклінток, професор латини з коледжу Хемпдін-Сидні, що у Вірджінії, вивчав одне з найменш зрозумілих латинських слів - consectetur - з уривку Lorem Ipsum, і у пошуку цього сл</p>
+		</div>
+	</div>
+	</div>
+	
 
 
 
