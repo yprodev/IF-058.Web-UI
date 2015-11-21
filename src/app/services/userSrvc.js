@@ -22,8 +22,6 @@ testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl)
      return $http.get(baseUrl + 'Log/startTest' + '/' + userId + '/' + testId)
        .then(fulfilled, rejected);
    },
-
-
     postInfoForStudent: function (url, postData) {
       return $http.post(baseUrl + url, postData)
         .then(fulfilled, rejected);

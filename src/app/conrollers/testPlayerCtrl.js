@@ -29,6 +29,8 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
       var url = 'test/getRecords/'
       return userSrvc.getInfoForStudent(url, data, result)
     }).then(function(test){
+      $scope.timeForTest = test[0].data[0].time_for_test;
+      console.log($scope.timeForTest, 'timeForTest');
       if (test[0].data[0].attempts < test[1]){
         alert('Немає предметів з доступними тестами для вашої групи')//убрати коли запрацює модалка
      $scope.showInformModal("Немає предметів з доступними тестами для вашої групи");
@@ -75,19 +77,24 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
     var userId = localStorage.userId;
     var testId = localStorage.testId;
     function timer(testDuration) {
-    $scope.counter = 10000;
+    $scope.counter = $scope.timeForTest * 60;
     $scope.onTimeout = function(){
         $scope.counter--;
         mytimeout = $timeout($scope.onTimeout,1000);
     }
     var mytimeout = $timeout($scope.onTimeout,1000);
     
-    $scope.stop = function(){
-        $timeout.cancel(mytimeout);
+    $scope.stop = function() {
+      $timeout.cancel(mytimeout);
     }
-            
 }
-timer()
+    var data = '';
+    var url = 'TestPlayer/getTimeStamp';
+    userSrvc.getInfoForStudent(url, data).then(function (resp) {
+        console.log(resp, "timer");
+      $scope.startTime = new Date(resp.data.unix_timestamp * 1000);
+    });
+timer();
 
     /*userSrvc.getTestInfo(userId, testId).then(function (resp) {
       $state.go('user.testPlayer');

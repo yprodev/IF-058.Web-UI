@@ -4,7 +4,7 @@
 	<div class="panel panel-primary">
 	  <div class="panel-heading">
 	  	1
-	    <span class="col-md-3 pull-right">Час на роздуми: 01:00:00</span>
+	    <span class="col-md-3 pull-right">Час на роздуми: {{counter | formatTimer}}</span>
         <div class="col-md-3 pull-right">Завдання 9 з 10 [Рівень 1]</div>
 	  </div>
 	  <div class="panel-body">
@@ -23,14 +23,15 @@
 				<span ng-bind-html='answer.answer_text | unsafe'></span>
 			</label>
 
-				
+
 		</div>
 	</div>
 	<div>
-	  		{{counter}}
+
+		{{startTime | date: 'mediumTime'}}
 	  	</div>
 	</div>
-	
+
 
 
 
