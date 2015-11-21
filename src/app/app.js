@@ -179,6 +179,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       templateUrl: 'app/views/testPlayer.html',
       controller: 'userQuestionListCtrl'
     });
+/*    state('user.questions.number', {
+      url: '/:id',
+      templateUrl: 'app/views/userQuestions.html',
+      controller: 'userQuestionListCtrl'
+    });*/
 
   $urlRouterProvider.otherwise('/');
 }]);
