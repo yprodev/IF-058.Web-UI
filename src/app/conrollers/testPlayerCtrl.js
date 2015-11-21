@@ -60,6 +60,8 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
         questionList.push(resp.data[i].question_id)
       }
       localStorage.questionList = questionList
+      console.log(questionList,'questionList')
+      $scope.questionList = questionList
       $scope.questionsQuantity = questionList.length
     }, function(error){
       console.log('Відсутні деталі тесту по данному тесту')
@@ -104,11 +106,12 @@ timer();
     userSrvc.getInfoForStudent(url, id).then(function (resp) {
       console.log(resp)
     })*/
-
-      var data = localStorage.questionList[0];
+var firstQuestion = localStorage.questionList[0];
+nextQuestion(firstQuestion)
+function nextQuestion (data){
       var questionUrl = 'question/getRecords/';
       var answerUrl = 'SAnswer/getAnswersByQuestion/';
-      $scope.questList = 
+      //$scope.questList = 
 $q.all([
     userSrvc.getInfoForStudent(questionUrl, data),
     userSrvc.getInfoForStudent(answerUrl, data)
@@ -119,6 +122,16 @@ $q.all([
       $scope.answers = resp[1].data;
       $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
    })
+}
+      
+      
+
+   $scope.chosenQuestion = function(questNumber){
+    console.log()
+    nextQuestion(questNumber)
+   }
+
+
   
   }
   //наступний запит використовуємо щоб залогініти юзера

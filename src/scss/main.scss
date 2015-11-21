@@ -363,3 +363,11 @@ label.ilabel {
     color: #fff;
   }
 }
+.question-number a {
+  cursor: pointer;
+  &:focus, &:hover {
+    color: #f00;
+    text-decoration: none;
+  }
+  
+}
