@@ -60,7 +60,6 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
         questionList.push(resp.data[i].question_id)
       }
       localStorage.questionList = questionList
-      console.log(questionList,'questionList')
       $scope.questionList = questionList
       $scope.questionsQuantity = questionList.length
     }, function(error){
@@ -93,7 +92,6 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
     var data = '';
     var url = 'TestPlayer/getTimeStamp';
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
-        console.log(resp, "timer");
       $scope.startTime = new Date(resp.data.unix_timestamp * 1000);
     });
 timer();
@@ -107,7 +105,7 @@ timer();
       console.log(resp)
     })*/
 var firstQuestion = localStorage.questionList[0];
-nextQuestion(firstQuestion)
+
 function nextQuestion (data){
       var questionUrl = 'question/getRecords/';
       var answerUrl = 'SAnswer/getAnswersByQuestion/';
@@ -117,21 +115,30 @@ $q.all([
     userSrvc.getInfoForStudent(answerUrl, data)
   ])
    .then(function (resp) {
-      console.log('resp',resp);
       $scope.question = resp[0].data[0].question_text;
       $scope.answers = resp[1].data;
       $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
    })
 }
-      
-      
 
-   $scope.chosenQuestion = function(questNumber){
-    console.log()
-    nextQuestion(questNumber)
-   }
+      //$scope.nextQuestion(questNumber)
+    $scope.chosenQuestion = function(questNumber){
+        $scope.questNumber = questNumber;
+        //console.log($scope.questNumber, "questNumber");
+        nextQuestion(questNumber);
+   };
+      $scope.chosenQuestion(firstQuestion);
 
+   var answerArray = [];
 
+   $scope.submitQuestion = function(radioValue) {
+       var answerObj = {}
+       answerObj.selectedAnswers = radioValue;
+       answerObj.selectedQuestion = $scope.questNumber;
+       console.log(answerObj,"AO");
+       answerArray.push(answerObj);
+       console.log(answerArray,"AA");
+   };
   
   }
   //наступний запит використовуємо щоб залогініти юзера

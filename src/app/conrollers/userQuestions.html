@@ -9,7 +9,7 @@
 	  </div>
 	  <div class="panel-body">
 	    <button class="btn btn-primary pull-left">Завершити тестування</button>
-	     <div class="pull-right text-center question-number"><a href='' ng-click='chosenQuestion(questNumber)' ng-repeat = 'questNumber in questionList'>{{$index + 1}}&nbsp;&nbsp;</a></div>
+	     <div class="pull-right text-center question-number"><a href='' ng-click='chosenQuestion(questNumber)' ng-repeat = 'questNumber in questionList'>{{$index + 1}}&nbsp;</a></div>
 	  </div>
 </div>
 	<div class="questionBar">
@@ -19,16 +19,18 @@
 	<div class="answer clearfix well">
 		<div ng-repeat = 'answer in answers'>
 			<label for='{{answer.answer_id}}' >
-				<input id = '{{answer.answer_id}}' type={{type}} name="answer" ng-model="$parent.radioValue" ng-value="{{answer.answer_id}}" ng-required="!$parent.radioValue"/>
+				<input id = '{{answer.answer_id}}' type={{type}} name="answer" ng-model="$parent.radioValue" value="{{answer.answer_id}}"/>
 				<span ng-bind-html='answer.answer_text | unsafe'></span>
 			</label>
 		</div>
+
+
 	</div>
 
 	<div class="submitQuestion">
-        <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(radioValue)" ng-disabled="!radioValue"/>
+        <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(value)"/>
     </div>
 	</div>
+
 </div>
 
-<!--ng-disabled="ng-value.length==0"-->
