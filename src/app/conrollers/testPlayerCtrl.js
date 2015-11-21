@@ -1,6 +1,6 @@
 var testPlayerApp = angular.module('testPlayerApp', ['ui.router']);
 //список вопросов
-testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', '$q', function ($scope, userSrvc, $stateParams, $state, $q) {
+testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', '$q','$timeout', function ($scope, userSrvc, $stateParams, $state, $q, $timeout) {
   var data = localStorage.userId/*'4'*///захардкоджено, внести в базу нужне значення і поміняти
   console.log('userId',data)
   var url = 'result/getRecordsByStudent/'
@@ -33,6 +33,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
         alert('Немає предметів з доступними тестами для вашої групи')//убрати коли запрацює модалка
      $scope.showInformModal("Немає предметів з доступними тестами для вашої групи");
       }
+
       var data =  $stateParams.id
       var url = 'TestDetail/getTestDetailsByTest/'
       return userSrvc.getInfoForStudent(url, data)
@@ -43,6 +44,9 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
         alert('Немає деталей тесту')
          $scope.showInformModal("Немає деталей тесту");//дописати щоб запрацювала модалка
       }
+     /* if (){
+
+      } */
       var id = $stateParams.id
       localStorage.testId = id;
       var data = [id, resp.data[0].level, resp.data[0].tasks]
@@ -65,12 +69,26 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
 
   $scope.beginTest = function(){
     if (!$scope.showTest){
-      console.log($scope.showTest)
     $scope.showTest = true;
     /*angular.element(element.getElementsById(".multi-files"))*/
     }
     var userId = localStorage.userId;
     var testId = localStorage.testId;
+    function timer(testDuration) {
+    $scope.counter = 10000;
+    $scope.onTimeout = function(){
+        $scope.counter--;
+        mytimeout = $timeout($scope.onTimeout,1000);
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+    
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
+            
+}
+timer()
+
     /*userSrvc.getTestInfo(userId, testId).then(function (resp) {
       $state.go('user.testPlayer');
     });*/
@@ -82,13 +100,17 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', 'userSrvc', '$stateP
 
       var data = localStorage.questionList[0];
       var questionUrl = 'question/getRecords/';
-      var answerUrl = 'answer/getAnswersByQuestion/';
-$q.all[(
+      var answerUrl = 'SAnswer/getAnswersByQuestion/';
+      $scope.questList = 
+$q.all([
     userSrvc.getInfoForStudent(questionUrl, data),
     userSrvc.getInfoForStudent(answerUrl, data)
-  )]
+  ])
    .then(function (resp) {
-      console.log('resp',resp)
+      console.log('resp',resp);
+      $scope.question = resp[0].data[0].question_text;
+      $scope.answers = resp[1].data;
+      $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
    })
   
   }

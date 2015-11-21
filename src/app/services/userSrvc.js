@@ -18,6 +18,10 @@ testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl)
           .then(fulfilled, rejected);
       }
     },
+    getTestInfo: function(userId, testId) {
+     return $http.get(baseUrl + 'Log/startTest' + '/' + userId + '/' + testId)
+       .then(fulfilled, rejected);
+   },
 
 
     postInfoForStudent: function (url, postData) {
