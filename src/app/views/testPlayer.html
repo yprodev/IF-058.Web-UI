@@ -1,36 +1,32 @@
-<div class='test' ng-show='showTest'>
-	<div class="panel panel-primary">
-	  <div class="panel-heading">
-	  	1
-	    <span class="col-md-3 pull-right">Час на роздуми: {{counter}}</span>
-        <div class="col-md-3 pull-right">Завдання 9 з 10 [Рівень 1]</div>
-	  </div>
-	  <div class="panel-body">
-	    <button class="btn btn-primary pull-left">Завершити тестування</button>
-	     <div class="pull-right text-center">1, 2, 3, 4, 5 </div>
-	  </div>
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		1
+		<span class="col-md-3 pull-right">Час на роздуми: {{counter | formatTimer}}</span>
+		<!--  <div class="col-md-3 pull-right">Завдання {{9}} з 10 [Рівень 1]</div> -->
+	</div>
+	<div class="panel-body">
+		<button class="btn btn-primary pull-left">Завершити тестування</button>
+		<div class="pull-right text-center question-number"><a href='' ng-click='chosenQuestion(questNumber)' ng-repeat = 'questNumber in questionList'>{{$index + 1}}&nbsp;&nbsp;</a></div>
+	</div>
 </div>
-	<div class="questionBar">
-		<div class="question clearfix well">
+<div class="questionBar">
+	<div class="question clearfix well">
 		<p>{{question}}</p>
 	</div>
 	<div class="answer clearfix well">
 		<div ng-repeat = 'answer in answers'>
-			<label for='{{answer.answer_id}}' >
-				<input id = '{{answer.answer_id}}' type={{type}} />
+			<label ng-show="type == 'radio'" for='{{answer.answer_id}}' >
+				<input id = '{{answer.answer_id}}' type='radio' name="answer" ng-model="$parent.radioValue" ng-value="{{answer.answer_id}}" ng-required="!$parent.radioValue"/>
 				<span ng-bind-html='answer.answer_text | unsafe'></span>
 			</label>
-
-				
+			<label ng-show="type == 'checkbox'" for='{{answer.answer_id}}' >
+				<input id = '{{answer.answer_id}}' type='checkbox' ng-value="{{answer.answer_id}}" />
+				<span ng-bind-html='answer.answer_text | unsafe'></span>
+			</label>
 		</div>
 	</div>
-	<div>
-		<p>fewefewfewfw</p>
-			{{startTime}}
-	  	</div>
+
+	<div class="submitQuestion">
+		<input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(radioValue)" ng-disabled="!radioValue"/>
 	</div>
-	
-
-
-
 </div>
