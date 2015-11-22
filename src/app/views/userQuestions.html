@@ -18,11 +18,15 @@
 	</div>
 	<div class="answer clearfix well">
 		<div ng-repeat = 'answer in answers'>
-			<label for='{{answer.answer_id}}' >
-				<input id = '{{answer.answer_id}}' type={{type}} name="answer" ng-model="$parent.radioValue" ng-value="{{answer.answer_id}}" ng-required="!$parent.radioValue"/>
-				<span ng-bind-html='answer.answer_text | unsafe'></span>
-			</label>
-		</div>
+            <label ng-show="type == 'radio'" for='{{answer.answer_id}}' >
+                <input id = '{{answer.answer_id}}' type='radio' name="answer" ng-model="$parent.radioValue" ng-value="{{answer.answer_id}}" ng-required="!$parent.radioValue"/>
+                <span ng-bind-html='answer.answer_text | unsafe'></span>
+            </label>
+            <label ng-show="type == 'checkbox'" for='{{answer.answer_id}}' >
+                <input id = '{{answer.answer_id}}' type='checkbox' ng-value="{{answer.answer_id}}" />
+                <span ng-bind-html='answer.answer_text | unsafe'></span>
+            </label>
+        </div>
 	</div>
 
 	<div class="submitQuestion">
