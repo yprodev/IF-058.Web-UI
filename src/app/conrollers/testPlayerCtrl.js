@@ -9,7 +9,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
     function timer(testDuration) {
     $scope.counter = $rootScope.timeForTest * 60;
 
-        console.log($scope.counter, "77777777777777777777");
+        //console.log($scope.counter, "77777777777777777777");
 
     $scope.onTimeout = function(){
         $scope.counter--;
@@ -36,13 +36,25 @@ timer();
     userSrvc.getInfoForStudent(url, id).then(function (resp) {
       console.log(resp)
     })*/
-      var firstQuestion = localStorage.questionList[0];
-      console.log($rootScope.questionList,"*********************");
 
+      var questionArray = localStorage.questionList.split(",");
+      var question;
+      if ($stateParams.id) {
+          question = +questionArray[$stateParams.id] ;
+      } else {
+          question = questionArray[0];
+      }
+
+      //$scope.nextQuestion(questNumber)
+      $scope.chosenQuestion = function(questNumber){
+          $scope.questNumber = questNumber;
+          nextQuestion(questNumber);
+      };
+$scope.chosenQuestion(question);
 function nextQuestion (data){
       var questionUrl = 'question/getRecords/';
       var answerUrl = 'SAnswer/getAnswersByQuestion/';
-      //$scope.questList = 
+      //$scope.questList =
 $q.all([
     userSrvc.getInfoForStudent(questionUrl, data),
     userSrvc.getInfoForStudent(answerUrl, data)
@@ -54,13 +66,8 @@ $q.all([
    })
 }
 
-      //$scope.nextQuestion(questNumber)
-    $scope.chosenQuestion = function(questNumber){
-        $scope.questNumber = questNumber;
-        //console.log($scope.questNumber, "questNumber");
-        nextQuestion(questNumber);
-   };
-      $scope.chosenQuestion(firstQuestion);
+
+
 
    var answerArray = [];
 

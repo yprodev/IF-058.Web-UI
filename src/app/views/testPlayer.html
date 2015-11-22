@@ -6,7 +6,7 @@
 	</div>
 	<div class="panel-body">
 		<button class="btn btn-primary pull-left">Завершити тестування</button>
-		<div class="pull-right text-center question-number"><a href='' ng-click='chosenQuestion(questNumber)' ng-repeat = 'questNumber in questionList'>{{$index + 1}}&nbsp;&nbsp;</a></div>
+		<div class="pull-right text-center question-number"><a ui-sref="user.testPlayer({id:$index + 1})" ng-click='chosenQuestion(questNumber)' ng-repeat = 'questNumber in questionList'>{{$index + 1}}&nbsp;&nbsp;</a></div>
 	</div>
 </div>
 <div class="questionBar">
