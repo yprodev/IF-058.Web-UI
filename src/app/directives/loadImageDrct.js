@@ -7,14 +7,8 @@ app.directive('imageLoad', ['$timeout', '$interval', function ($timeout, $interv
 
 	// imageLoad directive controller function
 	function imageLoadCtrl ($scope) {
-
 		$scope.studPhoto = {};
 		$scope.path = $scope.studPhoto;
-
-
-		$interval(function () {
-			console.log('path ', $scope.path);
-		}, 3000);
 	}
 
 

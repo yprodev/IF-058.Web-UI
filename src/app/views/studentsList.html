@@ -237,7 +237,7 @@
 
 
 
-
+<!-- 
 					<div class="form-group">
 						<label class="sr-only" for="group">Group</label>
 						<div class="input-group">
@@ -252,20 +252,18 @@
 											name="group"
 											id="group"
 											aria-describedby="helpGroup"
-											tabindex="8"
-											required>
+											tabindex="8">
 							</select>
-						</div><!-- END Input Group -->
+						</div>
 
-						<!-- Error message for Student's Gradebook -->
 						<span id="helpGradebook"
 									ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
 									class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
 						</span>
 
 					</div>
-
-					<image-load options="studPhoto"></image-load>
+ -->
+					<image-load options="newStudent.photo"></image-load>
 
 <!--
 					<div class="form-group">

@@ -1,34 +1,38 @@
 app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval) {
 
-	// Declares Entity parameters for getting records
-	$scope.thisEntity = 'student';
-	$scope.thisEntParent = entityObj[$scope.thisEntity].by.parentEntity;
-	$scope.idOfParent = $stateParams.id; 
 
-		console.log('this is our this ent ', $scope.thisEntity);
-		console.log('this ent parent ', $scope.thisEntParent);
-		console.log('this parent ID ', $scope.idOfParent);
 
-	// entitiesSrvc.getEntities($scope.thisEntity)
-	// 	.then(function (response) {
-	// 		$scope.students = response;
-	// 		$scope.noData = "There is no entities here.";
-	// 	});
+/*_________________________________________________
+/*
+/* GETTING RECORDS BY GROUP ID
+/*_________________________________________________
+*/
+	// Declares Entity parameters for getting records request
+	var thisEntity = 'student'
+		, thisEntParent = entityObj[thisEntity].by.parentEntity
+		, idOfParent = $stateParams.id; 
 
-// we need currentEntity.by.parentEntity
-	entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.thisEntParent, $scope.idOfParent)
+	// Getting records request
+	entitiesSrvc.getEntitiesByEntity(thisEntity, thisEntParent, idOfParent)
 	.then(function (resp) {
-		console.log('resp inside controller', resp);
 		gettingResponseHandler (resp);
 	});
 
-
-	//create array with entities if response has data
+	// Getting records request handler
 	function gettingResponseHandler (resp) {
 		$scope.students = resp;
-		console.log('RESPONSE FINISH (entities in the view) ', resp);
+		console.log('here our resp', resp);
 		$scope.noData = "Немає записів";
 	};
+
+
+
+
+/*_________________________________________________
+/*
+/* ADDING RECORDS BY GROUP ID
+/*_________________________________________________
+*/
 
 	//function shows and hides the form for creating new entity
 	$scope.showAddForm = function () {
@@ -36,23 +40,68 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 			$scope.showingAdd = true;
 		} else {
 			$scope.showingAdd = false;
-			$scope.newEntity = {};
+			$scope.resetEntity();
 		};
 	};
 
+	$scope.resetEntity = function () {
+		$scope.newEntity = {};
+	};
+
+
+
+
 	$scope.addNewStudent = function (recordData) {
 
-		// Some tricks with fields we don't know how to work with
-		if(!recordData.group_id || recordData.group_id == '') {
-			return; 
+		function addIdOfParent (objData) {
+			if(!objData.group_id) {
+				objData.group_id = idOfParent;
+			}
 		}
 
-/*		if(!$scope.studPhoto || $scope.studPhoto == '') {
-			return;
+		function addRecordPhoto (objData) {
+			if(!objData.photo || objData.photo.src === undefined) {
+				objData.photo = '';
+			} else {
+				objData.photo = objData.photo.src;
+			}
 		}
-*/
-		//Transfer photo string inside addNew Student method
-		recordData.photo = $scope.studPhoto.src || '';
+
+		function addPlainPass (objData) {
+			if (!objData.plain_password) {
+				objData.plain_password = objData.password_confirm;
+			}
+		}
+
+		addIdOfParent(recordData);
+		addRecordPhoto(recordData);
+		addPlainPass(recordData);
+
+		// Creating middle object
+		var newRecord = recordData;
+
+
+		console.log('new record ', newRecord);
+
+		// if (!recordData.plain_password) {
+		// 	recordData.plain_password = recordData.password_confirm;
+		// 	console.log('here our plain ', recordData.plain_password);
+		// }
+
+		// if(recordData.photo.src === undefined) {
+		// 	console.log('Kartinka undefined ', recordData.photo.src);
+		// } else {
+		// 	//Transfer photo string to the recordData.photo property
+		// 	recordData.photo = recordData.photo.src;
+		// }
+
+
+
+
+
+
+
+
 
 		// Put recordData Object into a variable
 		var studentRecordData = {
@@ -71,20 +120,19 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 			photo: recordData.photo
 		};
 
-		// var jsonData = JSON.stringify(studentRecordData);
 
 		// Gives data to a service
 		entitiesSrvc.createEntity($scope.thisEntity, studentRecordData)
 			.then(function (response) {
-				console.log(response);
+				console.log('adding student ', response);
 				// addRespHandler(resp, newData);
 			});
 
 		//handing success and error response
 		function addRespHandler (resp, newData) {
-			if (resp.data.response == 'ok' && resp.status == 200) {
+			if (resp.data.response === 'ok' && resp.status === 200) {
 				$scope.showingAdd = false;
-				$scope.newEntity = {};
+				$scope.resetEntity();
 			} else if (resp.data.response == 'orror 23000') {
 				console.log('pop up with error that there is such record');
 			} else {
@@ -93,6 +141,18 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 		}// END addRespHandler
 
 	}; // End $scope.addStudent
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
