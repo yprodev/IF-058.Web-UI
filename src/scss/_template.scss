@@ -10,8 +10,8 @@
 	&:hover {
 		@include round(5px);
 		@include scale(1.02, 1.02);
-		@include drop-shadow(3px, 3px, 3px, 0, $alpha: .08);
-		@include drop-shadow(-3px, -3px, 3px, 0, $alpha: .08);
+		@include drop-shadow(1px, 1px, 15px, 0, .15);
+		@include drop-shadow(-1px, -1px, 15px, 0, .15);
 		background-color: #0082F5;
 		border-bottom: none;
 
@@ -34,6 +34,8 @@
 .students-bootstrap > .ng-scope > .row > .col.col-img {
 	padding-top: 10px;
 	text-align: center;
+	font-family: $txt-light;
+	color: $clr-light-text;
 }
 
 .students-bootstrap > .ng-scope > .row > .col > hgroup > h3 {
