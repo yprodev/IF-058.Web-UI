@@ -109,7 +109,6 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 		function addRespHandler (resp, newRecord) {
 			if (resp.data.response === 'ok' && resp.status === 200) {
 				$scope.showingAdd = false;
-				console.log('resp from resp handler ', resp);
 				// okAddResponseHandler(resp, newRecord);
 				// $scope.resetEntity();
 			} else if (resp.data.response == 'orror 2300') {
