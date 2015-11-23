@@ -1,6 +1,6 @@
 app.controller('entitiesCtrl',
-  ['$scope', "$q", 'entitiesSrvc', 'countEntitiesSrvc', '$stateParams', '$state', '$timeout', 'entityObj',
-  function ($scope, $q, entitiesSrvc, countEntitiesSrvc, $stateParams, $state, $timeout, entityObj) {
+  ['$scope', "$q", 'entitiesSrvc', 'countEntitiesSrvc', '$stateParams', '$state', '$timeout', 'entityObj','$rootScope',
+  function ($scope, $q, entitiesSrvc, countEntitiesSrvc, $stateParams, $state, $timeout, entityObj, $rootScope) {
 
   //it defines from entitiesDrct
   $scope.thisEntity = "";
@@ -12,6 +12,7 @@ app.controller('entitiesCtrl',
   $scope.newEntity = {};
 
   //shows inform message about error
+
   $scope.showInformModal = function(infMsg) {
     $scope.infMsg = infMsg;
     angular.element(document.querySelector('#informModal')).modal();

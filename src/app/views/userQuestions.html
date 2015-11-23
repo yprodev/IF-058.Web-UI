@@ -1,2 +1,8 @@
 <h1>Тест состоит из {{questionsQuantity}} вопросов </h1>
-<button class="btn btn-primary" ng-click='beginTest()'>Начать тест</button>
+<button class="btn btn-primary" id="startBtn" ui-sref="user.testPlayer({id:1})">Начать тест </button>
+<!--<a ui-sref="user.testPlayer">Начать тест </a>-->
+<div class='test'>
+	<ui-view></ui-view>
+</div>
+
+<!--ng-disabled="ng-value.length==0"-->

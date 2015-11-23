@@ -1,6 +1,5 @@
-;
 var app = angular.module('app', ['ui.router', 'testPlayerApp']);
-
+var testPlayerApp = angular.module('testPlayerApp', ['ui.router']);
 app.constant("baseUrl", "http://dtapi.local/");
 app.value("entityObj", {
   "faculty": {
@@ -192,15 +191,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'userTestListCtrl'
     }).
     state('user.questions', {
-      url: '/questions/:id',
+      url: '/tests/:id',
       templateUrl: 'app/views/userQuestions.html',
-      controller: 'userQuestionListCtrl'
+      controller: 'prepareToTestCtrl'
     }).
     state('user.testPlayer', {
-      url: '/test',
+      url: '/question/:id',
       templateUrl: 'app/views/testPlayer.html',
       controller: 'userQuestionListCtrl'
     });
+/*    state('user.questions.number', {
+      url: '/:id',
+      templateUrl: 'app/views/userQuestions.html',
+      controller: 'userQuestionListCtrl'
+    });*/
 
   $urlRouterProvider.otherwise('/');
 }]);
