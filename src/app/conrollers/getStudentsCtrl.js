@@ -10,18 +10,19 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 	// Declares Entity parameters for getting records request
 	var thisEntity = 'student'
 		, thisEntParent = entityObj[thisEntity].by.parentEntity
-		, idOfParent = $stateParams.id; 
+		, idOfParent = $stateParams.id;
 
 	// Getting records request
 	entitiesSrvc.getEntitiesByEntity(thisEntity, thisEntParent, idOfParent)
 	.then(function (resp) {
+		console.log('response in the controller', resp)
 		gettingResponseHandler (resp);
 	});
 
 	// Getting records request handler
 	function gettingResponseHandler (resp) {
-		$scope.students = resp;
-		console.log('here our resp', resp);
+		$scope.students = resp.data;
+		console.log('resp in handler', resp.data);
 		$scope.noData = "Немає записів";
 	};
 
@@ -109,7 +110,7 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 		function addRespHandler (resp, newRecord) {
 			if (resp.data.response === 'ok' && resp.status === 200) {
 				$scope.showingAdd = false;
-				// okAddResponseHandler(resp, newRecord);
+				okAddResponseHandler(resp, newRecord);
 				// $scope.resetEntity();
 			} else if (resp.data.response == 'orror 2300') {
 				console.log('Виникла наступна помилка: ' + resp.data.response + '. Такі дані вже наявні у базі даних.');
@@ -120,11 +121,9 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 			}
 		}// END addRespHandler
 
-		// WE NEED USER ID
-		// THIS MEANS WE NEED DEPENDENCY USER
 		function okAddResponseHandler (resp, newRecord) {
-			newRecord[scope.commonId] = resp.data.id;
-			scope.entities.push(newData);
+			recordData.user_id = resp.data.id;
+			$scope.students.push(recordData);
 		};
 
 	}; // End $scope.addStudent
@@ -142,7 +141,11 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 
 
 
-
+/*_________________________________________________
+/*
+/* EDITING RECORDS BY GROUP ID
+/*_________________________________________________
+*/
 
 
 	// Show edit panel for a student
