@@ -1,0 +1,73 @@
+// StudentsList template
+
+.students-bootstrap > .ng-scope {
+	margin: $baseline;
+	padding: 7px;
+	border-bottom: 1px solid $clr-light-bg;
+	@include scale(1,1);
+	@include transition(all, .4s);
+
+	&:hover {
+		@include round(5px);
+		@include scale(1.02, 1.02);
+		@include drop-shadow(3px, 3px, 3px, 0, $alpha: .08);
+		@include drop-shadow(-3px, -3px, 3px, 0, $alpha: .08);
+		background-color: #0082F5;
+		border-bottom: none;
+
+		.row > .col > hgroup {
+			color: $WHITE;
+		}
+
+		.row > .col > span.detail {
+			color: $WHITE;
+		}
+		.row > .col > hgroup > h3 {
+			color: $WHITE;
+		}
+		.row > .col > hgroup > h4 {
+			color: $WHITE;
+		}
+	}
+}
+
+.students-bootstrap > .ng-scope > .row > .col.col-img {
+	padding-top: 10px;
+	text-align: center;
+}
+
+.students-bootstrap > .ng-scope > .row > .col > hgroup > h3 {
+	text-transform: uppercase;
+}
+
+.students-bootstrap > .ng-scope > .row > .col > hgroup > h4 {
+	text-transform: uppercase;
+}
+
+.students-bootstrap > .ng-scope > .row > .col > span {
+	display: block;
+	padding: 3px;
+	font-family: $txt-regular;
+	font-size: $body-font-size * 1.3;
+	line-height: $baseline;
+	color: $clr-regular-text;
+	vertical-align: center;
+}
+
+.students-bootstrap > .ng-scope > .row > .col > img {
+	@include round(50%);
+	// move visuly
+	margin-left: 15px;
+}
+
+.students-bootstrap > .ng-scope > .row > .col > span.detail {
+	font-family: $txt-light;
+	font-size: $body-font-size;
+	color: $clr-regular-text;
+}
+
+.students-bootstrap > .ng-scope > .row > .col > span.buttons {
+	display: block;
+	position: relative;
+	min-width: 90px;
+}

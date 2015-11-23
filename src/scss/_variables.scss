@@ -4,14 +4,16 @@
 ** ________________________________________________________________
 */
 
+@import url(https://fonts.googleapis.com/css?family=Ubuntu+Condensed|Noto+Serif|Open+Sans+Condensed:300&subset=latin,cyrillic-ext);
+
 //Font Sizes
 $body-font-size: 14px;
 $baseline: ($body-font-size * 1.5);
 $theme-margin: ($baseline * 3);
 
 //Font Families
-$txt-headline: 'Ubuntu Condensed', Helvetica, Arial, sans-serif;
-$txt-regular: 'Noto Serif', 'Times New Roman', Times, serif;
+$txt-headline: 'Noto Serif', Helvetica, Arial, sans-serif;
+$txt-regular: 'Ubuntu Condensed', 'Times New Roman', Times, serif;
 $txt-light: 'Open Sans Condensed', sans-serif;
 
 //Theme Colors

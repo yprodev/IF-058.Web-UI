@@ -275,14 +275,11 @@ button.marginTop {
 }
 
 
-@import '_variables.scss';
-
-
- /* ___________________________________
-   *
-   * Here is styles for student entities
-   * ___________________________________
-  */
+/* ___________________________________
+ *
+ * Here is styles for student entities
+ * ___________________________________
+*/
 
 .student-photo {
   width: 100%;
@@ -365,3 +362,7 @@ label.ilabel {
     color: #fff;
   }
 }
+@import '_variables.scss';
+@import '_mixins.scss';
+@import '_typography.scss';
+@import '_template.scss';
