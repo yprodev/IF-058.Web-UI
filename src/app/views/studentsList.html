@@ -313,74 +313,90 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-	<!-- Table appearence -->
+		<!-- DIVS appearence -->
+	<div ng-show="!students">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
-				<!-- If have no data -->
-				<div ng-show="!students">{{noData}}</div>
-
-					<!-- Start Repeat for entity STUDENT -->
-					<table ng-show="students" class="table table-striped">
-						<tr ng-if="editingStudent.user_id !== student.user_id"
-								ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse">
-							<td class="td-photo hidden-xs">
-								<img class="student-photo" 
-											 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
-											 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
-							</td>
-							<td>{{ student.student_surname }}</td>
-							<td>{{ student.student_name }}</td>
-							<td>{{ student.student_fname }}</td>
-							<td>{{ student.gradebook_id }}</td>
-							<td>
-								<actions-buttons-drct></actions-buttons-drct>
-							</td>
-						</tr>
+				{{noData}}
+			</div><!-- END col -->
+		</div><!-- END row -->
+	</div><!-- END ng-show -->
 
 
-
-						<tr ng-if="editingStudent.user_id === student.user_id"
-								ng-repeat-end>
-							<td class="td-photo hidden-xs">
-								<img class="student-photo" 
-											 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
-											 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
-							</td>
-							<td>{{ entity.student_surname }}</td>
-							<td>{{ entity.student_name }}</td>
-							<td>{{ entity.student_fname }}</td>
-							<td>{{ entity.gradebook_id }}</td>
-							<td>
-								<editing-buttons-drct></editing-buttons-drct>
-							</td>
-						</tr>
-					</table>
-
-					<!-- Confirmation Deleting Modal -->
-          <deleting-modal-drct></deleting-modal-drct>
-          <!-- Informational Error from Server Modal -->
-          <inform-modal-drct></inform-modal-drct>
+		<!-- DIVS appearence -->
+	<div ng-show="students" class="students-bootstrap">
+		<div ng-if="editingStudent.user_id !== student.user_id"
+				 ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-1 col-md-1 col-lg-1 col-img">
+					<img class="student-photo" 
+							 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
+							 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-11 col-md-11 col-lg-11">
+					<hgroup>
+						<h3>{{ student.student_surname }}</h3>
+						<h4>{{ student.student_name }} {{ student.student_fname }}</h4>
+					</hgroup>
+				</div><!-- END col -->
+			</div><!-- END row -->
+			<div class="row">
+				<div class="col col-xs-12 col-sm-1 col-sm-offset-1 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-1">
+					<span class="detail">{{ student.gradebook_id }}</span>
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-2 col-md-2 col-lg-2">
+					<span class="detail">{{ student.plain_password }}</span>
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5 col-lg-3 col-lg-offset-5">
+					<span class="buttons pull-right"><actions-buttons-drct></actions-buttons-drct></span>
+				</div><!-- END col -->
+			</div><!-- END row -->
+		</div><!-- END div repeat start -->
 
 
 
 
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-			<!-- If have no data -->
-			<div ng-show="!students">{{noData}}</div>
+		<div ng-if="editingStudent.user_id == student.user_id"
+				 ng-repeat-end>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<img class="student-photo" 
+							 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
+							 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.student_surname }}
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.student_name }}
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.student_fname }}
+				</div><!-- END col -->
+			</div><!-- END row -->
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.gradebook_id }}
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					CONTENT
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					CONTENT
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<editing-buttons-drct></editing-buttons-drct>
+				</div><!-- END col -->
+			</div><!-- END row -->
+		</div><!-- END div repeat end -->
+
+		<!-- Confirmation Deleting Modal -->
+		<deleting-modal-drct></deleting-modal-drct>
+		<!-- Informational Error from Server Modal -->
+		<inform-modal-drct></inform-modal-drct>
+	</div><!-- END ng-show -->
+
 
 
 
