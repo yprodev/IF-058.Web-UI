@@ -62,8 +62,23 @@ app.value("entityObj", {
     },
     group_name: '',
     event_date: ''
+  },
+  "student": {
+    username: "",
+    password: "",
+    password_confirm: "",
+    email: "",
+    gradebook_id: "",
+    student_surname: "",
+    student_name: "",
+    student_fname: "",
+    group_id: "",
+    plain_password: "",
+    photo: "",
+    by: {
+      parentEntity: "group"
+    }
   }
-
 
   //... and other entities
 });
@@ -138,14 +153,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/usersTabs',
       templateUrl: 'app/views/usersTabs.html'
     }).
+
     state('admin.usersTabs.students', {
-      url: '/students',
-      templateUrl: 'app/views/studentsList.html'
+      url: '/students/:id',
+      templateUrl: 'app/views/studentsList.html',
+      // controller: 'entitiesCtrl'
     }).
-    state('admin.addStudent', {
-      url: '/students/addStudent',
-      templateUrl: 'app/views/addStudentRecord.html'
-    }).
+    // state('admin.usersTabs.students', {
+    //   url: '/students',
+    //   templateUrl: 'app/views/studentsList.html'
+    // }).
+    // state('admin.addStudent', {
+    //   url: '/students/addStudent',
+    //   templateUrl: 'app/views/addStudentRecord.html'
+    // }).
     state('admin.timeTable', {
       url: '/timeTable/:id',
       templateUrl: 'app/views/timeTableList.html',
