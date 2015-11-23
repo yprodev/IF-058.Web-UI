@@ -276,8 +276,7 @@ button.marginTop {
 
 
 
-
-  /* ___________________________________
+ /* ___________________________________
    *
    * Here is styles for student entities
    * ___________________________________
@@ -285,11 +284,12 @@ button.marginTop {
 
 .student-photo {
   width: 100%;
+  max-width: 50px;
   height: auto;
 }
 
 .table>tbody>tr>td.td-photo {
-  width: 15%;
+  max-width: 50px;
   padding: 0;
 }
 
