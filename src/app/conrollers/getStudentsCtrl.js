@@ -1,13 +1,34 @@
-app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', '$interval', function ($scope, entitiesSrvc, $interval) {
+app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval) {
 
-	// Declares Entity of the controller
+	// Declares Entity parameters for getting records
 	$scope.thisEntity = 'student';
+	$scope.thisEntParent = entityObj[$scope.thisEntity].by.parentEntity;
+	$scope.idOfParent = $stateParams.id; 
 
-	entitiesSrvc.getEntities($scope.thisEntity)
-		.then(function (response) {
-			$scope.students = response;
-			$scope.noData = "There is no entities here.";
-		});
+		console.log('this is our this ent ', $scope.thisEntity);
+		console.log('this ent parent ', $scope.thisEntParent);
+		console.log('this parent ID ', $scope.idOfParent);
+
+	// entitiesSrvc.getEntities($scope.thisEntity)
+	// 	.then(function (response) {
+	// 		$scope.students = response;
+	// 		$scope.noData = "There is no entities here.";
+	// 	});
+
+// we need currentEntity.by.parentEntity
+	entitiesSrvc.getEntitiesByEntity($scope.thisEntity, $scope.thisEntParent, $scope.idOfParent)
+	.then(function (resp) {
+		console.log('resp inside controller', resp);
+		gettingResponseHandler (resp);
+	});
+
+
+	//create array with entities if response has data
+	function gettingResponseHandler (resp) {
+		$scope.students = resp;
+		console.log('RESPONSE FINISH (entities in the view) ', resp);
+		$scope.noData = "Немає записів";
+	};
 
 	//function shows and hides the form for creating new entity
 	$scope.showAddForm = function () {

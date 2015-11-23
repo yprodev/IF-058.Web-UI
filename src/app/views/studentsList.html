@@ -336,7 +336,7 @@
 					<!-- Start Repeat for entity STUDENT -->
 					<table ng-show="students" class="table table-striped">
 						<tr ng-if="editingStudent.user_id !== student.user_id"
-								ng-repeat-start="student in students.list | filter:searchItem | orderBy:sortType:sortReverse">
+								ng-repeat-start="student in students.data | filter:searchItem | orderBy:sortType:sortReverse">
 							<td class="td-photo hidden-xs">
 								<img class="student-photo" 
 											 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
