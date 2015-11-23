@@ -1,10 +1,7 @@
 testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
   return {
     getInfoForStudent: function (url, data, result) {
-
-      console.log('serviceData',data)
       if (Array.isArray(data)){
-        console.log('is Array')
         var sum = ''
         for (i=0; i<data.length; i++){
           sum = sum + data[i]+'/'
@@ -21,8 +18,10 @@ testPlayerApp.factory('userSrvc', ['$http', 'baseUrl', function ($http, baseUrl)
           .then(fulfilled, rejected);
       }
     },
-
-
+    getTestInfo: function(userId, testId) {
+     return $http.get(baseUrl + 'Log/startTest' + '/' + userId + '/' + testId)
+       .then(fulfilled, rejected);
+   },
     postInfoForStudent: function (url, postData) {
       return $http.post(baseUrl + url, postData)
         .then(fulfilled, rejected);
