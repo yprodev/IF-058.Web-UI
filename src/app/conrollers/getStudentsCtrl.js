@@ -40,15 +40,15 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 			$scope.showingAdd = true;
 		} else {
 			$scope.showingAdd = false;
-			$scope.resetEntity();
+			// $scope.resetEntity();
 		};
 	};
-
+/*
 	$scope.resetEntity = function () {
 		$scope.newEntity = {};
 	};
 
-
+*/
 
 
 	$scope.addNewStudent = function (recordData) {
@@ -78,67 +78,55 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 		addPlainPass(recordData);
 
 		// Creating middle object
-		var newRecord = recordData;
 
-
-		console.log('new record ', newRecord);
-
-		// if (!recordData.plain_password) {
-		// 	recordData.plain_password = recordData.password_confirm;
-		// 	console.log('here our plain ', recordData.plain_password);
-		// }
-
-		// if(recordData.photo.src === undefined) {
-		// 	console.log('Kartinka undefined ', recordData.photo.src);
-		// } else {
-		// 	//Transfer photo string to the recordData.photo property
-		// 	recordData.photo = recordData.photo.src;
-		// }
-
-
-
-
-
-
-
-
-
-		// Put recordData Object into a variable
-		var studentRecordData = {
-			// User Values
+		recordData = {
+			// User values
 			username: recordData.username,
 			password: recordData.password,
 			password_confirm: recordData.password_confirm,
 			email: recordData.email,
-			// Students Values
+			// Person values
 			gradebook_id: recordData.gradebook_id,
 			student_surname: recordData.student_surname,
 			student_name: recordData.student_name,
 			student_fname: recordData.student_fname,
 			group_id: recordData.group_id,
-			plain_password: recordData.password_confirm,
+			plain_password: recordData.plain_password,
 			photo: recordData.photo
 		};
 
+		var jsonData = JSON.stringify(recordData);
+		var newRecord = jsonData;
 
 		// Gives data to a service
-		entitiesSrvc.createEntity($scope.thisEntity, studentRecordData)
+		entitiesSrvc.createEntity(thisEntity, newRecord)
 			.then(function (response) {
 				console.log('adding student ', response);
-				// addRespHandler(resp, newData);
+				addRespHandler(response, newRecord);
 			});
 
 		//handing success and error response
-		function addRespHandler (resp, newData) {
+		function addRespHandler (resp, newRecord) {
 			if (resp.data.response === 'ok' && resp.status === 200) {
 				$scope.showingAdd = false;
-				$scope.resetEntity();
-			} else if (resp.data.response == 'orror 23000') {
-				console.log('pop up with error that there is such record');
+				console.log('resp from resp handler ', resp);
+				// okAddResponseHandler(resp, newRecord);
+				// $scope.resetEntity();
+			} else if (resp.data.response == 'orror 2300') {
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Такі дані вже наявні у базі даних.');
+			} else if (resp.data.response === 'Failed to validate array') {
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, введіть унікальні дані. Якщо дана помилка виникне вдруге, будь-ласка, зверніться до системного адміністратора, відправивши листа за поштовою адресою: somewhere@nowhere.net');
 			} else {
-				console.log('Error of Record' + resp.data.response);
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, зверніться до системного адміністратора, відправивши листа за поштовою адресою: somewhere@nowhere.net');
 			}
 		}// END addRespHandler
+
+		// WE NEED USER ID
+		// THIS MEANS WE NEED DEPENDENCY USER
+		function okAddResponseHandler (resp, newRecord) {
+			newRecord[scope.commonId] = resp.data.id;
+			scope.entities.push(newData);
+		};
 
 	}; // End $scope.addStudent
 
