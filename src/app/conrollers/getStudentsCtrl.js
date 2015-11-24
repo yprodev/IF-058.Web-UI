@@ -15,14 +15,12 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 	// Getting records request
 	entitiesSrvc.getEntitiesByEntity(thisEntity, thisEntParent, idOfParent)
 	.then(function (resp) {
-		console.log('response in the controller', resp)
 		gettingResponseHandler (resp);
 	});
 
 	// Getting records request handler
 	function gettingResponseHandler (resp) {
 		$scope.students = resp.data;
-		console.log('resp in handler', resp.data);
 		$scope.noData = "Немає записів";
 	};
 
