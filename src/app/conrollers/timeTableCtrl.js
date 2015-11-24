@@ -55,7 +55,7 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 
 		recordData = {
 			// values
-			subject_id : "1",
+			subject_id : recordData.subject_id,
 			group_id: recordData.group_id,
 			event_date: recordData.event_date
 		};
