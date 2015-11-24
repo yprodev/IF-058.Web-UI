@@ -124,13 +124,14 @@ body, html, .container-fluid, .nav-row {
 	  list-style-type: none;
 	  a {
 		color: white;
-		padding: 5px 0;
+		//padding: 5px 0;
 		// text-align: center;
 		width: 100%;
+    text-decoration: none;
 		font-size:16px;
 		&:hover {
 		  text-decoration: none;
-		  font-weight: bold;
+		  font-weight: normal;
 		  background-color: #057933;
 		}
 		span {
@@ -147,16 +148,21 @@ body, html, .container-fluid, .nav-row {
   position: fixed;
   min-height: 100%;
   box-shadow: 3px 0 3px $nav_color;
-  hr{
-    margin-top: 10px;
-    margin-bottom: 10px;
+
+  ul li {
+    border-bottom: 1px solid #ffffff;
   }
+
   ul li a {
-	display: inline-block;
-	span {
-	  // display:block;
-	  // padding-bottom:5px;
-	}
+    color: white;
+    display: block;
+    font-size: 16px;
+    padding: 5px 0 5px 10px;
+    width: 100%;
+  	span {
+  	  // display:block;
+  	  // padding-bottom:5px;
+  	}
   }
   @include navstyle;
 }
@@ -172,6 +178,8 @@ body, html, .container-fluid, .nav-row {
     }
     &:focus {
       background-color: #057933;
+      outline-style: none;
+      outline: none;
     }
     span {
       padding: 5px;
@@ -375,7 +383,36 @@ label.ilabel {
 }
 
 
+
 @import '_variables.scss';
 @import '_mixins.scss';
 @import '_typography.scss';
 @import '_template.scss';
+
+
+.panel-heading {
+  font-size: 16px;
+  font-family: $txt-regular;
+}
+
+a:focus {
+  outline: none !important;
+}
+
+
+.left-nav {
+  ul li {
+    border-bottom: 1px solid #ffffff;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  ul li a {
+    color: white;
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 0 10px 10px;
+  }
+  @include navstyle;
+}
