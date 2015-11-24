@@ -318,7 +318,73 @@
 					<span class="detail">{{ student.plain_password }}</span>
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5 col-lg-3 col-lg-offset-5">
-					<span class="buttons pull-right"><actions-buttons-drct></actions-buttons-drct></span>
+					<span class="buttons pull-right">
+
+						<button class="btn btn-info btn-sm"
+										ng-click='showEditingForm(student)'>
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+
+						<button class="btn btn-danger btn-sm col-md-offset-1"
+										data-toggle="modal"
+										data-target="#deleteModal"
+										ng-click='activateGroup(row.group_id)'>
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+
+					</span>
+				</div><!-- END col -->
+			</div><!-- END row -->
+		</div><!-- END div repeat start -->
+
+
+		<div ng-if="editingStudent.user_id === student.user_id" ng-repeat-end>
+			<div class="row">
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3 col-img">
+					Content 1 student gradebook_id
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					Content 1 student name
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					Content 1 student fname
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					Content 1 student surname
+				</div><!-- END col -->
+			</div><!-- END row -->
+			<div class="row">
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					Content 2 username
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					Content 2 email
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					Content 2 password
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					Content 2 password_confirm
+				</div><!-- END col -->
+			</div><!-- END row -->
+			<div class="row">
+				<div class="col col-xs-12 col-sm-12 col-md-8 col-lg-8">
+					Content 3 username
+					<image-load options="newStudent.photo"></image-load>
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
+					<span class="buttons pull-right">
+
+						<button class="btn btn-success btn-sm navbar-btn" 
+										ng-click='editGroup()'>
+							<span class="glyphicon glyphicon-ok"></span>
+						</button>
+
+						<button class="btn btn-warning btn-sm col-md-offset-1 navbar-btn"
+										ng-click="showEditingForm(null)">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					</span>
 				</div><!-- END col -->
 			</div><!-- END row -->
 		</div><!-- END div repeat start -->
@@ -326,40 +392,6 @@
 
 
 
-
-		<div ng-if="editingStudent.user_id == student.user_id"
-				 ng-repeat-end>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					<img class="student-photo" 
-							 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
-							 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
-				</div><!-- END col -->
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					{{ student.student_surname }}
-				</div><!-- END col -->
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					{{ student.student_name }}
-				</div><!-- END col -->
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					{{ student.student_fname }}
-				</div><!-- END col -->
-			</div><!-- END row -->
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					{{ student.gradebook_id }}
-				</div><!-- END col -->
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					CONTENT
-				</div><!-- END col -->
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					CONTENT
-				</div><!-- END col -->
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					<editing-buttons-drct></editing-buttons-drct>
-				</div><!-- END col -->
-			</div><!-- END row -->
-		</div><!-- END div repeat end -->
 
 		<!-- Confirmation Deleting Modal -->
 		<deleting-modal-drct></deleting-modal-drct>

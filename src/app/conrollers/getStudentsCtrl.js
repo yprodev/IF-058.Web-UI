@@ -146,6 +146,23 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 */
 
 
+	// $scope.editingStudent = null;
+
+	// //function opens a form for editing
+	// scope.showEditForm = function (entity) {
+	// 	if (scope.editingEntity != entity) {
+	// 		scope.editingEntity = entity;
+	// 		createEditedEntityStorage(entity);
+	// 	} else {
+	// 		scope.editingEntity = null;
+	// 	};
+	// };
+
+
+
+
+////MINEMINEMINE
+
 	// Show edit panel for a student
 	$scope.showEditingForm = function (stud) {
 		// if stud Object is not equal to null
