@@ -1,21 +1,21 @@
-/* ___________________________________________________________________________
+/* _____________________________________
 **
 ** Project typography
-** ___________________________________________________________________________
+** _____________________________________
 */
 
 html,
 body {
 	height:100%;
 }
-
-/* body {
+/* 
+body {
 	color: ($clr-regular-text);
 	font: ($body-font-size/$baseline) $txt-regular;
 
 	-webkit-font-smoothing: antialiased;
-} */
-
+}
+ */
 p {
 	margin: 0 0 $baseline 0;
 
@@ -60,3 +60,4 @@ h3 { font-size: 28; line-height: 1.4; color: $clr-bg-dblue;}
 h4 { font-size: 24; line-height: 1.4;}
 h5 { font-size: 20; line-height: 1.4;}
 h6 { font-family: $txt-light; font-size: 16; line-height: 1.4;}
+
