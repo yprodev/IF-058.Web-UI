@@ -1,4 +1,8 @@
 testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
+  function absentData (resp){
+
+    return resp.data[0][0] == "record_id" && resp.data[0][1] == "null"
+  }
   $scope.enterToEntity = function (to, entityId) {
     $state.go(to, {'id': entityId});
   };
@@ -14,15 +18,14 @@ testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc', '$statePa
       data = resp.data[0].group_id;
       return userSrvc.getInfoForStudent(url, data)
     }).then(function (groupInfo) {
+      if (absentData (groupInfo)) {
+          return $scope.noData = "Немає записів";
+      }
       url = 'subject/getRecords/'
       data = groupInfo.data[0].subject_id
-      if (!data) {
-          $scope.showInformModal("Немає предметів з доступними тестами для вашої групи");
-      } else {
-        for (i in groupInfo.data) {
-          return userSrvc.getInfoForStudent(url, data)
-        }
-      }
+    for (i in groupInfo.data) {
+      return userSrvc.getInfoForStudent(url, data)
+    }
     }).then(function (subjectInfo) {
       data = subjectInfo.data
       $scope.entities = data;
@@ -36,11 +39,19 @@ testPlayerApp.controller('userTestListCtrl', ['$scope', 'userSrvc', '$stateParam
     var url = 'test/getTestsBySubject/';
     var data = $stateParams.id
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
-      $scope.entities = resp.data
+      if (resp.data[0][0] == "record_id" && resp.data[0][1] == "null") {
+              $scope.noData = "Немає записів";
+            } else {
+              $scope.entities = resp.data;
+            }
+            $scope.noData = "Немає записів";
     })
   }
   $scope.getStudentTests();
   $scope.enterToEntity = function (to, entityId) {
     $state.go(to, {'id': entityId});
   };
+
+  
+
 }]);
