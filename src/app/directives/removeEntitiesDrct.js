@@ -25,6 +25,9 @@ app.directive('removeEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
                 case "ok":
                   var index = scope.entities.indexOf(currentEntity);
                   scope.entities.splice(index, 1);
+                  if (scope.entities.length === 0) {
+                    delete scope.entities;
+                  };
                   break;
                 case "error 23000":
                   scope.showInformModal("Неможливо видалити запис. Запис має залежні об'єкти.");

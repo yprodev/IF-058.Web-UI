@@ -51,6 +51,9 @@ app.directive('addEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
           //pushes to array scope.entities a new added object
           function successAddRespHandler (resp, newData) {
             newData[scope.commonId] = resp.data.id;
+            if (!scope.entities) {
+              scope.entities = [];
+            };
             scope.entities.push(newData);
           };
       }

@@ -1,13 +1,39 @@
-app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', '$interval', function ($scope, entitiesSrvc, $interval) {
+app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval) {
 
-	// Declares Entity of the controller
-	$scope.thisEntity = 'student';
 
-	entitiesSrvc.getEntities($scope.thisEntity)
-		.then(function (response) {
-			$scope.students = response;
-			$scope.noData = "There is no entities here.";
-		});
+
+/*_________________________________________________
+/*
+/* GETTING RECORDS BY GROUP ID
+/*_________________________________________________
+*/
+	// Declares Entity parameters for getting records request
+	var thisEntity = 'student'
+		, thisEntParent = entityObj[thisEntity].by.parentEntity
+		, idOfParent = $stateParams.id;
+
+	// Getting records request
+	entitiesSrvc.getEntitiesByEntity(thisEntity, thisEntParent, idOfParent)
+	.then(function (resp) {
+		console.log('response in the controller', resp)
+		gettingResponseHandler (resp);
+	});
+
+	// Getting records request handler
+	function gettingResponseHandler (resp) {
+		$scope.students = resp.data;
+		console.log('resp in handler', resp.data);
+		$scope.noData = "Немає записів";
+	};
+
+
+
+
+/*_________________________________________________
+/*
+/* ADDING RECORDS BY GROUP ID
+/*_________________________________________________
+*/
 
 	//function shows and hides the form for creating new entity
 	$scope.showAddForm = function () {
@@ -15,70 +41,111 @@ app.controller('getStudentsCtrl', ['$scope', 'entitiesSrvc', '$interval', functi
 			$scope.showingAdd = true;
 		} else {
 			$scope.showingAdd = false;
-			$scope.newEntity = {};
+			// $scope.resetEntity();
 		};
 	};
+/*
+	$scope.resetEntity = function () {
+		$scope.newEntity = {};
+	};
 
-	// $interval(function () {
-	// 	console.log($scope.group_id);
-	// }, 1500);
+*/
+
 
 	$scope.addNewStudent = function (recordData) {
 
-		// Some tricks with fields we don't know how to work with
-		if(!recordData.group_id || recordData.group_id == '') {
-			return; 
+		function addIdOfParent (objData) {
+			if(!objData.group_id) {
+				objData.group_id = idOfParent;
+			}
 		}
 
-		if(!$scope.studPhoto || $scope.studPhoto == '') {
-			return;
+		function addRecordPhoto (objData) {
+			if(!objData.photo || objData.photo.src === undefined) {
+				objData.photo = '';
+			} else {
+				objData.photo = objData.photo.src;
+			}
 		}
 
-		//Transfer photo string inside addNew Student method
-		recordData.photo = $scope.studPhoto;
+		function addPlainPass (objData) {
+			if (!objData.plain_password) {
+				objData.plain_password = objData.password_confirm;
+			}
+		}
 
-		// Put recordData Object into a variable
-		var studentRecordData = {
-			// User Values
+		addIdOfParent(recordData);
+		addRecordPhoto(recordData);
+		addPlainPass(recordData);
+
+		// Creating middle object
+
+		recordData = {
+			// User values
 			username: recordData.username,
 			password: recordData.password,
 			password_confirm: recordData.password_confirm,
 			email: recordData.email,
-			// Students Values
+			// Person values
 			gradebook_id: recordData.gradebook_id,
 			student_surname: recordData.student_surname,
 			student_name: recordData.student_name,
 			student_fname: recordData.student_fname,
 			group_id: recordData.group_id,
-			plain_password: recordData.password_confirm,
+			plain_password: recordData.plain_password,
 			photo: recordData.photo
 		};
 
-		var jsonData = JSON.stringify(studentRecordData);
+		var jsonData = JSON.stringify(recordData);
+		var newRecord = jsonData;
 
 		// Gives data to a service
-		entitiesSrvc.createEntity($scope.thisEntity, jsonData)
+		entitiesSrvc.createEntity(thisEntity, newRecord)
 			.then(function (response) {
-				console.log(response);
-				// addRespHandler(resp, newData);
+				console.log('adding student ', response);
+				addRespHandler(response, newRecord);
 			});
 
 		//handing success and error response
-		function addRespHandler (resp, newData) {
-			if (resp.data.response == 'ok' && resp.status == 200) {
+		function addRespHandler (resp, newRecord) {
+			if (resp.data.response === 'ok' && resp.status === 200) {
 				$scope.showingAdd = false;
-				$scope.newEntity = {};
-			} else if (resp.data.response == 'orror 23000') {
-				console.log('pop up with error that there is such record');
+				okAddResponseHandler(resp, newRecord);
+				// $scope.resetEntity();
+			} else if (resp.data.response == 'orror 2300') {
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Такі дані вже наявні у базі даних.');
+			} else if (resp.data.response === 'Failed to validate array') {
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, введіть унікальні дані. Якщо дана помилка виникне вдруге, будь-ласка, зверніться до системного адміністратора, відправивши листа за поштовою адресою: somewhere@nowhere.net');
 			} else {
-				console.log('Error of Record' + resp.data.response);
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, зверніться до системного адміністратора, відправивши листа за поштовою адресою: somewhere@nowhere.net');
 			}
 		}// END addRespHandler
+
+		function okAddResponseHandler (resp, newRecord) {
+			recordData.user_id = resp.data.id;
+			$scope.students.push(recordData);
+		};
 
 	}; // End $scope.addStudent
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+/*_________________________________________________
+/*
+/* EDITING RECORDS BY GROUP ID
+/*_________________________________________________
+*/
 
 
 	// Show edit panel for a student

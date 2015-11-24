@@ -237,7 +237,7 @@
 
 
 
-
+<!-- 
 					<div class="form-group">
 						<label class="sr-only" for="group">Group</label>
 						<div class="input-group">
@@ -252,20 +252,18 @@
 											name="group"
 											id="group"
 											aria-describedby="helpGroup"
-											tabindex="8"
-											required>
+											tabindex="8">
 							</select>
-						</div><!-- END Input Group -->
+						</div>
 
-						<!-- Error message for Student's Gradebook -->
 						<span id="helpGradebook"
 									ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
 									class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
 						</span>
 
 					</div>
-
-					<image-load options="studPhoto"></image-load>
+ -->
+					<image-load options="newStudent.photo"></image-load>
 
 <!--
 					<div class="form-group">
@@ -315,6 +313,89 @@
 
 
 
+		<!-- DIVS appearence -->
+	<div ng-show="!students">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				{{noData}}
+			</div><!-- END col -->
+		</div><!-- END row -->
+	</div><!-- END ng-show -->
+
+
+		<!-- DIVS appearence -->
+	<div ng-show="students" class="students-bootstrap">
+		<div ng-if="editingStudent.user_id !== student.user_id"
+				 ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse">
+			<div class="row">
+				<div class="col col-xs-12 col-sm-1 col-md-1 col-lg-1 col-img">
+					<img class="student-photo" 
+							 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
+							 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-11 col-md-11 col-lg-11">
+					<hgroup>
+						<h3>{{ student.student_surname }}</h3>
+						<h4>{{ student.student_name }} {{ student.student_fname }}</h4>
+					</hgroup>
+				</div><!-- END col -->
+			</div><!-- END row -->
+			<div class="row">
+				<div class="col col-xs-12 col-sm-1 col-sm-offset-1 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-1">
+					<span class="detail">{{ student.gradebook_id }}</span>
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-2 col-md-2 col-lg-2">
+					<span class="detail">{{ student.plain_password }}</span>
+				</div><!-- END col -->
+				<div class="col col-xs-12 col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5 col-lg-3 col-lg-offset-5">
+					<span class="buttons pull-right"><actions-buttons-drct></actions-buttons-drct></span>
+				</div><!-- END col -->
+			</div><!-- END row -->
+		</div><!-- END div repeat start -->
+
+
+
+
+
+		<div ng-if="editingStudent.user_id == student.user_id"
+				 ng-repeat-end>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<img class="student-photo" 
+							 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
+							 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.student_surname }}
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.student_name }}
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.student_fname }}
+				</div><!-- END col -->
+			</div><!-- END row -->
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					{{ student.gradebook_id }}
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					CONTENT
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					CONTENT
+				</div><!-- END col -->
+				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<editing-buttons-drct></editing-buttons-drct>
+				</div><!-- END col -->
+			</div><!-- END row -->
+		</div><!-- END div repeat end -->
+
+		<!-- Confirmation Deleting Modal -->
+		<deleting-modal-drct></deleting-modal-drct>
+		<!-- Informational Error from Server Modal -->
+		<inform-modal-drct></inform-modal-drct>
+	</div><!-- END ng-show -->
 
 
 
@@ -330,11 +411,17 @@
 
 
 
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-			<!-- If have no data -->
-			<div ng-show="!students">{{noData}}</div>
+
+
+
+
+
+
+
+
+
+
 
 			<!-- Tablist area -->
 			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
@@ -343,6 +430,7 @@
 				<div class="panel panel-default"
 						 ng-repeat-start="student in students.list"
 						 ng-if="editingStudent.user_id !== student.user_id">
+
 					<div class="panel-heading" role="tab" id="headingOne">
 						<h4 class="panel-title">
 							<a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
