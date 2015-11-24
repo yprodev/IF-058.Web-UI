@@ -29,7 +29,7 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 
 /*_________________________________________________
 /*
-/* ADDING RECORDS BY GROUP ID
+/* ADDING RECORDS BY GROUP AND SUBJECT ID
 /*_________________________________________________
 */
 
@@ -52,21 +52,21 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 	$scope.addNewTimeTable = function (recordData) {
 
 		// Creating middle object
-		console.log('hahaha ', recordData);
 
 		recordData = {
-			// User values
+			// values
+			subject_id : "1",
 			group_id: recordData.group_id,
 			event_date: recordData.event_date
 		};
-
+         console.log('its work, dude', recordData);
 		// var jsonData = JSON.stringify(recordData);
 		// var newRecord = jsonData;
 
 		// Gives data to a service
 		entitiesSrvc.createEntity(thisEntity, recordData)
 			.then(function (response) {
-				console.log('adding timeTable ', response);
+				console.log('adding timeTable', response);
 				addRespHandler(response, recordData);
 			});
 
@@ -76,21 +76,21 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 				$scope.showingAdd = false;
 				okAddResponseHandler(resp, recordData);
 				// $scope.resetEntity();
-			} else if (resp.data.response == 'orror 2300') {
+			} else if (resp.data.response == 'error 2300') {
 				console.log('Виникла наступна помилка: ' + resp.data.response + '. Такі дані вже наявні у базі даних.');
 			} else if (resp.data.response === 'Failed to validate array') {
-				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, введіть унікальні дані. Якщо дана помилка виникне вдруге, будь-ласка, зверніться до системного адміністратора, відправивши листа за поштовою адресою: somewhere@nowhere.net');
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, введіть унікальні дані.');
 			} else {
-				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, зверніться до системного адміністратора, відправивши листа за поштовою адресою: somewhere@nowhere.net');
+				console.log('Виникла наступна помилка: ' + resp.data.response + '. Будь-ласка, зверніться до системного адміністратора');
 			}
 		}// END addRespHandler
 
 		function okAddResponseHandler (resp, recordData) {
-			recordData.user_id = resp.data.id;
+			recordData.subject_id = resp.data.id;
 			$scope.agendaItems.push(recordData);
 		};
 
-	}; // End $scope.addStudent
+	}; // End $scope.addTimeTable
 
 
 
