@@ -63,7 +63,7 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
                   )
                 .then(function (respTimeTable) {
                   entitiesSrvc.getEntities("group").then(function (respGroups) {
-                      var groupsForTimeTable = respGroups.list;             
+                      var groupsForTimeTable = respGroups.list;
                       for (var g=0; g<groupsForTimeTable.length; g++) {
                         for (var i=0; i<respTimeTable.data.length; i++) {
                           if (respTimeTable.data[i].group_id == groupsForTimeTable[g].group_id) {
@@ -87,7 +87,12 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
 
           //create array with entities if response has data
           function gettingResponseHandler (resp) {
-            scope.entities = resp.data;
+            if (resp.data[0][0] == "record_id" && resp.data[0][1] == "null") {
+              scope.noData = "Немає записів";
+            } else {
+              scope.entities = resp.data;
+            }
+
             scope.noData = "Немає записів";
           };
 
