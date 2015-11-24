@@ -29,5 +29,10 @@ app.controller('entitiesCtrl',
       var now = new Date();
       return now.setDate(now.getDate());
   };
+  // // console.log($stateParams.id);
+  // if ($stateParams.id) {
+  //   $scope.test_id = $stateParams.id;
+  // };
+
 
 }]);
