@@ -373,6 +373,9 @@ label.ilabel {
 
 .question-number a {
   cursor: pointer;
+  line-height: 34px;
+  font-size: 1.3em;
+
   &:focus, &:hover {
     color: #f00;
     text-decoration: none;
@@ -415,4 +418,8 @@ a:focus {
     padding: 10px 0 10px 10px;
   }
   @include navstyle;
+}
+
+.panel .panel-heading {
+  height: 40px;
 }
