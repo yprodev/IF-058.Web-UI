@@ -1,5 +1,5 @@
 ;
-app.directive('editEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
+app.directive('editEntitiesDrct', ['entitiesSrvc', '$filter', function(entitiesSrvc, $filter){
   return {
     link: function (scope, element, attrs) {
           scope.editingEntity = null;
@@ -19,6 +19,7 @@ app.directive('editEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
             for (prop in entity) {
               scope.editedEntity["new_" + prop] = entity[prop];
             };
+            scope.decoding()
             if(scope.thisEntity == "AdminUser"){
               scope.editedEntity.new_password = "";
               scope.editedEntity.new_password_confirm = "";

@@ -1,4 +1,4 @@
-
+<decode-drct></decode-drct>
 <div entities-drct="question">
     <div class="testList">
         <div class="wrapper panel panel-success no-border">
@@ -18,7 +18,7 @@
                   </textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" min="1" class="navbar-btn form-control width-max"
+                                    <input id = 'level' type="number" min="1" class="navbar-btn form-control width-max"
                                            placeholder="Введіть рівень складності" ng-model="newEntity.level" required>
                                 </div>
                                 <div class="col-md-6">
@@ -87,14 +87,12 @@
                             <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-7">
                                 <div class="col-md-7">
-                                    <textarea class="form-control width-max navbar-btn" ques-text  ng-model="editedEntity.new_question_text"></textarea>
+                                    <textarea class="form-control width-max navbar-btn"  ng-model="editedEntity.new_question_text"></textarea>
                                 </div>
                                 <div class="col-md-5 ">
-                                    <div>
-                                        <file-model></file-model>
+                                        <editfile-drct></editfile-drct>
                                         <img class="picture edited-picture" ng-src="{{editedEntity.new_attachment}}" ng-show="editedEntity.new_attachment"  alt=""/>
                                         <img class="close-button-questions" src="img/close_button.png" height="30px" ng-show="editedEntity.new_attachment" ng-click="closePicture(entity)">
-                                    </div>
                                 </div>
                             </td>
                             <td class="col-md-1 usCenter"><input  class="form-control width-max" ng-model="editedEntity.new_level"></td>

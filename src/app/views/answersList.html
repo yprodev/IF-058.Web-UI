@@ -1,3 +1,4 @@
+<decode-drct></decode-drct>
 <div entities-drct="answer">
     <div class="">
         <div class="wrapper panel panel-success no-border">
@@ -31,6 +32,7 @@
                                 <div class="pull-right col-md-12">
                                     <div class="navbar-btn col-md-4 pull-left ">
                                         <loadfile-Drct></loadfile-Drct>
+                                         <img class="picture new-picture" ng-src="{{newEntity.attachment}}" ng-show="newEntity.attachment"  alt=""/>
                                     </div>
 
                                     <div class="navbar-btn col-md-3 pull-right">
@@ -77,13 +79,11 @@
                                     <input class="navbar-btn form-control width-max" ng-model="editedEntity.new_answer_text">
                                 </div>
                             <div class="col-md-5">
-                                <div ng-if="!(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1"> <file-model></file-model>
-                                    <img class="edited-picture" ng-src="{{editedEntity.new_attachment}}" alt="picture" height="100px"/>
-                                    <img class="close-button-answers" src="img/close_button.png" height="30px" ng-click="closePicture(editedEntity)">
-                                </div>
-                                <div ng-if="(entity.attachment == 'added' || entity.attachment == '')" class="col-md-1">
-                                    <file-model></file-model>
-                                </div>
+                                 <div>
+                                        <file-model></file-model>
+                                        <img attachment-popover class="picture edited-picture" ng-src="{{editedEntity.new_attachment}}" ng-show="editedEntity.new_attachment"  alt=""/>
+                                        <img class="close-button-questions" src="img/close_button.png" height="30px" ng-show="editedEntity.new_attachment" ng-click="closePicture(entity)">
+                                    </div>
                             </div>
                             </td>
                             <td class="col-md-2">
