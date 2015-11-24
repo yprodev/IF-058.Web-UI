@@ -13,36 +13,41 @@
                         <div class=" row">
                             <form name="addForm" class="form-inline" role='form' novalidate>
                                 <div class="col-md-6">
-                  <textarea rows="4" class="navbar-btn form-control width-max" placeholder="Введіть текст завдання"
-                            ng-model="newEntity.question_text" required>
-                  </textarea>
+                                    <label for="addQuestionText" class="label label-success">Текст питання</label>
+                                    <textarea rows="4" class="navbar-btn form-control width-max" placeholder="Введіть текст питання"
+                                                ng-model="newEntity.question_text" required id="addText">
+                                    </textarea>
                                 </div>
                                 <div class="col-md-6">
+                                    <label for="addLevel" class="label label-success">Рівень складності</label>
                                     <input type="number" min="1" class="navbar-btn form-control width-max"
-                                           placeholder="Введіть рівень складності" ng-model="newEntity.level" required>
+                                           placeholder="Введіть рівень складності" ng-model="newEntity.level" required id="addLevel">
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="choise" class="navbar-btn form-control width-max" ng-model="newEntity.type" required>
+                                    <label for="addQuestionType" class="label label-success">Тип питання</label>
+                                    <select id="choise" class="navbar-btn form-control width-max" ng-model="newEntity.type" required id="addQuestionType">
                                         <option value="" disabled selected hidden>Оберіть тип питання</option>
                                         <option value="1" selected="selected">простий вибір</option>
                                         <option value="2">мульти-вибір</option>
                                     </select>
                                 </div>
                                 <div class="row col-md-11">
-                                <div class="col-md-4">
-                                    <loadfile-drct></loadfile-drct>
-                                    <img class="picture new-picture" ng-src="{{newEntity.attachment}}" ng-show="newEntity.attachment"  alt=""/>
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
-                                            ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
-                                    </button>
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <button class="navbar-btn btn btn-warning pull-right width-max"
-                                            ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
-                                    </button>
-                                </div>
+                                    <div class="col-md-4">
+                                        <loadfile-drct></loadfile-drct>
+                                        <img class="picture new-picture navbar-btn" ng-src="{{newEntity.attachment}}" ng-show="newEntity.attachment"  alt=""/>
+                                    </div>
+                                    <div class="col-md-2 pull-right">
+                                        <br>
+                                        <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
+                                                ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
+                                        </button>
+                                    </div>
+                                    <div class="col-md-2 pull-right">
+                                        <br>
+                                        <button class="navbar-btn btn btn-warning pull-right width-max"
+                                                ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
+                                        </button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

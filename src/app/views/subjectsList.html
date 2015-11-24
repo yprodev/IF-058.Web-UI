@@ -12,13 +12,15 @@
                 <div class=" row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-4">
-                      <input class="form-control width-max navbar-btn" placeholder="Введіть назву предмету" type='text' ng-model="newEntity.subject_name" required
-                      >
+                      <label for="addSubject" class="label label-success">Предмет</label>
+                      <input class="form-control width-max navbar-btn" placeholder="Введіть назву предмету" type='text' ng-model="newEntity.subject_name" required id="addSubject">
                     </div>
                     <div class="col-md-6">
-                      <input class="form-control width-max navbar-btn" placeholder="Вкажіть деталі" type='text' ng-model="newEntity.subject_description" required>
+                      <label for="addDescription" class="label label-success">Деталі</label>
+                      <input class="form-control width-max navbar-btn" placeholder="Вкажіть деталі" type='text' ng-model="newEntity.subject_description" required id="addDescription">
                     </div>
                     <div class="col-md-2">
+                      <br>
                       <button type="submit" class="btn btn-success pull-right width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
                     </div>
                   </form>
