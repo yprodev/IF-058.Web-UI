@@ -148,16 +148,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       templateUrl: 'app/views/testDetails.html',
       controller: 'entitiesCtrl'
     }).
-    state('admin.usersTabs', {
-      url: '/usersTabs',
-      templateUrl: 'app/views/usersTabs.html'
-    }).
-
-    state('admin.usersTabs.students', {
-      url: '/students/:id',
-      templateUrl: 'app/views/studentsList.html',
-      // controller: 'entitiesCtrl'
-    }).
     // state('admin.usersTabs.students', {
     //   url: '/students',
     //   templateUrl: 'app/views/studentsList.html'
@@ -171,7 +161,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       templateUrl: 'app/views/timeTableList.html',
       controller: 'entitiesCtrl'
     }).
-    state('admin.usersTabs.addAdmin', {
+    state('admin.addAdmin', {
       url: '/addAdmin',
       templateUrl: 'app/views/addAdmin.html',
       controller: 'entitiesCtrl'
