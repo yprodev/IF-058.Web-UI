@@ -156,7 +156,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
     state('admin.timeTable', {
       url: '/timeTable/:id',
       templateUrl: 'app/views/timeTableList.html',
-      controller: 'entitiesCtrl'
+      //controller: 'timeTableCtrl'
     }).
     state('admin.addAdmin', {
       url: '/addAdmin',

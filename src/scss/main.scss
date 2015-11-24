@@ -144,26 +144,33 @@ body, html, .container-fluid, .nav-row {
   }
 }
 
+.left-nav {
+  ul li {
+    border-bottom: 1px solid #ffffff;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  ul li a {
+    color: white;
+    display: block;
+    font-size: 16px;
+    width: 100%;
+    padding: 10px 0 10px 2px;
+    span {
+      margin-right: 3px;
+      // display:block;
+      // padding-bottom:5px;
+    }
+  }
+  @include navstyle;
+}
+
 .left-panel {
   position: fixed;
   min-height: 100%;
   box-shadow: 3px 0 3px $nav_color;
 
-  ul li {
-    border-bottom: 1px solid #ffffff;
-  }
-
-  ul li a {
-    color: white;
-    display: block;
-    font-size: 16px;
-    padding: 5px 0 5px 10px;
-    width: 100%;
-  	span {
-  	  // display:block;
-  	  // padding-bottom:5px;
-  	}
-  }
   @include navstyle;
 }
 
@@ -182,6 +189,7 @@ body, html, .container-fluid, .nav-row {
       outline: none;
     }
     span {
+      margin-right: 2px;
       padding: 5px;
       color: #e8fb77;
       text-shadow: 0 0 8px #C4D2D5;
@@ -383,6 +391,9 @@ label.ilabel {
 
 .question-number a {
   cursor: pointer;
+  line-height: 34px;
+  font-size: 1.3em;
+
   &:focus, &:hover {
     color: #f00;
     text-decoration: none;
@@ -425,4 +436,8 @@ a:focus {
     padding: 10px 0 10px 10px;
   }
   @include navstyle;
+}
+
+.panel .panel-heading {
+  height: 40px;
 }

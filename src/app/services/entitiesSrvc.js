@@ -5,7 +5,8 @@ app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
   var dependencies = {
       group : 'speciality,faculty',
       student : 'group',
-      test: 'subject'
+      test: 'subject',
+      timeTable : 'group'
   };
 
   var getDependecies = function (data, dep) {
@@ -50,7 +51,22 @@ app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
 
     getEntitiesForEntity: function (entity, parentEntity, id) {
       return $http.get(baseUrl + entity + '/getTimeTablesForSubject' + '/' + id)
-        .then(fulfilled, rejected);
+        .then( function (response) {
+        if (dependencies[entity] != undefined) {
+            var depArr = dependencies[entity].split(',');
+            data = {};
+            data.list =response.data;
+            for (depId in depArr) {
+              if (depId != (depArr.length - 1)) {
+                getDependecies(data, depArr[depId]);
+              }
+              else {
+                return getDependecies(data, depArr[depId]);
+              }
+            }
+          }
+        return response;
+      }, rejected);
     },
 
     getEntities: function (entity) {

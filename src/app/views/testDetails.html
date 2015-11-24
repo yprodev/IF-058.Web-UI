@@ -11,16 +11,19 @@
                 <div class=" row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-3">
-                      <input class="form-control width-max navbar-btn" placeholder="Рівень завдань" ng-model="newEntity.level" required
-                      >
+                      <label for="taskLevel" class="label label-success">Рівень завдань</label>
+                      <input class="form-control width-max navbar-btn" placeholder="Введіть рівень завдань" ng-model="newEntity.level" required id="taskLevel">
                     </div>
-                    <div class="col-md-3">
-                      <input class="form-control width-max navbar-btn" placeholder="Кількість завдань" ng-model="newEntity.tasks" required>
+                    <div class="col-md-3 form-group">
+                      <label for="taskQuantity" class="label label-success">Кількість завдань</label>
+                      <input class="form-control width-max navbar-btn" placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required id="taskQuantity">
                     </div>
-                    <div class="col-md-3">
-                      <input class="form-control width-max navbar-btn" placeholder="Кількість балів" ng-model="newEntity.rate" required>
+                    <div class="col-md-3 form-group">
+                      <label for="taskRate" class="label label-success">Кількість балів</label>
+                      <input class="form-control width-max navbar-btn" placeholder="Введіть кількість балів" ng-model="newEntity.rate" required id="taskRate">
                     </div>
                     <div class="col-md-2 pull-right ">
+                      <br>
                       <button type="submit" class="btn btn-success width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
                     </div>
                   </form>

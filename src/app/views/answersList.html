@@ -15,15 +15,17 @@
                         <div class=" row">
                             <form name="addForm" class="form-inline" role='form' novalidate>
                                 <div class="col-md-6">
+                                    <label for="addAnswerText" class="label label-success">Текст відповіді</label>
                                     <textarea rows="3" class="navbar-btn form-control width-max"
                                               placeholder="Введіть нову відповідь"
-                                              ng-model="newEntity.answer_text" required>
+                                              ng-model="newEntity.answer_text" required id="addAnswerText">
                                     </textarea>
                                 </div>
                                 <div class="col-md-6">
+                                    <label for="addTrueAnswer" class="label label-success">Правильність відповіді</label>
                                     <select class="navbar-btn form-control width-max" ng-model="newEntity.true_answer"
-                                            required>
-                                        <option value="" disabled selected hidden> Вкажіть правельність відповіді
+                                            required id="addTrueAnswer">
+                                        <option value="" disabled selected hidden> Вкажіть правильність відповіді
                                         </option>
                                         <option value="1" selected="selected">Правильна відповідь</option>
                                         <option value="0">Неправильна відповідь</option>
@@ -34,13 +36,14 @@
                                         <loadfile-Drct></loadfile-Drct>
                                          <img class="picture new-picture" ng-src="{{newEntity.attachment}}" ng-show="newEntity.attachment"  alt=""/>
                                     </div>
-
                                     <div class="navbar-btn col-md-3 pull-right">
+                                        <br>
                                         <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
                                                 ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
                                         </button>
                                     </div>
                                     <div class="navbar-btn col-md-3 pull-right">
+                                        <br>
                                         <button class="navbar-btn btn btn-warning pull-right width-max"
                                                 ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
                                         </button>
