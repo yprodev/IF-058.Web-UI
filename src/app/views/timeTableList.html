@@ -14,24 +14,28 @@
                 <div class="well" ng-show="showingAdd">
                     <div class="row">
                         <form name="addForm" class="form-inline" role='form' novalidate>
-                            <div class="col-md-6">
-                                <select class="form-control width-max navbar-btn" ng-options="key as value for (key, value) in agendaItems.group" name="group" ng-model="newAgendaItem.group_id" required>
+                            <div class="col-md-4">
+                                <label for="addGroup" class="label label-success">Група</label>
+                                <select class="form-control width-max navbar-btn" ng-options="key as value for (key, value) in agendaItems.group" name="group" ng-model="newAgendaItem.group_id" required id="addGroup">
                                     <option value="">Виберіть групу</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <input class="form-control width-max"
-                                       placeholder="DD/MM/YY" ng-model="newAgendaItem.event_date" required>
+                            <div class="col-md-4">
+                                <label for="addEventDate" class="label label-success">Дата тестування</label>
+                                <input class="form-control width-max navbar-btn"
+                                       placeholder="DD/MM/YY" ng-model="newAgendaItem.event_date" required id="addEventDate">
                             </div>
 
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-success pull-right width-max"
+                                <br>
+                                <button type="submit" class="btn btn-success pull-right width-max navbar-btn"
                                         ng-disabled="addForm.$invalid" ng-click="addNewTimeTable(newAgendaItem)">Додати
                                 </button>
                             </div>
                             <div class="col-md-2">
-                                <button type="submit" class="btn btn-warning pull-right width-max"
-                                        ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Скинути
+                                <br>
+                                <button type="submit" class="btn btn-warning pull-right width-max navbar-btn"
+                                        ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
                                 </button>
                             </div>
                         </form>
@@ -53,7 +57,7 @@
                     </tr>
                     </thead>
                     <tbody >
-                    <tr ng-if="agendaItem !== editingEntity" ng-repeat="agendaItem in agendaItems.list">
+                    <tr ng-if="agendaItem !== editingEntity" ng-repeat-start="agendaItem in agendaItems.list">
                         <!-- read-only cells -->
                         <td>{{$index + 1}}</td>
                         <td>{{agendaItem.group_name}}</td>
@@ -67,10 +71,10 @@
                         </td>
                     </tr>
                     <tr ng-if="agendaItem === editingEntity" ng-repeat-end>
-            
+                        <td>{{$index + 1}}</td>
                         <td><input class="form-control width-max" ng-model="editedEntity.new_group_name"></td>
                         <td><input type="date" class="form-control width-max" ng-model="editedEntity.new_date"></td>
-                        <td>LALALA</td>
+
                         <td class="usCenter col-md-2">
                             <button class="btn btn-success" ng-click="editEntity(entity)">
                                 <span class="glyphicon glyphicon-ok"></span></button>

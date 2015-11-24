@@ -17,7 +17,7 @@ app.directive('loadfileDrct', function () {
   }
   return {
     restrict: 'E',
-    template: '<label class="btn btn-default btn-sm" for="photo">' +
+    template: '<label class="btn btn-default btn-sm navbar-btn" for="photo">' +
     '<span class="glyphicon glyphicon-cloud-upload"></span> <span class="file-name">Оберіть картинку</span></label>' +
     '<input type="file" id="photo" class="form-control inputfile"/>',
     link: function (scope, element, attrs) {

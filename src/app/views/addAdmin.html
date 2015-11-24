@@ -11,20 +11,23 @@
           <div class=" row">
             <form name="addForm" class="form-inline" role='form' novalidate>
               <div class="col-md-3">
-
-                <input class="form-control width-max navbar-btn" placeholder="Введіть логін" type='text' ng-model="newEntity.username" ng-minlength="4" required>
-
+                <label for="addLogin" class="label label-success">Логін</label>
+                <input class="form-control width-max navbar-btn" placeholder="Введіть логін" type='text' ng-model="newEntity.username" ng-minlength="4" required id="addLogin">
               </div>
               <div class="col-md-3">
-                <input class="form-control width-max navbar-btn" placeholder="Введіть елетронну пошту" type='email' ng-model="newEntity.email" required>
+                <label for="addEmail" class="label label-success">Електронна пошта</label>
+                <input class="form-control width-max navbar-btn" placeholder="Введіть елетронну пошту" type='email' ng-model="newEntity.email" required id="addEmail">
               </div>
               <div class="col-md-2">
-                <input class="form-control width-max navbar-btn" placeholder="Введіть пароль" type='password' ng-model="newEntity.password" ng-minlength="4" required>
+                <label for="addPassword" class="label label-success">Пароль</label>
+                <input class="form-control width-max navbar-btn" placeholder="Введіть пароль" type='password' ng-model="newEntity.password" ng-minlength="4" required id="addPassword">
               </div>
               <div class="col-md-2">
-                <input class="form-control width-max navbar-btn" placeholder="Повторіть пароль" type='password' ng-model="newEntity.password_confirm" ng-minlength="4"  required compare-to="newEntity.password">
+                <label for="addConfirmPassword" class="label label-success">Підтвердження пароля</label>
+                <input class="form-control width-max navbar-btn" placeholder="Повторіть пароль" type='password' ng-model="newEntity.password_confirm" ng-minlength="4"  required compare-to="newEntity.password" id="addConfirmPassword">
               </div>
               <div class="col-md-2">
+                <br>
                 <button type="submit" class="btn btn-success pull-right width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
               </div>
             </form>
