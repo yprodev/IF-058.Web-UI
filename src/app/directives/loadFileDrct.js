@@ -8,6 +8,7 @@ app.directive('loadfiledesignDrct', function () {
 
 })
 
+
 app.directive('loadfileDrct', function () {
   function fileCutName(str, slength) {
     if (str.length >= 15) {
@@ -21,7 +22,11 @@ app.directive('loadfileDrct', function () {
     '<span class="glyphicon glyphicon-cloud-upload"></span> <span class="file-name">Оберіть картинку</span></label>' +
     '<input type="file" id="photo" class="form-control inputfile"/>',
     link: function (scope, element, attrs) {
-      scope.newEntity.attachment = '';
+      scope.attachmentReset = function(){
+        console.log('hello')
+        scope.newEntity.attachment = '';  
+      }
+      
         element.bind('change', function (changeEvent) {
         var fileName = changeEvent.target.files[0].name;
         scope.cutName = fileCutName(fileName, -15);
@@ -34,10 +39,11 @@ app.directive('loadfileDrct', function () {
           });
           scope.$watch('showingAdd', function (newValue, oldValue) {
             if (newValue == false) {
-              angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";
+              if (scope.newEntity.attachment){
+                angular.element(document.querySelector('#imageAttachment'))[0].attributes["src"].value = "";  
+              } 
             }
           })
-
         };
         reader.readAsDataURL(changeEvent.target.files[0]);
       })

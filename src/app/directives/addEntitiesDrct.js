@@ -21,6 +21,11 @@ app.directive('addEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
           //creates new element of array and sends new entity on server
           scope.addEntity = function () {
             var newData = scope.newEntity;
+             if (scope.thisEntity == 'question' || scope.thisEntity == 'answer'){
+              if (!scope.newEntity.attachment){
+                scope.newEntity.attachment = '';
+              }
+            }
             addParentEntityId(newData);
             entitiesSrvc.createEntity(scope.thisEntity, newData)
             .then(function (resp) {
