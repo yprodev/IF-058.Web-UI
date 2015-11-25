@@ -237,9 +237,15 @@ body, html, .container-fluid, .nav-row {
   padding: 1px 15px;
 }
 
-.input-group-addon, .input-group-btn{
-  width:0;
-}
+// That person who used this method
+// to change basic bootstrap style,
+// please use custom because it is 
+// VERY BAD WAY TO DO SO
+
+// .input-group-addon,
+// .input-group-btn{
+//   width:0;
+// }
 
 .sm-menu{
   padding-left: 55px;
@@ -309,7 +315,7 @@ button.marginTop {
 }
 
 .add-button {
-  margin: 20px 0 20px auto;
+  margin:0;
 }
 
 // Create input type file button
@@ -372,7 +378,7 @@ label.ilabel {
 }
 
 .well.well-stud {
-  margin: 80px auto 20px auto;
+  margin: 15px auto 20px auto;
 }
 
 .icon-bar {
