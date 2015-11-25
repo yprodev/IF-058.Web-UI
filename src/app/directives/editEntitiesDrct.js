@@ -20,11 +20,11 @@ app.directive('editEntitiesDrct', ['entitiesSrvc', '$filter', function(entitiesS
             for (prop in entity) {
               scope.editedEntity["new_" + prop] = entity[prop];
             };
-            scope.decoding()
             if(scope.thisEntity == "AdminUser"){
               scope.editedEntity.new_password = "";
               scope.editedEntity.new_password_confirm = "";
             };
+			  scope.decoding();
           };
 
 			//updates an element of array and send updating of entity to server
