@@ -17,7 +17,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
     userSrvc.getInfoForStudent(url, id).then(function (resp) {
       console.log(resp)
     })*/
-      
+
       var questionArray = $rootScope.testData.questionList
       var question;
       if ($stateParams.id) {
@@ -25,13 +25,22 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
       } else {
           question = questionArray[0];
       }
-
+      $scope.selected = 0;
       //$scope.nextQuestion(questNumber)
-      $scope.chosenQuestion = function(questNumber){
+      $scope.chosenQuestion = function(questNumber, index){
+          $scope.selected = index;
+          console.log($scope.selected, "%%%%%%%%%%%%%%%%%%%%%%");
           $scope.questNumber = questNumber;
           nextQuestion(questNumber);
       };
-$scope.chosenQuestion(question);
+//$scope.chosenQuestion(question);
+
+      $scope.firstQuestion = function(question) {
+          nextQuestion(question);
+      }
+      console.log("huy");
+      $scope.firstQuestion(question);
+
 function nextQuestion (data){
       var questionUrl = 'question/getRecords/';
       var answerUrl = 'SAnswer/getAnswersByQuestion/';
@@ -54,7 +63,7 @@ $q.all([
        answerArray.push(answerObj);
        console.log(answerArray,"AA");
    };
-  
+
   }
   //наступний запит використовуємо щоб залогініти юзера
     $scope.beginTest();
