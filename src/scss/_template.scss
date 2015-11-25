@@ -10,8 +10,7 @@
 	&:hover {
 		@include round(5px);
 		@include scale(1.02, 1.02);
-		@include drop-shadow(1px, 1px, 15px, 0, .15);
-		@include drop-shadow(-1px, -1px, 15px, 0, .15);
+		@include drop-shadow(1px, 0px, 15px, 0, .15);
 		background-color: #0082F5;
 		border-bottom: none;
 
@@ -29,6 +28,30 @@
 			color: $WHITE;
 		}
 	}
+}
+
+.students-bootstrap > .ng-scope.active-student {
+
+
+		@include round(5px);
+		@include scale(1.02, 1.02);
+		@include drop-shadow(1px, 0px, 15px, 0, .15);
+		background-color: #0082F5;
+		border-bottom: none;
+
+		.row > .col > hgroup {
+			color: $WHITE;
+		}
+
+		.row > .col > span.detail {
+			color: $WHITE;
+		}
+		.row > .col > hgroup > h3 {
+			color: $WHITE;
+		}
+		.row > .col > hgroup > h4 {
+			color: $WHITE;
+		}
 }
 
 .students-bootstrap > .ng-scope > .row > .col.col-img {

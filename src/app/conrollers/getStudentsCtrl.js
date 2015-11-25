@@ -146,17 +146,6 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 
 
 
-
-		// function getUserResp(param) {
-		// 	return {
-		// 		get: function () {
-		// 			return param;
-		// 		}
-		// 	};
-		// }
-
-
-
 ////MINEMINEMINE
 
 	$scope.editingStudent = null;
@@ -164,30 +153,30 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 	// Show edit panel for a student
 	$scope.showEditingForm = function (stud) {
 
+		// var uObj = {};
 
-		var uObj = {};
+		// function getUserEntityByStudId (id) {
+		// 	var userEntity = 'AdminUser';
 
-		function getUserEntityByStudId (id) {
-			var userEntity = 'AdminUser';
-
-			// Gets data form AdminUser
-			entitiesSrvc.getUsersById(userEntity, id)
-				.then(function (response) {
-					console.log('HERE users response ', response[0]);
-					if (response.length === 1) {
-						uObj.params = response[0];
-					}
-				});
-		}
+		// 	// Gets data form AdminUser
+		// 	entitiesSrvc.getUsersById(userEntity, id)
+		// 		.then(function (response) {
+		// 			console.log('HERE users response ', response[0]);
+		// 			if (response.length === 1) {
+		// 				uObj.params = response[0];
+		// 			}
+		// 		});
+		// }
 
 		if (stud !== null) {
+			$scope.actclass = 'active-student';
 			$scope.currId = stud.user_id;
-			$scope.editingStudent = stud;
-			getUserEntityByStudId(stud.user_id);
-			$scope.userMeta = uObj.params;
-			console.log('show editing form', $scope.userMeta);
+			// getUserEntityByStudId(stud.user_id);
+			// $scope.userMeta = uObj.params;
+			// console.log('show editing form', $scope.userMeta);
 			// createEditedEntityStorage(stud);
-		}
+		} 
+		$scope.editingStudent = stud;
 
 	};
 
@@ -213,19 +202,14 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 			// Needs to FIX through the fucntion
 			photo: ''
 
-
-			// user_id: $scope.editingStudent.user_id,
-			// // Students Values
-			// gradebook_id: $scope.editingStudent.gradebook_id,
-			// student_surname: $scope.editingStudent.student_surname,
-			// student_name: $scope.editingStudent.student_name,
-			// student_fname: $scope.editingStudent.student_fname,
-			// group_id: $scope.editingStudent.group_id,
-			// // plain_password: $scope.editingStudent.plain_password
-			// photo: ""
 		};
 
-		var eStud = $scope.editingStudent;
+		//Local variant of the student
+		var editingStudData = $scope.editingStudent;
+
+
+
+
 
 		// Need local variable for using in service
 		// Then we will need to null the scope's same variable
@@ -246,15 +230,14 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 			}); // END .then
 
 			// 'Nulls' all scope variables
-			$scope.editingStudent = null;
-			$scope.currId = null;
+		$scope.currId = null;
 	};
 
 
 
 	// Getting confirmation before deleting a student
 	$scope.confirmDelete = function (studentId) {
-		if ( $scope.confirmedStud != studentId ) {
+		if ( $scope.confirmedStud !== studentId ) {
 			$scope.confirmedStud = studentId;
 		} else {
 			$scope.confirmedStud = null;
@@ -263,22 +246,28 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 
 	// Deleting student record
 	$scope.deleteStudent = function () {
-		var currentId = $scope.confirmedStud,
-				currentStud = $scope.confirmedStud;
+		var currentId = $scope.confirmedStud;
+		var currentStud = $scope.confirmedStud;
 
 		entitiesSrvc.deleteEntity($scope.thisEntity, currentId)
 			.then(function (response) {
-				if (response.data.response == 'ok') {
-
-					// Place currentStud into index variable ..
+				if (response.data.response === 'ok') {
+					console.log('everything is ok');
 					var index = $scope.students.list.indexOf(currentStud);
 					// .. to splice it in the list of students
 					$scope.students.list.splice(index, 1);
+				} else if (response.data.response === 'error 23000') {
+					$scope.showInformaModal("Виникла помилка: " + response.data.response + '. Неможливо видалити запис через наявні залежні об\'єкти.');
 				} else {
-					alert('Error ' + response.data.response);
+					$scope.showInformaModal("Виникла помилка: " + response.data.response);
 				}
 			}); //END .then
 		$scope.confirmDelete();
 	}; // END deleteStudent
+
+	$scope.showInformaModal = function (infMsg) {
+		$scope.infMsg = infMsg;
+		angular.element(document.querySelector('#deleteModal').modal())
+	};
 
 	}]);
