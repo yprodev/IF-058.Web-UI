@@ -10,13 +10,16 @@
                 <div class="row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-4">
+                      <label for="addSpecialityName" class="label label-success">Спеціальність</label>
                       <input class="form-control width-max navbar-btn" placeholder="Введіть назву спеціальності" type='text' ng-model="newEntity.speciality_name" required
-                      >
+                      id="addSpecialityName">
                     </div>
                     <div class="col-md-6">
-                      <input class="form-control width-max navbar-btn" placeholder="Вкажіть код спеціальності" type='text' ng-model="newEntity.speciality_code" required>
+                      <label for="addSpecialityCode" class="label label-success">Код спеціальності</label>
+                      <input class="form-control width-max navbar-btn" placeholder="Введіть код спеціальності" type='text' ng-model="newEntity.speciality_code" required id="addSpecialityCode">
                     </div>
                     <div class="col-md-2">
+                      <br>
                       <button type="submit" class="btn btn-success pull-right width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати</button>
                     </div>
                   </form>
