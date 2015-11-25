@@ -93,6 +93,7 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
     timer();
   }
 
+
 }]);
 
 

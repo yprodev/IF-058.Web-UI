@@ -57,5 +57,4 @@ testPlayerApp.controller('userTestListCtrl', ['$scope', 'userSrvc', '$stateParam
     $state.go(to, {'id': entityId});
   };
 
-
 }]);

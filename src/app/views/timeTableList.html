@@ -22,8 +22,19 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="addEventDate" class="label label-success">Дата тестування</label>
-                                <input class="form-control width-max navbar-btn"
-                                       placeholder="DD/MM/YY" ng-model="newAgendaItem.event_date" required id="addEventDate">
+                                <div>
+                                     <mb-datepicker class="form-control navbar-btn" element-id='date1'
+                                         input-class="testClass"
+                                         input-name="testName"
+                                         arrows="arrows"
+                                         calendar-header="header"
+                                         date="date"
+                                         date-format="YYYY-MM-DD"
+                                         >
+                                     </mb-datepicker>
+                                    <!-- <input class="form-control width-max navbar-btn" -->
+                                           <!-- placeholder="DD/MM/YY" ng-model="newAgendaItem.event_date" required id="addEventDate"> -->
+                                </div>
                             </div>
 
                             <div class="col-md-2">
