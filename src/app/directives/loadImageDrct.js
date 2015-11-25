@@ -73,7 +73,7 @@ app.directive('imageLabel', ['$timeout', '$interval', function ($timeout, $inter
 		template: [
 			'<label class="btn btn-default btn-sm" for="photo">',
 				'<span class="glyphicon glyphicon-cloud-upload"></span>',
-				'<span class="file-name">Choose Student\'s Photo</span>',
+				'<span class="file-name">Виберіть фото студента</span>',
 			'</label>'
 		].join('\n'),
 		link: link

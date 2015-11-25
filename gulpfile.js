@@ -15,10 +15,10 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	imagemin = require('gulp-imagemin'),
 	pngquant = require('imagemin-pngquant'),
+	fs = require('fs'),
 
 //Added for moving files to virtual machine through GULP PLUGIN
 	GulpSSH = require('gulp-ssh');
-
 
 var path = {
 	build:{
@@ -137,6 +137,48 @@ gulp.task('watch', function() {
  * _________________________________________________________________________
 */
 
+// var argv = require('yargs')
+// 	.usage('Usage: $0 <command> [options]')
+// 	.command('run', 'run this')
+// 	.option({
+// 		'f': {
+// 			alias: 'file',
+// 			demand: true,
+// 			nargs: 1,
+// 			default: 'src/app/app.js',
+// 			describe: 'needs file string',
+// 			type: 'string'
+// 		},
+// 		's': {
+// 			alias: 'source',
+// 			demand: true,
+// 			nargs: 1,
+// 			default: 'http://dtapi.local/',
+// 			describe: 'needs source string',
+// 			type: 'string'
+// 		},
+// 		'h': {
+// 			alias: 'help',
+// 		}
+// 	})
+// 	.example('$0 count -f src/app/app.js -s http://dtapi.local/', 'changes line in the given file')
+// 	.epilog('copyright 2015')
+// 	.argv;
+
+
+// 	fs.readFile(argv.file, 'utf8', function (err,data) {
+// 		if (err) {
+// 			return console.log(err);
+// 		}
+// 		var result = data.replace(/http:\/\/dtapi.local\//g, argv.source);
+
+// 		fs.writeFile(argv.file, result, 'utf8', function (err) {
+// 			 if (err) return console.log(err);
+// 		});
+// 	});
+
+
+
 gulp.task("dist-fonts", function() {
 	gulp.src('bower_components/bootstrap/fonts/**.*')
 		.pipe(gulp.dest(path.dist.fonts));
@@ -167,7 +209,7 @@ gulp.task("dist-js", function() {
 			.pipe(concat("app.js"))
 			.pipe(uglify())
 			.pipe(gulp.dest(path.dist.js));
-})
+});
 
 gulp.task("dist-ven-css", function() {
 		// First of all we need to compile LESS vendor files

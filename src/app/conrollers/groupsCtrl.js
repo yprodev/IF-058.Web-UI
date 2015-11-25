@@ -72,10 +72,14 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 				faculty_id: $scope.editingData.faculty_id,
 				group_name: $scope.editingData.group_name
 			};
+
 			var editingData = $scope.editingData;
+
 			editingData.faculty_name = $scope.groups.faculty[editingData.faculty_id];
 			editingData.speciality_name = $scope.groups.speciality[editingData.speciality_id];
+
 			var currentId = $scope.currentId;
+
 			entitiesSrvc.updateEntity($scope.thisEntity, currentId, editedDataServer).then(function (resp) {
 			switch (resp.data.response) {
 				case "ok":

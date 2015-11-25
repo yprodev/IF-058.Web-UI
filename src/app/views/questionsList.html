@@ -1,8 +1,8 @@
-
+<decode-drct></decode-drct>
 <div entities-drct="question">
     <div class="testList">
         <div class="wrapper panel panel-success no-border">
-            <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Завдання 1</div>
+            <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Завдання </div>
             <!-- The button and form to add Entity -->
             <div class="col-md-12">
                 <div>
@@ -15,7 +15,7 @@
                                 <div class="col-md-6">
                                     <label for="addQuestionText" class="label label-success">Текст питання</label>
                                     <textarea rows="4" class="navbar-btn form-control width-max" placeholder="Введіть текст питання"
-                                                ng-model="newEntity.question_text" required id="addText">
+                                                ng-model="newEntity.question_text" required id="addQuestionText">
                                     </textarea>
                                 </div>
                                 <div class="col-md-6">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
 
-                    <button class="btn btn-primary pull-right" ui-sref="admin.testDetails({id:entities[0].test_id})" ng-click="">Параметри тесту</button>
+                    <button class="btn btn-primary pull-right" ui-sref="admin.testDetails({id:entities[0].test_id})" >Параметри тесту</button>
                     <br/>
                     <br/>
                     <div ng-show="!entities">{{noData}}</div>
@@ -92,14 +92,12 @@
                             <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-7">
                                 <div class="col-md-7">
-                                    <textarea class="form-control width-max navbar-btn" ques-text  ng-model="editedEntity.new_question_text"></textarea>
+                                    <textarea class="form-control width-max navbar-btn"  ng-model="editedEntity.new_question_text"></textarea>
                                 </div>
                                 <div class="col-md-5 ">
-                                    <div>
-                                        <file-model></file-model>
+                                        <editfile-drct></editfile-drct>
                                         <img class="picture edited-picture" ng-src="{{editedEntity.new_attachment}}" ng-show="editedEntity.new_attachment"  alt=""/>
                                         <img class="close-button-questions" src="img/close_button.png" height="30px" ng-show="editedEntity.new_attachment" ng-click="closePicture(entity)">
-                                    </div>
                                 </div>
                             </td>
                             <td class="col-md-1 usCenter"><input  class="form-control width-max" ng-model="editedEntity.new_level"></td>

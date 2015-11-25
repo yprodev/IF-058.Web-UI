@@ -1,8 +1,16 @@
 /**
  * Created by ����� on 04.11.2015.
  */
-app.filter('unsafe', function($sce) { return $sce.trustAsHtml; });
-app.filter('testStatus', function() {
+app.filter('unsafe', ['$sce', function($sce) { return $sce.trustAsHtml; }]);
+app.filter("decode", [function(){
+    return function(str){
+      var el = document.createElement("div");
+      el.innerHTML = str;
+      str = el.innerText || el.textContent;
+      return str;
+    }
+  }]);
+app.filter('testStatus', [function() {
   return function(value){
     if (value == 1) {
       return 'доступно';
@@ -12,8 +20,8 @@ app.filter('testStatus', function() {
       'вибір не виконано'
     }
   }
-});
-app.filter('avialibility', function() {
+}]);
+app.filter('avialibility', [function() {
   return function(value){
     if (value == '1') {
       return 'простий вибір';
@@ -23,8 +31,8 @@ app.filter('avialibility', function() {
       'вибір не виконано'
     }
   }
-});
-app.filter('correctAnswer', function() {
+}]);
+app.filter('correctAnswer', [function() {
   return function(value){
     if (value == '1') {
       return 'так';
@@ -34,16 +42,15 @@ app.filter('correctAnswer', function() {
       'вибір не виконано'
     }
   }
-});
-app.filter('formatTimer', function () {
+}]);
+app.filter('formatTimer', [function () {
   return function (input) {
     function z(n) {
       return (n < 10 ? '0' : '') + n;
     }
-
     var seconds = input % 60;
     var minutes = Math.floor(input % 3600 / 60);
     var hours = Math.floor(input / 3600);
     return (z(hours) + ':' + z(minutes) + ':' + z(seconds));
   };
-});
+}]);
