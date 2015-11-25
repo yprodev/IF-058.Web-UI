@@ -24,8 +24,9 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
           question = +questionArray[$stateParams.id] ;
       } else {
           question = questionArray[0];
+          $scope.selected = 0;
       }
-      $scope.selected = 0;
+
       //$scope.nextQuestion(questNumber)
       $scope.chosenQuestion = function(questNumber, index){
           $scope.selected = index;
