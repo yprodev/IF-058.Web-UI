@@ -1,7 +1,25 @@
 app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval) {
 
-
-
+    $scope.date = null;
+    $scope.arrows = {
+        year: {
+            left: 'images/white_arrow_left.svg',
+            right: 'images/white_arrow_right.svg'
+        },
+        month: {
+            left: 'images/grey_arrow_left.svg',
+            right: 'images/grey_arrow_right.svg'
+        }
+    }
+    $scope.header = {
+        monday: 'Mon',
+        tuesday: 'Tue',
+        wednesday: 'Wed',
+        thursday: 'Thu',
+        friday: 'Fri',
+        saturday: 'Sat',
+        sunday: 'Sun',
+    }
 /*_________________________________________________
 /*
 /* GETTING RECORDS BY GROUP ID
@@ -48,16 +66,14 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 	};
 
 */
-
-	$scope.addNewTimeTable = function (recordData) {
+      $scope.addNewTimeTable = function (recordData) {
 
 		// Creating middle object
-
 		recordData = {
 			// values
-			subject_id : "1",
+			subject_id : $stateParams.id,
 			group_id: recordData.group_id,
-			event_date: recordData.event_date
+			event_date: $scope.date
 		};
          console.log('its work, dude', recordData);
 		// var jsonData = JSON.stringify(recordData);
