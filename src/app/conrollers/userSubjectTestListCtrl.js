@@ -1,8 +1,9 @@
 testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc', '$stateParams', '$state', function ($scope, userSrvc, $stateParams, $state) {
-  function absentData (resp){
+  function absentData(resp) {
 
     return resp.data[0][0] == "record_id" && resp.data[0][1] == "null"
   }
+
   $scope.enterToEntity = function (to, entityId) {
     $state.go(to, {'id': entityId});
   };
@@ -14,18 +15,22 @@ testPlayerApp.controller('userSubjectListCtrl', ['$scope', 'userSrvc', '$statePa
     var url = 'student/getRecords/';
     var data = localStorage.userId
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
-      url = 'timeTable/getTimeTablesForGroup/'
-      data = resp.data[0].group_id;
-      return userSrvc.getInfoForStudent(url, data)
+      if (absentData(resp)) {
+        return $scope.noData = "Немає записів";
+      } else {
+        url = 'timeTable/getTimeTablesForGroup/'
+        data = resp.data[0].group_id;
+        return userSrvc.getInfoForStudent(url, data)
+      }
     }).then(function (groupInfo) {
-      if (absentData (groupInfo)) {
-          return $scope.noData = "Немає записів";
+      if (absentData(groupInfo)) {
+        return $scope.noData = "Немає записів";
       }
       url = 'subject/getRecords/'
       data = groupInfo.data[0].subject_id
-    for (i in groupInfo.data) {
-      return userSrvc.getInfoForStudent(url, data)
-    }
+      for (i in groupInfo.data) {
+        return userSrvc.getInfoForStudent(url, data)
+      }
     }).then(function (subjectInfo) {
       data = subjectInfo.data
       $scope.entities = data;
@@ -40,11 +45,11 @@ testPlayerApp.controller('userTestListCtrl', ['$scope', 'userSrvc', '$stateParam
     var data = $stateParams.id
     userSrvc.getInfoForStudent(url, data).then(function (resp) {
       if (resp.data[0][0] == "record_id" && resp.data[0][1] == "null") {
-              $scope.noData = "Немає записів";
-            } else {
-              $scope.entities = resp.data;
-            }
-            $scope.noData = "Немає записів";
+        $scope.noData = "Немає записів";
+      } else {
+        $scope.entities = resp.data;
+      }
+      $scope.noData = "Немає записів";
     })
   }
   $scope.getStudentTests();
@@ -52,6 +57,5 @@ testPlayerApp.controller('userTestListCtrl', ['$scope', 'userSrvc', '$stateParam
     $state.go(to, {'id': entityId});
   };
 
-  
 
 }]);

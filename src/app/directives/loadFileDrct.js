@@ -106,23 +106,5 @@ app.directive('customPopover', [function () {
         }
     };
 }]);
-/*app.directive('attachmentPopover', function () {
-return {
-        restrict: 'A',
-        template: '<span>{{label}}</span>',
-        link: function (scope, el, attrs) {
-          console.log('kokoko')
-          console.log(el)
-            scope.label = attrs.popoverLabel;
-            $(el).popover({
-                trigger: 'click',
-                html: true,
-                content: attrs.popoverHtml,
-                placement: attrs.popoverPlacement
-            });
-        }
-    };
-  })*/
-
 
 

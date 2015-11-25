@@ -1,6 +1,5 @@
 testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q','$timeout', function ($scope, $rootScope, userSrvc, $stateParams, $state, $q, $timeout) {
   $scope.beginTest = function(){
-    console.log('testData', $rootScope.testData)
 /*    if (!$scope.showTest){
     $scope.showTest = true;
     /!*angular.element(element.getElementsById(".multi-files"))*!/
@@ -18,7 +17,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
       console.log(resp)
     })*/
       
-      var questionArray = $rootScope.testData.questionList
+      var questionArray = $rootScope.testData.questionList;
       var question;
       if ($stateParams.id) {
           question = +questionArray[$stateParams.id] ;
@@ -29,7 +28,6 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
       //$scope.nextQuestion(questNumber)
       $scope.chosenQuestion = function(questNumber, index){
           $scope.selected = index;
-          console.log($scope.selected, "%%%%%%%%%%%%%%%%%%%%%%");
           $scope.questNumber = questNumber;
           nextQuestion(questNumber);
       };
@@ -37,7 +35,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
 
       $scope.firstQuestion = function(question) {
           nextQuestion(question);
-      }
+      };
 
       $scope.firstQuestion(question);
 
@@ -56,15 +54,13 @@ $q.all([
    })
 }
    $scope.submitQuestion = function(radioValue) {
-       var answerObj = {}
+       var answerObj = {};
        answerObj.selectedAnswers = radioValue;
        answerObj.selectedQuestion = $scope.questNumber;
-       console.log(answerObj,"AO");
        answerArray.push(answerObj);
-       console.log(answerArray,"AA");
    };
   
-  }
+  };
   //наступний запит використовуємо щоб залогініти юзера
     $scope.beginTest();
 }]);
