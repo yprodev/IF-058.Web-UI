@@ -15,7 +15,7 @@ app.directive('imageLoad', ['$timeout', '$interval', function ($timeout, $interv
 	return {
 		restrict: 'E',
 		template: [
-			'<div class="form-group">',
+			'<div class="form-group navbar-btn">',
 				'<image-label image-src="{{ studPhoto.src }}" image-name="{{ studPhoto.name }}"></image-label>',
 				'<image-input pic-src="studPhoto.src" pic-name="studPhoto.name"></image-input>',
 			'</div>'
@@ -110,7 +110,7 @@ app.directive('imageInput', ['$timeout', function ($timeout) {
 			fileTarget = changeEvent.target.files[0];
 			fileName = fileTarget.name;
 
-			// Define cutted nama of the file and change the value of the button 
+			// Define cutted nama of the file and change the value of the button
 			$scope.cutName = fileCutName(fileName, -11);
 			el.text($scope.cutName); // HERE must be a problem
 
