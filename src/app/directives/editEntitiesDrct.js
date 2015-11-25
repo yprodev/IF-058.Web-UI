@@ -1,29 +1,31 @@
 ;
-app.directive('editEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
-	return {
-		link: function (scope, element, attrs) {
-			scope.editingEntity = null;
-			//function opens a form for editing
-			scope.showEditForm = function (entity) {
-				if (scope.editingEntity != entity) {
-					scope.editingEntity = entity;
-					createEditedEntityStorage(entity);
-				} else {
-					scope.editingEntity = null;
-				};
-			};
 
-			//creates buffer (storage) for editing object
-			function createEditedEntityStorage (entity) {
-				scope.editedEntity = {};
-				for (prop in entity) {
-					scope.editedEntity["new_" + prop] = entity[prop];
-				};
-				if(scope.thisEntity == "AdminUser"){
-					scope.editedEntity.new_password = "";
-					scope.editedEntity.new_password_confirm = "";
-				};
-			};
+app.directive('editEntitiesDrct', ['entitiesSrvc', '$filter', function(entitiesSrvc, $filter){
+  return {
+    link: function (scope, element, attrs) {
+          scope.editingEntity = null;
+          //function opens a form for editing
+          scope.showEditForm = function (entity) {
+            if (scope.editingEntity != entity) {
+              scope.editingEntity = entity;
+              createEditedEntityStorage(entity);
+            } else {
+              scope.editingEntity = null;
+            };
+          };
+
+          //creates buffer (storage) for editing object
+          function createEditedEntityStorage (entity) {
+            scope.editedEntity = {};
+            for (prop in entity) {
+              scope.editedEntity["new_" + prop] = entity[prop];
+            };
+            scope.decoding()
+            if(scope.thisEntity == "AdminUser"){
+              scope.editedEntity.new_password = "";
+              scope.editedEntity.new_password_confirm = "";
+            };
+          };
 
 			//updates an element of array and send updating of entity to server
 			scope.editEntity = function (entity) {

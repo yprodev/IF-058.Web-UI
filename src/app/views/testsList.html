@@ -12,36 +12,43 @@
                     <div class=" row">
                         <form name="addForm" class="form-inline" role='form' novalidate>
                             <div class="col-md-6">
+                                <label for="addTest" class="label label-success">Назва тесту</label>
                                 <input class="form-control width-max navbar-btn" placeholder="Введіть назву тесту" type='text'
-                                       ng-model="newEntity.test_name" required>
+                                       ng-model="newEntity.test_name" required id="addTest">
                             </div>
                             <div class="col-md-6">
+                                <label for="addQuantity" class="label label-success">Кількість завдань</label>
                                 <input type="number" min="1" class="form-control width-max navbar-btn"
-                                       placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required>
+                                       placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required id="addQuantity">
                             </div>
                             <div class="col-md-6">
-                                <input type="number" min="1" class="form-control width-max navbar-btn" placeholder="Введіть тривалість(хв)"
-                                       ng-model="newEntity.time_for_test" required>
+                                <label for="addDuration" class="label label-success">Тривалість тесту (хв)</label>
+                                <input type="number" min="1" class="form-control width-max navbar-btn" placeholder="Введіть тривалість (хв)"
+                                       ng-model="newEntity.time_for_test" required id="addDuration">
                             </div>
                             <div class="col-md-6">
+                                <label for="addAttempts" class="label label-success">Кількість спроб</label>
                                 <input type="number" min="1" class="form-control width-max navbar-btn"
-                                       placeholder="Введіть кількість спроб" ng-model="newEntity.attempts" required>
+                                       placeholder="Введіть кількість спроб" ng-model="newEntity.attempts" required id="addAttempts">
                             </div>
                             <div class="col-md-6">
-                                <select id="avaible" class="form-control width-max navbar-btn" ng-model="newEntity.enabled" required>
+                                <label for="addEnabled" class="label label-success">Доступність тесту</label>
+                                <select id="avaible" class="form-control width-max navbar-btn" ng-model="newEntity.enabled" required id="addEnabled">
                                     <option value="" disabled selected hidden> Вкажіть доступність тесту </option>
-                                    <option value="1" >Доступно</option>
+                                    <option value="1">Доступно</option>
                                     <option value="0">Недоступно</option>
                                 </select>
                             </div>
                             <div class="col-md-2 pull-right">
-                                <button type="submit" class="btn btn-success pull-right width-max navbar-btn"
-                                        ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
+                                <br>
+                                <button type="submit" class="btn btn-warning pull-right width-max  navbar-btn"
+                                        ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
                                 </button>
                             </div>
                             <div class="col-md-2 pull-right">
-                                <button type="submit" class="btn btn-warning pull-right width-max  navbar-btn"
-                                        ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
+                                <br>
+                                <button type="submit" class="btn btn-success pull-right width-max navbar-btn"
+                                        ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
                                 </button>
                             </div>
                         </form>

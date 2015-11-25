@@ -10,24 +10,28 @@
                 <div class=" row">
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-4">
-                      <input class="form-control width-max navbar-btn" placeholder="Введіть назву групи" type='text' ng-model="newName" required>
+                      <label for="addGroup" class="label label-success">Група</label>
+                      <input class="form-control width-max navbar-btn" placeholder="Введіть назву групи" type='text' ng-model="newName" required id="addGroup">
                     </div>
                     <div class="col-md-3">
+                      <label for="addFaculty" class="label label-success">Факультет</label>
                     <select class="form-control width-max navbar-btn"
                       ng-options="key as value for (key, value) in groups.faculty" name="faculty"
-                       ng-model="newFaculty_id" required>
+                       ng-model="newFaculty_id" required id="addFaculty">
                        <option value="">Виберіть факультет</option>
                     </select></td>
                     </div>
 
                   <div class="col-md-3">
-                  <select class="form-control width-max navbar-btn"
-                  ng-options="key as value for (key, value) in groups.speciality" name="faculty"
-                   ng-model="newSpeciality_id" required>
-                   <option value="">Виберіть спеціальність</option>
-                  </select>
+                    <label for="addSpeciality" class="label label-success">Спеціальність</label>
+                   <select class="form-control width-max navbar-btn"
+-                  ng-options="key as value for (key, value) in groups.speciality" name="faculty"
+-                   ng-model="newSpeciality_id" required id="addSpeciality">
+-                   <option value="">Виберіть спеціальність</option>
+-                  </select>
                     </div>
                     <div class="col-md-2">
+                      <br>
                       <button type="submit" class="btn btn-success pull-right width-max navbar-btn" ng-disabled="addForm.$invalid" ng-click="addGroup()">Додати</button>
                     </div>
                   </form>
