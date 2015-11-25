@@ -1,6 +1,15 @@
 var testPlayerApp = angular.module('testPlayerApp', ['ui.router']);
 //список вопросов
 testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q','$timeout', function ($scope, $rootScope, userSrvc, $stateParams, $state, $q, $timeout) {
+    
+
+    var testData = {
+    counter: '',
+    startTime: '',
+    questionList: ''
+  }
+
+  $rootScope.testData = testData
   var data = localStorage.userId/*'4'*///захардкоджено, внести в базу нужне значення і поміняти
   console.log('userId',data)
   var url = 'result/getRecordsByStudent/'
@@ -29,7 +38,7 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
       var url = 'test/getRecords/'
       return userSrvc.getInfoForStudent(url, data, result)
     }).then(function(test){
-      $rootScope.timeForTest = test[0].data[0].time_for_test;
+      $scope.timeForTest = test[0].data[0].time_for_test;
       console.log($scope.timeForTest, 'timeForTest');
       if (test[0].data[0].attempts < test[1]){
         alert('Немає предметів з доступними тестами для вашої групи')//убрати коли запрацює модалка
@@ -59,8 +68,8 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
       for (i in resp.data){
         questionList.push(resp.data[i].question_id)
       }
-      localStorage.questionList = questionList;
-      $rootScope.questionList = questionList;
+      //localStorage.questionList = questionList;
+      testData.questionList = questionList;
       $scope.questionsQuantity = questionList.length;
         console.log(questionList, "&&&&&&&&&&&&&&&&");
     }, function(error){
@@ -69,7 +78,30 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
     })
     
   }
+
+    var data = '';
+    var url = 'TestPlayer/getTimeStamp';
+    userSrvc.getInfoForStudent(url, data).then(function (resp) {
+      testData.startTime = new Date(resp.data.unix_timestamp * 1000);
+    });
+  console.log('testData', testData)
   $scope.getRecordsByStudent()
+  $scope.startTest = function(){
+    console.log('hello')
+    function timer(testDuration) {
+    testData.counter = $scope.timeForTest * 60;
+    //console.log($scope.counter, "77777777777777777777");
+    $scope.onTimeout = function(){
+        testData.counter--;
+        mytimeout = $timeout($scope.onTimeout,1000);
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+      $scope.stop = function() {
+      $timeout.cancel(mytimeout);
+    }
+}    /*if ()*/
+timer();
+  }
 
 }]);
 

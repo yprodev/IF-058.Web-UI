@@ -1,32 +1,13 @@
 testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q','$timeout', function ($scope, $rootScope, userSrvc, $stateParams, $state, $q, $timeout) {
   $scope.beginTest = function(){
+    console.log('testData', $rootScope.testData)
 /*    if (!$scope.showTest){
     $scope.showTest = true;
     /!*angular.element(element.getElementsById(".multi-files"))*!/
     }*/
     var userId = localStorage.userId;
     var testId = localStorage.testId;
-    function timer(testDuration) {
-    $scope.counter = $rootScope.timeForTest * 60;
 
-        //console.log($scope.counter, "77777777777777777777");
-
-    $scope.onTimeout = function(){
-        $scope.counter--;
-        mytimeout = $timeout($scope.onTimeout,1000);
-    }
-    var mytimeout = $timeout($scope.onTimeout,1000);
-    
-      $scope.stop = function() {
-      $timeout.cancel(mytimeout);
-    }
-}
-    var data = '';
-    var url = 'TestPlayer/getTimeStamp';
-    userSrvc.getInfoForStudent(url, data).then(function (resp) {
-      $scope.startTime = new Date(resp.data.unix_timestamp * 1000);
-    });
-timer();
 
     /*userSrvc.getTestInfo(userId, testId).then(function (resp) {
       $state.go('user.testPlayer');
@@ -36,8 +17,8 @@ timer();
     userSrvc.getInfoForStudent(url, id).then(function (resp) {
       console.log(resp)
     })*/
-
-      var questionArray = localStorage.questionList.split(",");
+      
+      var questionArray = $rootScope.testData.questionList
       var question;
       if ($stateParams.id) {
           question = +questionArray[$stateParams.id] ;
@@ -65,12 +46,6 @@ $q.all([
       $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
    })
 }
-
-
-
-
-   var answerArray = [];
-
    $scope.submitQuestion = function(radioValue) {
        var answerObj = {}
        answerObj.selectedAnswers = radioValue;
