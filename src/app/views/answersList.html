@@ -78,12 +78,12 @@
                         <tr ng-if="entity == editingEntity" ng-repeat-end="">
                             <td class="usCenter">{{$index + 1}}</td>
                             <td class="col-md-8">
-                                <div class="col-md-7">
+                                <div class="col-md-8">
                                     <input class="navbar-btn form-control width-max" ng-model="editedEntity.new_answer_text">
                                 </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                  <div>
-                                        <file-model></file-model>
+                                        <editfile-drct></editfile-drct>
                                         <img attachment-popover class="picture edited-picture" ng-src="{{editedEntity.new_attachment}}" ng-show="editedEntity.new_attachment"  alt=""/>
                                         <img class="close-button-questions" src="img/close_button.png" height="30px" ng-show="editedEntity.new_attachment" ng-click="closePicture(entity)">
                                     </div>
