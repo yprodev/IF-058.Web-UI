@@ -100,7 +100,6 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 		// Gives data to a service
 		entitiesSrvc.createEntity(thisEntity, newRecord)
 			.then(function (response) {
-				console.log('adding student ', response);
 				addRespHandler(response, newRecord);
 			});
 
@@ -146,30 +145,50 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 */
 
 
-	// $scope.editingStudent = null;
 
-	// //function opens a form for editing
-	// scope.showEditForm = function (entity) {
-	// 	if (scope.editingEntity != entity) {
-	// 		scope.editingEntity = entity;
-	// 		createEditedEntityStorage(entity);
-	// 	} else {
-	// 		scope.editingEntity = null;
-	// 	};
-	// };
 
+		// function getUserResp(param) {
+		// 	return {
+		// 		get: function () {
+		// 			return param;
+		// 		}
+		// 	};
+		// }
 
 
 
 ////MINEMINEMINE
 
+	$scope.editingStudent = null;
+
 	// Show edit panel for a student
 	$scope.showEditingForm = function (stud) {
-		// if stud Object is not equal to null
+
+
+		var uObj = {};
+
+		function getUserEntityByStudId (id) {
+			var userEntity = 'AdminUser';
+
+			// Gets data form AdminUser
+			entitiesSrvc.getUsersById(userEntity, id)
+				.then(function (response) {
+					console.log('HERE users response ', response[0]);
+					if (response.length === 1) {
+						uObj.params = response[0];
+					}
+				});
+		}
+
 		if (stud !== null) {
 			$scope.currId = stud.user_id;
-		}
 			$scope.editingStudent = stud;
+			getUserEntityByStudId(stud.user_id);
+			$scope.userMeta = uObj.params;
+			console.log('show editing form', $scope.userMeta);
+			// createEditedEntityStorage(stud);
+		}
+
 	};
 
 	// Editing and updating student record functionality
@@ -177,15 +196,33 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 
 		// Put student data we need to update
 		var editStudData = {
-			user_id: $scope.editingStudent.user_id,
-			// Students Values
+			user_id: $scope.currId,
+			// User values
+			username: $scope.editingStudent.username,
+			password: $scope.editingStudent.password_confirm,
+			password_confirm: $scope.editingStudent.password_confirm,
+			email: $scope.editingStudent.email,
+			// Person values
 			gradebook_id: $scope.editingStudent.gradebook_id,
 			student_surname: $scope.editingStudent.student_surname,
 			student_name: $scope.editingStudent.student_name,
 			student_fname: $scope.editingStudent.student_fname,
-			group_id: $scope.editingStudent.group_id,
-			// plain_password: $scope.editingStudent.plain_password
-			photo: ""
+			// Group we have in the controller scope like the variable
+			group_id: idOfParent,
+			plain_password: $scope.editingStudent.plain_password,
+			// Needs to FIX through the fucntion
+			photo: ''
+
+
+			// user_id: $scope.editingStudent.user_id,
+			// // Students Values
+			// gradebook_id: $scope.editingStudent.gradebook_id,
+			// student_surname: $scope.editingStudent.student_surname,
+			// student_name: $scope.editingStudent.student_name,
+			// student_fname: $scope.editingStudent.student_fname,
+			// group_id: $scope.editingStudent.group_id,
+			// // plain_password: $scope.editingStudent.plain_password
+			// photo: ""
 		};
 
 		var eStud = $scope.editingStudent;

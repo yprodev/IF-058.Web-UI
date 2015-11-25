@@ -73,6 +73,13 @@ app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
       }, rejected);
     },
 
+    getUsersById: function (entity, id) {
+      return $http.get(baseUrl + entity + '/getRecords' + '/' + id)
+      .then(function (response) {
+        return response.data;
+      }, rejected);
+    },
+
     createEntity: function (entity, data) {
       return $http.post(baseUrl + entity + '/insertData', data)
         .then(fulfilled, rejected);
