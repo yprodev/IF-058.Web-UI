@@ -17,7 +17,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
     userSrvc.getInfoForStudent(url, id).then(function (resp) {
       console.log(resp)
     })*/
-      
+
       var questionArray = $rootScope.testData.questionList
       var question;
       if ($stateParams.id) {
@@ -39,7 +39,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
       $scope.firstQuestion = function(question) {
           nextQuestion(question);
       }
-
+      console.log("huy");
       $scope.firstQuestion(question);
 
 function nextQuestion (data){
@@ -64,7 +64,7 @@ $q.all([
        answerArray.push(answerObj);
        console.log(answerArray,"AA");
    };
-  
+
   }
   //наступний запит використовуємо щоб залогініти юзера
     $scope.beginTest();

@@ -18,28 +18,28 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<div class="form-group student-form-group">
-					<label class="label label-success" for="gradebook">Залікова книжка №</label>
-
+					<label class="label label-success" for="surname">Прізвище</label>
 						<input type="text"
-									 name="studGradebook"
-									 id="gradebook"
+									 name="studSurname"
+									 id="surname"
 									 class="form-control width-max navbar-btn"
-									 aria-describedby="helpGradebook"
-									 placeholder="AH-894893"
-									 tabindex="8"
-									 ng-minlength="5"
-									 ng-maxlength="20"
-									 ng-model="newStudent.gradebook_id"
+									 aria-describedby="helpSurname"
+									 placeholder="Введіть прізвище студента"
+									 tabindex="3"
+									 ng-minlength="2"
+									 ng-maxlength="50"
+									 ng-model="newStudent.student_surname"
 									 required
 									 poptip
 									 data-toggle="tooltip"
 									 data-placement="top"
-									 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
+									 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
-					<!-- Error message for Student's Gradebook -->
-					<span id="helpGradebook"
-								ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
-								class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
+
+					<!-- Error message for Student's Surname -->
+					<span id="helpSurname"
+								ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
+								class="help-block error">{{ getError(addRecord.studSurname.$error) }}
 					</span>
 
 				</div>
@@ -52,7 +52,7 @@
 									 id="secname"
 									 class="form-control width-max navbar-btn"
 									 aria-describedby="helpSecName"
-									 placeholder="Drake"
+									 placeholder="Введіть ім'я студента"
 									 tabindex="2"
 									 ng-minlength="2"
 									 ng-maxlength="50"
@@ -79,7 +79,7 @@
 									 id="name"
 									 class="form-control width-max navbar-btn"
 									 aria-describedby="helpName"
-									 placeholder="John"
+									 placeholder="Введіть по-батькові студента"
 									 tabindex="1"
 									 ng-minlength="2"
 									 ng-maxlength="50"
@@ -100,34 +100,57 @@
 			</div><!-- END col -->
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<div class="form-group student-form-group">
-					<label class="label label-success" for="surname">Прізвище</label>
+					<label class="label label-success" for="gradebook">Залікова книжка №</label>
+
 						<input type="text"
-									 name="studSurname"
-									 id="surname"
+									 name="studGradebook"
+									 id="gradebook"
 									 class="form-control width-max navbar-btn"
-									 aria-describedby="helpSurname"
-									 placeholder="Smith"
-									 tabindex="3"
-									 ng-minlength="2"
-									 ng-maxlength="50"
-									 ng-model="newStudent.student_surname"
+									 aria-describedby="helpGradebook"
+									 placeholder="Введіть номер залікової книжки"
+									 tabindex="8"
+									 ng-minlength="5"
+									 ng-maxlength="20"
+									 ng-model="newStudent.gradebook_id"
 									 required
 									 poptip
 									 data-toggle="tooltip"
 									 data-placement="top"
-									 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
+									 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
 
-
-					<!-- Error message for Student's Surname -->
-					<span id="helpSurname"
-								ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
-								class="help-block error">{{ getError(addRecord.studSurname.$error) }}
+					<!-- Error message for Student's Gradebook -->
+					<span id="helpGradebook"
+								ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
+								class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
 					</span>
-
 				</div>
 			</div><!-- END col -->
 		</div><!-- END row -->
 		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<div class="form-group student-form-group">
+					<label class="label label-success" for="email">Електронна пошта</label>
+						<input type="email"
+									 name="studentEmail"
+									 id="email"
+									 class="form-control navbar-btn"
+									 aria-describedby="helpEmail"
+									 placeholder="Введіть емейл студента"
+									 tabindex="7"
+									 ng-model="newStudent.email"
+									 required
+									 poptip
+									 data-toggle="tooltip"
+									 data-placement="top"
+									 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
+
+					<!-- Error message for EMAIL -->
+					<span id="helpEmail"
+								ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
+								class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
+					</span>
+				</div>
+			</div><!-- END col -->
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 					<div class="form-group student-form-group">
 						<label class="label label-success" for="username">Логін</label>
@@ -136,7 +159,7 @@
 										 id="username"
 										 class="form-control navbar-btn"
 										 aria-describedby="helpUsername"
-										 placeholder="e.g. test-user"
+										 placeholder="Введіть логін студента"
 										 tabindex="4"
 										 ng-minlength="4"
 										 ng-maxlength="32"
@@ -157,37 +180,13 @@
 			</div><!-- END col -->
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<div class="form-group student-form-group">
-					<label class="label label-success" for="email">Email адреса</label>
-						<input type="email"
-									 name="studentEmail"
-									 id="email"
-									 class="form-control navbar-btn"
-									 aria-describedby="helpEmail"
-									 placeholder="myemail@site.com"
-									 tabindex="7"
-									 ng-model="newStudent.email"
-									 required
-									 poptip
-									 data-toggle="tooltip"
-									 data-placement="top"
-									 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
-
-					<!-- Error message for EMAIL -->
-					<span id="helpEmail"
-								ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
-								class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
-					</span>
-
-				</div>
-			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div class="form-group student-form-group">
 					<label class="label label-success" for="password">Пароль</label>
 						<input type="password"
 									 name="studUserPassword"
 									 id="password"
 									 class="form-control navbar-btn"
 									 aria-describedby="helpPassword"
+									 placeholder="Введіть пароль студента"
 									 tabindex="5"
 									 minlength="4"
 									 maxlength="64"
@@ -214,6 +213,7 @@
 										 id="confpassword"
 										 class="form-control navbar-btn"
 										 aria-describedby="helpConfPassword"
+										 placeholder="Повторіть пароль студента"
 										 tabindex="6"
 										 ng-maxlength="64"
 										 ng-model="newStudent.password_confirm"
@@ -234,7 +234,7 @@
 		</div><!-- END row -->
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-				<image-load options="newStudent.photo" class="navbar-btn"></image-load>
+				<image-load options="newStudent.photo"></image-load>
 			</div><!-- END col -->
 			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 				<button type="submit"
@@ -277,7 +277,7 @@
 				 class="ng-scope">
 			<div class="row">
 				<div class="col col-xs-12 col-sm-1 col-md-1 col-lg-1 col-img">
-					<img class="student-photo" 
+					<img class="student-photo"
 							 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
 							 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
 				</div><!-- END col -->
@@ -322,33 +322,32 @@
 			<div class="row">
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
 					<div class="form-group student-form-group">
-						<label class="label label-success" for="gradebook">Залікова книжка №</label>
-
+						<label class="label label-success" for="surname">Прізвище</label>
 							<input type="text"
-										 name="studGradebook"
-										 id="gradebook"
+										 name="studSurname"
+										 id="surname"
 										 class="form-control width-max navbar-btn"
-										 aria-describedby="helpGradebook"
-										 placeholder="AH-894893"
-										 tabindex="8"
-										 ng-minlength="5"
-										 ng-maxlength="20"
-										 ng-model="editingStudent.gradebook_id"
-										 value="{{ student.gradebook_id }}"
+										 aria-describedby="helpSurname"
+										 placeholder="Введіть прізвище студента"
+										 tabindex="3"
+										 ng-minlength="2"
+										 ng-maxlength="50"
+										 ng-model="editingStudent.student_surname"
+										 value="{{ student.student_surname }}"
 										 required
 										 poptip
 										 data-toggle="tooltip"
 										 data-placement="top"
-										 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
+										 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
-						<!-- Error message for Student's Gradebook -->
-						<span id="helpGradebook"
-									ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
-									class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
+
+						<!-- Error message for Student's Surname -->
+						<span id="helpSurname"
+									ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
+									class="help-block error">{{ getError(addRecord.studSurname.$error) }}
 						</span>
 
 					</div>
-
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
 					<div class="form-group student-form-group">
@@ -358,7 +357,7 @@
 										 id="secname"
 										 class="form-control width-max navbar-btn"
 										 aria-describedby="helpSecName"
-										 placeholder="Drake"
+										 placeholder="Введіть ім'я студента"
 										 tabindex="2"
 										 ng-minlength="2"
 										 ng-maxlength="50"
@@ -387,7 +386,7 @@
 										 id="name"
 										 class="form-control width-max navbar-btn"
 										 aria-describedby="helpName"
-										 placeholder="John"
+										 placeholder="Введіть по-батькові студента"
 										 tabindex="1"
 										 ng-minlength="2"
 										 ng-maxlength="50"
@@ -411,35 +410,62 @@
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
 					<div class="form-group student-form-group">
-						<label class="label label-success" for="surname">Прізвище</label>
+						<label class="label label-success" for="gradebook">Залікова книжка №</label>
+
 							<input type="text"
-										 name="studSurname"
-										 id="surname"
+										 name="studGradebook"
+										 id="gradebook"
 										 class="form-control width-max navbar-btn"
-										 aria-describedby="helpSurname"
-										 placeholder="Smith"
-										 tabindex="3"
-										 ng-minlength="2"
-										 ng-maxlength="50"
-										 ng-model="editingStudent.student_surname"
-										 value="{{ student.student_surname }}"
+										 aria-describedby="helpGradebook"
+										 placeholder="Введіть номер залікової книжки"
+										 tabindex="8"
+										 ng-minlength="5"
+										 ng-maxlength="20"
+										 ng-model="editingStudent.gradebook_id"
+										 value="{{ student.gradebook_id }}"
 										 required
 										 poptip
 										 data-toggle="tooltip"
 										 data-placement="top"
-										 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
+										 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
 
-
-						<!-- Error message for Student's Surname -->
-						<span id="helpSurname"
-									ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
-									class="help-block error">{{ getError(addRecord.studSurname.$error) }}
+						<!-- Error message for Student's Gradebook -->
+						<span id="helpGradebook"
+									ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
+									class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
 						</span>
 
 					</div>
+
 				</div><!-- END col -->
 			</div><!-- END row -->
 			<div class="row">
+
+				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+					<div class="form-group student-form-group">
+						<label class="label label-success" for="email">Електронна пошта</label>
+							<input type="email"
+										 name="studentEmail"
+										 id="email"
+										 class="form-control navbar-btn"
+										 aria-describedby="helpEmail"
+										 placeholder="Введіть емейл студента"
+										 tabindex="7"
+										 ng-model="editingStudent.email"
+										 value="{{ userMeta.email }}"
+										 required
+										 poptip
+										 data-toggle="tooltip"
+										 data-placement="top"
+										 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
+
+						<!-- Error message for EMAIL -->
+						<span id="helpEmail"
+									ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
+									class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
+						</span>
+					</div>
+				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
 
 					<div class="form-group student-form-group">
@@ -449,7 +475,7 @@
 										 id="username"
 										 class="form-control navbar-btn"
 										 aria-describedby="helpUsername"
-										 placeholder="e.g. test-user"
+										 placeholder="Введіть логін студента"
 										 tabindex="4"
 										 ng-minlength="4"
 										 ng-maxlength="32"
@@ -472,38 +498,13 @@
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
 					<div class="form-group student-form-group">
-						<label class="label label-success" for="email">Email Адреса</label>
-							<input type="email"
-										 name="studentEmail"
-										 id="email"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpEmail"
-										 placeholder="myemail@site.com"
-										 tabindex="7"
-										 ng-model="editingStudent.email"
-										 value="{{ userMeta.email }}"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
-
-						<!-- Error message for EMAIL -->
-						<span id="helpEmail"
-									ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
-									class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
-						</span>
-
-					</div>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
 						<label class="label label-success" for="password">Пароль</label>
 							<input type="password"
 										 name="studUserPassword"
 										 id="password"
 										 class="form-control navbar-btn"
 										 aria-describedby="helpPassword"
+										 placeholder="Введіть пароль студента"
 										 tabindex="5"
 										 minlength="4"
 										 maxlength="64"
@@ -530,6 +531,7 @@
 										 id="confpassword"
 										 class="form-control navbar-btn"
 										 aria-describedby="helpConfPassword"
+										 placeholder="Повторіть пароль студента"
 										 tabindex="6"
 										 ng-maxlength="64"
 										 ng-model="editingStudent.password_confirm"
@@ -553,14 +555,14 @@
 					<image-load options="editingStudent.photo"></image-load>
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<span class="buttons pull-right">
+					<span class="buttons pull-right navbar-btn">
 
-						<button class="btn btn-success btn-sm navbar-btn" 
+						<button class="btn btn-success btn-sm "
 										ng-click='editGroup()'>
 							<span class="glyphicon glyphicon-ok"></span>
 						</button>
 
-						<button class="btn btn-warning btn-sm col-md-offset-1 navbar-btn"
+						<button class="btn btn-warning btn-sm col-md-offset-1 "
 										ng-click="showEditingForm(null)">
 							<span class="glyphicon glyphicon-remove"></span>
 						</button>
