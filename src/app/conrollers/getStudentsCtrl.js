@@ -10,7 +10,10 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 	// Declares Entity parameters for getting records request
 	var thisEntity = 'student'
 		, thisEntParent = entityObj[thisEntity].by.parentEntity
-		, idOfParent = $stateParams.id
+		, idOfParent = $stateParams.id;
+
+
+	$scope.imgStr = 'img/def-stud.jpg';
 
 	// Getting records request
 	entitiesSrvc.getEntByEnt(thisEntity, thisEntParent, idOfParent)
@@ -185,9 +188,13 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 
 		// remember here was an object editingObj
 		$scope.editingStudent = stud;
-		console.log('after cl estud ', $scope.editingStudent);
+		console.log('after cl estud ', $scope.editingStudent.photo);
 
 	};
+
+
+
+
 
 	function editRecordPhoto (objData) {
 		if(!objData.photo || objData.photo.src === undefined) {
@@ -238,7 +245,7 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 		var currId = $scope.currId;
 
 		if (passConfirmed) {
-			entitiesSrvc.updateEntity(thisEntity, currId, jsonDataEdited)
+			entitiesSrvc.updateEntity('student', currId, jsonDataEdited)
 				.then(function (response) {
 					if(response.data.response == 'ok') {
 						for (var i = 1; i < $scope.students.length; i++) {
