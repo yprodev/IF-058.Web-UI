@@ -32,6 +32,9 @@ app.directive('removeEntitiesDrct', ['entitiesSrvc', function(entitiesSrvc){
                 case "error 23000":
                   scope.showInformModal("Неможливо видалити запис. Запис має залежні об'єкти.");
                   break;
+                case "Error: Cannot erase infomration about oneself":
+                  scope.showInformModal("Неможливо видалити обліковий запис, під яким Ви залогінені.");
+                  break;
                 default:
                   scope.showInformModal("Помилка видалення запису: " + resp.data.response);
               };

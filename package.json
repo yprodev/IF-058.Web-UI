@@ -17,6 +17,8 @@
     "imagemin-pngquant": "^4.2.0",
     "jshint": "^2.8.0",
     "jshint-stylish": "^2.1.0",
+    "material-date-picker": "^1.2.3",
+    "moment": "^2.10.6",
     "yargs": "^3.30.0"
   }
 }

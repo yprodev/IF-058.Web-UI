@@ -108,29 +108,25 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 
 
 //function for initiate of entity for delete in modal
-		$scope.activateGroup = function ($event, group) {
-
-
-
-			if ($scope.activeGroup != group) {
-				$scope.activeGroup = group;
-			} else {
-				$scope.activeGroup = null;
-			}
-
-			if ($event) {
-				$event.stopPropagation();
-			}
+	$scope.activateGroup = function ($event, group) {
+		$scope.activeGroup = group;
+		angular.element(document.querySelector('#deleteModal')).modal();
+		if ($event) {
+		  $event.stopPropagation();
+		}
 		};
 //function removes an entity from array and from server
 	$scope.removeGroup = function () {
 		var currentGroup = $scope.activeGroup;
-		var currentId = $scope.activeGroup;
+		var currentId = $scope.activeGroup.group_id;
 		entitiesSrvc.deleteEntity($scope.thisEntity, currentId).then(function (resp) {
 			switch (resp.data.response) {
 				case "ok":
 						var index = $scope.groups.list.indexOf(currentGroup);
 						$scope.groups.list.splice(index, 1);
+						if ($scope.groups.length === 0) {
+						  delete $scope.groups.list;
+						};
 				break;
 				case "error 23000":
 					$scope.showInformModal("Неможливо видалити запис. Запис має залежні об'єкти.");
@@ -139,7 +135,6 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 					$scope.showInformModal("Помилка видалення запису: " + resp.data.response);
 			};
 		});
-		$scope.activateGroup();
 	};
 
 	$scope.showInformModal = function(infMsg) {

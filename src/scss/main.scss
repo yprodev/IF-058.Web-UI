@@ -53,9 +53,7 @@ form .ng-invalid-minlength.ng-dirty {
 form .ng-invalid-data.ng-dirty {
   background-color: lightgoldenrodyellow;
 }
-form .ng-valid.ng-dirty {
-  border: 1px solid #37B549;
-}
+
 span.summary.ng-invalid {
   color: red;
   font-weight: bold;
@@ -399,7 +397,7 @@ label.ilabel {
   line-height: 34px;
   font-size: 1.3em;
 
-  &:focus, &:hover {
+  &:hover {
     color: #f00;
     text-decoration: none;
   }
@@ -408,7 +406,9 @@ label.ilabel {
   text-align: center;
 }
 
-
+.selectedItem{
+  color:#f00;
+}
 
 @import '_variables.scss';
 @import '_mixins.scss';
@@ -425,27 +425,13 @@ a:focus {
   outline: none !important;
 }
 
-
-.left-nav {
-  ul li {
-    border-bottom: 1px solid #ffffff;
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-  ul li a {
-    color: white;
-    display: block;
-    font-size: 16px;
-    width: 100%;
-    padding: 10px 0 10px 10px;
-  }
-  @include navstyle;
-}
-
 .panel .panel-heading {
   height: 40px;
 }
-.selectedItem {
-  
+
+.questCount {
+    font-size: 30px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: #286091;
 }
