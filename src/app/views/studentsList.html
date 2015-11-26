@@ -563,15 +563,6 @@
 				</div><!-- END col -->
 			</div><!-- END row -->
 		</div><!-- END div repeat start -->
-
-
-
-
-
-		<!-- Confirmation Deleting Modal -->
-		<deleting-modal-drct></deleting-modal-drct>
-		<!-- Informational Error from Server Modal -->
-		<inform-modal-drct></inform-modal-drct>
 	</div><!-- END ng-show -->
 
 
@@ -617,25 +608,17 @@
 
 
 			<!-- Modal confirmation window before deleting -->
-			<div class="modal fade"
+			<div class="modal fade bs-example-modal-sm"
+					 tabindex="-1"
 					 role="dialog"
-					 id="deleteModal"
-					 aria-labelledby="gridSystemModalLabel">
-				<div class="modal-dialog"
+					 aria-labelledby="mySmallModalLabel"
+					 id="deleteModalWin">
+				<div class="modal-dialog modal-sm"
 						 role="document">
 					<div class="modal-content">
-
 						<div class="modal-header">
-							<button type="button"
-											class="close"
-											data-dismiss="modal"
-											ng-click="confirmDelete()"
-											aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-
-							<h4 class="modal-title" id="gridSystemModalLabel">Do you really want to delete student?</h4>
-						</div><!-- END modal-header -->
+							<h4 class="modal-title">Видалити запис?</h4>
+						</div>
 
 						<div class="modal-footer">
 							<button type="button"

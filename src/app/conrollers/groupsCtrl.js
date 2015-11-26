@@ -6,7 +6,6 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 
 	//function gets a list of entities
 	entitiesSrvc.getEntities($scope.thisEntity).then(function(httpData) {
-		console.log('groups data resp',httpData);
 		$scope.groups = httpData;
 	});
 
@@ -109,18 +108,19 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 
 
 //function for initiate of entity for delete in modal
-		$scope.activateGroup = function (group) {
+		$scope.activateGroup = function ($event, group) {
 
-			// if ($event) {
-			// 	$event.stopPropagation();
-			// }
+
 
 			if ($scope.activeGroup != group) {
 				$scope.activeGroup = group;
 			} else {
 				$scope.activeGroup = null;
-			};
+			}
 
+			if ($event) {
+				$event.stopPropagation();
+			}
 		};
 //function removes an entity from array and from server
 	$scope.removeGroup = function () {

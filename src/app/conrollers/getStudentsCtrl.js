@@ -47,12 +47,6 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 			// $scope.resetEntity();
 		};
 	};
-/*
-	$scope.resetEntity = function () {
-		$scope.newEntity = {};
-	};
-
-*/
 
 
 	$scope.addNewStudent = function (recordData) {
@@ -126,6 +120,7 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 		function okAddResponseHandler (resp, newRecord) {
 			recordData.user_id = resp.data.id;
 			$scope.students.push(recordData);
+			$scope.newStudent = {};
 		};
 
 	}; // End $scope.addStudent
@@ -188,8 +183,6 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 
 		// remember here was an object editingObj
 		$scope.editingStudent = stud;
-		console.log('after cl estud ', $scope.editingStudent.photo);
-
 	};
 
 
@@ -269,55 +262,44 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*_________________________________________________
+/*
+/* DELETING STUDENT RECORDS
+/*_________________________________________________
+*/
 
 	// Getting confirmation before deleting a student
 	$scope.confirmDelete = function (studentId) {
-		if ( $scope.confirmedStud !== studentId ) {
-			$scope.confirmedStud = studentId;
-		} else {
-			$scope.confirmedStud = null;
-		}
+		angular.element(document.querySelector('#deleteModalWin')).modal();
+		$scope.confirmedStud = studentId;
 	};
 
 	// Deleting student record
 	$scope.deleteStudent = function () {
 		var currentId = $scope.confirmedStud;
-		var currentStud = $scope.confirmedStud;
 
-		entitiesSrvc.deleteEntity($scope.thisEntity, currentId)
+		entitiesSrvc.deleteEntity(thisEntity, $scope.confirmedStud)
 			.then(function (response) {
-				if (response.data.response === 'ok') {
-					console.log('everything is ok');
-					var index = $scope.students.list.indexOf(currentStud);
-					// .. to splice it in the list of students
-					$scope.students.list.splice(index, 1);
-				} else if (response.data.response === 'error 23000') {
-					$scope.showInformaModal("Виникла помилка: " + response.data.response + '. Неможливо видалити запис через наявні залежні об\'єкти.');
-				} else {
-					$scope.showInformaModal("Виникла помилка: " + response.data.response);
-				}
+				delRespHandler(response, thisEntity);
 			}); //END .then
-		$scope.confirmDelete();
 	}; // END deleteStudent
 
-	$scope.showInformaModal = function (infMsg) {
-		$scope.infMsg = infMsg;
-		angular.element(document.querySelector('#deleteModal').modal())
-	};
+
+	function delRespHandler (resp, entity) {
+		switch (resp.data.response) {
+			case 'ok':
+				var index = $scope.students.indexOf(currentStud);
+				$scope.students.splice(index, 1);
+				if ($scope.students.length === 0) {
+					delete $scope.students;
+				}
+				break;
+			case 'error 23000':
+				console.log('Виникла помилка: ' + response.data.response + '. Неможливо видалити запис через наявні залежні об\'єкти.');
+				break;
+			default:
+				console.log("Виникла помилка: " + response.data.response);
+		}
+	}
 
 	}]);
