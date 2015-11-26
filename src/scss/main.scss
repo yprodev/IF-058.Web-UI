@@ -1,5 +1,9 @@
 $myBlue: #0073B4;
 $myGreen: #3AB54A;
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
 * {
   margin: 0;
   padding: 0;

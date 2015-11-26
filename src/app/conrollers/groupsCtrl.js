@@ -6,6 +6,7 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 
 	//function gets a list of entities
 	entitiesSrvc.getEntities($scope.thisEntity).then(function(httpData) {
+		console.log('groups data resp',httpData);
 		$scope.groups = httpData;
 	});
 
@@ -63,7 +64,7 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 			if (group !== null) {
 				$scope.currentId = group.group_id;
 			}
-				$scope.editingData = group;
+			$scope.editingData = group;
 			};
 	//function updates an element of array and send updating of entity to server
 		$scope.editGroup = function () {
@@ -110,11 +111,16 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 //function for initiate of entity for delete in modal
 		$scope.activateGroup = function (group) {
 
+			// if ($event) {
+			// 	$event.stopPropagation();
+			// }
+
 			if ($scope.activeGroup != group) {
 				$scope.activeGroup = group;
 			} else {
 				$scope.activeGroup = null;
 			};
+
 		};
 //function removes an entity from array and from server
 	$scope.removeGroup = function () {

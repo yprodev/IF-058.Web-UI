@@ -263,7 +263,7 @@
 		<!-- DIVS appearence -->
 	<div ng-show="!students">
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-data">
 				{{noData}}
 			</div><!-- END col -->
 		</div><!-- END row -->
@@ -272,14 +272,14 @@
 
 		<!-- DIVS appearence -->
 	<div ng-show="students" class="students-bootstrap">
-		<div ng-if="editingStudent.user_id != student.user_id"
+		<div ng-if="editingStudent.user_id !== student.user_id"
 				 ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse"
 				 class="ng-scope">
 			<div class="row">
 				<div class="col col-xs-12 col-sm-1 col-md-1 col-lg-1 col-img">
 					<img class="student-photo" 
 							 ng-src="{{ student.photo ? student.photo : '../build/img/def-stud.jpg' }}"
-							 alt="Photo of {{student.student_surname }} {{ student.student_name }}">
+							 alt="{{student.student_surname }} {{ student.student_name }} photo">
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-11 col-md-11 col-lg-11">
 					<hgroup>
@@ -316,7 +316,7 @@
 		</div><!-- END div repeat start -->
 
 
-		<div ng-if="editingStudent.user_id == student.user_id"
+		<div ng-if="editingStudent.user_id === student.user_id"
 				 ng-repeat-end=""
 				 class="ng-scope {{ actclass }}">
 			<div class="row">
@@ -334,7 +334,6 @@
 										 ng-minlength="5"
 										 ng-maxlength="20"
 										 ng-model="editingStudent.gradebook_id"
-										 value="{{ student.gradebook_id }}"
 										 required
 										 poptip
 										 data-toggle="tooltip"
@@ -363,7 +362,6 @@
 										 ng-minlength="2"
 										 ng-maxlength="50"
 										 ng-model="editingStudent.student_name"
-										 value="{{ student.student_name }}"
 										 required
 										 poptip
 										 data-toggle="tooltip"
@@ -393,7 +391,6 @@
 										 ng-maxlength="50"
 										 ng-model="editingStudent.student_fname"
 										 ng-model-option="{ updateOn: 'default', debounce: { default: 500} }"
-										 value="{{ student.student_fname }}"
 										 required
 										 poptip
 										 data-toggle="tooltip"
@@ -422,7 +419,6 @@
 										 ng-minlength="2"
 										 ng-maxlength="50"
 										 ng-model="editingStudent.student_surname"
-										 value="{{ student.student_surname }}"
 										 required
 										 poptip
 										 data-toggle="tooltip"
@@ -480,8 +476,8 @@
 										 aria-describedby="helpEmail"
 										 placeholder="myemail@site.com"
 										 tabindex="7"
-										 ng-model="editingStudent.email"
-										 value="{{ userMeta.email }}"
+										 ng-model=" params.email "
+										 value="{{ params.email }}"
 										 required
 										 poptip
 										 data-toggle="tooltip"
@@ -554,9 +550,8 @@
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
 					<span class="buttons pull-right">
-
 						<button class="btn btn-success btn-sm navbar-btn" 
-										ng-click='editGroup()'>
+										ng-click='editStud()'>
 							<span class="glyphicon glyphicon-ok"></span>
 						</button>
 

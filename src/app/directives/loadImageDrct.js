@@ -49,7 +49,7 @@ app.directive('imageLabel', ['$timeout', '$interval', function ($timeout, $inter
 				$($element).popover({
 					html: true,
 					trigger: 'hover',
-					placement: 'top',
+					placement: 'right',
 					title: function () {
 						return '<strong>Фото: </strong>' + picName;
 					},
