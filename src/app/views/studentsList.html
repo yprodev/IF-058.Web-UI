@@ -378,7 +378,6 @@
 					</div>
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-
 					<div class="form-group student-form-group">
 						<label class="label label-success" for="name">По-батькові</label>
 							<input type="text"
@@ -438,7 +437,6 @@
 				</div><!-- END col -->
 			</div><!-- END row -->
 			<div class="row">
-
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
 					<div class="form-group student-form-group">
 						<label class="label label-success" for="email">Електронна пошта</label>
@@ -464,7 +462,6 @@
 					</div>
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-
 					<div class="form-group student-form-group">
 						<label class="label label-success" for="username">Логін</label>
 							<input type="text"
@@ -494,31 +491,6 @@
 				</div><!-- END col -->
 				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
 					<div class="form-group student-form-group">
-						<label class="label label-success" for="email">Email Адреса</label>
-							<input type="email"
-										 name="studentEmail"
-										 id="email"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpEmail"
-										 placeholder="myemail@site.com"
-										 tabindex="7"
-										 ng-model="editingStudent.email"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
-
-						<!-- Error message for EMAIL -->
-						<span id="helpEmail"
-									ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
-									class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
-						</span>
-
-					</div>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
 						<label class="label label-success" for="password">Пароль</label>
 							<input type="password"
 										 name="studUserPassword"
@@ -526,7 +498,7 @@
 										 class="form-control navbar-btn"
 										 aria-describedby="helpPassword"
 										 placeholder="Введіть пароль студента"
-										 tabindex="5"
+										 tabindex="7"
 										 minlength="4"
 										 maxlength="64"
 										 ng-model="editingStudent.password"
@@ -553,7 +525,7 @@
 										 class="form-control navbar-btn"
 										 aria-describedby="helpConfPassword"
 										 placeholder="Повторіть пароль студента"
-										 tabindex="6"
+										 tabindex="8"
 										 ng-maxlength="64"
 										 ng-model="editingStudent.password_confirm"
 										 required
