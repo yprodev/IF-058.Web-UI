@@ -25,7 +25,7 @@
 									 class="form-control width-max navbar-btn"
 									 aria-describedby="helpSurname"
 									 placeholder="Введіть прізвище студента"
-									 tabindex="3"
+									 tabindex="1"
 									 ng-minlength="2"
 									 ng-maxlength="50"
 									 ng-model="newStudent.student_surname"
@@ -80,7 +80,7 @@
 									 class="form-control width-max navbar-btn"
 									 aria-describedby="helpName"
 									 placeholder="Введіть по-батькові студента"
-									 tabindex="1"
+									 tabindex="3"
 									 ng-minlength="2"
 									 ng-maxlength="50"
 									 ng-model="newStudent.student_fname"
@@ -108,7 +108,7 @@
 									 class="form-control width-max navbar-btn"
 									 aria-describedby="helpGradebook"
 									 placeholder="Введіть номер залікової книжки"
-									 tabindex="8"
+									 tabindex="4"
 									 ng-minlength="5"
 									 ng-maxlength="20"
 									 ng-model="newStudent.gradebook_id"
@@ -120,12 +120,14 @@
 
 					<!-- Error message for Student's Gradebook -->
 					<span id="helpGradebook"
-								ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
+								ng-show="addRecord.studGradebook.$invalid && addRecord.studGradebook.$dirty"
 								class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
 					</span>
 				</div>
 			</div><!-- END col -->
 		</div><!-- END row -->
+
+
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<div class="form-group student-form-group">
@@ -136,7 +138,7 @@
 									 class="form-control navbar-btn"
 									 aria-describedby="helpEmail"
 									 placeholder="Введіть емейл студента"
-									 tabindex="7"
+									 tabindex="5"
 									 ng-model="newStudent.email"
 									 required
 									 poptip
@@ -160,7 +162,7 @@
 										 class="form-control navbar-btn"
 										 aria-describedby="helpUsername"
 										 placeholder="Введіть логін студента"
-										 tabindex="4"
+										 tabindex="6"
 										 ng-minlength="4"
 										 ng-maxlength="32"
 										 ng-model="newStudent.username"
@@ -187,7 +189,7 @@
 									 class="form-control navbar-btn"
 									 aria-describedby="helpPassword"
 									 placeholder="Введіть пароль студента"
-									 tabindex="5"
+									 tabindex="7"
 									 minlength="4"
 									 maxlength="64"
 									 ng-model="newStudent.password"
@@ -199,7 +201,7 @@
 
 					<!-- Error message for Student's User Password -->
 					<span id="helpPassword"
-								ng-show="addRecord.studUserPassword.$dirty"
+								ng-show="addRecord.studUserPassword.$invalid && addRecord.studUserPassword.$dirty"
 								class="help-block error">{{ getError(addRecord.studUserPassword.$error) }}
 					</span>
 
@@ -214,7 +216,7 @@
 										 class="form-control navbar-btn"
 										 aria-describedby="helpConfPassword"
 										 placeholder="Повторіть пароль студента"
-										 tabindex="6"
+										 tabindex="8"
 										 ng-maxlength="64"
 										 ng-model="newStudent.password_confirm"
 										 required
