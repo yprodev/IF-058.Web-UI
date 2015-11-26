@@ -1,25 +1,25 @@
 app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval) {
 
-    $scope.date = null;
-    $scope.arrows = {
-        year: {
-            left: 'img/white_arrow_left.svg',
-            right: 'img/white_arrow_right.svg'
-        },
-        month: {
-            left: 'img/grey_arrow_left.svg',
-            right: 'img/grey_arrow_right.svg'
-        }
-    }
-    $scope.header = {
-        monday: 'Mon',
-        tuesday: 'Tue',
-        wednesday: 'Wed',
-        thursday: 'Thu',
-        friday: 'Fri',
-        saturday: 'Sat',
-        sunday: 'Sun',
-    }
+    // $scope.date = null;
+    // $scope.arrows = {
+    //     year: {
+    //         left: 'img/white_arrow_left.svg',
+    //         right: 'img/white_arrow_right.svg'
+    //     },
+    //     month: {
+    //         left: 'img/grey_arrow_left.svg',
+    //         right: 'img/grey_arrow_right.svg'
+    //     }
+    // }
+    // $scope.header = {
+    //     monday: 'Mon',
+    //     tuesday: 'Tue',
+    //     wednesday: 'Wed',
+    //     thursday: 'Thu',
+    //     friday: 'Fri',
+    //     saturday: 'Sat',
+    //     sunday: 'Sun',
+    // }
 /*_________________________________________________
 /*
 /* GETTING RECORDS BY GROUP ID
