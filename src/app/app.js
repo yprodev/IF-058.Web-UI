@@ -78,6 +78,21 @@ app.value("entityObj", {
     by: {
       parentEntity: "group"
     }
+  },
+  "result": {
+    session_id:"",
+    student_id:"",
+    test_id:"",
+    session_date:"",
+    start_time:"",
+    end_time:"",
+    result:"",
+    questions:"",
+    true_answers:"",
+    answers:"",
+    by: {
+
+    }
   }
 
   //... and other entities
@@ -163,7 +178,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/addAdmin',
       templateUrl: 'app/views/addAdmin.html',
       controller: 'entitiesCtrl'
-    }).state('user.subjects', {
+    }).
+    state('admin.resultsByStudent', {
+      url: '/resultsByStudent/:id',
+      templateUrl: 'app/views/resultsByStudentList.html',
+      controller: 'entitiesCtrl'
+    }).
+    state('user.subjects', {
       url: '/subjects',
       templateUrl: 'app/views/userSubjects.html',
       controller: 'userSubjectListCtrl'

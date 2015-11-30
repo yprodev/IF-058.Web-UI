@@ -8,7 +8,6 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
             defineNameOfId();
             checkForPropertyBy();
           };
-
           //define currentEntity by comparing of thisEntity and properties of scope.entityObj
           function defineCurrentEntity () {
             if (scope.entityObj[scope.thisEntity] != undefined) {
@@ -19,9 +18,13 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
           //define id of entity: "entity_id" or "id" (it returns from server)
           function defineNameOfId (){
             scope.commonId =
-            scope.thisEntity !== "AdminUser" && scope.thisEntity !== "TestDetail"
+            scope.thisEntity !== "AdminUser" &&
+            scope.thisEntity !== "TestDetail"
             ? scope.thisEntity + "_id"
             : "id";
+            if (scope.thisEntity === "result") {
+              scope.commonId = "session_id";
+            };
             return scope.commonId;
           };
 
@@ -57,7 +60,7 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
                   gettingResponseHandler (resp);
                 });
                 break;
-                case 'timeTable':
+              case 'timeTable':
                 entitiesSrvc.getEntitiesForEntity(
                   scope.thisEntity, scope.currentEntity.by.parentEntity, id
                   )
@@ -75,6 +78,11 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
                     });
                 });
                 break;
+              case 'result':
+                entitiesSrvc.getRecordsByStudent(scope.thisEntity, id)
+                .then(function (resp) {
+                  gettingResponseHandler (resp);
+                });
 
             };
           };
@@ -89,6 +97,7 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
           function gettingResponseHandler (resp) {
             if (resp.data[0][0] == "record_id" && resp.data[0][1] == "null") {
               scope.noData = "Немає записів";
+              scope.student_fullname = resp.data[1].student_fullname;
             } else {
               scope.entities = resp.data;
             }
