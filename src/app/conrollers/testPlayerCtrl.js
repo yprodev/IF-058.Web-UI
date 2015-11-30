@@ -11,8 +11,6 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     //console.log('savedTestData',savedTestData)
                     var questionArray = savedTestData.questionList;
                     $scope.questionList = questionArray 
-
-                    console.log('questionArray2', questionArray)
                     var userId = localStorage.userId;
                     var testId = localStorage.testId;
 
@@ -52,12 +50,14 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                             })
                     };
 
-                    $scope.submitQuestion = function (radioValue) {
+                    $scope.submitQuestion = function (/*radioValue, */ answer /*questNumber*/) {
+                        console.log('checkValue', answer/*$scope.checkAnswer*/)
                         var answerObj = {};
                         var answerArray = [];
-                        answerObj.selectedAnswers = radioValue;
+                        //answerObj.selectedAnswers = radioValue;
                         answerObj.selectedQuestion = $scope.questNumber;
                         answerArray.push(answerObj);
+                        console.log('answerArray', answerArray)
                     };
                 });
             };
