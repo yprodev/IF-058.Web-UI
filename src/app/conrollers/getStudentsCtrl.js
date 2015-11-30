@@ -1,6 +1,10 @@
-app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval) {
+app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', '$state', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval, $state) {
 
-
+//DO NOT DELETE!!!
+// This function added by Vitaliy for routing to get resultsByStudent
+	$scope.enterToEntity = function(to, entityId) {
+	  $state.go(to ,{'id': entityId});
+	};
 
 /*_________________________________________________
 /*

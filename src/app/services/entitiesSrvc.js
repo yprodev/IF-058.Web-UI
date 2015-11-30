@@ -108,6 +108,33 @@ app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
       }, rejected);
     },
 
+    getRecordsByStudent: function (entity, id) {
+      return $http.get(baseUrl + entity + '/getRecordsByStudent' + '/' + id)
+      .then(function (responseResult) {
+        return $http.get(baseUrl + "student" + '/getRecords' + '/' + id)
+          .then(function (responseStudent) {
+            if (responseResult.data[0][0] == "record_id" && responseResult.data[0][1] == "null") {
+              responseResult.data[1] = {};
+              responseResult.data[1].student_fullname = responseStudent.data[0].student_surname + " " + responseStudent.data[0].student_name;
+              return responseResult;
+            } else {
+              responseResult.data[0].student_fullname = responseStudent.data[0].student_surname + " " + responseStudent.data[0].student_name;
+              return $http.get(baseUrl + "test" + '/getRecords')
+                .then(function (responseTest) {
+                  for (var i=0; i<responseResult.data.length; i++) {
+                    for (var j=0; j<responseTest.data.length; j++) {
+                      if (responseResult.data[i].test_id === responseTest.data[j].test_id) {
+                        responseResult.data[i].test_name = responseTest.data[j].test_name;
+                      };
+                    };
+                  };
+                  return responseResult;
+                }, rejected);
+            };
+        }, rejected);
+      }, rejected);
+    },
+
     createEntity: function (entity, data) {
       return $http.post(baseUrl + entity + '/insertData', data)
         .then(fulfilled, rejected);

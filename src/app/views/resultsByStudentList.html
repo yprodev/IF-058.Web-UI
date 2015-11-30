@@ -1,0 +1,56 @@
+<div entities-drct="result">
+  <div class="wrapper panel-success no-border">
+    <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Результати тестувань - {{entities[0].student_fullname}} {{student_fullname}} </div>
+        <!-- The button and form to add Entity -->
+        <div class="col-md-12">
+          <div>
+            <br/>
+            <div ng-show="!entities">{{noData}}</div>
+<!-- The table for list of Entities -->
+            <table ng-show="entities" class="table table-hover .table-condensed">
+                <thead class="usCenter">
+                  <tr>
+                    <th>№</th>
+                    <th class="col-md-3 clickable" ng-click="sortType = 'test_id'; sortReverse = !sortReverse">Тест
+                        <i ng-show="sortType == 'test_id' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                        <i ng-show="sortType == 'test_id' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                    </th>
+                    <th class="col-md-3 clickable" ng-click="sortType = 'test_id'; sortReverse = !sortReverse">Предмет
+                        <i ng-show="sortType == 'test_id' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                        <i ng-show="sortType == 'test_id' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                    </th>
+                    <th class="col-md-2 clickable" ng-click="sortType = 'session_date'; sortReverse = !sortReverse">Дата
+                        <i ng-show="sortType == 'session_date' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                        <i ng-show="sortType == 'session_date' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                    </th>
+                    <th class="col-md-2 clickable" ng-click="sortType = 'test_id'; sortReverse = !sortReverse">Результат
+                        <i ng-show="sortType == 'test_id' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                        <i ng-show="sortType == 'test_id' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                    </th>
+                    <th class="col-md-2">Дії</th>
+                  </tr>
+                </thead>
+                <tbody class="usCenter">
+                  <tr ng-repeat="entity in entities | filter:searchItem | orderBy:sortType:sortReverse" id="row{{$index + 1}}">
+                    <!-- read-only cells -->
+                    <td>{{$index + 1}}</td>
+                    <td class="col-md-3">{{entity.test_name}}</td>
+                    <td class="col-md-3">subject_name</td>
+                    <td class="col-md-2">{{entity.session_date}}</td>
+                    <td class="col-md-2">{{entity.result}}%</td>
+                    <td class="col-md-2">
+                      <button class="btn btn-sm btn-danger" ng-click="activateEntity($event, entity)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+            <!-- The modal to confirm removing of Entity -->
+            <deleting-modal-drct></deleting-modal-drct>
+            <!-- The modal to inform about error from server -->
+            <inform-modal-drct></inform-modal-drct>
+          </div>
+        </div>
+      </div>
+</div>

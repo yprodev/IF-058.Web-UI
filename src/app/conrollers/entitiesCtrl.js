@@ -1,7 +1,6 @@
 app.controller('entitiesCtrl',
   ['$scope', "$q", 'entitiesSrvc', 'countEntitiesSrvc', '$stateParams', '$state', '$timeout', 'entityObj','$rootScope',
   function ($scope, $q, entitiesSrvc, countEntitiesSrvc, $stateParams, $state, $timeout, entityObj, $rootScope) {
-
   //it defines from entitiesDrct
   $scope.thisEntity = "";
 
