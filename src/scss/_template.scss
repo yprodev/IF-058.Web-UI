@@ -11,7 +11,7 @@
 		@include round(5px);
 		@include scale(1.02, 1.02);
 		@include drop-shadow(1px, 0px, 15px, 0, .15);
-		background-color: #0082F5;
+		background-color: $clr-normal-blue;
 		border-bottom: none;
 
 		.row > .col > hgroup {
@@ -97,3 +97,12 @@
 	min-width: 90px;
 }
 
+
+.no-data {
+	margin: 30px;
+	width:80%;
+	font-family: $txt-light;
+	font-size: $body-font-size * 1.7;
+	line-height: $baseline * 1.5;
+	color: $clr-normal-blue;
+}

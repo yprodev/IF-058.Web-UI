@@ -7,15 +7,16 @@
  * _________________________________________________________________________
 */
 var gulp = require('gulp'),
-	uglify = require('gulp-uglify'),
-	concat = require('gulp-concat'),
-	csscomb = require('gulp-csscomb'),
-	cssmin = require('gulp-cssmin'),
-	less = require('gulp-less'),
-	sass = require('gulp-sass'),
-	imagemin = require('gulp-imagemin'),
-	pngquant = require('imagemin-pngquant'),
-	fs = require('fs'),
+		uglify = require('gulp-uglify'),
+		concat = require('gulp-concat'),
+		csscomb = require('gulp-csscomb'),
+		cssmin = require('gulp-cssmin'),
+		less = require('gulp-less'),
+		sass = require('gulp-sass'),
+		imagemin = require('gulp-imagemin'),
+		pngquant = require('imagemin-pngquant'),
+		fs = require('fs'),
+		jshint = require('gulp-jshint'),
 
 //Added for moving files to virtual machine through GULP PLUGIN
 	GulpSSH = require('gulp-ssh');
@@ -56,7 +57,6 @@ var path = {
  *
  * _________________________________________________________________________
 */
-
 gulp.task('default', ['build', 'watch']);
 
 gulp.task("vendor-fonts", function() {
@@ -99,6 +99,9 @@ gulp.task("build-all-js", function() {
 			'bower_components/moment/moment.js',
 			path.src.js // Path for compiling all project js files
 		])
+			// .pipe(jshint())
+			// .pipe(jshint.reporter('jshint-stylish'))
+			// .pipe(jshint.reporter('fail'))
 			.pipe(concat("app.js"))
 			.pipe(gulp.dest(path.build.js));
 });
@@ -140,48 +143,6 @@ gulp.task('watch', function() {
  * _________________________________________________________________________
 */
 
-// var argv = require('yargs')
-// 	.usage('Usage: $0 <command> [options]')
-// 	.command('run', 'run this')
-// 	.option({
-// 		'f': {
-// 			alias: 'file',
-// 			demand: true,
-// 			nargs: 1,
-// 			default: 'src/app/app.js',
-// 			describe: 'needs file string',
-// 			type: 'string'
-// 		},
-// 		's': {
-// 			alias: 'source',
-// 			demand: true,
-// 			nargs: 1,
-// 			default: 'http://dtapi.local/',
-// 			describe: 'needs source string',
-// 			type: 'string'
-// 		},
-// 		'h': {
-// 			alias: 'help',
-// 		}
-// 	})
-// 	.example('$0 count -f src/app/app.js -s http://dtapi.local/', 'changes line in the given file')
-// 	.epilog('copyright 2015')
-// 	.argv;
-
-
-// 	fs.readFile(argv.file, 'utf8', function (err,data) {
-// 		if (err) {
-// 			return console.log(err);
-// 		}
-// 		var result = data.replace(/http:\/\/dtapi.local\//g, argv.source);
-
-// 		fs.writeFile(argv.file, result, 'utf8', function (err) {
-// 			 if (err) return console.log(err);
-// 		});
-// 	});
-
-
-
 gulp.task("dist-fonts", function() {
 	gulp.src('bower_components/bootstrap/fonts/**.*')
 		.pipe(gulp.dest(path.dist.fonts));
@@ -205,6 +166,8 @@ gulp.task("dist-js", function() {
 			'bower_components/bootstrap/js/tab.js',
 			'bower_components/angular/angular.js',
 			'bower_components/angular-ui-router/release/angular-ui-router.js',
+			'bower_components/material-date-picker/build/mbdatepicker.js',
+			'bower_components/moment/moment.js',
 			// Our project JS files
 			path.src.js
 
@@ -218,7 +181,8 @@ gulp.task("dist-ven-css", function() {
 		// First of all we need to compile LESS vendor files
 		gulp.src([
 			'bower_components/bootstrap/dist/css/bootstrap.css',
-			'bower_components/bootstrap/dist/css/bootstrap-theme.css'
+			'bower_components/bootstrap/dist/css/bootstrap-theme.css',
+			'bower_components/material-date-picker/build/styles/mbdatepicker.css'
 		])
 			.pipe(concat('vendor.css'))
 			.pipe(cssmin())

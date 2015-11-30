@@ -89,6 +89,18 @@ app.factory('entitiesSrvc', ['$http', 'baseUrl', function ($http, baseUrl) {
       }, rejected);
     },
 
+    getEntByEnt: function (entity, parentEntity, id) {
+      return $http.get(baseUrl + entity + '/get'+entity[0].toUpperCase()+entity.slice(1) + 's' + 'By' + parentEntity[0].toUpperCase()+parentEntity.slice(1) +'/' + id)
+        .then(function (response) {
+          if (response.data[0][0] === 'record_id' && response.data[0][1] === 'null') {
+            return {
+              response: null
+            };
+          }
+          return response;
+        }, rejected);
+    },
+
     getUsersById: function (entity, id) {
       return $http.get(baseUrl + entity + '/getRecords' + '/' + id)
       .then(function (response) {

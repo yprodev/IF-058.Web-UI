@@ -63,7 +63,7 @@ app.controller('groupsCtrl', ['$scope', '$stateParams', '$state', 'entitiesSrvc'
 			if (group !== null) {
 				$scope.currentId = group.group_id;
 			}
-				$scope.editingData = group;
+			$scope.editingData = group;
 			};
 	//function updates an element of array and send updating of entity to server
 		$scope.editGroup = function () {
