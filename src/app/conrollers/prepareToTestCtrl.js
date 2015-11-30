@@ -9,7 +9,7 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
     questionList: ''
   }
 
-  $rootScope.testData = testData
+
   var data = localStorage.userId
   var url = 'result/getRecordsByStudent/'
   var id = $stateParams.id
@@ -75,6 +75,7 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
   var url = 'TestPlayer/getTimeStamp';
   userSrvc.getInfoForStudent(url, data).then(function (resp) {
     testData.startTime = new Date(resp.data.unix_timestamp * 1000);
+    console.log(testData.startTime, 'testData.startTime');
   });
   $scope.getRecordsByStudent()
   $scope.startTest = function () {
@@ -85,12 +86,22 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
         mytimeout = $timeout($scope.onTimeout, 1000);
       }
       var mytimeout = $timeout($scope.onTimeout, 1000);
+      console.log(mytimeout, 'mytimeout');
       $scope.stop = function () {
         $timeout.cancel(mytimeout);
       }
     }
 
     timer();
+    function saveData (){
+      var url = 'testPlayer/saveData';
+      var data = testData;
+      userSrvc.postInfoForStudent(url, data).then(function (resp) {
+      })
+    }
+    saveData()
+
+
   }
 
 
