@@ -10,6 +10,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     savedTestData = resp.data;
                     //console.log('savedTestData',savedTestData)
                     var questionArray = savedTestData.questionList;
+                    $scope.questionList = questionArray 
 
                     console.log('questionArray2', questionArray)
                     var userId = localStorage.userId;
