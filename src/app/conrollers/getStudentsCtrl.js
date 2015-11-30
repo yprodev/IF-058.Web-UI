@@ -273,9 +273,12 @@ app.controller('getStudentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entit
 */
 
 	// Getting confirmation before deleting a student
-	$scope.confirmDelete = function (studentId) {
+	$scope.confirmDelete = function (studentId, $event) {
 		angular.element(document.querySelector('#deleteModalWin')).modal();
 		$scope.confirmedStud = studentId;
+		if ($event) {
+		  $event.stopPropagation(); //for avoiding of enter to entity / Vitaliy
+		}
 	};
 
 	// Deleting student record

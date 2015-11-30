@@ -18,9 +18,13 @@ app.directive('getEntitiesDrct', ['entitiesSrvc', '$stateParams', function(entit
           //define id of entity: "entity_id" or "id" (it returns from server)
           function defineNameOfId (){
             scope.commonId =
-            scope.thisEntity !== "AdminUser" && scope.thisEntity !== "TestDetail"
+            scope.thisEntity !== "AdminUser" &&
+            scope.thisEntity !== "TestDetail"
             ? scope.thisEntity + "_id"
             : "id";
+            if (scope.thisEntity === "result") {
+              scope.commonId = "session_id";
+            };
             return scope.commonId;
           };
 
