@@ -14,6 +14,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     savedTestData = resp.data;
                     var questionArray = savedTestData.questionList;
                     $scope.questionList = questionArray 
+                    console.log('$scope.questionList', $scope.questionList)
 
                     
                     function timer (){
@@ -39,28 +40,28 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     var answerObj = {};
                     var answerArray = [];   
 
-                    //var questionArray = savedTestData.questionList;
-                    var question;
-                    if ($stateParams.id) {
-                        question = +questionArray[$stateParams.id];
-                    } else {
-                        question = questionArray[0];
 
+
+                    //var questionArray = savedTestData.questionList;
+                    var quest;
+                    $scope.choosenQuestion = function (quest, index) {
+                        $scope.selected = index;
+                        //устранить баг при повторном клике красным горит предыдущий вопрос
+                        console.log('$scope.selected', $scope.selected)
+                        nextQuestion(quest);
+                    }
+                    console.log('$stateParams.id', $stateParams.id)
+                    if ($stateParams.id !== '1') {
+                        console.log('1')
+                        quest = +questionArray[$stateParams.id-1];
+                        console.log('quest', quest)
+                        $scope.choosenQuestion(quest, $stateParams.id);
+                    } else {
+                        console.log('0')
+                        quest = questionArray[0];
+                        $scope.choosenQuestion(quest, '1');
                         $scope.selected = 0;
                     };
-
-                    $scope.chosenQuestion = function (questNumber, index) {
-                        $scope.selected = index;
-                        $scope.questNumber = questNumber;
-                        //answerObj.selectedQuestion = $scope.questNumber;
-                        nextQuestion(questNumber);
-
-                    };
-                    $scope.firstQuestion = function (question) {
-                        nextQuestion(question);
-                    }
-
-                    $scope.firstQuestion(question);
 
                     function nextQuestion(data) {
                         var questionUrl = 'question/getRecords/';
@@ -71,14 +72,19 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                         ])
                             .then(function (resp) {
                                 $scope.question = resp[0].data[0].question_text;
+                                //console.log('$scope.question', $scope.question)
                                 $scope.answers = resp[1].data;
                                 $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
+                                //console.log($scope.questNumberSubmit);
                             })
                     };
 
-                    $scope.submitQuestion = function (radioValue) {
+                    $scope.submitQuestion = function (questNumber, radioValue) {
+                        //console.log('questNumber', $scope.questNumberSubmit)
                         answerObj.selectedAnswers = radioValue;
+                        answerObj.selectedQuestion = questNumber;
                         answerArray.push(answerObj);
+                        //console.log('answerObj', answerObj)
                     }
                 });
             };
