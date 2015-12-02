@@ -1,6 +1,6 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <span class="col-md-3 pull-right">Час на роздуми: {{counter | formatTimer}}</span>
+        <span class="col-md-3 pull-right">Час на роздуми: {{counter}}</span>
     </div>
     <div class="panel-body">
         <button class="btn btn-primary pull-left">Завершити тестування</button>
@@ -25,13 +25,12 @@
                 <span ng-bind-html='answer.answer_text | unsafe'></span>
             </label>
             <label ng-show="type == 'checkbox'" for='{{answer.answer_id}}'>
-                <input id='{{answer.answer_id}}' type='checkbox' ng-value="{{answer.answer_id}}" ng-model='checkValue'/>
+                <input id='{{answer.answer_id}}' type='checkbox' checklist-value="{{answer.answer_id}}" checklist-model='userAnswer' ng-true-value="1" ng-false-value="0"/>
                 <span ng-bind-html='answer.answer_text | unsafe'></span>
             </label>
         </div>
     </div>
     <div class="submitQuestion">
-        {{checkValue | json}}
-        <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(checkAnswer)"/>
+        <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(radioValue)"/>
     </div>
 </div>
