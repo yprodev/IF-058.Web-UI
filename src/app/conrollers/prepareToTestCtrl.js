@@ -82,8 +82,7 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
     function saveData (){
       var url = 'testPlayer/saveData';
       var data = testData;
-      userSrvc.postInfoForStudent(url, data).then(function (resp) {
-      })
+      userSrvc.postInfoForStudent(url, data)
     }
     saveData()
 

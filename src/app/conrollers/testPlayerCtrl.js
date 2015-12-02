@@ -1,22 +1,14 @@
-testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q', '$timeout',
+testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q', '$timeout', 
     function ($scope, $rootScope, userSrvc, $stateParams, $state, $q, $timeout) {
         $scope.beginTest = function () {    
-            
-                    /*$timeout(timer, 1000)*/
-            var savedTestData;
-
-
-
-            function getSavedData() {
                 var url = 'testPlayer/getData'
                 var data = ''
                 userSrvc.getInfoForStudent(url, data).then(function (resp) {
-                    savedTestData = resp.data;
+                    var savedTestData = resp.data;
                     var questionArray = savedTestData.questionList;
                     $scope.questionList = questionArray 
                     console.log('$scope.questionList', $scope.questionList)
 
-                    
                     function timer (){
                          var data = '';
                           var url = 'TestPlayer/getTimeStamp';
@@ -36,7 +28,9 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     var userId = localStorage.userId;
                     var testId = localStorage.testId;
                     var answerObj = {};
-                    var answerArray = [];   
+                    var answerArray = [];
+                    $scope.checklistValue = []
+                    
 
 
 
@@ -44,19 +38,16 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     var quest;
                     $scope.choosenQuestion = function (quest, index) {
                         $scope.selected = index-1;
-                        //устранить баг при повторном клике красным горит предыдущий вопрос
-
+                        console.log('quest', quest)
+                        $scope.quest = quest
                         nextQuestion(quest);
                     }
                     if ($stateParams.id !== '1') {
 
                         quest = +questionArray[$stateParams.id-1];
-                        console.log('quest', quest)
                         $scope.choosenQuestion(quest, $stateParams.id);
                     } else {
-
                         quest = questionArray[0];
-                        console.log('quest', quest)
                         $scope.choosenQuestion(quest, '1');
                         $scope.selected = 0;
                     };
@@ -73,21 +64,29 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                                 //console.log('$scope.question', $scope.question)
                                 $scope.answers = resp[1].data;
                                 $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
-                                //console.log($scope.questNumberSubmit);
+                                // console.log($scope.answers);
                             })
                     };
-
-                    $scope.submitQuestion = function (questNumber, radioValue) {
-                        //console.log('questNumber', $scope.questNumberSubmit)
-                        answerObj.selectedAnswers = radioValue;
-                        answerObj.selectedQuestion = questNumber;
+                        
+                    $scope.submitQuestion = function (radioValue) {
+                        answerObj.selectedQuestion = $scope.quest;
+                        answerObj.selectedAnswer = radioValue
+                        answerObj.selectedAnswer = $scope.checklistValue
+                        console.log('answerObj.selectedAnswer', answerObj.selectedAnswer)
                         answerArray.push(answerObj);
-                        //console.log('answerObj', answerObj)
+                        console.log('answerArray', answerArray)
+                        var nextState = +$stateParams.id + 1
+                        $state.go('user.testPlayer', {id:nextState});
                     }
-                });
-            };
 
-            getSavedData();
+                    $scope.finishTest = function () {
+                        console.log('answerArray', answerArray)
+                    }
+
+
+                });
+                    
+          
         };
         $scope.beginTest();
     }]);
