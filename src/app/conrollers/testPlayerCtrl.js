@@ -20,8 +20,6 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     function timer (){
                          var data = '';
                           var url = 'TestPlayer/getTimeStamp';
-                          
-                          
                           $scope.onTimeout = function(){
                             userSrvc.getInfoForStudent(url, data).then(function (resp) {
                             var timeDifference = new Date((resp.data.unix_timestamp - savedTestData.timeForTest*60) * 1000);
@@ -45,20 +43,20 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     //var questionArray = savedTestData.questionList;
                     var quest;
                     $scope.choosenQuestion = function (quest, index) {
-                        $scope.selected = index;
+                        $scope.selected = index-1;
                         //устранить баг при повторном клике красным горит предыдущий вопрос
-                        console.log('$scope.selected', $scope.selected)
+
                         nextQuestion(quest);
                     }
-                    console.log('$stateParams.id', $stateParams.id)
                     if ($stateParams.id !== '1') {
-                        console.log('1')
+
                         quest = +questionArray[$stateParams.id-1];
                         console.log('quest', quest)
                         $scope.choosenQuestion(quest, $stateParams.id);
                     } else {
-                        console.log('0')
+
                         quest = questionArray[0];
+                        console.log('quest', quest)
                         $scope.choosenQuestion(quest, '1');
                         $scope.selected = 0;
                     };

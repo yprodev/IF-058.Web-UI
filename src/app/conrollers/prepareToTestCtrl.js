@@ -67,7 +67,6 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
       for (i in resp.data) {
         questionList.push(resp.data[i].question_id)
       }
-      //localStorage.questionList = questionList;
       testData.questionList = questionList;
       $scope.questionsQuantity = questionList.length;
     })
@@ -80,20 +79,6 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
   });
   $scope.getRecordsByStudent()
   $scope.startTest = function () {
-   /* function timer(testDuration) {
-      testData.counter = $scope.timeForTest * 60;
-      $scope.onTimeout = function () {
-        testData.counter--;
-        $rootScope.counter = testData.counter
-        mytimeout = $timeout($scope.onTimeout, 1000);
-      }
-      var mytimeout = $timeout($scope.onTimeout, 1000);
-      $scope.stop = function () {
-        $timeout.cancel(mytimeout);
-      }
-    }*/
-
-    //timer();
     function saveData (){
       var url = 'testPlayer/saveData';
       var data = testData;
