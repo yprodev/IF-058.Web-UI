@@ -38,13 +38,8 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     var quest;
                     $scope.choosenQuestion = function (quest, index) {
                         $scope.selected = index-1;
-<<<<<<< HEAD
-                        //СѓСЃС‚СЂР°РЅРёС‚СЊ Р±Р°Рі РїСЂРё РїРѕРІС‚РѕСЂРЅРѕРј РєР»РёРєРµ РєСЂР°СЃРЅС‹Рј РіРѕСЂРёС‚ РїСЂРµРґС‹РґСѓС‰РёР№ РІРѕРїСЂРѕСЃ
-
-=======
                         console.log('quest', quest)
-                        $scope.quest = quest
->>>>>>> ca6bd4c96b4172c8d90819ea55b470821f05a926
+                        $scope.quest = quest;
                         nextQuestion(quest);
                     }
                     if ($stateParams.id !== '1') {
