@@ -1,123 +1,124 @@
 
 <div class="timeTableList"
-     ng-controller="timeTableCtrl">
-    <div class="wrapper panel panel-success no-border">
-        <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Розклад </div>
-        <!-- The button and form to add Entity -->
-        <div class="col-md-12">
-            <div>
-                <br/>
-                <button class="btn btn-primary pull-right" ng-click="showAddForm()"><span
-                        class="glyphicon glyphicon-plus"></span></button>
-                <br/><br/><br/>
+   ng-controller="timeTableCtrl">
+  <div class="wrapper panel panel-success no-border">
+    <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Розклад </div>
+    <!-- The button and form to add Entity -->
+    <div class="col-md-12">
+      <div>
+        <br/>
+        <button class="btn btn-primary pull-right" ng-click="showAddForm()"><span
+            class="glyphicon glyphicon-plus"></span></button>
+        <br/><br/><br/>
 
-                <div class="well" ng-show="showingAdd">
-                    <div class="row">
-                        <form name="addForm" class="form-inline" role='form' novalidate>
-                            <div class="col-md-4">
-                                <label for="addGroup" class="label label-success">Група</label>
-                                <select class="form-control width-max navbar-btn" ng-options="key as value for (key, value) in agendaItems.group" name="group" ng-model="newAgendaItem.group_id" required id="addGroup">
-                                    <option value="">Виберіть групу</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="addEventDate" class="label label-success">Дата тестування</label>
-                                <div>
-                                     <mb-datepicker class="form-control navbar-btn" element-id='date1'
-                                         input-class="testClass"
-                                         input-name="testName"
-                                         arrows="arrows"
-                                         calendar-header="header"
-                                         date="date"
-                                         date-format="YYYY-MM-DD"
-                                         >
-                                     </mb-datepicker>
-                                    <!-- <input class="form-control width-max navbar-btn" -->
-                                           <!-- placeholder="DD/MM/YY" ng-model="newAgendaItem.event_date" required id="addEventDate"> -->
-                                </div>
-                            </div>
-
-                            <div class="col-md-2">
-                                <br>
-                                <button type="submit" class="btn btn-success pull-right width-max navbar-btn"
-                                        ng-disabled="addForm.$invalid" ng-click="addNewTimeTable(newAgendaItem)">Додати
-                                </button>
-                            </div>
-                            <div class="col-md-2">
-                                <br>
-                                <button type="submit" class="btn btn-warning pull-right width-max navbar-btn"
-                                        ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+        <div class="well" ng-show="showingAdd">
+          <div class="row">
+            <form name="addForm" class="form-inline" role='form' novalidate>
+              <div class="col-md-4">
+                <label for="addGroup" class="label label-success">Група</label>
+                <select class="form-control input-sm width-max navbar-btn" ng-options="key as value for (key, value) in agendaItems.group" name="group" ng-model="newAgendaItem.group_id" required id="addGroup">
+                  <option value="">Виберіть групу</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="addEventDate" class="label label-success">Дата тестування</label>
+                <div>
+                   <mb-datepicker class="form-control navbar-btn" element-id='date1'
+                     input-class="testClass"
+                     input-name="testName"
+                     arrows="arrows"
+                     calendar-header="header"
+                     date="date"
+                     date-format="YYYY-MM-DD"
+                     >
+                   </mb-datepicker>
+                  <!-- <input class="form-control input-sm width-max navbar-btn" -->
+                       <!-- placeholder="DD/MM/YY" ng-model="newAgendaItem.event_date" required id="addEventDate"> -->
                 </div>
+              </div>
 
-
-                <div ng-show="!agendaItems">{{noData}}</div>
-
-                <!-- The table for list of Entities -->
-                <table ng-show="agendaItems" class="table table-hover .table-condensed">
-                    <thead>
-                    <tr>
-                        <th>№</th>
-                        <th>Група</th>
-                        <!-- <th>Предмет</th>-->
-                        <th>Дата</th>
-                        <th class="usCenter">Дії</th>
-                    </tr>
-                    </thead>
-                    <tbody >
-                    <tr ng-if="agendaItem !== editingEntity" ng-repeat-start="agendaItem in agendaItems.list">
-                        <!-- read-only cells -->
-                        <td>{{$index + 1}}</td>
-                        <td>{{agendaItem.group_name}}</td>
-                        <td>{{agendaItem.event_date}}</td>
-                        <td class="usCenter">
-                            <button class="btn btn-info" ng-click="showEditForm(agendaItem)">
-                                <span class="glyphicon glyphicon-pencil"></span></button>
-                            <button class="btn btn-danger col-md-offset-1" data-toggle="modal"
-                                    data-target="#deleteModal" ng-click="activateEntity(agendaItem)">
-                                <span class="glyphicon glyphicon-trash"></span></button>
-                        </td>
-                    </tr>
-                    <tr ng-if="agendaItem === editingEntity" ng-repeat-end>
-                        <td>{{$index + 1}}</td>
-                        <td><input class="form-control width-max" ng-model="editedEntity.new_group_name"></td>
-                        <td><input type="date" class="form-control width-max" ng-model="editedEntity.new_date"></td>
-
-                        <td class="usCenter col-md-2">
-                            <button class="btn btn-success" ng-click="editEntity(entity)">
-                                <span class="glyphicon glyphicon-ok"></span></button>
-                            <button class="btn btn-warning col-md-offset-1" ng-click="showEditForm(entity)">
-                                <span class="glyphicon glyphicon-remove"></span></button>
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-
-                <!-- The modal to confirm removing of Entity -->
-                <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                     aria-labelledby="mySmallModalLabel" id="deleteModal">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Видалити запис?</h4>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal"
-                                        ng-click="activateEntity()">Скасувати
-                                </button>
-                                <button type="button" class="btn btn-danger" ng-click="removeEntity()"
-                                        data-dismiss="modal">Видалити
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+              <div class="col-md-2">
+                <br>
+                <button type="submit" class="btn btn-success pull-right width-max navbar-btn"
+                    ng-disabled="addForm.$invalid" ng-click="addNewTimeTable(newAgendaItem)">Додати
+                </button>
+              </div>
+              <div class="col-md-2">
+                <br>
+                <button type="submit" class="btn btn-warning pull-right width-max navbar-btn"
+                    ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+
+
+        <div ng-show="!agendaItems">{{noData}}</div>
+
+        <!-- The table for list of Entities -->
+        <div class="table-responsive">
+          <table ng-show="agendaItems" class="table table-hover .table-condensed">
+            <thead>
+            <tr>
+              <th>№</th>
+              <th class="col-md-5">Група</th>
+              <th class="col-md-5">Дата</th>
+              <th class="col-md-2 usCenter">Дії</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr ng-if="agendaItem !== editingEntity" ng-repeat-start="agendaItem in agendaItems.list">
+              <!-- read-only cells -->
+              <td>{{$index + 1}}</td>
+              <td>{{agendaItem.group_name}}</td>
+              <td>{{agendaItem.event_date}}</td>
+              <td class="usCenter">
+                <button class="btn btn-info" ng-click="showEditForm(agendaItem)">
+                  <span class="glyphicon glyphicon-pencil"></span></button>
+                <button class="btn btn-danger col-md-offset-1" data-toggle="modal"
+                    data-target="#deleteModal" ng-click="activateEntity(agendaItem)">
+                  <span class="glyphicon glyphicon-trash"></span></button>
+              </td>
+            </tr>
+            <tr ng-if="agendaItem === editingEntity" ng-repeat-end>
+              <td>{{$index + 1}}</td>
+              <td><input class="form-control input-sm width-max navbar-btn" ng-model="editedEntity.new_group_name"></td>
+              <td><input type="date" class="form-control input-sm width-max navbar-btn" ng-model="editedEntity.new_date"></td>
+
+              <td class="usCenter col-md-2">
+                <button class="btn btn-success navbar-btn" ng-click="editEntity(entity)">
+                  <span class="glyphicon glyphicon-ok"></span></button>
+                <button class="btn btn-warning col-md-offset-1 navbar-btn" ng-click="showEditForm(entity)">
+                  <span class="glyphicon glyphicon-remove"></span></button>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- The modal to confirm removing of Entity -->
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+           aria-labelledby="mySmallModalLabel" id="deleteModal">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Видалити запис?</h4>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"
+                    ng-click="activateEntity()">Скасувати
+                </button>
+                <button type="button" class="btn btn-danger" ng-click="removeEntity()"
+                    data-dismiss="modal">Видалити
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
 </div>
