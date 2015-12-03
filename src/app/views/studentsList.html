@@ -276,10 +276,10 @@
 	<div ng-show="students" class="students-bootstrap">
 		<div ng-if="editingStudent.user_id !== student.user_id"
 				 ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse"
-				 class="ng-scope">
+				 class="ng-scope" ng-click="enterToEntity('admin.resultsByStudent', student.user_id)" role="button">
 			<div class="row">
 				<div class="col col-xs-12 col-sm-1 col-md-1 col-lg-1 col-img">
-					<img class="student-photo" 
+					<img class="student-photo"
 							 ng-src="{{ student.photo ? student.photo : imgStr }}"
 							 alt="{{student.student_surname }} {{ student.student_name }} photo">
 				</div><!-- END col -->
@@ -308,7 +308,7 @@
 						<button class="btn btn-danger btn-sm col-md-offset-1"
 										data-toggle="modal"
 										data-target="#deleteModal"
-										ng-click='confirmDelete(student.user_id)'>
+										ng-click='confirmDelete(student.user_id, $event)'>
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
 

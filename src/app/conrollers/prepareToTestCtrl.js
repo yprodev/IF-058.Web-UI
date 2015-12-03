@@ -6,10 +6,10 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
   var testData = {
     counter: '',
     startTime: '',
-    questionList: ''
+    questionList: '',
+    timeForTest: ''
   }
 
-  $rootScope.testData = testData
   var data = localStorage.userId
   var url = 'result/getRecordsByStudent/'
   var id = $stateParams.id
@@ -39,7 +39,8 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
       var url = 'test/getRecords/'
       return userSrvc.getInfoForStudent(url, data, result)
     }).then(function (test) {
-      $scope.timeForTest = test[0].data[0].time_for_test;
+      //$scope.timeForTest = test[0].data[0].time_for_test;
+      testData.timeForTest = test[0].data[0].time_for_test;
       if (test[0].data[0].attempts < test[1]) {
         alert('Немає предметів з доступними тестами для вашої групи')//убрати коли запрацює модалка
         //$scope.showInformModal("Немає предметів з доступними тестами для вашої групи");
@@ -66,7 +67,6 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
       for (i in resp.data) {
         questionList.push(resp.data[i].question_id)
       }
-      //localStorage.questionList = questionList;
       testData.questionList = questionList;
       $scope.questionsQuantity = questionList.length;
     })
@@ -74,23 +74,19 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
   var data = '';
   var url = 'TestPlayer/getTimeStamp';
   userSrvc.getInfoForStudent(url, data).then(function (resp) {
-    testData.startTime = new Date(resp.data.unix_timestamp * 1000);
+    testData.startTime = resp.data.unix_timestamp
+    console.log(testData.startTime, 'testData.startTime')
   });
   $scope.getRecordsByStudent()
   $scope.startTest = function () {
-    function timer(testDuration) {
-      testData.counter = $scope.timeForTest * 60;
-      $scope.onTimeout = function () {
-        testData.counter--;
-        mytimeout = $timeout($scope.onTimeout, 1000);
-      }
-      var mytimeout = $timeout($scope.onTimeout, 1000);
-      $scope.stop = function () {
-        $timeout.cancel(mytimeout);
-      }
+    function saveData (){
+      var url = 'testPlayer/saveData';
+      var data = testData;
+      userSrvc.postInfoForStudent(url, data)
     }
+    saveData()
 
-    timer();
+
   }
 
 
