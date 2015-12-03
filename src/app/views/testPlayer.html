@@ -3,7 +3,7 @@
         <span class="col-md-3 pull-right">Час на роздуми: {{counter | formatTimer}}</span>
     </div>
     <div class="panel-body">
-        <button class="btn btn-primary pull-left">Завершити тестування</button>
+        <button class="btn btn-primary pull-left" ng-click = 'finishTest()'>Завершити тестування</button>
         <div class="pull-right text-center question-number">
             <a ui-sref="user.testPlayer({id:$index + 1})"
                ng-click='firstQuestion(questNumber, $index)'
@@ -19,18 +19,21 @@
     </div>
     <div class="answer clearfix well">
         <div ng-repeat='answer in answers'>
-            <label ng-show="type == 'radio'" for='{{answer.answer_id}}'>
-                <input id='{{answer.answer_id}}' type='radio' name="answer" ng-model="$parent.radioValue"
+            <label ng-show="type == 'radio'" for='answer.answer_id'>
+                <input id='answer.answer_id' type='radio' name="answer" ng-model="$parent.radioValue"
                        ng-value="{{answer.answer_id}}"/>
                 <span ng-bind-html='answer.answer_text | unsafe'></span>
+                <img class="picture new-picture navbar-btn" ng-src="{{answer.attachment}}"
+                                             ng-show="answer.attachment != 'added'" alt=""/>
             </label>
-            <label ng-show="type == 'checkbox'" for='{{answer.answer_id}}'>
-                <input id='{{answer.answer_id}}' type='checkbox' checklist-value="{{answer.answer_id}}" checklist-model='userAnswer' ng-true-value="1" ng-false-value="0"/>
+            <label ng-show="type == 'checkbox'">
+                <input type='checkbox' checklist-model="checklistValue" checklist-value="answer.answer_id" ng-click='clicked()'/>
                 <span ng-bind-html='answer.answer_text | unsafe'></span>
             </label>
         </div>
     </div>
     <div class="submitQuestion">
-        <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(questNumber, radioValue)"/>
+        {{select.answers}}
+        <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(radioValue)"/>
     </div>
 </div>

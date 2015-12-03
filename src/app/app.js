@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'testPlayerApp', 'materialDatePicker']);
+var app = angular.module('app', ['ui.router', 'testPlayerApp', 'materialDatePicker', 'checklist-model']);
 var testPlayerApp = angular.module('testPlayerApp', ['ui.router']);
 
 app.constant("baseUrl", "http://dtapi.local/");
