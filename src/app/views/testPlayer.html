@@ -19,8 +19,8 @@
     </div>
     <div class="answer clearfix well">
         <div ng-repeat='answer in answers'>
-            <label ng-show="type == 'radio'" for='answer.answer_id'>
-                <input id='answer.answer_id' type='radio' name="answer" ng-model="$parent.radioValue"
+            <label ng-show="type == 'radio'">
+                <input  type='radio' name="answer" ng-model="$parent.radioValue"
                        ng-value="{{answer.answer_id}}"/>
                 <span ng-bind-html='answer.answer_text | unsafe'></span>
                 <img class="picture new-picture navbar-btn" ng-src="{{answer.attachment}}"

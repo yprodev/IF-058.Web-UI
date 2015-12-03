@@ -61,28 +61,38 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                         ])
                             .then(function (resp) {
                                 $scope.question = resp[0].data[0].question_text;
-                                //console.log('$scope.question', $scope.question)
                                 $scope.answers = resp[1].data;
                                 $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
-                                // console.log($scope.answers);
                             })
                     };
-                        
+                       var userAnswers = []
+                       if (!localStorage.getItem('userAnswers')){
+                            localStorage.setItem('userAnswers', JSON.stringify(userAnswers)) 
+                       }
+                       
                     $scope.submitQuestion = function (radioValue) {
+                        userAnswers = JSON.parse(localStorage.getItem('userAnswers'))
                         answerObj.selectedQuestion = $scope.quest;
-                        answerObj.selectedAnswer = radioValue
-                        answerObj.selectedAnswer = $scope.checklistValue
-                        console.log('answerObj.selectedAnswer', answerObj.selectedAnswer)
-                        answerArray.push(answerObj);
-                        console.log('answerArray', answerArray)
+                        if ($scope.type === 'radio'){
+                            answerObj.selectedAnswer = radioValue
+                        } else {
+                            answerObj.selectedAnswer = $scope.checklistValue
+                        }
+                        userAnswers.push(answerObj);
+                        localStorage.setItem('userAnswers', JSON.stringify(userAnswers))
+                        console.log('userAnswers', userAnswers)
                         var nextState = +$stateParams.id + 1
                         $state.go('user.testPlayer', {id:nextState});
                     }
 
                     $scope.finishTest = function () {
                         console.log('answerArray', answerArray)
-                    }
 
+
+                        localStorage.removeItem('userAnswers')
+                        console.log('local', localStorage.getItem('userAnswers'))
+                    }
+                    
 
                 });
                     
