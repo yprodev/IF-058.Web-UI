@@ -39,7 +39,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     $scope.choosenQuestion = function (quest, index) {
                         $scope.selected = index-1;
                         console.log('quest', quest)
-                        $scope.quest = quest
+                        $scope.quest = quest;
                         nextQuestion(quest);
                     }
                     if ($stateParams.id !== '1') {
@@ -67,26 +67,27 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                                 // console.log($scope.answers);
                             })
                     };
-                        
-                    $scope.submitQuestion = function (radioValue) {
-                        answerObj.selectedQuestion = $scope.quest;
-                        answerObj.selectedAnswer = radioValue
-                        answerObj.selectedAnswer = $scope.checklistValue
-                        console.log('answerObj.selectedAnswer', answerObj.selectedAnswer)
+
+                    var questionQuantity = $scope.questionList.length;
+
+                    $scope.submitQuestion = function (questNumber, radioValue) {
+                        //console.log('questNumber', $scope.questNumberSubmit)
+                        answerObj.selectedAnswers = radioValue;
+                        answerObj.selectedQuestion = questNumber;
                         answerArray.push(answerObj);
-                        console.log('answerArray', answerArray)
-                        var nextState = +$stateParams.id + 1
-                        $state.go('user.testPlayer', {id:nextState});
+                        //console.log('answerObj', answerObj)
+                        var nextState = +$stateParams.id + 1;
+                        if (nextState <= questionQuantity) {
+                            $state.go('user.testPlayer', {'id': nextState});
+                        } else {
+                            alert('finish');
+                        }
                     }
 
                     $scope.finishTest = function () {
                         console.log('answerArray', answerArray)
                     }
-
-
                 });
-                    
-          
         };
         $scope.beginTest();
     }]);
