@@ -1,5 +1,25 @@
 app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$interval', function ($scope, $stateParams, entityObj, entitiesSrvc, $interval) {
 
+    $scope.date = null;
+    $scope.arrows = {
+        year: {
+            left: 'img/white_arrow_left.svg',
+            right: 'img/white_arrow_right.svg'
+        },
+        month: {
+            left: 'img/grey_arrow_left.svg',
+            right: 'img/grey_arrow_right.svg'
+        }
+    }
+    $scope.header = {
+        monday: 'Mon',
+        tuesday: 'Tue',
+        wednesday: 'Wed',
+        thursday: 'Thu',
+        friday: 'Fri',
+        saturday: 'Sat',
+        sunday: 'Sun',
+    }
 /*_________________________________________________
 /*
 /* GETTING RECORDS BY GROUP ID
@@ -18,11 +38,11 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 
 	// Getting records request handler
 	function gettingResponseHandler (resp) {
-		  if (resp.response === null) //if (resp.list[0][0] == "record_id" && resp.list[0][1] == "null") {
+		// if (resp.list[0][0] == "record_id" && resp.list[0][1] == "null") {
 		  $scope.noData = "Немає записів";
-		  else {
-		  $scope.agendaItems.list = resp;
-		 };	
+		// } else {
+		  $scope.agendaItems = resp;
+		// }	
 	};
 /*_________________________________________________
 /*
@@ -43,7 +63,6 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 	$scope.resetEntity = function () {
 		$scope.newEntity = {};
 	};
-
 */
       $scope.addNewTimeTable = function (recordData) {
 
