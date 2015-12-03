@@ -44,7 +44,7 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     var quest;
                     $scope.choosenQuestion = function (quest, index) {
                         $scope.selected = index-1;
-                        //устранить баг при повторном клике красным горит предыдущий вопрос
+                        //СѓСЃС‚СЂР°РЅРёС‚СЊ Р±Р°Рі РїСЂРё РїРѕРІС‚РѕСЂРЅРѕРј РєР»РёРєРµ РєСЂР°СЃРЅС‹Рј РіРѕСЂРёС‚ РїСЂРµРґС‹РґСѓС‰РёР№ РІРѕРїСЂРѕСЃ
 
                         nextQuestion(quest);
                     }
@@ -77,12 +77,20 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                             })
                     };
 
+                    var questionQuantity = $scope.questionList.length;
+
                     $scope.submitQuestion = function (questNumber, radioValue) {
                         //console.log('questNumber', $scope.questNumberSubmit)
                         answerObj.selectedAnswers = radioValue;
                         answerObj.selectedQuestion = questNumber;
                         answerArray.push(answerObj);
                         //console.log('answerObj', answerObj)
+                        var nextQuest = +$stateParams.id + 1;
+                        if (nextQuest <= questionQuantity) {
+                            $state.go('user.testPlayer', {'id': nextQuest});
+                        } else {
+                            alert('finish');
+                        }
                     }
                 });
             };
