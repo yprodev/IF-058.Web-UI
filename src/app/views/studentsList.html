@@ -1,254 +1,254 @@
-<div class="container-fluid"
-		 ng-controller="getStudentsCtrl">
+<section class="container-fluid"
+				 ng-controller="studentsCtrl">
 
-<!-- Student Add form HERE -->
-	<div class="row">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<button class="btn btn-sm btn-primary pull-right add-button" ng-click="showAddForm()">
-			<span class="glyphicon glyphicon-plus"></span>
-		</button>
-		</div><!-- END col -->
-	</div><!-- END row student add record form-->
-
-<div class="well well-stud"
-		 ng-show="showingAdd">
-	<form name="addRecord"
-					novalidate
-					ng-submit="addNewStudent(newStudent)">
+	<div ng-controller="addStudentCtrl">
+		<!-- Student Add form HERE -->
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div class="form-group student-form-group">
-					<label class="label label-success" for="surname">Прізвище</label>
-						<input type="text"
-									 name="studSurname"
-									 id="surname"
-									 class="form-control width-max navbar-btn"
-									 aria-describedby="helpSurname"
-									 placeholder="Введіть прізвище студента"
-									 tabindex="1"
-									 ng-minlength="2"
-									 ng-maxlength="50"
-									 ng-model="newStudent.student_surname"
-									 required
-									 poptip
-									 data-toggle="tooltip"
-									 data-placement="top"
-									 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
-
-
-					<!-- Error message for Student's Surname -->
-					<span id="helpSurname"
-								ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
-								class="help-block error">{{ getError(addRecord.studSurname.$error) }}
-					</span>
-
-				</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<button class="btn btn-sm btn-primary pull-right add-button" ng-click="showAddForm()">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
 			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div class="form-group student-form-group">
-					<label class="label label-success" for="secname">Ім'я</label>
-						<input type="text"
-									 name="studSecondName"
-									 id="secname"
-									 class="form-control width-max navbar-btn"
-									 aria-describedby="helpSecName"
-									 placeholder="Введіть ім'я студента"
-									 tabindex="2"
-									 ng-minlength="2"
-									 ng-maxlength="50"
-									 ng-model="newStudent.student_name"
-									 required
-									 poptip
-									 data-toggle="tooltip"
-									 data-placement="top"
-									 title="Будь ласка, введіть і'мя студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
+		</div><!-- END row student add record form-->
 
-					<!-- Error message for Student's Second Name -->
-					<span id="helpSecName"
-								ng-show="addRecord.studSecondName.$invalid && addRecord.studSecondName.$dirty"
-								class="help-block error">{{ getError(addRecord.studSecondName.$error) }}
-					</span>
-
-				</div>
-			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div class="form-group student-form-group">
-					<label class="label label-success" for="name">По-батькові</label>
-						<input type="text"
-									 name="studFirstName"
-									 id="name"
-									 class="form-control width-max navbar-btn"
-									 aria-describedby="helpName"
-									 placeholder="Введіть по-батькові студента"
-									 tabindex="3"
-									 ng-minlength="2"
-									 ng-maxlength="50"
-									 ng-model="newStudent.student_fname"
-									 required
-									 poptip
-									 data-toggle="tooltip"
-									 data-placement="top"
-									 title="Будь ласка, введіть по-батькові студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
-
-					<!-- Error message for Student's First Name -->
-					<span id="helpName"
-								ng-show="addRecord.studFirstName.$invalid && addRecord.studFirstName.$dirty"
-								class="help-block error">{{ getError(addRecord.studFirstName.$error) }}
-					</span>
-
-				</div>
-			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div class="form-group student-form-group">
-					<label class="label label-success" for="gradebook">Залікова книжка №</label>
-
-						<input type="text"
-									 name="studGradebook"
-									 id="gradebook"
-									 class="form-control width-max navbar-btn"
-									 aria-describedby="helpGradebook"
-									 placeholder="Введіть номер залікової книжки"
-									 tabindex="4"
-									 ng-minlength="5"
-									 ng-maxlength="20"
-									 ng-model="newStudent.gradebook_id"
-									 required
-									 poptip
-									 data-toggle="tooltip"
-									 data-placement="top"
-									 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
-
-					<!-- Error message for Student's Gradebook -->
-					<span id="helpGradebook"
-								ng-show="addRecord.studGradebook.$invalid && addRecord.studGradebook.$dirty"
-								class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
-					</span>
-				</div>
-			</div><!-- END col -->
-		</div><!-- END row -->
+		<div class="well well-stud"
+				 ng-show="showingAdd">
+			<form name="addRecord"
+							novalidate
+							ng-submit="addNewStudent(newStudent)">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="surname">Прізвище</label>
+								<input type="text"
+											 name="studSurname"
+											 id="surname"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpSurname"
+											 placeholder="Введіть прізвище студента"
+											 tabindex="1"
+											 ng-minlength="2"
+											 ng-maxlength="50"
+											 ng-model="newStudent.student_surname"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
 
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div class="form-group student-form-group">
-					<label class="label label-success" for="email">Електронна пошта</label>
-						<input type="email"
-									 name="studentEmail"
-									 id="email"
-									 class="form-control navbar-btn"
-									 aria-describedby="helpEmail"
-									 placeholder="Введіть емейл студента"
-									 tabindex="5"
-									 ng-model="newStudent.email"
-									 required
-									 poptip
-									 data-toggle="tooltip"
-									 data-placement="top"
-									 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
+							<!-- Error message for Student's Surname -->
+							<span id="helpSurname"
+										ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
+										class="help-block error">{{ getError(addRecord.studSurname.$error) }}
+							</span>
 
-					<!-- Error message for EMAIL -->
-					<span id="helpEmail"
-								ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
-								class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
-					</span>
-				</div>
-			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="username">Логін</label>
-							<input type="text"
-										 name="studUsername"
-										 id="username"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpUsername"
-										 placeholder="Введіть логін студента"
-										 tabindex="6"
-										 ng-minlength="4"
-										 ng-maxlength="32"
-										 ng-model="newStudent.username"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, введіть унікальний логін.Ви можете використати від 4 до 32 латинських символів та цифр.">
+						</div>
+					</div><!-- END col -->
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="secname">Ім'я</label>
+								<input type="text"
+											 name="studSecondName"
+											 id="secname"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpSecName"
+											 placeholder="Введіть ім'я студента"
+											 tabindex="2"
+											 ng-minlength="2"
+											 ng-maxlength="50"
+											 ng-model="newStudent.student_name"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть і'мя студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
-						<!-- Error message for Student's Username -->
-						<span id="helpUsername"
-									ng-show="addRecord.studUsername.$invalid && addRecord.studUsername.$dirty"
-									class="help-block error">{{ getError(addRecord.studUsername.$error) }}
-						</span>
+							<!-- Error message for Student's Second Name -->
+							<span id="helpSecName"
+										ng-show="addRecord.studSecondName.$invalid && addRecord.studSecondName.$dirty"
+										class="help-block error">{{ getError(addRecord.studSecondName.$error) }}
+							</span>
 
-					</div>
-			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-				<div class="form-group student-form-group">
-					<label class="label label-success" for="password">Пароль</label>
-						<input type="password"
-									 name="studUserPassword"
-									 id="password"
-									 class="form-control navbar-btn"
-									 aria-describedby="helpPassword"
-									 placeholder="Введіть пароль студента"
-									 tabindex="7"
-									 minlength="4"
-									 maxlength="64"
-									 ng-model="newStudent.password"
-									 required
-									 poptip
-									 data-toggle="tooltip"
-									 data-placement="top"
-									 title="Будь ласка, виберіть пароль користувачу. Ви можете використати будь-які латинські символи.">
+						</div>
+					</div><!-- END col -->
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="name">По-батькові</label>
+								<input type="text"
+											 name="studFirstName"
+											 id="name"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpName"
+											 placeholder="Введіть по-батькові студента"
+											 tabindex="3"
+											 ng-minlength="2"
+											 ng-maxlength="50"
+											 ng-model="newStudent.student_fname"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть по-батькові студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
-					<!-- Error message for Student's User Password -->
-					<span id="helpPassword"
-								ng-show="addRecord.studUserPassword.$invalid && addRecord.studUserPassword.$dirty"
-								class="help-block error">{{ getError(addRecord.studUserPassword.$error) }}
-					</span>
+							<!-- Error message for Student's First Name -->
+							<span id="helpName"
+										ng-show="addRecord.studFirstName.$invalid && addRecord.studFirstName.$dirty"
+										class="help-block error">{{ getError(addRecord.studFirstName.$error) }}
+							</span>
 
-				</div>
-			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="confpassword">Підтвердіть пароль</label>
-							<input type="password"
-										 name="studConfPassword"
-										 id="confpassword"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpConfPassword"
-										 placeholder="Повторіть пароль студента"
-										 tabindex="8"
-										 ng-maxlength="64"
-										 ng-model="newStudent.password_confirm"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, підтвердіть пароль, який Ви щойно ввели.">
+						</div>
+					</div><!-- END col -->
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="gradebook">Залікова книжка №</label>
 
-						<!-- Error message for Student's User Password Confiramtion -->
-						<span id="helpConfPassword"
-									ng-show="addRecord.studConfPassword.$invalid && addRecord.studConfPassword.$dirty"
-									class="help-block error">{{ getError(addRecord.studConfPassword.$error) }}
-						</span>
+								<input type="text"
+											 name="studGradebook"
+											 id="gradebook"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpGradebook"
+											 placeholder="Введіть номер залікової книжки"
+											 tabindex="4"
+											 ng-minlength="5"
+											 ng-maxlength="20"
+											 ng-model="newStudent.gradebook_id"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
 
-					</div>
-			</div><!-- END col -->
-		</div><!-- END row -->
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-				<image-load options="newStudent.photo"></image-load>
-			</div><!-- END col -->
-			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<button type="submit"
-								class="btn btn-primary pull-right navbar-btn"
-								tabindex="10"
-								ng-disabled="addRecord.$invalid">Submit</button>
-			</div><!-- END col -->
-		</div><!-- END row -->
-	</form><!-- END form -->
-</div><!-- END ng-show showingAdd -->
+							<!-- Error message for Student's Gradebook -->
+							<span id="helpGradebook"
+										ng-show="addRecord.studGradebook.$invalid && addRecord.studGradebook.$dirty"
+										class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
+							</span>
+						</div>
+					</div><!-- END col -->
+				</div><!-- END row -->
 
 
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="email">Електронна пошта</label>
+								<input type="email"
+											 name="studentEmail"
+											 id="email"
+											 class="form-control navbar-btn"
+											 aria-describedby="helpEmail"
+											 placeholder="Введіть емейл студента"
+											 tabindex="5"
+											 ng-model="newStudent.email"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
+
+							<!-- Error message for EMAIL -->
+							<span id="helpEmail"
+										ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
+										class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
+							</span>
+						</div>
+					</div><!-- END col -->
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="form-group student-form-group">
+								<label class="label label-success" for="username">Логін</label>
+									<input type="text"
+												 name="studUsername"
+												 id="username"
+												 class="form-control navbar-btn"
+												 aria-describedby="helpUsername"
+												 placeholder="Введіть логін студента"
+												 tabindex="6"
+												 ng-minlength="4"
+												 ng-maxlength="32"
+												 ng-model="newStudent.username"
+												 required
+												 poptip
+												 data-toggle="tooltip"
+												 data-placement="top"
+												 title="Будь ласка, введіть унікальний логін.Ви можете використати від 4 до 32 латинських символів та цифр.">
+
+								<!-- Error message for Student's Username -->
+								<span id="helpUsername"
+											ng-show="addRecord.studUsername.$invalid && addRecord.studUsername.$dirty"
+											class="help-block error">{{ getError(addRecord.studUsername.$error) }}
+								</span>
+
+							</div>
+					</div><!-- END col -->
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="password">Пароль</label>
+								<input type="password"
+											 name="studUserPassword"
+											 id="password"
+											 class="form-control navbar-btn"
+											 aria-describedby="helpPassword"
+											 placeholder="Введіть пароль студента"
+											 tabindex="7"
+											 minlength="4"
+											 maxlength="64"
+											 ng-model="newStudent.password"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, виберіть пароль користувачу. Ви можете використати будь-які латинські символи.">
+
+							<!-- Error message for Student's User Password -->
+							<span id="helpPassword"
+										ng-show="addRecord.studUserPassword.$invalid && addRecord.studUserPassword.$dirty"
+										class="help-block error">{{ getError(addRecord.studUserPassword.$error) }}
+							</span>
+
+						</div>
+					</div><!-- END col -->
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+							<div class="form-group student-form-group">
+								<label class="label label-success" for="confpassword">Підтвердіть пароль</label>
+									<input type="password"
+												 name="studConfPassword"
+												 id="confpassword"
+												 class="form-control navbar-btn"
+												 aria-describedby="helpConfPassword"
+												 placeholder="Повторіть пароль студента"
+												 tabindex="8"
+												 ng-maxlength="64"
+												 ng-model="newStudent.password_confirm"
+												 required
+												 poptip
+												 data-toggle="tooltip"
+												 data-placement="top"
+												 title="Будь ласка, підтвердіть пароль, який Ви щойно ввели.">
+
+								<!-- Error message for Student's User Password Confiramtion -->
+								<span id="helpConfPassword"
+											ng-show="addRecord.studConfPassword.$invalid && addRecord.studConfPassword.$dirty"
+											class="help-block error">{{ getError(addRecord.studConfPassword.$error) }}
+								</span>
+
+							</div>
+					</div><!-- END col -->
+				</div><!-- END row -->
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+						<image-load options="newStudent.photo"></image-load>
+					</div><!-- END col -->
+					<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<button type="submit"
+										class="btn btn-primary pull-right navbar-btn"
+										tabindex="10"
+										ng-disabled="addRecord.$invalid">Submit</button>
+					</div><!-- END col -->
+				</div><!-- END row -->
+			</form><!-- END form -->
+		</div><!-- END ng-show showingAdd -->
+	</div><!-- END addStudentCtrl wrapper -->
 
 
 
@@ -260,348 +260,352 @@
 
 
 
+
+
+
+
+	<div ng-controller="updateStudentCtrl">
+		<!-- DIVS appearence -->
+		<div ng-show="!students">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-data">
+					{{noData}}
+				</div><!-- END col -->
+			</div><!-- END row -->
+		</div><!-- END ng-show -->
 
 
 		<!-- DIVS appearence -->
-	<div ng-show="!students">
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 no-data">
-				{{noData}}
-			</div><!-- END col -->
-		</div><!-- END row -->
-	</div><!-- END ng-show -->
+		<div ng-show="students" class="students-bootstrap">
+			<div ng-if="editingStudent.user_id !== student.user_id"
+					 ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse"
+					 class="ng-scope">
+				<div class="row">
+					<div class="col col-xs-12 col-sm-1 col-md-1 col-lg-1 col-img">
+						<img class="student-photo" 
+								 ng-src="{{ student.photo ? student.photo : imgStr }}"
+								 alt="{{student.student_surname }} {{ student.student_name }} photo">
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-11 col-md-11 col-lg-11">
+						<hgroup>
+							<h3>{{ student.student_surname }}</h3>
+							<h4>{{ student.student_name }} {{ student.student_fname }}</h4>
+						</hgroup>
+					</div><!-- END col -->
+				</div><!-- END row -->
+				<div class="row">
+					<div class="col col-xs-12 col-sm-1 col-sm-offset-1 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-1">
+						<span class="detail">{{ student.gradebook_id }}</span>
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-2 col-md-2 col-lg-2">
+						<span class="detail">{{ student.plain_password }}</span>
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5 col-lg-3 col-lg-offset-5">
+						<span class="buttons pull-right">
 
+							<button class="btn btn-info btn-sm"
+											ng-click='showEditingForm(student)'>
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
 
-		<!-- DIVS appearence -->
-	<div ng-show="students" class="students-bootstrap">
-		<div ng-if="editingStudent.user_id !== student.user_id"
-				 ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse"
-				 class="ng-scope">
-			<div class="row">
-				<div class="col col-xs-12 col-sm-1 col-md-1 col-lg-1 col-img">
-					<img class="student-photo" 
-							 ng-src="{{ student.photo ? student.photo : imgStr }}"
-							 alt="{{student.student_surname }} {{ student.student_name }} photo">
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-11 col-md-11 col-lg-11">
-					<hgroup>
-						<h3>{{ student.student_surname }}</h3>
-						<h4>{{ student.student_name }} {{ student.student_fname }}</h4>
-					</hgroup>
-				</div><!-- END col -->
-			</div><!-- END row -->
-			<div class="row">
-				<div class="col col-xs-12 col-sm-1 col-sm-offset-1 col-md-1 col-md-offset-1 col-lg-1 col-lg-offset-1">
-					<span class="detail">{{ student.gradebook_id }}</span>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-2 col-md-2 col-lg-2">
-					<span class="detail">{{ student.plain_password }}</span>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-sm-offset-5 col-md-3 col-md-offset-5 col-lg-3 col-lg-offset-5">
-					<span class="buttons pull-right">
+							<button class="btn btn-danger btn-sm col-md-offset-1"
+											data-toggle="modal"
+											data-target="#deleteModal"
+											ng-click='confirmDelete(student.user_id)'>
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
 
-						<button class="btn btn-info btn-sm"
-										ng-click='showEditingForm(student)'>
-							<span class="glyphicon glyphicon-pencil"></span>
-						</button>
-
-						<button class="btn btn-danger btn-sm col-md-offset-1"
-										data-toggle="modal"
-										data-target="#deleteModal"
-										ng-click='confirmDelete(student.user_id)'>
-							<span class="glyphicon glyphicon-trash"></span>
-						</button>
-
-					</span>
-				</div><!-- END col -->
-			</div><!-- END row -->
-		</div><!-- END div repeat start -->
-
-
-		<div ng-if="editingStudent.user_id === student.user_id"
-				 ng-repeat-end=""
-				 class="ng-scope {{ actclass }}">
-			<div class="row">
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="surname">Прізвище</label>
-							<input type="text"
-										 name="studSurname"
-										 id="surname"
-										 class="form-control width-max navbar-btn"
-										 aria-describedby="helpSurname"
-										 placeholder="Введіть прізвище студента"
-										 tabindex="1"
-										 ng-minlength="2"
-										 ng-maxlength="50"
-										 ng-model="editingStudent.student_surname"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
-
-
-						<!-- Error message for Student's Surname -->
-						<span id="helpSurname"
-									ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
-									class="help-block error">{{ getError(addRecord.studSurname.$error) }}
 						</span>
-
-					</div>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="secname">Ім'я</label>
-							<input type="text"
-										 name="studSecondName"
-										 id="secname"
-										 class="form-control width-max navbar-btn"
-										 aria-describedby="helpSecName"
-										 placeholder="Введіть ім'я студента"
-										 tabindex="2"
-										 ng-minlength="2"
-										 ng-maxlength="50"
-										 ng-model="editingStudent.student_name"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, введіть і'мя студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
-
-						<!-- Error message for Student's Second Name -->
-						<span id="helpSecName"
-									ng-show="addRecord.studSecondName.$invalid && addRecord.studSecondName.$dirty"
-									class="help-block error">{{ getError(addRecord.studSecondName.$error) }}
-						</span>
-
-					</div>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="name">По-батькові</label>
-							<input type="text"
-										 name="studFirstName"
-										 id="name"
-										 class="form-control width-max navbar-btn"
-										 aria-describedby="helpName"
-										 placeholder="Введіть по-батькові студента"
-										 tabindex="3"
-										 ng-minlength="2"
-										 ng-maxlength="50"
-										 ng-model="editingStudent.student_fname"
-										 ng-model-option="{ updateOn: 'default', debounce: { default: 500} }"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, введіть по-батькові студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
-
-						<!-- Error message for Student's First Name -->
-						<span id="helpName"
-									ng-show="addRecord.studFirstName.$invalid && addRecord.studFirstName.$dirty"
-									class="help-block error">{{ getError(addRecord.studFirstName.$error) }}
-						</span>
-
-					</div>
-
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="gradebook">Залікова книжка №</label>
-
-							<input type="text"
-										 name="studGradebook"
-										 id="gradebook"
-										 class="form-control width-max navbar-btn"
-										 aria-describedby="helpGradebook"
-										 placeholder="Введіть номер залікової книжки"
-										 tabindex="4"
-										 ng-minlength="5"
-										 ng-maxlength="20"
-										 ng-model="editingStudent.gradebook_id"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
-
-						<!-- Error message for Student's Gradebook -->
-						<span id="helpGradebook"
-									ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
-									class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
-						</span>
-
-					</div>
-
-				</div><!-- END col -->
-			</div><!-- END row -->
-			<div class="row">
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="email">Електронна пошта</label>
-							<input type="email"
-										 name="studentEmail"
-										 id="email"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpEmail"
-										 placeholder="Введіть емейл студента"
-										 tabindex="5"
-										 ng-model="editingStudent.email"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
-
-						<!-- Error message for EMAIL -->
-						<span id="helpEmail"
-									ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
-									class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
-						</span>
-					</div>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="username">Логін</label>
-							<input type="text"
-										 name="studUsername"
-										 id="username"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpUsername"
-										 placeholder="Введіть логін студента"
-										 tabindex="6"
-										 ng-minlength="4"
-										 ng-maxlength="32"
-										 ng-model="editingStudent.username"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, введіть унікальний логін.Ви можете використати від 4 до 32 латинських символів та цифр.">
-
-						<!-- Error message for Student's Username -->
-						<span id="helpUsername"
-									ng-show="addRecord.studUsername.$invalid && addRecord.studUsername.$dirty"
-									class="help-block error">{{ getError(addRecord.studUsername.$error) }}
-						</span>
-
-					</div>
-
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="password">Пароль</label>
-							<input type="password"
-										 name="studUserPassword"
-										 id="password"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpPassword"
-										 placeholder="Введіть пароль студента"
-										 tabindex="7"
-										 minlength="4"
-										 maxlength="64"
-										 ng-model="editingStudent.password"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, виберіть пароль користувачу. Ви можете використати будь-які латинські символи.">
-
-						<!-- Error message for Student's User Password -->
-						<span id="helpPassword"
-									ng-show="addRecord.studUserPassword.$dirty"
-									class="help-block error">{{ getError(addRecord.studUserPassword.$error) }}
-						</span>
-
-					</div>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
-					<div class="form-group student-form-group">
-						<label class="label label-success" for="confpassword">Підтвердіть пароль</label>
-							<input type="password"
-										 name="studConfPassword"
-										 id="confpassword"
-										 class="form-control navbar-btn"
-										 aria-describedby="helpConfPassword"
-										 placeholder="Повторіть пароль студента"
-										 tabindex="8"
-										 ng-maxlength="64"
-										 ng-model="editingStudent.password_confirm"
-										 required
-										 poptip
-										 data-toggle="tooltip"
-										 data-placement="top"
-										 title="Будь ласка, підтвердіть пароль, який Ви щойно ввели.">
-
-						<!-- Error message for Student's User Password Confiramtion -->
-						<span id="helpConfPassword"
-									ng-show="addRecord.studConfPassword.$invalid && addRecord.studConfPassword.$dirty"
-									class="help-block error">{{ getError(addRecord.studConfPassword.$error) }}
-						</span>
-
-					</div>
-				</div><!-- END col -->
-			</div><!-- END row -->
-			<div class="row">
-				<div class="col col-xs-12 col-sm-12 col-md-8 col-lg-8">
-					<image-load options="editingStudent.photo"></image-load>
-				</div><!-- END col -->
-				<div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
-					<span class="buttons pull-right navbar-btn">
-						<button class="btn btn-success btn-sm "
-										ng-click='editStud()'>
-							<span class="glyphicon glyphicon-ok"></span>
-						</button>
-
-						<button class="btn btn-warning btn-sm col-md-offset-1 "
-										ng-click="showEditingForm(null)">
-							<span class="glyphicon glyphicon-remove"></span>
-						</button>
-					</span>
-				</div><!-- END col -->
-			</div><!-- END row -->
-		</div><!-- END div repeat start -->
-	</div><!-- END ng-show -->
+					</div><!-- END col -->
+				</div><!-- END row -->
+			</div><!-- END div repeat start -->
 
 
+			<div ng-if="editingStudent.user_id === student.user_id"
+					 ng-repeat-end=""
+					 class="ng-scope {{ actclass }}">
+				<div class="row">
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="surname">Прізвище</label>
+								<input type="text"
+											 name="studSurname"
+											 id="surname"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpSurname"
+											 placeholder="Введіть прізвище студента"
+											 tabindex="1"
+											 ng-minlength="2"
+											 ng-maxlength="50"
+											 ng-model="editingStudent.student_surname"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть прізвище студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
 
+							<!-- Error message for Student's Surname -->
+							<span id="helpSurname"
+										ng-show="addRecord.studSurname.$invalid && addRecord.studSurname.$dirty"
+										class="help-block error">{{ getError(addRecord.studSurname.$error) }}
+							</span>
 
+						</div>
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="secname">Ім'я</label>
+								<input type="text"
+											 name="studSecondName"
+											 id="secname"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpSecName"
+											 placeholder="Введіть ім'я студента"
+											 tabindex="2"
+											 ng-minlength="2"
+											 ng-maxlength="50"
+											 ng-model="editingStudent.student_name"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть і'мя студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
+							<!-- Error message for Student's Second Name -->
+							<span id="helpSecName"
+										ng-show="addRecord.studSecondName.$invalid && addRecord.studSecondName.$dirty"
+										class="help-block error">{{ getError(addRecord.studSecondName.$error) }}
+							</span>
 
+						</div>
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="name">По-батькові</label>
+								<input type="text"
+											 name="studFirstName"
+											 id="name"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpName"
+											 placeholder="Введіть по-батькові студента"
+											 tabindex="3"
+											 ng-minlength="2"
+											 ng-maxlength="50"
+											 ng-model="editingStudent.student_fname"
+											 ng-model-option="{ updateOn: 'default', debounce: { default: 500} }"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть по-батькові студента. Ви можете використати від 2 до 50 літер латиниці або кирилиці.">
 
+							<!-- Error message for Student's First Name -->
+							<span id="helpName"
+										ng-show="addRecord.studFirstName.$invalid && addRecord.studFirstName.$dirty"
+										class="help-block error">{{ getError(addRecord.studFirstName.$error) }}
+							</span>
 
-			<!-- Modal confirmation window before deleting -->
-			<div class="modal fade bs-example-modal-sm"
-					 tabindex="-1"
-					 role="dialog"
-					 aria-labelledby="mySmallModalLabel"
-					 id="deleteModalWin">
-				<div class="modal-dialog modal-sm"
-						 role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title">Видалити запис?</h4>
 						</div>
 
-						<div class="modal-footer">
-							<button type="button"
-											class="btn btn-default"
-											data-dismiss="modal"
-											ng-click="confirmDelete()">Undo
-							</button>
-							<button type="button"
-											class="btn btn-danger"
-											ng-click="deleteStudent()"
-											data-dismiss="modal">Delete
-							</button>
-						</div><!-- END modal-footer -->
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="gradebook">Залікова книжка №</label>
 
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
+								<input type="text"
+											 name="studGradebook"
+											 id="gradebook"
+											 class="form-control width-max navbar-btn"
+											 aria-describedby="helpGradebook"
+											 placeholder="Введіть номер залікової книжки"
+											 tabindex="4"
+											 ng-minlength="5"
+											 ng-maxlength="20"
+											 ng-model="editingStudent.gradebook_id"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть номер залікової книжки студента. Ви можете використати від 5 до 50 літер латиниці або кирилиці включаючи цифри.">
 
-		</div><!-- END col -->
-	</div><!-- END row getStudentsCTRL -->
-</div>
+							<!-- Error message for Student's Gradebook -->
+							<span id="helpGradebook"
+										ng-show="addRecord.studGradebook.$invalid && addRecord.studentGradebook.$dirty"
+										class="help-block error">{{ getError(addRecord.studGradebook.$error) }}
+							</span>
+
+						</div>
+
+					</div><!-- END col -->
+				</div><!-- END row -->
+				<div class="row">
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="email">Електронна пошта</label>
+								<input type="email"
+											 name="studentEmail"
+											 id="email"
+											 class="form-control navbar-btn"
+											 aria-describedby="helpEmail"
+											 placeholder="Введіть емейл студента"
+											 tabindex="5"
+											 ng-model="editingStudent.email"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, напишіть поштову адресу студента.Пам'ятайте, що потрібно використовувати символ @.">
+
+							<!-- Error message for EMAIL -->
+							<span id="helpEmail"
+										ng-show="addRecord.studentEmail.$invalid && addRecord.studentEmail.$dirty"
+										class="help-block error">{{ getError(addRecord.studentEmail.$error) }}
+							</span>
+						</div>
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="username">Логін</label>
+								<input type="text"
+											 name="studUsername"
+											 id="username"
+											 class="form-control navbar-btn"
+											 aria-describedby="helpUsername"
+											 placeholder="Введіть логін студента"
+											 tabindex="6"
+											 ng-minlength="4"
+											 ng-maxlength="32"
+											 ng-model="editingStudent.username"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, введіть унікальний логін.Ви можете використати від 4 до 32 латинських символів та цифр.">
+
+							<!-- Error message for Student's Username -->
+							<span id="helpUsername"
+										ng-show="addRecord.studUsername.$invalid && addRecord.studUsername.$dirty"
+										class="help-block error">{{ getError(addRecord.studUsername.$error) }}
+							</span>
+
+						</div>
+
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="password">Пароль</label>
+								<input type="password"
+											 name="studUserPassword"
+											 id="password"
+											 class="form-control navbar-btn"
+											 aria-describedby="helpPassword"
+											 placeholder="Введіть пароль студента"
+											 tabindex="7"
+											 minlength="4"
+											 maxlength="64"
+											 ng-model="editingStudent.password"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, виберіть пароль користувачу. Ви можете використати будь-які латинські символи.">
+
+							<!-- Error message for Student's User Password -->
+							<span id="helpPassword"
+										ng-show="addRecord.studUserPassword.$dirty"
+										class="help-block error">{{ getError(addRecord.studUserPassword.$error) }}
+							</span>
+
+						</div>
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-3 col-md-3 col-lg-3">
+						<div class="form-group student-form-group">
+							<label class="label label-success" for="confpassword">Підтвердіть пароль</label>
+								<input type="password"
+											 name="studConfPassword"
+											 id="confpassword"
+											 class="form-control navbar-btn"
+											 aria-describedby="helpConfPassword"
+											 placeholder="Повторіть пароль студента"
+											 tabindex="8"
+											 ng-maxlength="64"
+											 ng-model="editingStudent.password_confirm"
+											 required
+											 poptip
+											 data-toggle="tooltip"
+											 data-placement="top"
+											 title="Будь ласка, підтвердіть пароль, який Ви щойно ввели.">
+
+							<!-- Error message for Student's User Password Confiramtion -->
+							<span id="helpConfPassword"
+										ng-show="addRecord.studConfPassword.$invalid && addRecord.studConfPassword.$dirty"
+										class="help-block error">{{ getError(addRecord.studConfPassword.$error) }}
+							</span>
+
+						</div>
+					</div><!-- END col -->
+				</div><!-- END row -->
+				<div class="row">
+					<div class="col col-xs-12 col-sm-12 col-md-8 col-lg-8">
+						<image-load options="editingStudent.photo"></image-load>
+					</div><!-- END col -->
+					<div class="col col-xs-12 col-sm-12 col-md-4 col-lg-4">
+						<span class="buttons pull-right navbar-btn">
+							<button class="btn btn-success btn-sm "
+											ng-click='editStud()'>
+								<span class="glyphicon glyphicon-ok"></span>
+							</button>
+
+							<button class="btn btn-warning btn-sm col-md-offset-1 "
+											ng-click="showEditingForm(null)">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+						</span>
+					</div><!-- END col -->
+				</div><!-- END row -->
+			</div><!-- END div repeat start -->
+		</div><!-- END ng-show -->
+	</div><!-- END getStudentsCtrl wrapper -->
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Modal confirmation window before deleting -->
+	<div class="modal fade bs-example-modal-sm"
+			 tabindex="-1"
+			 role="dialog"
+			 aria-labelledby="mySmallModalLabel"
+			 id="deleteModalWin">
+		<div class="modal-dialog modal-sm"
+				 role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Видалити запис?</h4>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button"
+									class="btn btn-default"
+									data-dismiss="modal"
+									ng-click="confirmDelete()">Undo
+					</button>
+					<button type="button"
+									class="btn btn-danger"
+									ng-click="deleteStudent()"
+									data-dismiss="modal">Delete
+					</button>
+				</div><!-- END modal-footer -->
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+</section><!-- END container-fluid -->
