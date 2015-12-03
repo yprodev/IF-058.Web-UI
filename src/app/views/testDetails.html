@@ -12,15 +12,15 @@
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-3">
                       <label for="taskLevel" class="label label-success">Рівень завдань</label>
-                      <input class="form-control width-max navbar-btn" placeholder="Введіть рівень завдань" ng-model="newEntity.level" required id="taskLevel">
+                      <input class="navbar-btn form-control input-sm width-max" placeholder="Введіть рівень завдань" ng-model="newEntity.level" required id="taskLevel">
                     </div>
                     <div class="col-md-3 form-group">
                       <label for="taskQuantity" class="label label-success">Кількість завдань</label>
-                      <input class="form-control width-max navbar-btn" placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required id="taskQuantity">
+                      <input class="navbar-btn form-control input-sm width-max" placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required id="taskQuantity">
                     </div>
                     <div class="col-md-3 form-group">
                       <label for="taskRate" class="label label-success">Кількість балів</label>
-                      <input class="form-control width-max navbar-btn" placeholder="Введіть кількість балів" ng-model="newEntity.rate" required id="taskRate">
+                      <input class="navbar-btn form-control input-sm width-max" placeholder="Введіть кількість балів" ng-model="newEntity.rate" required id="taskRate">
                     </div>
                     <div class="col-md-2 pull-right ">
                       <br>
@@ -34,7 +34,8 @@
             <div ng-show="!entities">{{noData}}</div>
 
 <!-- The table for list of Entities -->
-            <table ng-show="entities" class="table table-hover .table-condensed">
+            <div class="table-responsive">
+              <table ng-show="entities" class="table table-hover .table-condensed">
                 <thead class="usCenter">
                   <tr>
                     <th>№</th>
@@ -66,9 +67,9 @@
                   </tr>
                   <tr ng-if="entity == editingEntity" ng-repeat-end="">
                     <td>{{$index + 1}}</td>
-                    <td class="col-md-3"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_level"></td>
-                    <td class="col-md-3"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_tasks"></td>
-                    <td class="col-md-4"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_rate"></td>
+                    <td class="col-md-3"><input class="navbar-btn form-control input-sm width-max" ng-model="editedEntity.new_level"></td>
+                    <td class="col-md-3"><input class="navbar-btn form-control input-sm width-max" ng-model="editedEntity.new_tasks"></td>
+                    <td class="col-md-4"><input class="navbar-btn form-control input-sm width-max" ng-model="editedEntity.new_rate"></td>
                     <td class="col-md-2">
                       <editing-buttons-drct></editing-buttons-drct>
                     </td>
@@ -81,7 +82,8 @@
                     <td class="col-md-2"></td>
                   </tr>
                 </tbody>
-            </table>
+              </table>
+            </div>
             <!-- The modal to confirm removing of Entity -->
             <deleting-modal-drct></deleting-modal-drct>
             <!-- The modal to inform about error from server -->

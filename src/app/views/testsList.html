@@ -13,27 +13,27 @@
                             <form name="addForm" class="form-inline" role='form' novalidate>
                                 <div class="col-md-6">
                                     <label for="addTest" class="label label-success">Назва тесту</label>
-                                    <input class="form-control width-max navbar-btn" placeholder="Введіть назву тесту" type='text'
+                                    <input class="form-control input-sm width-max navbar-btn" placeholder="Введіть назву тесту" type='text'
                                            ng-model="newEntity.test_name" required id="addTest">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="addQuantity" class="label label-success">Кількість завдань</label>
-                                    <input type="number" min="1" class="form-control width-max navbar-btn"
+                                    <input type="number" min="1" class="form-control input-sm width-max navbar-btn"
                                            placeholder="Введіть кількість завдань" ng-model="newEntity.tasks" required id="addQuantity">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="addDuration" class="label label-success">Тривалість тесту (хв)</label>
-                                    <input type="number" min="1" class="form-control width-max navbar-btn" placeholder="Введіть тривалість (хв)"
+                                    <input type="number" min="1" class="form-control input-sm width-max navbar-btn" placeholder="Введіть тривалість (хв)"
                                            ng-model="newEntity.time_for_test" required id="addDuration">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="addAttempts" class="label label-success">Кількість спроб</label>
-                                    <input type="number" min="1" class="form-control width-max navbar-btn"
+                                    <input type="number" min="1" class="form-control input-sm width-max navbar-btn"
                                            placeholder="Введіть кількість спроб" ng-model="newEntity.attempts" required id="addAttempts">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="addEnabled" class="label label-success">Доступність тесту</label>
-                                    <select id="avaible" class="form-control width-max navbar-btn" ng-model="newEntity.enabled" required id="addEnabled">
+                                    <select id="avaible" class="form-control input-sm width-max navbar-btn" ng-model="newEntity.enabled" required id="addEnabled">
                                         <option value="" disabled selected hidden> Вкажіть доступність тесту </option>
                                         <option value="1">Доступно</option>
                                         <option value="0">Недоступно</option>
@@ -56,69 +56,73 @@
                     </div>
 
                     <time-table-button-drct></time-table-button-drct>
+                    <br/>
+                    <br/>
 
                     <div ng-show="!entities">{{noData}}</div>
                     <!-- The table for list of Entities -->
-                    <table ng-show="entities" class="table table-hover .table-condensed">
-                        <thead class="usCenter">
-                        <tr>
-                            <th>№</th>
-                            <th class="clickable" ng-click="sortType = 'test_name'; sortReverse = !sortReverse">Тест
-                                <i ng-show="sortType == 'test_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                                <i ng-show="sortType == 'test_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                            </th>
-                            <th class="clickable" ng-click="sortType = 'tasks'; sortReverse = !sortReverse">Завдань
-                                <i ng-show="sortType == 'tasks' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                                <i ng-show="sortType == 'tasks' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                            </th>
-                            <th class="clickable" ng-click="sortType = 'time_for_test'; sortReverse = !sortReverse">Тривалість
-                                <i ng-show="sortType == 'time_for_test' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                                <i ng-show="sortType == 'time_for_test' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                            </th>
-                            <th class="clickable" ng-click="sortType = 'attempts'; sortReverse = !sortReverse">Спроб
-                                <i ng-show="sortType == 'attempts' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                                <i ng-show="sortType == 'attempts' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                            </th>
-                            <th class="clickable" ng-click="sortType = 'enabled'; sortReverse = !sortReverse">Статус
-                                <i ng-show="sortType == 'enabled' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                                <i ng-show="sortType == 'enabled' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                            </th>
-                            <th>Дії</th>
-                        </tr>
-                        </thead>
-                        <tbody class="usCenter">
-                        <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse" ng-click="enterToEntity('admin.questions', entity.test_id)" role="button">
-                            <td>{{$index + 1}}</td>
-                            <td class="col-md-4">{{entity.test_name}}</td>
-                            <!-- <td>{{test.subject_id}}</td>-->
-                            <td class="col-md-1">{{entity.tasks}}</td>
-                            <td class="col-md-1">{{entity.time_for_test}}</td>
-                            <td class="col-md-2">{{entity.attempts}}</td>
-                            <td class="col-md-2">{{entity.enabled | testStatus}}</td>
-                            <td class="col-md-2" class="usCenter">
-                                <actions-buttons-drct></actions-buttons-drct>
-                            </td>
-                        </tr>
-                        <tr ng-if="entity == editingEntity" ng-repeat-end="">
-                            <td>{{$index + 1}}</td>
-                            <!--написати перевірку на ввід чисел при редагуванні-->
-                            <td class="col-md-4"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_test_name"></td>
-                            <td class="col-md-1"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_tasks"></td>
-                            <td class="col-md-1"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_time_for_test"></td>
-                            <td class="col-md-2"><input class="form-control width-max navbar-btn" ng-model="editedEntity.new_attempts"></td>
-                            <td class="col-md-2">
-                                <select class="form-control width-max navbar-btn" ng-model="editedEntity.new_enabled">
-                                    <option value="" disabled selected hidden> Вкажіть доступність тесту </option>
-                                    <option value="1">Доступно</option>
-                                    <option value="0">Недоступно</option>
-                                </select>
-                            </td>
-                            <td class="col-md-2">
-                                <editing-buttons-drct></editing-buttons-drct>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table ng-show="entities" class="table table-hover .table-condensed">
+                            <thead>
+                            <tr>
+                                <th>№</th>
+                                <th class="clickable" ng-click="sortType = 'test_name'; sortReverse = !sortReverse">Тест
+                                    <i ng-show="sortType == 'test_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                    <i ng-show="sortType == 'test_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                                </th>
+                                <th class="clickable" ng-click="sortType = 'tasks'; sortReverse = !sortReverse">Завдань
+                                    <i ng-show="sortType == 'tasks' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                    <i ng-show="sortType == 'tasks' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                                </th>
+                                <th class="clickable" ng-click="sortType = 'time_for_test'; sortReverse = !sortReverse">Тривалість
+                                    <i ng-show="sortType == 'time_for_test' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                    <i ng-show="sortType == 'time_for_test' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                                </th>
+                                <th class="clickable" ng-click="sortType = 'attempts'; sortReverse = !sortReverse">Спроб
+                                    <i ng-show="sortType == 'attempts' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                    <i ng-show="sortType == 'attempts' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                                </th>
+                                <th class="clickable" ng-click="sortType = 'enabled'; sortReverse = !sortReverse">Статус
+                                    <i ng-show="sortType == 'enabled' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                                    <i ng-show="sortType == 'enabled' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                                </th>
+                                <th class="usCenter">Дії</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities | filter:searchItem | orderBy:sortType:sortReverse" ng-click="enterToEntity('admin.questions', entity.test_id)" role="button">
+                                <td>{{$index + 1}}</td>
+                                <td class="col-md-4">{{entity.test_name}}</td>
+                                <!-- <td>{{test.subject_id}}</td>-->
+                                <td class="col-md-1">{{entity.tasks}}</td>
+                                <td class="col-md-1">{{entity.time_for_test}}</td>
+                                <td class="col-md-2">{{entity.attempts}}</td>
+                                <td class="col-md-2">{{entity.enabled | testStatus}}</td>
+                                <td class="col-md-2 usCenter" class="usCenter">
+                                    <actions-buttons-drct></actions-buttons-drct>
+                                </td>
+                            </tr>
+                            <tr ng-if="entity == editingEntity" ng-repeat-end="">
+                                <td>{{$index + 1}}</td>
+                                <!--написати перевірку на ввід чисел при редагуванні-->
+                                <td class="col-md-4"><input class="form-control input-sm width-max navbar-btn" ng-model="editedEntity.new_test_name"></td>
+                                <td class="col-md-1"><input class="form-control input-sm width-max navbar-btn" ng-model="editedEntity.new_tasks"></td>
+                                <td class="col-md-1"><input class="form-control input-sm width-max navbar-btn" ng-model="editedEntity.new_time_for_test"></td>
+                                <td class="col-md-2"><input class="form-control input-sm width-max navbar-btn" ng-model="editedEntity.new_attempts"></td>
+                                <td class="col-md-2">
+                                    <select class="form-control input-sm width-max navbar-btn" ng-model="editedEntity.new_enabled">
+                                        <option value="" disabled selected hidden> Вкажіть доступність тесту </option>
+                                        <option value="1">Доступно</option>
+                                        <option value="0">Недоступно</option>
+                                    </select>
+                                </td>
+                                <td class="col-md-2 usCenter">
+                                    <editing-buttons-drct></editing-buttons-drct>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- The modal to confirm removing of Entity -->
                     <deleting-modal-drct></deleting-modal-drct>
                     <!-- The modal to inform about error from server -->

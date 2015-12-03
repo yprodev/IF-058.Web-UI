@@ -24,7 +24,9 @@ app.directive('editEntitiesDrct', ['entitiesSrvc', '$filter', function(entitiesS
               scope.editedEntity.new_password = "";
               scope.editedEntity.new_password_confirm = "";
             };
+            if(scope.thisEntity == "question" || scope.thisEntity == "answer") {
 			  scope.decoding();
+            };
           };
 
 			//updates an element of array and send updating of entity to server
