@@ -48,6 +48,7 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
 
       var data = $stateParams.id
       var url = 'TestDetail/getTestDetailsByTest/'
+
       return userSrvc.getInfoForStudent(url, data)
     }).then(function (resp) {
       if (!resp.data[0].id) {
@@ -58,17 +59,35 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
       } else {
         var id = $stateParams.id
         localStorage.testId = id;
-        var data = [id, resp.data[0].level, resp.data[0].tasks]
         var url = 'question/getQuestionIdsByLevelRand/'
-        return userSrvc.getInfoForStudent(url, data)
+        var dataLevels = []
+        for (var i = 0; i<resp.data.length; i++){
+           dataLevels.push([id, resp.data[i].level, resp.data[i].tasks])
+
+           
+        }
+        //console.log('dataLevels', dataLevels)
+        //console.log('datadetail: ', resp.data)
+          function reqArr () {
+            var newArr = []
+            for (var k = 0; k<dataLevels.length; k++){
+              newArr.push(userSrvc.getInfoForStudent(url, dataLevels[k]))
+            }
+            return newArr
+          }
+         return $q.all(
+          reqArr()
+          )
       }
     }).then(function (resp) {
       var questionList = []
-      for (i in resp.data) {
-        questionList.push(resp.data[i].question_id)
-      }
+     for (var i = 0; i<resp.length; i++){
+        for (k in resp[i].data) {
+          questionList.push(resp[i].data[k].question_id)
+        }
       testData.questionList = questionList;
       $scope.questionsQuantity = questionList.length;
+     }
     })
   }
   var data = '';

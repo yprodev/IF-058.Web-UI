@@ -29,7 +29,9 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     var testId = localStorage.testId;
                     var answerObj = {};
                     var answerArray = [];
-                    $scope.checklistValue = []
+                    $scope.checklistValue = [];
+                    var userAnswers = [];
+                    answerObj.answer_ids = [];
                     
 
 
@@ -65,20 +67,20 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                                 $scope.type = resp[0].data[0].type == '1' ? 'radio' : 'checkbox';
                             })
                     };
-                       var userAnswers = []
                        if (!localStorage.getItem('userAnswers')){
                             localStorage.setItem('userAnswers', JSON.stringify(userAnswers)) 
                        }
-                       
                     $scope.submitQuestion = function (radioValue) {
                         userAnswers = JSON.parse(localStorage.getItem('userAnswers'))
-                        answerObj.selectedQuestion = $scope.quest;
+                        answerObj.question_id = $scope.quest;
                         if ($scope.type === 'radio'){
-                            answerObj.selectedAnswer = radioValue
+                            answerObj.answer_ids.push(radioValue)
                         } else {
-                            answerObj.selectedAnswer = $scope.checklistValue
+                            answerObj.answer_ids = $scope.checklistValue
                         }
                         userAnswers.push(answerObj);
+                        /*$scope.allAnswers = userAnswers*/
+                        console.log('$scope.allAnswers', $scope.allAnswers)
                         localStorage.setItem('userAnswers', JSON.stringify(userAnswers))
                         console.log('userAnswers', userAnswers)
                         var nextState = +$stateParams.id + 1
@@ -86,8 +88,12 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     }
 
                     $scope.finishTest = function () {
-                        console.log('answerArray', answerArray)
-
+                         var url = 'SAnswer/checkAnswers'
+                            var data = localStorage.getItem('userAnswers')
+                            console.log('data', data)
+                        userSrvc.postInfoForStudent(url, data).then(function (resp) {
+                            console.log(resp)
+                        })
 
                         localStorage.removeItem('userAnswers')
                         console.log('local', localStorage.getItem('userAnswers'))
