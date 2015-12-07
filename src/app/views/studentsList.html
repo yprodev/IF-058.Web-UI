@@ -277,7 +277,7 @@
 
 		<!-- DIVS appearence -->
 		<div ng-show="students" class="students-bootstrap">
-			<div ng-if="editingStudent.user_id !== student.user_id"
+			<div ng-if="editStudent.user_id !== student.user_id"
 					 ng-repeat-start="student in students | filter:searchItem | orderBy:sortType:sortReverse"
 					 class="ng-scope">
 				<div class="row">
@@ -321,7 +321,7 @@
 			</div><!-- END div repeat start -->
 
 
-			<div ng-if="editingStudent.user_id === student.user_id"
+			<div ng-if="editStudent.user_id === student.user_id"
 					 ng-repeat-end=""
 					 class="ng-scope {{ actclass }}">
 				<div class="row">
@@ -558,7 +558,7 @@
 							</button>
 
 							<button class="btn btn-warning btn-sm col-md-offset-1 "
-											ng-click="showEditingForm(null)">
+											ng-click="showEditingForm(student)">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 						</span>

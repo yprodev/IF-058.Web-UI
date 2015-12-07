@@ -81,19 +81,33 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 	}// END createEditingStorage
 
 	// Show edit panel for a student
+	$scope.editStudent = null;
+
 	$scope.showEditingForm = function (stud) {
 
-		if (stud !== null) {
+    if ($scope.editStudent != stud) {
+      $scope.editStudent = stud;
 			$scope.actclass = 'active-student';
-			$scope.currId = stud.user_id;
+			// $scope.currId = stud.user_id;
 			createComplexObj(stud);
-		}
-
-		// remember here was an object editingObj
-		$scope.editingStudent = stud;
+    } else {
+      $scope.editStudent = null;
+    };
 	};
 
 
+	// // Show edit panel for a student
+	// $scope.showEditingForm = function (stud) {
+
+	// 	if (stud !== null) {
+	// 		$scope.actclass = 'active-student';
+	// 		$scope.currId = stud.user_id;
+	// 		createComplexObj(stud);
+	// 	}
+
+	// 	// remember here was an object editingObj
+	// 	$scope.editingStudent = stud;
+	// };
 
 	function editRecordPhoto (objData) {
 		if(!objData.photo || objData.photo.src === undefined) {
