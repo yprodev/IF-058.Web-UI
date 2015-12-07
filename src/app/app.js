@@ -214,10 +214,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       templateUrl: 'app/views/testResult.html',
       controller: 'userQuestionListCtrl'
     });
-/*    state('user.questions.number', {
-      url: '/:id',
-      templateUrl: 'app/views/userQuestions.html',
-      controller: 'userQuestionListCtrl'
+    /*state('user.finalGrade', {
+      url: '/finalGrade',
+      templateUrl: 'app/views/userFinalGrade.html',
+      controller: 'testPlayerCtrl'
     });*/
 
   $urlRouterProvider.otherwise('/');

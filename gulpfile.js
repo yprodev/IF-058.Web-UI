@@ -99,9 +99,9 @@ gulp.task("build-all-js", function() {
 			'bower_components/moment/moment.js',
 			path.src.js // Path for compiling all project js files
 		])
-			// .pipe(jshint())
-			// .pipe(jshint.reporter('jshint-stylish'))
-			// .pipe(jshint.reporter('fail'))
+			/*.pipe(jshint())
+			.pipe(jshint.reporter('jshint-stylish'))
+			.pipe(jshint.reporter('fail'))*/
 			.pipe(concat("app.js"))
 			.pipe(gulp.dest(path.build.js));
 });
