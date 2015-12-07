@@ -8,6 +8,7 @@
 	@include transition(all, .4s);
 
 	&:hover {
+		margin-bottom: ($baseline + 1px);
 		@include round(5px);
 		@include scale(1.02, 1.02);
 		@include drop-shadow(1px, 0px, 15px, 0, .15);
