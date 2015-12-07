@@ -37,3 +37,9 @@
         <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(radioValue)"/>
     </div>
 </div>
+
+<div ng-repeat="point in testResult">
+    <p>id:{{point.question_id}}</p>
+    <p>res:{{point.true}}</p>
+</div>
+<p>question:{{question}}</p>

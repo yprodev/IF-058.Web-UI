@@ -208,6 +208,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/question/:id',
       templateUrl: 'app/views/testPlayer.html',
       controller: 'userQuestionListCtrl'
+    }).
+    state('user.testResult', {
+      url: '/question',
+      templateUrl: 'app/views/testResult.html',
+      controller: 'userQuestionListCtrl'
     });
 /*    state('user.questions.number', {
       url: '/:id',
