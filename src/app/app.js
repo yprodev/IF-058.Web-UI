@@ -213,12 +213,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/question',
       templateUrl: 'app/views/testResult.html',
       controller: 'userQuestionListCtrl'
-    });
-    /*state('user.finalGrade', {
+    }).
+    state('user.finalGrade', {
       url: '/finalGrade',
       templateUrl: 'app/views/userFinalGrade.html',
-      controller: 'testPlayerCtrl'
-    });*/
+      controller: 'userQuestionListCtrl'
+    });
 
   $urlRouterProvider.otherwise('/');
 }]);

@@ -58,7 +58,6 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
         //$scope.showInformModal("Немає деталей тесту");
         //дописати щоб запрацювала модалка
       } else {
-        console.log('resrDetails', resp);
         var id = $stateParams.id
         localStorage.testId = id;
         var url = 'question/getQuestionIdsByLevelRand/'
@@ -69,9 +68,6 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
 
            
         }
-        console.log('testData.rate', testData.rate)
-        //console.log('dataLevels', dataLevels)
-        //console.log('datadetail: ', resp.data)
           function reqArr () {
             var newArr = []
             for (var k = 0; k<dataLevels.length; k++){
@@ -98,7 +94,6 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
   var url = 'TestPlayer/getTimeStamp';
   userSrvc.getInfoForStudent(url, data).then(function (resp) {
     testData.startTime = resp.data.unix_timestamp
-    console.log(testData.startTime, 'testData.startTime')
   });
   $scope.getRecordsByStudent()
   $scope.startTest = function () {
