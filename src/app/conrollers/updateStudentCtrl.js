@@ -53,9 +53,12 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 			});
 	}
 
-	function createComplexObj(obj) {
 
-		// $scope.editingObj = {};
+
+	function createComplexObj(obj) {
+		// Seperate scope variable
+		$scope.editingObj = {};
+
 		getUserEntityByStudId(obj.user_id);
 		$scope.$watch('params', function (newValue, oldValue) {
 			if ($scope.params) {
@@ -64,8 +67,8 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 					// User DATA
 					username: $scope.params.username,
 					email: $scope.params.email,
-					password: '',
-					password_confirm: '',
+					password: $scope.params.password,
+					password_confirm: $scope.params.password,
 					// Student DATA
 					gradebook_id: obj.gradebook_id,
 					student_surname: obj.student_surname,
@@ -77,6 +80,29 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 				};
 
 			} //END if
+
+			// We need to do this because of the link data type
+			$scope.editingStudent = {
+				// User DATA
+				username: $scope.editingObj.username,
+				email: $scope.editingObj.email,
+				password: '',
+				password_confirm: '',
+				// Student DATA
+				gradebook_id: $scope.editingObj.gradebook_id,
+				student_surname: $scope.editingObj.student_surname,
+				student_name: $scope.editingObj.student_name,
+				student_fname: $scope.editingObj.student_fname,
+				group_id: $scope.editingObj.group_id,
+				plain_password: $scope.editingObj.plain_password,
+				photo: $scope.editingObj.photo
+			};
+
+			// if ($scope.editingStudent.password && $scope.editingStudent.password_confirm) {
+			// 	$scope.editingStudent.password = '';
+			// 	$scope.editingStudent.password_confirm = '';
+			// }
+
 		});
 	}// END createEditingStorage
 
@@ -85,14 +111,14 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 
 	$scope.showEditingForm = function (stud) {
 
-    if ($scope.editStudent != stud) {
-      $scope.editStudent = stud;
+		if ($scope.editStudent != stud) {
+			$scope.editStudent = stud;
 			$scope.actclass = 'active-student';
 			// $scope.currId = stud.user_id;
 			createComplexObj(stud);
-    } else {
-      $scope.editStudent = null;
-    };
+		} else {
+			$scope.editStudent = null;
+		}
 	};
 
 
@@ -110,17 +136,32 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 	// };
 
 	function editRecordPhoto (objData) {
-		if(!objData.photo || objData.photo.src === undefined) {
-			objData.photo = '';
+		if (objData.photo && ((objData.photo !== '') || (objData.photo === undefined))) {
+			objData.photo = objData.photo;
 		} else {
-			objData.photo = objData.photo.src;
+			objData.photo = '';
 		}
 	}
 
-	function truePassword (pass, passConf) {
-		if (pass !== passConf) {
+	// function truePassword (pass, passConf) {
+	// 	if ((passConf !== '') && (pass !== passConf)) {
+	// 		passConfirmed = false;
+	// 	} else {
+	// 		passConfirmed = true;
+	// 	}
+	// 	return passConfirmed;
+	// }
+
+	function isPassword (obj) {
+
+		if ((obj.password === '') && (obj.password_confirm === '')) {
+			obj.password = $scope.editingObj.password;
+			obj.password_confirm = $scope.editingObj.password_confirm;
+			passConfirmed = true;
+		} else if ((obj.password_confirm !== '') && (obj.password !== obj.password_confirm)) {
 			passConfirmed = false;
 		} else {
+			obj.plain_password = obj.password_confirm;
 			passConfirmed = true;
 		}
 		return passConfirmed;
@@ -128,31 +169,27 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 
 
 	$timeout(function () {
-		console.log('gdzce fotka student? ', $scope.students);
-		console.log('gdzce fotka str? ', $scope.imgStr);
-		console.log('gdzce fotka edited? ', $scope.editingStudent.email);
-		console.log('gdzce fotka editingObj? ', $scope.editingObj);
+		console.log('gdzce fotka editingStudent? ', $scope.editingStudent);
+		console.log('gdzce editingObj? ', $scope.editingObj);
 	}, 5000);
 
 
 	// Editing and updating student record functionality
 	$scope.editStud = function () {
-
 		var passConfirmed;
-
 		editRecordPhoto($scope.editingStudent);
-		passConfirmed = truePassword($scope.editingStudent.password, $scope.editingStudent.password_confirm);
 
-		var eStud = $scope.editingStudent;
+		// var eStud = $scope.editingStudent;
 
-		// Creating an object we will pass to the backend
+		console.log('pass confirmed from inner statement ', passConfirmed);
+
 		var editedDataStud = {
-			// User values
+			// User DATA
 			username: $scope.editingStudent.username,
-			password: $scope.editingStudent.password_confirm,
-			password_confirm: $scope.editingStudent.password_confirm,
 			email: $scope.editingStudent.email,
-			// Person values
+			password: $scope.editingStudent.password,
+			password_confirm: $scope.editingStudent.password_confirm,
+			// Student DATA
 			gradebook_id: $scope.editingStudent.gradebook_id,
 			student_surname: $scope.editingStudent.student_surname,
 			student_name: $scope.editingStudent.student_name,
@@ -162,10 +199,35 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 			photo: $scope.editingStudent.photo
 		};
 
+		passConfirmed = isPassword(editedDataStud);
+
+
+		// Creating an object we will pass to the backend
+		// var editedDataStud = {
+		// 	// User values
+		// 	username: $scope.editingStudent.username,
+		// 	password: $scope.editingStudent.password_confirm,
+		// 	password_confirm: $scope.editingStudent.password_confirm,
+		// 	email: $scope.editingStudent.email,
+		// 	// Person values
+		// 	gradebook_id: $scope.editingStudent.gradebook_id,
+		// 	student_surname: $scope.editingStudent.student_surname,
+		// 	student_name: $scope.editingStudent.student_name,
+		// 	student_fname: $scope.editingStudent.student_fname,
+		// 	group_id: $scope.editingStudent.group_id,
+		// 	plain_password: $scope.editingStudent.plain_password,
+		// 	photo: $scope.editingStudent.photo
+		// };
+
+
+		$timeout(function () {
+			console.log('peredaem edited Data ', editedDataStud);
+			console.log('peredaem confirmed pass ', passConfirmed);
+		}, 1000);
 
 
 		// Create json data type data
-		var jsonDataEdited = JSON.stringify(editedDataStud);
+		// var jsonDataEdited = JSON.stringify(editedDataStud);
 		var currId = $scope.currId;
 
 		if (passConfirmed) {
@@ -182,7 +244,12 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 						throw new Error ('Try to solve this or please, contact with your back-end administrator ' + response.data.response);
 					}
 				}); // END .then
+		} else {
+			console.log('there is no pass');
 		}
+
+
+
 	};
 
 
