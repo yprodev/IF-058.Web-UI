@@ -114,7 +114,7 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 		if ($scope.editStudent != stud) {
 			$scope.editStudent = stud;
 			$scope.actclass = 'active-student';
-			// $scope.currId = stud.user_id;
+			$scope.currId = stud.user_id;
 			createComplexObj(stud);
 		} else {
 			$scope.editStudent = null;
@@ -181,8 +181,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 
 		// var eStud = $scope.editingStudent;
 
-		console.log('pass confirmed from inner statement ', passConfirmed);
-
 		var editedDataStud = {
 			// User DATA
 			username: $scope.editingStudent.username,
@@ -227,19 +225,27 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 
 
 		// Create json data type data
-		// var jsonDataEdited = JSON.stringify(editedDataStud);
+		var jsonDataEdited = JSON.stringify(editedDataStud);
 		var currId = $scope.currId;
 
 		if (passConfirmed) {
-			entitiesSrvc.updateEntity(thisEntity, currId, jsonDataEdited)
+			entitiesSrvc.updateEntity($scope.thisEntity, currId, jsonDataEdited)
 				.then(function (response) {
 					if(response.data.response === 'ok') {
-						for (var i = 1; i < $scope.students.length; i++) {
-							if ($scope.students[i].user_id !== currId) {
+						console.log('moi studentu', $scope.students);
+						console.log('moi currId', currId);
+						console.log('moi currId', typeof(currId));
+						for (var i = 0; i < $scope.students.length; i++) {
+							if ($scope.students[i].user_id === currId) {
+								for (prop in editedDataStud) {
+									$scope.students[i][prop] = editedDataStud[prop];
+								};
 								// Need to say about error if it needed
-								throw new Error ($scope.students[i] + ' is different from ' + currId + ' id.. Try to solve this or, please, contact with your back-end administrator.');
+								// throw new Error ($scope.students[i] + ' is different from ' + currId + ' id.. Try to solve this or, please, contact with your back-end administrator.');
 							}
 						} // END for loop
+					// Close editing form
+					$scope.editStudent = null;
 					} else {
 						throw new Error ('Try to solve this or please, contact with your back-end administrator ' + response.data.response);
 					}
