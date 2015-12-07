@@ -81,24 +81,26 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
 
                             console.log('savedTestData.rate', savedTestData.rate);
                             levelsArr.push({id: resp[0].data[0].question_id, level: resp[0].data[0].level});
-                           /* for (var i = 0; i< levelsArr.length; i++){
+                            var newLevelsArr = []
+                            for (var i = 0; i< levelsArr.length; i++){
 
                                 for (var j = 0; j<savedTestData.rate.length; j++){
 
                                     if (levelsArr[i].level == savedTestData.rate[j].level){
-
-                                        levelsArr.push({'id': resp[0].data[0].question_id,
+                                        console.log('id', resp[0].data[0].question_id[i])
+                                        levelsArr[i].rate = savedTestData.rate[j].rate
+                                        /*newLevelsArr.push({id: resp[0].data[0].question_id,
                                             'level': resp[0].data[0].level,
                                             'rate':savedTestData.rate[j].rate
-                                        });
+                                        });*/
                                     }
                                 }
                             }
-                            console.log('levelsArr', levelsArr)
-*/
+                            //console.log('levelsArr', levelsArr)
+
                             localStorage.setItem('levelsArr', JSON.stringify(levelsArr));
                             $scope.levelsArr = levelsArr;
-                            console.log('levelsArr', levelsArr);
+                            console.log('levelsArr', $scope.levelsArr);
 
 
                         })
@@ -133,15 +135,20 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     userSrvc.postInfoForStudent(url, data).then(function (resp) {
                         $scope.testResult = resp.data;
                         console.log($scope.testResult, '$scope.testResult');
+
                         for (var i = 0; i < $scope.testResult.length; i++) {
                             console.log('$scope.testResult[i].question_id', $scope.testResult[i].question_id)
                             for (var j = 0; j < $scope.levelsArr.length; j++) {
                                 console.log('$scope.levelsArr[j].id', $scope.levelsArr[j].id)
+                                console.log($scope.testResult[i].question_id == $scope.levelsArr[j].id, 'if');
+
                                 if ($scope.testResult[i].question_id == $scope.levelsArr[j].id) {
                                     countResultArr.push({
                                         'id': $scope.testResult[i].question_id,
                                         'level': $scope.levelsArr[j].level,
+                                        'rate': $scope.levelsArr[j].rate,
                                         'true': $scope.testResult[i].true
+
                                     })
 
                                     console.log('countResultArr', countResultArr)
