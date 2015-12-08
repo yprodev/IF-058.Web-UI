@@ -11,25 +11,7 @@ app.controller('studentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entities
 	$scope.thisEntity = 'student';
 	$scope.thisEntParent = entityObj[$scope.thisEntity].by.parentEntity;
 	$scope.idOfParent = $stateParams.id;
-
-
 	$scope.imgStr = 'img/def-stud.jpg';
-
-	// Getting records request
-
-	entitiesSrvc.getEntByEnt($scope.thisEntity, $scope.thisEntParent, $scope.idOfParent)
-	.then(function (resp) {
-		gettingResponseHandler (resp);
-	});
-
-	// Getting records request handler
-
-	function gettingResponseHandler (resp) {
-		if (resp.response === null) {
-			$scope.noData = 'Студенти відсутні в даній групі. Ви можете їх додати власноруч, натиснувши на кнопку "+" в правому верхньому кутку екрана. Якщо Ви потрапили не туди, використайте меню, щоб перейти в групу, яка Вам необхідна.';
-		}
-		$scope.students = resp.data;
-	};
 
 
 
