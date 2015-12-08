@@ -1,4 +1,4 @@
-app.directive('addStudent', ['entitiesSrvc', function(entitiesSrvc){
+app.directive('addStudent', ['entitiesSrvc', function (entitiesSrvc){
 
 
 	function link (scope, element, attrs) {
@@ -146,7 +146,8 @@ app.directive('addStudent', ['entitiesSrvc', function(entitiesSrvc){
 							} // END for loop
 						scope.editStudent = null; // Close editing form
 						} else {
-							throw new Error ('Try to solve this or please, contact with your back-end administrator ' + response.data.response);
+							scope.editStudent = null; // Close editing form
+							throw new Error('Nothing was changed! ' + response.data.response);
 						}
 					}); // END .then
 			} else {

@@ -1,4 +1,4 @@
-app.directive('addStudent', ['entitiesSrvc', function(entitiesSrvc){
+app.directive('addStudent', ['entitiesSrvc', function (entitiesSrvc){
 
 
 	function link (scope, element, attrs) {
