@@ -1,6 +1,7 @@
 testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q', '$timeout',
     function ($scope, $rootScope, userSrvc, $stateParams, $state, $q, $timeout) {
         $scope.beginTest = function () {
+            $scope.finalGrade = (JSON.parse(localStorage.getItem('finalGrade'))).toFixed(2)// кажется що так бичо спитати як можна переробити
             var url = 'testPlayer/getData';
             var data = '';
             userSrvc.getInfoForStudent(url, data).then(function (resp) {
@@ -114,8 +115,14 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                     console.log('$scope.allAnswers', $scope.allAnswers);
                     localStorage.setItem('userAnswers', JSON.stringify(userAnswers));
                     console.log('userAnswers', userAnswers);
+
+                    var quesArrLen = questionArray.length;
                     var nextState = +$stateParams.id + 1;
-                    $state.go('user.testPlayer', {id: nextState});
+                    if(nextState <= quesArrLen) {
+                        $state.go('user.testPlayer', {id: nextState});
+                    } else {
+                        $state.go('user.testPlayer', {id: 1});
+                    }
                 };
 
                 var countResultArr = []
@@ -151,9 +158,11 @@ testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userS
                             //var studentGradeArr = []
                             for (var i = 0; i<countResultArr.length; i++){
                                 studentRightAns += ((+countResultArr[i].level)*(+countResultArr[i].rate)*(+countResultArr[i].true))
-                                maxAvilable += ((+countResultArr[i].level)*(+countResultArr[i].rate))
                             }
-                            $scope.finalGrade = studentRightAns/maxAvilable*100
+                            maxAvilable = savedTestData.maxAvilable
+
+                            var finalGrade = studentRightAns/maxAvilable*100
+                            localStorage.setItem('finalGrade', JSON.stringify(finalGrade));//потім можна зробити вьюху результата як директиву
                             console.log('finalGrade', $scope.finalGrade)
                             localStorage.removeItem('levelsArr')
                             localStorage.removeItem('userAnswers')

@@ -8,7 +8,8 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
     startTime: '',
     questionList: '',
     timeForTest: '',
-    rate: []
+    rate: [],
+    maxAvilable: 0
   }
 
   var data = localStorage.userId
@@ -58,6 +59,9 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
         //$scope.showInformModal("Немає деталей тесту");
         //дописати щоб запрацювала модалка
       } else {
+        for (var i = 0; i<resp.data.length; i++){
+          testData.maxAvilable += resp.data[i].tasks * resp.data[i].rate
+        }
         var id = $stateParams.id
         localStorage.testId = id;
         var url = 'question/getQuestionIdsByLevelRand/'
