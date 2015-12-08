@@ -1,39 +1,5 @@
 app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$timeout', function ($scope, $stateParams, entityObj, entitiesSrvc, $timeout) {
 
-
-
-/*_________________________________________________
-/*
-/* GETTING RECORDS BY GROUP ID
-/*_________________________________________________
-*/
-	// Declares Entity parameters for getting records request
-	// var thisEntity = 'student'
-	// 	, thisEntParent = entityObj[thisEntity].by.parentEntity
-	// 	, idOfParent = $stateParams.id;
-	// $scope.imgStr = 'img/def-stud.jpg';
-
-	// Getting records request
-	// entitiesSrvc.getEntByEnt($scope.thisEntity, $scope.thisEntParent, $scope.idOfParent)
-	// .then(function (resp) {
-	// 	gettingResponseHandler(resp);
-	// });
-
-	// // Getting records request handler
-	// function gettingResponseHandler (resp) {
-	// 	if (resp.response === null) {
-	// 		$scope.noData = 'Студенти відсутні в даній групі. Ви можете їх додати власноруч, натиснувши на кнопку "+" в правому верхньому кутку екрана. Якщо Ви потрапили не туди, використайте меню, щоб перейти в групу, яка Вам необхідна.';
-	// 	}
-	// 	$scope.students = resp.data;
-	// };
-
-
-
-
-
-
-
-
 /*_________________________________________________
 /*
 /* EDITING RECORDS BY GROUP ID
@@ -52,7 +18,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 				}
 			});
 	}
-
 
 
 	function createComplexObj(obj) {
@@ -98,11 +63,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 				photo: $scope.editingObj.photo
 			};
 
-			// if ($scope.editingStudent.password && $scope.editingStudent.password_confirm) {
-			// 	$scope.editingStudent.password = '';
-			// 	$scope.editingStudent.password_confirm = '';
-			// }
-
 		});
 	}// END createEditingStorage
 
@@ -121,20 +81,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 		}
 	};
 
-
-	// // Show edit panel for a student
-	// $scope.showEditingForm = function (stud) {
-
-	// 	if (stud !== null) {
-	// 		$scope.actclass = 'active-student';
-	// 		$scope.currId = stud.user_id;
-	// 		createComplexObj(stud);
-	// 	}
-
-	// 	// remember here was an object editingObj
-	// 	$scope.editingStudent = stud;
-	// };
-
 	function editRecordPhoto (objData) {
 		if (objData.photo && ((objData.photo !== '') || (objData.photo === undefined))) {
 			objData.photo = objData.photo;
@@ -142,15 +88,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 			objData.photo = '';
 		}
 	}
-
-	// function truePassword (pass, passConf) {
-	// 	if ((passConf !== '') && (pass !== passConf)) {
-	// 		passConfirmed = false;
-	// 	} else {
-	// 		passConfirmed = true;
-	// 	}
-	// 	return passConfirmed;
-	// }
 
 	function isPassword (obj) {
 
@@ -166,12 +103,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 		}
 		return passConfirmed;
 	}
-
-
-	$timeout(function () {
-		console.log('gdzce fotka editingStudent? ', $scope.editingStudent);
-		console.log('gdzce editingObj? ', $scope.editingObj);
-	}, 5000);
 
 
 	// Editing and updating student record functionality
@@ -199,53 +130,21 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 
 		passConfirmed = isPassword(editedDataStud);
 
-
-		// Creating an object we will pass to the backend
-		// var editedDataStud = {
-		// 	// User values
-		// 	username: $scope.editingStudent.username,
-		// 	password: $scope.editingStudent.password_confirm,
-		// 	password_confirm: $scope.editingStudent.password_confirm,
-		// 	email: $scope.editingStudent.email,
-		// 	// Person values
-		// 	gradebook_id: $scope.editingStudent.gradebook_id,
-		// 	student_surname: $scope.editingStudent.student_surname,
-		// 	student_name: $scope.editingStudent.student_name,
-		// 	student_fname: $scope.editingStudent.student_fname,
-		// 	group_id: $scope.editingStudent.group_id,
-		// 	plain_password: $scope.editingStudent.plain_password,
-		// 	photo: $scope.editingStudent.photo
-		// };
-
-
-		$timeout(function () {
-			console.log('peredaem edited Data ', editedDataStud);
-			console.log('peredaem confirmed pass ', passConfirmed);
-		}, 1000);
-
-
-		// Create json data type data
-		var jsonDataEdited = JSON.stringify(editedDataStud);
+		var jsonDataEdited = JSON.stringify(editedDataStud); // Create json data type data
 		var currId = $scope.currId;
 
 		if (passConfirmed) {
 			entitiesSrvc.updateEntity($scope.thisEntity, currId, jsonDataEdited)
 				.then(function (response) {
 					if(response.data.response === 'ok') {
-						console.log('moi studentu', $scope.students);
-						console.log('moi currId', currId);
-						console.log('moi currId', typeof(currId));
 						for (var i = 0; i < $scope.students.length; i++) {
 							if ($scope.students[i].user_id === currId) {
 								for (prop in editedDataStud) {
 									$scope.students[i][prop] = editedDataStud[prop];
-								};
-								// Need to say about error if it needed
-								// throw new Error ($scope.students[i] + ' is different from ' + currId + ' id.. Try to solve this or, please, contact with your back-end administrator.');
+								}
 							}
 						} // END for loop
-					// Close editing form
-					$scope.editStudent = null;
+					$scope.editStudent = null; // Close editing form
 					} else {
 						throw new Error ('Try to solve this or please, contact with your back-end administrator ' + response.data.response);
 					}
@@ -253,9 +152,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 		} else {
 			console.log('there is no pass');
 		}
-
-
-
 	};
 
 
