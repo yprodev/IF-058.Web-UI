@@ -110,8 +110,6 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 		var passConfirmed;
 		editRecordPhoto($scope.editingStudent);
 
-		// var eStud = $scope.editingStudent;
-
 		var editedDataStud = {
 			// User DATA
 			username: $scope.editingStudent.username,
@@ -150,7 +148,7 @@ app.controller('updateStudentCtrl', ['$scope', '$stateParams', 'entityObj', 'ent
 					}
 				}); // END .then
 		} else {
-			console.log('there is no pass');
+			throw new Error ('Password is not confirmed or is incorrect ' + passConfirmed);
 		}
 	};
 

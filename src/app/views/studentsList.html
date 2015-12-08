@@ -308,12 +308,35 @@
 								<span class="glyphicon glyphicon-pencil"></span>
 							</button>
 
+
+
+
+
+
+
+
+
+
+
+							<div ng-controller="deleteStudentCtrl">
+
+
 							<button class="btn btn-danger btn-sm col-md-offset-1"
 											data-toggle="modal"
 											data-target="#deleteModal"
-											ng-click='confirmDelete(student.user_id)'>
+											ng-click='confirmDelete(student)'>
 								<span class="glyphicon glyphicon-trash"></span>
 							</button>
+
+
+
+
+							</div><!-- END ng-controller deleteStudent -->
+
+
+
+
+
 
 						</span>
 					</div><!-- END col -->
@@ -570,13 +593,7 @@
 
 
 
-
-
-
-
-
-
-
+	<div ng-controller="deleteStudentCtrl">
 
 	<!-- Modal confirmation window before deleting -->
 	<div class="modal fade bs-example-modal-sm"
@@ -607,5 +624,8 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+
+</div><!-- END deleteCtrl -->
+
 
 </section><!-- END container-fluid -->
