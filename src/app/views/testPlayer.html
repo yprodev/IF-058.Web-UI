@@ -9,7 +9,7 @@
                ng-click='firstQuestion(questNumber, $index)'
                ng-repeat='questNumber in questionList'
                ng-class="{selectedItem: $index == selected}"
-                    >{{$index + 1}}&nbsp;&nbsp;</a>
+                    >{{$index + 1}}</a>
         </div>
     </div>
 </div>
@@ -37,10 +37,3 @@
         <input class="btn btn-primary" type="button" value="Підтвердити" ng-click="submitQuestion(radioValue)"/>
     </div>
 </div>
-
-<div ng-repeat="point in testResult">
-    <p>Твоя оцінка: {{finalGrade}}%</p>
-    <p>id:{{point.question_id}}</p>
-    <p>res:{{point.true}}</p>
-</div>
-<p>question:{{question}}</p>

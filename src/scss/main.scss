@@ -395,12 +395,16 @@ label.ilabel {
 }
 
 .question-number a {
-  cursor: pointer;
-  line-height: 34px;
-  font-size: 1.3em;
+    cursor: pointer;
+    line-height: 34px;
+    font-size: 1.7em;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    color: #3175B0;
 
   &:hover {
-    color: #f00;
     text-decoration: none;
   }
 }
@@ -408,8 +412,10 @@ label.ilabel {
   text-align: center;
 }
 
-.selectedItem{
-  color:#f00;
+a.selectedItem {
+  color:#fff;
+  border-radius: 50%;
+  background-color: #3175B0;
 }
 
 @import '_variables.scss';
