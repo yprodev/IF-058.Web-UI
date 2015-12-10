@@ -200,7 +200,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       controller: 'userTestListCtrl'
     }).
     state('user.questions', {
-      url: '/tests/:id',
+      url: '/testDetail/:id',
       templateUrl: 'app/views/userQuestions.html',
       controller: 'prepareToTestCtrl'
     }).
