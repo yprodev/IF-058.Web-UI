@@ -49,7 +49,7 @@ testPlayerApp.controller('userTestListCtrl', ['$scope', 'userSrvc', '$stateParam
       } else {
         $scope.entities = resp.data;
       }
-      $scope.noData = "Немає записів";
+      //$scope.noData = "Немає записів";
     })
   }
   $scope.getStudentTests();
