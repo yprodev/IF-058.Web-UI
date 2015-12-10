@@ -1,7 +1,11 @@
 testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q', '$timeout',
     function ($scope, $rootScope, userSrvc, $stateParams, $state, $q, $timeout) {
         $scope.beginTest = function () {
-            $scope.finalGrade = (JSON.parse(localStorage.getItem('finalGrade'))).toFixed(2)// кажется що так бичо спитати як можна переробити
+
+            // кажется що так бичо спитати як можна переробити
+            if (JSON.parse(localStorage.getItem('finalGrade'))){
+                $scope.finalGrade = (JSON.parse(localStorage.getItem('finalGrade'))).toFixed(2)    
+            }
             var url = 'testPlayer/getData';
             var data = '';
             userSrvc.getInfoForStudent(url, data).then(function (resp) {
