@@ -1,8 +1,6 @@
 testPlayerApp.controller('userQuestionListCtrl', ['$scope', '$rootScope', 'userSrvc', '$stateParams', '$state', '$q', '$timeout',
     function ($scope, $rootScope, userSrvc, $stateParams, $state, $q, $timeout) {
         $scope.beginTest = function () {
-
-            // кажется що так бичо спитати як можна переробити
             if (JSON.parse(localStorage.getItem('finalGrade'))){
                 $scope.finalGrade = (JSON.parse(localStorage.getItem('finalGrade'))).toFixed(2)    
             }
