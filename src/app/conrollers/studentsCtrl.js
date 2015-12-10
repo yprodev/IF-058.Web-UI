@@ -12,4 +12,4 @@ app.controller('studentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entities
 	$scope.imgStr = 'img/def-stud.jpg';
 
 
-	}]);
+}]);

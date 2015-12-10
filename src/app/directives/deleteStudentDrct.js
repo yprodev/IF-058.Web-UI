@@ -9,14 +9,10 @@ app.directive('deleteStudent', ['entitiesSrvc', function (entitiesSrvc){
 		/*_________________________________________________
 		*/
 
-
-
 		// Getting confirmation before deleting a student
 		scope.confirmDelete = function (student) {
 			angular.element(document.querySelector('#deleteModalWin')).modal();
-
 			scope.curId = student.user_id; // id present
-
 		};
 
 
@@ -27,16 +23,24 @@ app.directive('deleteStudent', ['entitiesSrvc', function (entitiesSrvc){
 
 			entitiesSrvc.deleteEntity(scope.thisEntity, currentId)
 				.then(function (response) {
-					delRespHandler(response);
+					delRespHandler(response, currentId);
 				}); //END .then
+
 		}; // END deleteStudent
 
 
-		function delRespHandler (resp) {
+		function delRespHandler (resp, id) {
 			switch (resp.data.response) {
 				case 'ok':
-					var index = scope.students.indexOf(scope.curId);
-					scope.students.splice(index, 1);
+					// deleting student from the page without updating page
+					for (var i = 0; i < scope.students.length; i++) {
+						if (scope.students[i]['user_id'] === id) {
+							var index = scope.students.indexOf(scope.students[i]);
+							scope.students.splice(index, 1);
+							break;
+						}
+					}
+
 					if (scope.students.length === 0) {
 						delete scope.students;
 					}
