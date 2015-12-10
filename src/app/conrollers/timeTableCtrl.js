@@ -12,13 +12,13 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
         }
     }
     $scope.header = {
-        monday: 'Mon',
-        tuesday: 'Tue',
-        wednesday: 'Wed',
-        thursday: 'Thu',
-        friday: 'Fri',
-        saturday: 'Sat',
-        sunday: 'Sun',
+        monday: 'Пн',
+        tuesday: 'Вт',
+        wednesday: 'Ср',
+        thursday: 'Чт',
+        friday: 'Пт',
+        saturday: 'Сб',
+        sunday: 'Нд',
     }
 /*_________________________________________________
 /*
@@ -63,7 +63,6 @@ app.controller('timeTableCtrl', ['$scope', '$stateParams', 'entityObj', 'entitie
 	$scope.resetEntity = function () {
 		$scope.newEntity = {};
 	};
-
 */
       $scope.addNewTimeTable = function (recordData) {
 

@@ -10,9 +10,13 @@ app.directive('deleteStudent', ['entitiesSrvc', function (entitiesSrvc){
 		*/
 
 		// Getting confirmation before deleting a student
-		scope.confirmDelete = function (student) {
+		scope.confirmDelete = function (student, $event) {
 			angular.element(document.querySelector('#deleteModalWin')).modal();
 			scope.curId = student.user_id; // id present
+
+			if ($event) {
+				$event.stopPropagation(); //for avoiding of enter to entity / Vitaliy
+			}
 		};
 
 

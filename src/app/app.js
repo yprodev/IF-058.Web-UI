@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'testPlayerApp', 'materialDatePicker']);
+var app = angular.module('app', ['ui.router', 'testPlayerApp', 'materialDatePicker', 'checklist-model']);
 var testPlayerApp = angular.module('testPlayerApp', ['ui.router']);
 
 app.constant("baseUrl", "http://dtapi.local/");
@@ -77,6 +77,21 @@ app.value("entityObj", {
     photo: "",
     by: {
       parentEntity: "group"
+    }
+  },
+  "result": {
+    session_id:"",
+    student_id:"",
+    test_id:"",
+    session_date:"",
+    start_time:"",
+    end_time:"",
+    result:"",
+    questions:"",
+    true_answers:"",
+    answers:"",
+    by: {
+
     }
   }
 
@@ -163,7 +178,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/addAdmin',
       templateUrl: 'app/views/addAdmin.html',
       controller: 'entitiesCtrl'
-    }).state('user.subjects', {
+    }).
+    state('admin.resultsByStudent', {
+      url: '/resultsByStudent/:id',
+      templateUrl: 'app/views/resultsByStudentList.html',
+      controller: 'entitiesCtrl'
+    }).
+    state('user.subjects', {
       url: '/subjects',
       templateUrl: 'app/views/userSubjects.html',
       controller: 'userSubjectListCtrl'
@@ -187,12 +208,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
       url: '/question/:id',
       templateUrl: 'app/views/testPlayer.html',
       controller: 'userQuestionListCtrl'
-    });
-/*    state('user.questions.number', {
-      url: '/:id',
-      templateUrl: 'app/views/userQuestions.html',
+    }).
+    state('user.testResult', {
+      url: '/question',
+      templateUrl: 'app/views/testResult.html',
       controller: 'userQuestionListCtrl'
-    });*/
+    }).
+    state('user.finalGrade', {
+      url: '/finalGrade',
+      templateUrl: 'app/views/userFinalGrade.html',
+      controller: 'userQuestionListCtrl'
+    });
 
   $urlRouterProvider.otherwise('/');
 }]);

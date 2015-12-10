@@ -1,4 +1,9 @@
-app.controller('studentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$timeout', function ($scope, $stateParams, entityObj, entitiesSrvc, $timeout) {
+app.controller('studentsCtrl', ['$scope', '$stateParams', 'entityObj', 'entitiesSrvc', '$timeout', '$state', function ($scope, $stateParams, entityObj, entitiesSrvc, $timeout, $state) {
+
+
+	$scope.enterToEntity = function (to, entityId) {
+		$state.go(to, {'id': entityId});
+	};
 
 /*_________________________________________________
 /*

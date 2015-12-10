@@ -99,9 +99,9 @@ gulp.task("build-all-js", function() {
 			'bower_components/moment/moment.js',
 			path.src.js // Path for compiling all project js files
 		])
-			// .pipe(jshint())
-			// .pipe(jshint.reporter('jshint-stylish'))
-			// .pipe(jshint.reporter('fail'))
+			/*.pipe(jshint())
+			.pipe(jshint.reporter('jshint-stylish'))
+			.pipe(jshint.reporter('fail'))*/
 			.pipe(concat("app.js"))
 			.pipe(gulp.dest(path.build.js));
 });
@@ -166,6 +166,8 @@ gulp.task("dist-js", function() {
 			'bower_components/bootstrap/js/tab.js',
 			'bower_components/angular/angular.js',
 			'bower_components/angular-ui-router/release/angular-ui-router.js',
+			'bower_components/material-date-picker/build/mbdatepicker.js',
+			'bower_components/moment/moment.js',
 			// Our project JS files
 			path.src.js
 
@@ -179,7 +181,8 @@ gulp.task("dist-ven-css", function() {
 		// First of all we need to compile LESS vendor files
 		gulp.src([
 			'bower_components/bootstrap/dist/css/bootstrap.css',
-			'bower_components/bootstrap/dist/css/bootstrap-theme.css'
+			'bower_components/bootstrap/dist/css/bootstrap-theme.css',
+			'bower_components/material-date-picker/build/styles/mbdatepicker.css'
 		])
 			.pipe(concat('vendor.css'))
 			.pipe(cssmin())

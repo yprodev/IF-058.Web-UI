@@ -6,10 +6,12 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
   var testData = {
     counter: '',
     startTime: '',
-    questionList: ''
+    questionList: '',
+    timeForTest: '',
+    rate: [],
+    maxAvilable: 0
   }
 
-  $rootScope.testData = testData
   var data = localStorage.userId
   var url = 'result/getRecordsByStudent/'
   var id = $stateParams.id
@@ -39,7 +41,8 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
       var url = 'test/getRecords/'
       return userSrvc.getInfoForStudent(url, data, result)
     }).then(function (test) {
-      $scope.timeForTest = test[0].data[0].time_for_test;
+      //$scope.timeForTest = test[0].data[0].time_for_test;
+      testData.timeForTest = test[0].data[0].time_for_test;
       if (test[0].data[0].attempts < test[1]) {
         alert('Немає предметів з доступними тестами для вашої групи')//убрати коли запрацює модалка
         //$scope.showInformModal("Немає предметів з доступними тестами для вашої групи");
@@ -47,6 +50,7 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
 
       var data = $stateParams.id
       var url = 'TestDetail/getTestDetailsByTest/'
+
       return userSrvc.getInfoForStudent(url, data)
     }).then(function (resp) {
       if (!resp.data[0].id) {
@@ -55,42 +59,56 @@ testPlayerApp.controller('prepareToTestCtrl', ['$scope', '$rootScope', 'userSrvc
         //$scope.showInformModal("Немає деталей тесту");
         //дописати щоб запрацювала модалка
       } else {
+        for (var i = 0; i<resp.data.length; i++){
+          testData.maxAvilable += resp.data[i].tasks * resp.data[i].rate
+        }
         var id = $stateParams.id
         localStorage.testId = id;
-        var data = [id, resp.data[0].level, resp.data[0].tasks]
         var url = 'question/getQuestionIdsByLevelRand/'
-        return userSrvc.getInfoForStudent(url, data)
+        var dataLevels = []
+        for (var i = 0; i<resp.data.length; i++){
+           dataLevels.push([id, resp.data[i].level, resp.data[i].tasks])
+          testData.rate.push({'level': resp.data[i].level, 'rate': resp.data[i].rate})
+
+           
+        }
+          function reqArr () {
+            var newArr = []
+            for (var k = 0; k<dataLevels.length; k++){
+              newArr.push(userSrvc.getInfoForStudent(url, dataLevels[k]))
+            }
+            return newArr
+          }
+         return $q.all(
+          reqArr()
+          )
       }
     }).then(function (resp) {
       var questionList = []
-      for (i in resp.data) {
-        questionList.push(resp.data[i].question_id)
-      }
-      //localStorage.questionList = questionList;
+     for (var i = 0; i<resp.length; i++){
+        for (k in resp[i].data) {
+          questionList.push(resp[i].data[k].question_id)
+        }
       testData.questionList = questionList;
       $scope.questionsQuantity = questionList.length;
+     }
     })
   }
   var data = '';
   var url = 'TestPlayer/getTimeStamp';
   userSrvc.getInfoForStudent(url, data).then(function (resp) {
-    testData.startTime = new Date(resp.data.unix_timestamp * 1000);
+    testData.startTime = resp.data.unix_timestamp
   });
   $scope.getRecordsByStudent()
   $scope.startTest = function () {
-    function timer(testDuration) {
-      testData.counter = $scope.timeForTest * 60;
-      $scope.onTimeout = function () {
-        testData.counter--;
-        mytimeout = $timeout($scope.onTimeout, 1000);
-      }
-      var mytimeout = $timeout($scope.onTimeout, 1000);
-      $scope.stop = function () {
-        $timeout.cancel(mytimeout);
-      }
+    function saveData (){
+      var url = 'testPlayer/saveData';
+      var data = testData;
+      userSrvc.postInfoForStudent(url, data)
     }
+    saveData()
 
-    timer();
+
   }
 
 

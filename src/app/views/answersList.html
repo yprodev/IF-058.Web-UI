@@ -1,124 +1,125 @@
 <decode-drct></decode-drct>
 <div entities-drct="answer">
-    <div class="">
-        <div class="wrapper panel panel-success no-border">
-            <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Відповіді на питання</div>
-            <!-- The button and form to add Entity -->
-            <div class="col-md-12">
-                <div>
-                    <br/>
-                    <button class="btn btn-primary btn-sm pull-right" ng-click="showAddForm()"><span
-                            class="glyphicon glyphicon-plus"></span></button>
-                    <br/><br/>
+  <div class="">
+    <div class="wrapper panel panel-success no-border">
+      <div class="panel-heading"><span class="glyphicon glyphicon-bookmark"></span> Відповіді на питання</div>
+      <!-- The button and form to add Entity -->
+      <div class="col-md-12">
+        <div>
+          <br/>
+          <button class="btn btn-primary btn-sm pull-right" ng-click="showAddForm()"><span
+              class="glyphicon glyphicon-plus"></span></button>
+          <br/><br/>
 
-                    <div class="well" ng-show="showingAdd">
-                        <div class=" row">
-                            <form name="addForm" class="form-inline" role='form' novalidate>
-                                <div class="col-md-6">
-                                    <label for="addAnswerText" class="label label-success">Текст відповіді</label>
-                                    <textarea rows="3" class="navbar-btn form-control width-max"
-                                              placeholder="Введіть нову відповідь"
-                                              ng-model="newEntity.answer_text" required id="addAnswerText">
-                                    </textarea>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="addTrueAnswer" class="label label-success">Правильність
-                                        відповіді</label>
-                                    <select class="navbar-btn form-control width-max" ng-model="newEntity.true_answer"
-                                            required id="addTrueAnswer">
-                                        <option value="" disabled selected hidden> Вкажіть правильність відповіді
-                                        </option>
-                                        <option value="1" selected="selected">Правильна відповідь</option>
-                                        <option value="0">Неправильна відповідь</option>
-                                    </select>
-                                </div>
-                                <div class="pull-right col-md-12">
-                                    <div class="navbar-btn col-md-4 pull-left ">
-                                        <loadfile-Drct></loadfile-Drct>
-                                        <img class="picture new-picture" ng-src="{{newEntity.attachment}}"
-                                             ng-show="newEntity.attachment" alt=""/>
-                                    </div>
-                                    <div class="navbar-btn col-md-3 pull-right">
-                                        <br>
-                                        <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
-                                                ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
-                                        </button>
-                                    </div>
-                                    <div class="navbar-btn col-md-3 pull-right">
-                                        <br>
-                                        <button class="navbar-btn btn btn-warning pull-right width-max"
-                                                ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div ng-show="!entities">{{noData}}</div>
-
-                    <!-- The table for list of Entities -->
-                    <table ng-show="entities" class="table table-hover .table-condensed">
-                        <thead class="usCenter">
-                        <tr>
-                            <th>№</th>
-                            <th>Відповіді</th>
-                            <th>Правильна відповідь</th>
-                            <th>Дії</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="usCenter" ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
-                            <!-- read-only cells -->
-                            <td>{{$index + 1}}</td>
-                            <td class="col-md-8" ng-bind-html="entity.answer_text | unsafe"></td>
-                            <td class="col-md-2">{{entity.true_answer | correctAnswer}}</td>
-                            <td class="col-md-2">
-                                <actions-buttons-drct></actions-buttons-drct>
-                            </td>
-                        </tr>
-                        <tr ng-if="entity == editingEntity" ng-repeat-end="">
-                            <td class="usCenter">{{$index + 1}}</td>
-                            <td class="col-md-8">
-                                <div class="col-md-8">
-                                    <input class="navbar-btn form-control width-max"
-                                           ng-model="editedEntity.new_answer_text">
-                                </div>
-                                <div class="col-md-4">
-                                    <div>
-                                        <editfile-drct></editfile-drct>
-                                        <img attachment-popover class="picture edited-picture"
-                                             ng-src="{{editedEntity.new_attachment}}"
-                                             ng-show="editedEntity.new_attachment" alt=""/>
-                                        <img class="close-button-questions" src="img/close_button.png" height="30px"
-                                             ng-show="editedEntity.new_attachment" ng-click="closePicture(entity)">
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="col-md-2">
-                                <select class="navbar-btn form-control width-max"
-                                        ng-model="editedEntity.new_true_answer">
-                                    <option value="" disabled selected hidden> Вкажіть правельність</option>
-                                    <option value="1">Так</option>
-                                    <option value="0">Ні</option>
-                                </select>
-                            </td>
-                            <td class="col-md-2 usCenter">
-                                <editing-buttons-drct></editing-buttons-drct>
-                            </td>
-
-                            <!--<td><input class="form-control width-max" ng-model="editedEntity.new_attachment"/></td>-->
-
-                        </tr>
-
-                        </tbody>
-                    </table>
-                    <!-- The modal to confirm removing of Entity -->
-                    <deleting-modal-drct></deleting-modal-drct>
-                    <!-- The modal to inform about error from server -->
-                    <inform-modal-drct></inform-modal-drct>
+          <div class="well" ng-show="showingAdd">
+            <div class=" row">
+              <form name="addForm" class="form-inline" role='form' novalidate>
+                <div class="col-md-6">
+                  <label for="addAnswerText" class="label label-success">Текст відповіді</label>
+                  <textarea rows="3" class="navbar-btn form-control input-sm width-max"
+                        placeholder="Введіть нову відповідь"
+                        ng-model="newEntity.answer_text" required id="addAnswerText">
+                  </textarea>
                 </div>
+                <div class="col-md-6">
+                  <label for="addTrueAnswer" class="label label-success">Правильність
+                    відповіді</label>
+                  <select class="navbar-btn form-control input-sm width-max" ng-model="newEntity.true_answer"
+                      required id="addTrueAnswer">
+                    <option value="" disabled selected hidden> Вкажіть правильність відповіді
+                    </option>
+                    <option value="1" selected="selected">Правильна відповідь</option>
+                    <option value="0">Неправильна відповідь</option>
+                  </select>
+                </div>
+                <div class="pull-right col-md-12">
+                  <div class="navbar-btn col-md-4 pull-left ">
+                    <loadfile-Drct></loadfile-Drct>
+                    <img class="picture new-picture" ng-src="{{newEntity.attachment}}"
+                       ng-show="newEntity.attachment" alt=""/>
+                  </div>
+                  <div class="navbar-btn col-md-3 pull-right">
+                    <br>
+                    <button type="submit" class="navbar-btn btn btn-success pull-right width-max"
+                        ng-disabled="addForm.$invalid" ng-click="addEntity()">Додати
+                    </button>
+                  </div>
+                  <div class="navbar-btn col-md-3 pull-right">
+                    <br>
+                    <button class="navbar-btn btn btn-warning pull-right width-max"
+                        ng-disabled="!addForm.$dirty" ng-click="resetEntity()">Очистити
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
+          </div>
+
+          <div ng-show="!entities">{{noData}}</div>
+
+          <!-- The table for list of Entities -->
+          <div class="table-responsive">
+            <table ng-show="entities" class="table table-hover .table-condensed">
+              <thead>
+              <tr>
+                <th>№</th>
+                <th>Відповіді</th>
+                <th></th>
+                <th class="usCenter" >Правильна відповідь</th>
+                <th class="usCenter" >Дії</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-if="entity != editingEntity" ng-repeat-start="entity in entities">
+                <!-- read-only cells -->
+                <td>{{$index + 1}}</td>
+                <td class="col-md-6" ng-bind-html="entity.answer_text | unsafe"></td>
+                <td class="col-md-2"></td>
+                <td class="col-md-2 usCenter">{{entity.true_answer | correctAnswer}}</td>
+                <td class="col-md-2 usCenter">
+                  <actions-buttons-drct></actions-buttons-drct>
+                </td>
+              </tr>
+              <tr ng-if="entity == editingEntity" ng-repeat-end="">
+                <td>{{$index + 1}}</td>
+                <td class="col-md-6">
+                    <input class="navbar-btn form-control input-sm width-max"
+                         ng-model="editedEntity.new_answer_text">
+                </td>
+                <td class="col-md-2">
+                    <editfile-drct></editfile-drct>
+                    <img attachment-popover class="picture edited-picture"
+                       ng-src="{{editedEntity.new_attachment}}"
+                       ng-show="editedEntity.new_attachment" alt=""/>
+                    <img class="close-button-questions" src="img/close_button.png" height="30px"
+                       ng-show="editedEntity.new_attachment !== 'added'" ng-click="closePicture(entity)">
+                </td>
+                  <div class="col-md-4">
+                <td class="col-md-2 usCenter">
+                  <select class="navbar-btn form-control input-sm width-max"
+                      ng-model="editedEntity.new_true_answer">
+                    <option value="" disabled selected hidden> Вкажіть правельність</option>
+                    <option value="1">Так</option>
+                    <option value="0">Ні</option>
+                  </select>
+                </td>
+                <td class="col-md-2 usCenter">
+                  <editing-buttons-drct></editing-buttons-drct>
+                </td>
+
+                <!--<td><input class="form-control width-max" ng-model="editedEntity.new_attachment"/></td>-->
+
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- The modal to confirm removing of Entity -->
+          <deleting-modal-drct></deleting-modal-drct>
+          <!-- The modal to inform about error from server -->
+          <inform-modal-drct></inform-modal-drct>
         </div>
+      </div>
     </div>
+  </div>
 </div>

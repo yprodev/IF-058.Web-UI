@@ -12,11 +12,11 @@
                   <form name="addForm" class="form-inline" role='form' novalidate>
                     <div class="col-md-4">
                       <label for="addGroup" class="label label-success">Група</label>
-                      <input class="form-control width-max navbar-btn" placeholder="Введіть назву групи" type='text' ng-model="newName" required id="addGroup">
+                      <input class="form-control input-sm width-max navbar-btn" placeholder="Введіть назву групи" type='text' ng-model="newName" required id="addGroup">
                     </div>
                     <div class="col-md-3">
                       <label for="addFaculty" class="label label-success">Факультет</label>
-                    <select class="form-control width-max navbar-btn"
+                    <select class="form-control input-sm width-max navbar-btn"
                       ng-options="key as value for (key, value) in groups.faculty" name="faculty"
                        ng-model="newFaculty_id" required id="addFaculty">
                        <option value="">Виберіть факультет</option>
@@ -25,7 +25,7 @@
 
                   <div class="col-md-3">
                     <label for="addSpeciality" class="label label-success">Спеціальність</label>
-                   <select class="form-control width-max navbar-btn"
+                   <select class="form-control input-sm width-max navbar-btn"
 -                  ng-options="key as value for (key, value) in groups.speciality" name="faculty"
 -                   ng-model="newSpeciality_id" required id="addSpeciality">
 -                   <option value="">Виберіть спеціальність</option>
@@ -43,64 +43,66 @@
             <div ng-show="!groups.list">{{noData}}</div>
 
 <!-- The table for list of Entities -->
-            <table ng-show="groups.list" class="table table-hover .table-condensed">
-                <thead class="usCenter">
-                  <tr>
-                    <th>№</th>
-                    <th class="col-md-2 clickable" ng-click="sortType = 'group_name'; sortReverse = !sortReverse">Назва групи
-                        <i ng-show="sortType == 'group_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                        <i ng-show="sortType == 'group_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                    </th>
-                    <th class="col-md-5 clickable" ng-click="sortType = 'faculty_name'; sortReverse = !sortReverse">Факультет
-                        <i ng-show="sortType == 'faculty_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                        <i ng-show="sortType == 'faculty_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                    </th>
-                    <th class="col-md-3 clickable" ng-click="sortType = 'speciality_name'; sortReverse = !sortReverse">Спеціальність
-                        <i ng-show="sortType == 'speciality_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
-                        <i ng-show="sortType == 'speciality_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
-                    </th>
-                    <th class="col-md-2">Дії</th>
-                  </tr>
-                </thead>
-                  <tbody class="usCenter">
-                    <tr ng-repeat-start="row in groups.list | filter:searchItem | orderBy:sortType:sortReverse" ng-if='editingData.group_id !== row.group_id' role="button" ng-click="enterToEntity('admin.students', row.group_id)">
-                      <td>{{$index + 1}}</td>
-                      <td class="col-md-2">{{row.group_name}}</td>
-                      <td class="col-md-5">{{row.faculty_name}}</td>
-                      <td class="col-md-3">{{row.speciality_name}}</td>
-                        <td  class="col-md-2">
-                          <button class="btn btn-info btn-sm" ng-click='showEditForm(row)'>
-                            <span class="glyphicon glyphicon-pencil"></span></button>
-                          <button class="btn btn-danger btn-sm col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click='activateGroup($event, row)'>
-                            <span class="glyphicon glyphicon-trash"></span></button>
-                      </td>
+            <div class="table-responsive">
+              <table ng-show="groups.list" class="table table-hover .table-condensed">
+                  <thead>
+                    <tr>
+                      <th>№</th>
+                      <th class="col-md-2 clickable" ng-click="sortType = 'group_name'; sortReverse = !sortReverse">Назва групи
+                          <i ng-show="sortType == 'group_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                          <i ng-show="sortType == 'group_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                      </th>
+                      <th class="col-md-5 clickable" ng-click="sortType = 'faculty_name'; sortReverse = !sortReverse">Факультет
+                          <i ng-show="sortType == 'faculty_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                          <i ng-show="sortType == 'faculty_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                      </th>
+                      <th class="col-md-3 clickable" ng-click="sortType = 'speciality_name'; sortReverse = !sortReverse">Спеціальність
+                          <i ng-show="sortType == 'speciality_name' && !sortReverse" class="glyphicon glyphicon-chevron-down"></i>
+                          <i ng-show="sortType == 'speciality_name' && sortReverse" class="glyphicon glyphicon-chevron-up"></i>
+                      </th>
+                      <th class="col-md-2 usCenter">Дії</th>
                     </tr>
-                    <tr ng-repeat-end ng-if='editingData.group_id === row.group_id'>
-                      <td>{{$index + 1}}</td>
-                      <td class="col-md-2">
-                        <input class="form-control width-max navbar-btn" ng-model="editingData.group_name" value= '{{row.group_name}}'</>
-                      </td>
-                      <td class="col-md-5">
-                        <select class="form-control width-max navbar-btn"
-                      ng-options="key as value for (key, value) in groups.faculty" name="faculty"
-                       ng-model="editingData.faculty_id">
-                        </select>
-                      </td>
-                      <td class="col-md-3">
-                        <select class="form-control width-max navbar-btn"
-                        ng-options="key as value for (key, value) in groups.speciality" name="faculty"
-                         ng-model="editingData.speciality_id">
-                        </select>
-                      </td>
-                      <td  class="col-md-2">
-                          <button class="btn btn-success btn-sm navbar-btn" ng-click='editGroup()'>
-                            <span class="glyphicon glyphicon-ok"></span></button>
-                          <button class="btn btn-warning btn-sm col-md-offset-1 navbar-btn" ng-click="showEditForm(null)">
-                            <span class="glyphicon glyphicon-remove"></span></button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                  </thead>
+                    <tbody>
+                      <tr ng-repeat-start="row in groups.list | filter:searchItem | orderBy:sortType:sortReverse" ng-if='editingData.group_id !== row.group_id' role="button" ng-click="enterToEntity('admin.students', row.group_id)">
+                        <td>{{$index + 1}}</td>
+                        <td class="col-md-2">{{row.group_name}}</td>
+                        <td class="col-md-5">{{row.faculty_name}}</td>
+                        <td class="col-md-3">{{row.speciality_name}}</td>
+                          <td  class="col-md-2 usCenter">
+                            <button class="btn btn-info btn-sm" ng-click='showEditForm(row)'>
+                              <span class="glyphicon glyphicon-pencil"></span></button>
+                            <button class="btn btn-danger btn-sm col-md-offset-1" data-toggle="modal" data-target="#deleteModal" ng-click='activateGroup($event, row)'>
+                              <span class="glyphicon glyphicon-trash"></span></button>
+                        </td>
+                      </tr>
+                      <tr ng-repeat-end ng-if='editingData.group_id === row.group_id'>
+                        <td>{{$index + 1}}</td>
+                        <td class="col-md-2">
+                          <input class="form-control input-sm width-max navbar-btn" ng-model="editingData.group_name" value= '{{row.group_name}}'</>
+                        </td>
+                        <td class="col-md-5">
+                          <select class="form-control input-sm width-max navbar-btn"
+                        ng-options="key as value for (key, value) in groups.faculty" name="faculty"
+                         ng-model="editingData.faculty_id">
+                          </select>
+                        </td>
+                        <td class="col-md-3">
+                          <select class="form-control input-sm width-max navbar-btn"
+                          ng-options="key as value for (key, value) in groups.speciality" name="faculty"
+                           ng-model="editingData.speciality_id">
+                          </select>
+                        </td>
+                        <td  class="col-md-2 usCenter">
+                            <button class="btn btn-success btn-sm navbar-btn" ng-click='editGroup()'>
+                              <span class="glyphicon glyphicon-ok"></span></button>
+                            <button class="btn btn-warning btn-sm col-md-offset-1 navbar-btn" ng-click="showEditForm(null)">
+                              <span class="glyphicon glyphicon-remove"></span></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
             <!-- The modal to confirm removing of Entity -->
             <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" id="deleteModal">
               <div class="modal-dialog modal-sm">
